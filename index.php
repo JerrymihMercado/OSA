@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>Material Design for Bootstrap</title>
+    <title>Office of Student Affairs</title>
     <link rel="stylesheet" href="./Style/style.css">
      <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
@@ -14,48 +14,7 @@
   </head>
   <body>
     <!-- Start your project here-->
-  <div class="container-fluid header-title">
-    <div class="row">
-      <div class="col-md-1 ">
-        <img src="img/clsu-logo.png" alt="" class="logo">
-      </div>
-      <div class="col">
-        <div class="logo-title">
-          <p class="pt-3 ps-3 header1">Central Luzon State University</p>
-          <p class="ps-3 header2">Science City of Muñoz, Nueva Ecija, Philippines 3120</p>
-        </div>  
-      </div>
-    </div>
-  </div>  
-  <div class="container-fluid">
-    <div class="row">
-      <nav class="navbar main-header-mid navbar-expand-md">
-        <ul class="navbar-nav">
-          <li class="nav-item ">
-            <a href="./" class="link-home text-white">HOME</a>
-          </li>
-          <li class="nav-item ">
-            <a href="#" class="link text-white ps-3">ABOUT US</a>
-          </li>
-          <li class="nav-item ">
-            <a href="Section/impu.php" class="link text-white ps-3">IMPU</a>
-          </li>
-          <li class="nav-item ">
-            <a href="#" class="link text-white ps-3">CDESU</a>
-          </li>
-          <li class="nav-item ">
-            <a href="#" class="link text-white ps-3">GSU</a>
-          </li>
-          <li class="nav-item ">
-            <a href="#" class="link text-white ps-3">SOU</a>
-          </li>
-          <li class="nav-item ">
-            <a href="#" class="link text-white ps-3">SDB</a>
-          </li>
-        </ul>
-      </nav>
-    </div>
-  </div>
+    <?php include './Components/header.php'?>
 
   <div class="carousel-section">
     <div id="carouselExampleControls" class="carousel slide" data-mdb-ride="carousel">
@@ -102,8 +61,8 @@
 
   <div class="container-fluid">
     <div class="row">
-      <p class="d-flex justify-content-end">VIEW ALL</p>
       <div class="col">
+      <a href="#" class="d-flex justify-content-end p-2">VIEW ALL</a>
         <div class="card">
           <div class="card-body shadow-2">
             <div class="row">
@@ -122,10 +81,9 @@
           </div>
         </div>
       </div>
-      
-
     </div>
   </div>
+  <?php include './Components/footer.php'?>
     <!-- End your project here-->
 
     <!-- MDB -->
