@@ -10,7 +10,7 @@
     <div class="container-fluid header-title">
     <div class="row">
       <div class="col-md-1 ">
-        <img src="../img/clsu-logo.png" alt="" class="logo">
+        <img src="./img/clsu-logo.png" alt="" class="logo">
       </div>
       <div class="col">
         <div class="logo-title">
@@ -44,6 +44,9 @@
           </li>
           <li class="nav-item ">
             <a href="#" class="link text-white ps-3">SDB</a>
+          </li>
+          <li class="nav-item ">
+            <a href="#" class="link text-white ps-3">LOGIN</a>
           </li>
         </ul>
       </nav>
