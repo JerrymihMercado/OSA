@@ -1,0 +1,70 @@
+.logo{
+    height: 128px;
+    weight: 128px;
+}
+/* .logo-title .span{
+    display: block;
+    background: -webkit-linear-gradient(0deg, #008102, #93d12d);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+} */
+/* .header-title{
+    position: relative;
+} */
+.header1{
+    font-family: Arial, sans-serif;
+    font-size: 28px;
+    font-weight:700;
+    text-transform: uppercase;
+    background: -webkit-linear-gradient(0deg, #008102, #93d12d);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.header2{
+    font-family: 'Uniform Bold', Arial, sans-serif;
+    margin-top:-15px;
+    background: -webkit-linear-gradient(0deg, #008102, #93d12d);
+    font-size: 13px;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.logo{
+    position: absolute;
+    z-index: 3; 
+}
+.navbar{
+    background: -webkit-linear-gradient(0deg, #008102, #93d12d);
+    position: relative;
+    /* padding-top: .5rem;
+    padding-bottom: .5rem; */
+}
+.nav-item a{
+    border-right-style: solid;
+    border-width: thin;
+    padding-right: 20px;
+    font-weight: 700;
+    font-size: 13px;
+}
+
+.link-home{
+    padding-left: 10.5rem;
+    font-weight: 700;
+    font-size: 13px;
+}
+/* .link{
+    font-weight: 700;
+    font-size: 13px;
+} */
+.carousel-caption{
+    position: absolute;
+    top: 18%;
+}
+.announce{
+    background: -webkit-linear-gradient(0deg, #008102, #93d12d);
+    height: 40px;
+    width: 25%;
+}
+.content-img{
+    height: 200px;
+    width: 200px;
+}
