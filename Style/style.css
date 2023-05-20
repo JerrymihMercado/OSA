@@ -83,3 +83,7 @@
     height: 200px;
     width: 200px;
 }
+
+.card_title{
+    background: -webkit-linear-gradient(0deg, #008102, #93d12d);
+}

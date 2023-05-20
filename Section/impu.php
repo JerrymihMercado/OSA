@@ -6,12 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../Style/style.css">
-    <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet"/>
-    <!-- MDB -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.0/mdb.min.css" rel="stylesheet"/>
+    <?php
+      include '../Links/link.php';
+    ?>
     
 </head>
 <body>
@@ -41,9 +38,10 @@
     </div>
 
     <!-- student handbook -->
-    <div class="p-2 col-sm-2">
+    <div class="p-2 col-sm-2 card_title text-white">
         <h5>Student Handbook</h5>
     </div>
+    
 
     <div class="mt-3 container-fluid">
         <div class="row">
@@ -77,11 +75,11 @@
     </div>
 
     <!-- publication -->
-    <div class="mt-3 p-2 col-sm-2">
+    <div class="mt-3 p-2 col-sm-2 card_title text-white">
         <h5>Publication</h5>
     </div>
     <div class="col justify-content-end d-flex p-3">
-        <a href="all_publications.php">View all</a>
+        <a href="./all_publications.php">View all</a>
     </div>
     <div class="container-fluid mt-4">
         <div class="row row-cols-1 row-cols-md-2 g-4">
@@ -109,7 +107,7 @@
         </div>
     </div>
     <!-- Research and evaluation -->
-    <div class="mt-3 p-2 col-sm-2 card__title">
+    <div class="mt-3 p-2 col-sm-2 card_title text-white">
         <h5>Research and Evaluation</h5>
     </div>
     <div class="col justify-content-end d-flex p-3">

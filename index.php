@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <title>Material Design for Bootstrap</title>
-    <!-- Font Awesome -->
+    <link rel="stylesheet" href="./Style/style.css">
+     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
     <!-- Google Fonts Roboto -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap"/>
     <link rel="stylesheet" href="css/mdb.min.css" />
-    <link rel="stylesheet" href="./Style/style.css">
   </head>
   <body>
     <!-- Start your project here-->
@@ -32,7 +32,7 @@
       <nav class="navbar main-header-mid navbar-expand-md">
         <ul class="navbar-nav">
           <li class="nav-item ">
-            <a href="#" class="link-home text-white">HOME</a>
+            <a href="./" class="link-home text-white">HOME</a>
           </li>
           <li class="nav-item ">
             <a href="#" class="link text-white ps-3">ABOUT US</a>
