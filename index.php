@@ -10,7 +10,7 @@
     <!-- Google Fonts Roboto -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap"/>
     <link rel="stylesheet" href="css/mdb.min.css" />
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./Style/style.css">
   </head>
   <body>
     <!-- Start your project here-->
@@ -38,7 +38,7 @@
             <a href="#" class="link text-white ps-3">ABOUT US</a>
           </li>
           <li class="nav-item ">
-            <a href="#" class="link text-white ps-3">IMPU</a>
+            <a href="Section/impu.php" class="link text-white ps-3">IMPU</a>
           </li>
           <li class="nav-item ">
             <a href="#" class="link text-white ps-3">CDESU</a>
