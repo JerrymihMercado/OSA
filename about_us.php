@@ -15,7 +15,7 @@
   </head>
   <body>
     <!-- Start your project here-->
-    <?php include './Components/header.php'?>
+    <?php include './header.php'?>
     
     <div class="header_section container-fluid text-center">
         <div class="row">
