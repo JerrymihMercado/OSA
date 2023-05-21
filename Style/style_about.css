@@ -27,13 +27,22 @@
 .overview{
     /* margin: 25px, 10Spx, 10px, 25px; */
     width: 80%;
-    padding-top: 50px;
+    margin-top: 50px;
+}
+.view{
+    border-left: 8px solid #FFD600;
+}
+.overview-info{
+    border-top-style: dotted ;
+    border-color: #BEBEBE;
+    
 }
 .card-img{
     height: 220px;
 }
 .borders{
     border-top-style: dotted;
+    border-color: #BEBEBE;
     /* width: 55rem; */
 }
 .mission-info{

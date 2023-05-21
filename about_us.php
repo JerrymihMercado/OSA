@@ -17,19 +17,24 @@
     <!-- Start your project here-->
     <?php include './header.php'?>
     
-    <div class="header_section container-fluid text-center">
+    <div class="header_section container-fluid ">
         <div class="row">
             <div class="col-12 text-center pt-5">
                 <img src="img/white-logo.png" alt="" class="banner_logo ">
                 <h2 class="text-center banner_text text-white">OFFICE OF STUDENT AFFAIRS</h2>    
-                <h3 class="text-white"></h3>
+                <h3 class="text-white">"ABOUT US"</h3>
             </div>
             <div class="col-12 d-flex justify-content-center pt-5">
               <div class="card overview">
-                <div class="card-body pt-5   ">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <button type="button" class="btn btn-primary">Button</button>
+                <div class="card-body   ">
+                  <h4 class="card-title text-success view ps-2">OVERVIEW</h4>
+                  <p class="card-text overview-info pt-3">The Office of Student Affairs was originally conceived as Student
+                    Institutional Services (SIS) in 1964 under the leadership of Dr. Teodoro Irabagon.
+                    In September 1971, the SIS was formally replaced by the Office of Student
+                    Affairs with Dr. Benito Abenes, a faculty member from the College of Education
+                    as Director. Three service units were retained such as Student Affairs, Guidance
+                    and Placement and Cultural and Recreational Services.</p>
+                  <!-- <button type="button" class="btn btn-primary">Button</button> -->
                 </div>
               </div>
             </div>
