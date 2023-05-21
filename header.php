@@ -25,13 +25,13 @@
       <nav class="navbar main-header-mid navbar-expand-md">
         <ul class="navbar-nav">
           <li class="nav-item ">
-            <a href="../index.php" class="link-home text-white">HOME</a>
+            <a href="index.php" class="link-home text-white">HOME</a>
           </li>
           <li class="nav-item ">
             <a href="#" class="link text-white ps-3">ABOUT US</a>
           </li>
           <li class="nav-item ">
-            <a href="../Section/impu.php" class="link text-white ps-3">IMPU</a>
+            <a href="Section/impu.php" class="link text-white ps-3">IMPU</a>
           </li>
           <li class="nav-item ">
             <a href="#" class="link text-white ps-3">CDESU</a>

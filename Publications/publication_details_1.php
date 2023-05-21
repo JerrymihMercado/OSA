@@ -31,7 +31,7 @@
       <nav class="navbar main-header-mid navbar-expand-md">
         <ul class="navbar-nav">
           <li class="nav-item ">
-            <a href="index.php" class="link-home text-white">HOME</a>
+            <a href="../index.php" class="link-home text-white">HOME</a>
           </li>
           <li class="nav-item ">
             <a href="#" class="link text-white ps-3">ABOUT US</a>
@@ -79,38 +79,42 @@
             <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="../Section/impu.php">Publication</a></li>
-                <li class="breadcrumb-item active" aria-current="page">View All</li>
+                <li class="breadcrumb-item active" aria-current="page">Details</li>
             </ol>
             </nav>
         </nav>
     </div>
 
-    <div class="container-fluid mt-4">
-        <div class="row row-cols-1 row-cols-md-3 g-4">
-            <div class="col">
-                <a href="../Publications/publication_page_1.php">
-                    <div class="card h-100">
-                    <img src="../img/clsu-1.jpg" class="card-img-top" alt="Hollywood Sign on The Hill"/>
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">
-                        This is a longer card with supporting text below as a natural lead-in to
-                        additional content. This content is a little bit longer.
-                        </p>
-                    </div>
-                </div>
-                </a>
-            </div>
-            <div class="col">
-                <div class="card h-100">
-                <img src="../img/clsu-1.jpg" class="card-img-top" alt="Palm Springs Road"/>
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a short card.</p>
-                </div>
-                </div>
-            </div>
+    <div class="p-3">
+      <h5>CAGawaran: Pasiklabin ang Pusong Aggies 2023</h5>
+      <p>05-21-23</p>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row row-cols-1 row-cols-md-2 g-4">
+      <div class="col">
+        <div class="card">
+          <div class="card-body">
+            <img src="../img/Rectangle 298.png" class="card-img-top" alt="Palm Springs Road"/>
+          </div>
         </div>
+      </div>
+      <div class="col">
+        <div class="card">
+          <div class="card-body">
+            <img src="../img/Rectangle 298.png" class="card-img-top" alt="Palm Springs Road"/>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <div class="container-fluid mt-5">
+      <p>ICYMI | In celebration of 116th Founding Anniversary of Central Luzon State University (CLSU), College of Agriculture (CAg) launched various activities for CAg students, April 11.
+      With the theme “CAGarawan: Pasiklabin ang Pusong Aggies” different activities such as tug-of-war, agawang buko, color fun run, and open mic live band were conducted.
+      Agawan ng Buko: Akin lang ang BJ Ko
+      Winner: Denver Luces
+      TIKAS: Tibay at Lakas ng Aggies</p>
     </div>
 
     <?php
