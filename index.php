@@ -14,51 +14,7 @@
   </head>
   <body>
     <!-- Start your project here-->
-    <div class="container-fluid header-title">
-    <div class="row">
-      <div class="col-md-1 ">
-        <img src="./img/clsu-logo.png" alt="" class="logo">
-      </div>
-      <div class="col">
-        <div class="logo-title">
-          <p class="pt-3 ps-3 header1">Central Luzon State University</p>
-          <p class="ps-3 header2">Science City of Muñoz, Nueva Ecija, Philippines 3120</p>
-        </div>  
-      </div>
-    </div>
-  </div>  
-  <div class="container-fluid">
-    <div class="row">
-      <nav class="navbar main-header-mid navbar-expand-md">
-        <ul class="navbar-nav">
-          <li class="nav-item ">
-            <a href="index.php" class="link-home text-white">HOME</a>
-          </li>
-          <li class="nav-item ">
-            <a href="#" class="link text-white ps-3">ABOUT US</a>
-          </li>
-          <li class="nav-item ">
-            <a href="Section/impu.php" class="link text-white ps-3">IMPU</a>
-          </li>
-          <li class="nav-item ">
-            <a href="#" class="link text-white ps-3">CDESU</a>
-          </li>
-          <li class="nav-item ">
-            <a href="#" class="link text-white ps-3">GSU</a>
-          </li>
-          <li class="nav-item ">
-            <a href="#" class="link text-white ps-3">SOU</a>
-          </li>
-          <li class="nav-item ">
-            <a href="#" class="link text-white ps-3">SDB</a>
-          </li>
-          <li class="nav-item ">
-            <a href="#" class="link text-white ps-3">LOGIN</a>
-          </li>
-        </ul>
-      </nav>
-    </div>
-  </div>
+    <?php include './header.php'?>
 
   <div class="carousel-section">
     <div id="carouselExampleControls" class="carousel slide" data-mdb-ride="carousel">
@@ -99,13 +55,13 @@
 
   <div class="container-fluid pt-5">
     <div class="row">
-      <h4 class="announce text-white pt-2">ANNOUNCEMENTS</h4>
+      <h4 class="announcement text-white pt-2">ANNOUNCEMENTS</h4>
     </div>
   </div>
 
   <div class="container-fluid">
     <div class="row">
-      <div class="col">
+      <div class="col-12">
       <a href="#" class="d-flex justify-content-end p-2">VIEW ALL</a>
         <div class="card">
           <div class="card-body shadow-2">
