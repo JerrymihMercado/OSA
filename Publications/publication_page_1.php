@@ -59,21 +59,6 @@
     </div>
   </div>
 
-    <!-- banner -->
-    <div class="bg-image ripple" data-mdb-ripple-color="light">
-        <img src="../img/clsu-1.jpg" class="banner__img" />
-        <a href="#!">
-            <div class="mask" style="background-color: hsla(0, 0%, 0%, 0.5)">
-            <div class="d-flex justify-content-center align-items-center h-100 text-center">
-                <h2 class="text-white mb-0">INFORMATION MANAGEMENT AND PUBLICATION UNIT</h2>
-            </div>
-            </div>
-            <!-- <div class="hover-overlay">
-            <div class="mask" style="background-color: hsla(0, 0%,98%, 0.2)"></div>
-            </div> -->
-        </a>
-    </div>  
-
     <div class="mt-3 p-3">
         <nav aria-label="breadcrumb">
             <nav aria-label="breadcrumb">

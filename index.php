@@ -85,11 +85,11 @@
       </div>
         </div>
         <div class="carousel-item">
-          <img src="https://mdbcdn.b-cdn.net/img/new/slides/042.webp" class="d-block w-100" alt="Camera"/>
+          <img src="img/banner1.png" class="d-block w-100" alt="osa-banner"/>
         </div>
-        <div class="carousel-item">
+        <!-- <div class="carousel-item">
           <img src="https://mdbcdn.b-cdn.net/img/new/slides/043.webp" class="d-block w-100" alt="Exotic Fruits"/>
-        </div>
+        </div> -->
       </div>
       <button class="carousel-control-prev" type="button" data-mdb-target="#carouselExampleControls" data-mdb-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -102,35 +102,62 @@
     </div>
   </div>
 
-  <div class="container-fluid pt-5">
-    <div class="row">
-      <h4 class="announcement text-white pt-2">ANNOUNCEMENTS</h4>
-    </div>
+  <div class="p-2 col-sm-2 card_title text-white mt-5">
+    <h5>Announcement</h5>
   </div>
-
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-12">
-      <a href="#" class="d-flex justify-content-end p-2">VIEW ALL</a>
-        <div class="card">
-          <div class="card-body shadow-2">
-            <div class="row">
-              <div class="col-2">
-              <img src="img/testing.jpg" alt="" class="card-img content-img">
+  <div class="col justify-content-end d-flex p-3">
+      <a href="Announcement/all_announcement.php">View all</a>
+  </div>
+  <div class="p-2">
+    <div class="container-fluid mt-4">
+        <div class="col g-4">
+            <div class="card mb-3" style="max-width: 100%;">
+              <div class="row g-0">
+                  <div class="col-md-4">
+                      <img
+                          src="./img/osa-picture.jpg"
+                          alt="Trendy Pants and Shoes"
+                          class="img-fluid rounded-start"
+                      />
+                      </div>
+                      <div class="col-md-8">
+                      <div class="card-body">
+                          <h5 class="card-title">Card title</h5>
+                          <p class="card-text">
+                          This is a wider card with supporting text below as a natural lead-in to
+                          additional content. This content is a little bit longer.
+                          </p>
+                          <p class="text-muted">05-22-23</p>
+                          <button type="button" class="btn btn-success shadow" data-mdb-ripple-color="dark">View Details</button>
+                      </div>
+                  </div>
               </div>
-              <div class="col-9 ps-3">
-                <h5 class="pt-4">NEWS I AD Scientific Index: CLSU Ranks 13th, 70 Faculty & Staff Researchers Make it to the List of CLSU Best Scientists</h5>
-                <button class="btn btn-success">VIEW DETAILS</button>              
+          </div>
+          <div class="card mb-3" style="max-width: 100%;">
+              <div class="row g-0">
+                  <div class="col-md-4">
+                      <img
+                          src="./img/osa-picture.jpg"
+                          alt="Trendy Pants and Shoes"
+                          class="img-fluid rounded-start"
+                      />
+                      </div>
+                      <div class="col-md-8">
+                      <div class="card-body">
+                          <h5 class="card-title">Card title</h5>
+                          <p class="card-text">
+                          This is a wider card with supporting text below as a natural lead-in to
+                          additional content. This content is a little bit longer.
+                          </p>
+                          <p class="text-muted">05-22-23</p>
+                          <button type="button" class="btn btn-success shadow" data-mdb-ripple-color="dark">View Details</button>
+                      </div>
+                  </div>
               </div>
-              <div class="col-1">
-                <p>05-05-2023</p>
-
-              </div>
-            </div>
           </div>
         </div>
-      </div>
     </div>
+        
   </div>
 
   <!-- login modal -->

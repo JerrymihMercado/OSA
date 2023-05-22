@@ -76,11 +76,11 @@
     <!-- brief history -->
     <div class="p-5 text-center">
         <p>"This unit is designed to assist in the best practice of student affairs and
-services in the university through the aid of research, publication and
-information management. The IMPU shall be responsible for the collection,
-organization, and control over the planning, processing, evaluating and
-reporting of relevant information in order to meet client objectives and to
-enable efficient and effective delivery of services."</p>
+        services in the university through the aid of research, publication and
+        information management. The IMPU shall be responsible for the collection,
+        organization, and control over the planning, processing, evaluating and
+        reporting of relevant information in order to meet client objectives and to
+        enable efficient and effective delivery of services."</p>
     </div>
 
     <!-- student handbook -->
@@ -157,7 +157,7 @@ enable efficient and effective delivery of services."</p>
         <h5>Research and Evaluation</h5>
     </div>
     <div class="col justify-content-end d-flex p-3">
-        <a href="#!">View all</a>
+        <a href="../Research_&_Evaluation/reasearch_page_1.php">View all</a>
     </div>
     <div class="container-fluid mt-4">
         <div class="row row-cols-1 row-cols-md-3 g-4">
