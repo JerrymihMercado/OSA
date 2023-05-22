@@ -1,3 +1,41 @@
+<?php
+
+session_start();
+include 'mysql_connect.php';
+
+if (isset($_POST['submit'])) {
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+
+    $sql = "SELECT * FROM user
+      WHERE email = '$email'
+      AND password = '$password'";
+
+    $res = mysqli_query($conn, $sql);
+    if (mysqli_num_rows($res) == 1) {
+        $row = mysqli_fetch_assoc($res);
+        $_SESSION['user'] = $email;
+        $_SESSION['role'] = $row['role'];
+        
+
+        $_SESSION['status_login'] = "success";
+        if ($row['role'] == 1) {    
+            // $_SESSION['status_login'] = "success";
+            alert("Success");
+            header("location:index.php#login");
+        }
+         else {
+            header("location:index.php");
+            // $_SESSION['status_login'] = "success";
+            alert("Success");
+        }
+    } else {
+        // $_SESSION['status'] = "error";
+        alert("Error"); 
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,7 +78,7 @@
             <a href="../Section/impu.php" class="link text-white ps-3">IMPU</a>
           </li>
           <li class="nav-item ">
-            <a href="#" class="link text-white ps-3">CDESU</a>
+            <a href="../CDESU/cdesu.php" class="link text-white ps-3">CDESU</a>
           </li>
           <li class="nav-item ">
             <a href="#" class="link text-white ps-3">GSU</a>
@@ -63,7 +101,7 @@
         <nav aria-label="breadcrumb">
             <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="../Research_&_Evaluation/reasearch_page_1.php">Reaseach and Evaluation</a></li>
+                <li class="breadcrumb-item"><a href="../CDESU/cdesu.php">CDESU</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Details</li>
             </ol>
             </nav>
@@ -76,26 +114,34 @@
     </div>
 
     <div class="container-fluid">
-        <div class="card mb-3" style="max-width: 100%;">
-            <div class="row g-0">
-                <div class="col-md-4">
-                <img
-                    src="../img/announcement_img.png"
-                    alt="Trendy Pants and Shoes"
-                    class="img-fluid rounded-start"
-                />
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="card h-100">
+                    <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                        <img src="../img/banner1.jpg" class="img-fluid"/>
+                        <a href="#!">
+                        <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                        </a>
+                    </div>
+                <div class="card-body bg-secondary text-white">
+                    <h5 class="card-title">Special title treatment</h5>
+                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
                 </div>
-                <div class="col-md-8">
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">
-                    ICYMI | In celebration of 116th Founding Anniversary of Central Luzon State University (CLSU), College of Agriculture (CAg) launched various activities for CAg students, April 11.
-                    With the theme “CAGarawan: Pasiklabin ang Pusong Aggies” different activities such as tug-of-war, agawang buko, color fun run, and open mic live band were conducted.
-                    Agawan ng Buko: Akin lang ang BJ Ko
-                    Winner: Denver Luces
-                    TIKAS: Tibay at Lakas ng Aggies
-                    </p>
-                    
+                    <h5 class="card-title">Special title treatment</h5>
+                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+                </div>
+                <div class="card mt-2">
+                <div class="card-body">
+                    <h5 class="card-title">Special title treatment</h5>
+                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
                 </div>
                 </div>
             </div>

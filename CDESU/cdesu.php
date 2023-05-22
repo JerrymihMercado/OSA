@@ -58,44 +58,47 @@
       </nav>
     </div>
   </div>
+  <!-- banner -->
+    <div class="bg-image ripple" data-mdb-ripple-color="light">
+        <img src="../img/clsu-1.jpg" class="banner__img" />
+        <a href="#!">
+            <div class="mask" style="background-color: hsla(0, 0%, 0%, 0.5)">
+            <div class="d-flex justify-content-center align-items-center h-100 text-center">
+                <h2 class="text-white mb-0">Career Development and Employment Services Unit- OSA, CLSU</h2>
+            </div>
+            </div>
+            <!-- <div class="hover-overlay">
+            <div class="mask" style="background-color: hsla(0, 0%,98%, 0.2)"></div>
+            </div> -->
+        </a>
+    </div> 
 
-    <div class="mt-3 p-3">
-        <nav aria-label="breadcrumb">
-            <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="../Research_&_Evaluation/reasearch_page_1.php">Reaseach and Evaluation</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Details</li>
-            </ol>
-            </nav>
-        </nav>
+    <div class="mt-3 p-2 col-sm-2 card_title text-white">
+        <h5>LATEST JOB POSTS</h5>
     </div>
 
-    <div class="mt-3 p-3">
-        <h4>CAGawaran: Pasiklabin ang Pusong Aggies 2023</h4>
-        <h6>Date: 05-22-23</h6>
-    </div>
-
-    <div class="container-fluid">
-        <div class="card mb-3" style="max-width: 100%;">
-            <div class="row g-0">
-                <div class="col-md-4">
-                <img
-                    src="../img/announcement_img.png"
-                    alt="Trendy Pants and Shoes"
-                    class="img-fluid rounded-start"
-                />
+    <div class="container-fluid mt-4">
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            <div class="col">
+                <a href="../CDESU/cdesu_details.php">
+                    <div class="card h-100">
+                    <img src="../img/clsu-1.jpg" class="card-img-top" alt="Hollywood Sign on The Hill"/>
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">
+                        This is a longer card with supporting text below as a natural lead-in to
+                        additional content. This content is a little bit longer.
+                        </p>
+                    </div>
                 </div>
-                <div class="col-md-8">
+                </a>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                <img src="../img/clsu-1.jpg" class="card-img-top" alt="Palm Springs Road"/>
                 <div class="card-body">
                     <h5 class="card-title">Card title</h5>
-                    <p class="card-text">
-                    ICYMI | In celebration of 116th Founding Anniversary of Central Luzon State University (CLSU), College of Agriculture (CAg) launched various activities for CAg students, April 11.
-                    With the theme “CAGarawan: Pasiklabin ang Pusong Aggies” different activities such as tug-of-war, agawang buko, color fun run, and open mic live band were conducted.
-                    Agawan ng Buko: Akin lang ang BJ Ko
-                    Winner: Denver Luces
-                    TIKAS: Tibay at Lakas ng Aggies
-                    </p>
-                    
+                    <p class="card-text">This is a short card.</p>
                 </div>
                 </div>
             </div>
