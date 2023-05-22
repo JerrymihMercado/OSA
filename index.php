@@ -52,8 +52,13 @@
           <li class="nav-item ">
             <a href="#" class="link text-white ps-3">SDB</a>
           </li>
-          <li class="nav-item ">
-            <a href="#" class="link text-white ps-3">LOGIN</a>
+          <!-- <li class="nav-item ">
+            <a href="#" class="link text-white ps-3" >LOGIN</a>
+          </li> -->
+          <li class="nav-item">
+            <a href="" class="text-white ps-3 " data-mdb-toggle="modal" data-mdb-target="#login_Modal">
+              LOGIN
+            </a>
           </li>
         </ul>
       </nav>
@@ -127,6 +132,49 @@
       </div>
     </div>
   </div>
+
+  <!-- login modal -->
+  <!-- Button trigger modal -->
+  <!-- <button type="button" class="btn btn-primary" data-mdb-toggle="modal" data-mdb-target="#login_Modal">
+    Launch demo modal
+  </button> -->
+
+  <!-- Modal -->
+  <div class="modal fade" id="login_Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">LOGIN</h5>
+          <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <!-- Email input -->
+            <div class="form-outline mb-4">
+              <input type="email" id="email" class="form-control" />
+              <label class="form-label" for="email">Email address</label>
+            </div>
+
+            <!-- Password input -->
+            <div class="form-outline mb-4">
+              <input type="password" id="password" class="form-control" />
+              <label class="form-label" for="password">Password</label>
+            </div>
+
+            <!-- 2 column grid layout for inline styling -->
+            <div class="row mb-4">
+              
+                  <a href="#!">Forgot password?</a>
+            </div>
+            <!-- Submit button -->
+            <button type="submit" class="btn btn-primary btn-block">Login</button>
+        </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
   <?php include './Components/footer.php'?>
     <!-- End your project here-->
 

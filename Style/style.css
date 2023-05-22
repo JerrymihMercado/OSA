@@ -2,6 +2,9 @@ a{
     color: inherit;
     text-decoration: none;
 }
+.login_btn{
+    cursor: pointer;
+}
 
 /* banner */
 .banner__img{
