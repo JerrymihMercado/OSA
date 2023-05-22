@@ -4,7 +4,7 @@
   
   <!-- Section: Links  -->
   <section class="">
-    <div class="container-fluid text-center text-md-start pt-3">
+    <div class="container-fluid  text-md-start pt-3">
       <!-- Grid row -->
       <div class="row mt-3">
         <!-- Grid column -->
@@ -37,10 +37,10 @@
             SOCIAL MEDIA
           </h6>
           <div>
-            <a href="" class="me-3 text-reset">
+            <a href="https://www.facebook.com/officeofstudentaffairsCLSU" class="me-3 text-reset">
               <i class="fab fa-facebook-square fa-lg"></i>
             </a>
-            <a href="" class="me-3 text-reset">
+            <a href="https://twitter.com/clsu_official?lang=en" class="me-3 text-reset">
               <i class="fab fa-twitter fa-lg"></i>
             </a>
             <a href="" class="me-3 text-reset">
