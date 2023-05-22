@@ -28,7 +28,7 @@
             <a href="index.php" class="link-home text-white">HOME</a>
           </li>
           <li class="nav-item ">
-            <a href="#" class="link text-white ps-3">ABOUT US</a>
+            <a href="about_us.php" class="link text-white ps-3">ABOUT US</a>
           </li>
           <li class="nav-item ">
             <a href="Section/impu.php" class="link text-white ps-3">IMPU</a>

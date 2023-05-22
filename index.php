@@ -104,13 +104,13 @@
 
   <div class="container-fluid pt-5">
     <div class="row">
-      <h4 class="announce text-white pt-2">ANNOUNCEMENTS</h4>
+      <h4 class="announcement text-white pt-2">ANNOUNCEMENTS</h4>
     </div>
   </div>
 
   <div class="container-fluid">
     <div class="row">
-      <div class="col">
+      <div class="col-12">
       <a href="#" class="d-flex justify-content-end p-2">VIEW ALL</a>
         <div class="card">
           <div class="card-body shadow-2">
