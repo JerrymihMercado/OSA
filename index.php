@@ -193,16 +193,47 @@ if (isset($_POST['submit'])) {
       <div class="row">
         <div class="osa-tag">
           <p class="tag-info">ANNOUNCEMENT</p>
-          <!-- <p class="tag-sub ">halinat sumayaw</p> -->
+          <p class="tag-sub ">Read the latest announcemnet from the Office of Student Affairs(OSA)</p>
         </div>
 
       </div>
 
     </div>
+  <div class="container">
   <div class="col justify-content-end d-flex p-3">
       <a href="Announcement/all_announcement.php">View all</a>
+  </div>             
   </div>
-  <div class="p-2">
+  <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="card shadow-5 h-100">
+            
+            <div class="row no-gutter">
+              <div class="col-md-3 card-pic">
+                <!-- <img src="img/Rectangle 266.png" class="card-img-top card-image" alt="Hollywood Sign on The Hill"/> -->
+                  <img src="img/osa-picture.jpg" alt="" class="card-pic card-img  ">
+              </div>
+              <div class="col-md-9">
+                <div class="card-body ">
+                  <h5 class="text-success">OSA MISSION</h5>
+                  <div class="borders" >
+                    <p class="text-muted pt-2">05-22-23</p>
+                    <p class=" mission-info1">OSA shall promote the development of the students’ talents,
+                      potentials and leadership capabilities through its program thrusts that promote
+                      self- awareness, self-growth and development, self- management, cooperative
+                      </p>
+                      
+                          <button type="button" class="btn btn-success shadow" data-mdb-ripple-color="dark">View Details</button>
+                    </div>
+                </div>
+              </div>
+            </div>  
+          </div>
+        </div>
+      </div>
+    </div>
+  <!-- <div class="p-2">
     <div class="container mt-4">
         <div class="col g-4">
             <div class="card mb-3" style="max-width: 100%;">
@@ -252,7 +283,7 @@ if (isset($_POST['submit'])) {
         </div>
     </div>
         
-  </div>
+  </div> -->
 
   <!-- login modal -->
   <!-- Button trigger modal -->

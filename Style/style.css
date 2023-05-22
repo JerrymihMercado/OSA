@@ -97,3 +97,10 @@ a{
     /* height: 40px;
     width: 20px; */
 }
+.mission-info1{
+    border-right: 8px solid #148D08;
+    /* margin-top: 10px; */
+}
+.card-pic{
+    height: 150px;
+}
