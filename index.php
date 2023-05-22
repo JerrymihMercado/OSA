@@ -50,6 +50,7 @@ if (isset($_POST['submit'])) {
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <title>Office of Student Affairs</title>
     <link rel="stylesheet" href="./Style/style.css">
+    <link rel="stylesheet" href="./Style/style_about.css">
      <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
     <!-- Google Fonts Roboto -->
@@ -65,10 +66,7 @@ if (isset($_POST['submit'])) {
     }
   </style>
   <body>
-<<<<<<< Updated upstream
     <!-- Start your project here--> 
-  <?php include './header.php'?>
-=======
     <!-- Start your project here-->
     <div class="container-fluid header-title">
     <div class="row">
@@ -91,7 +89,7 @@ if (isset($_POST['submit'])) {
             <a href="index.php" class="link-home text-white active">HOME</a>
           </li>
           <li class="nav-item ">
-            <a href="#" class="link text-white ps-3">ABOUT US</a>
+            <a href="about_us.php" class="link text-white ps-3">ABOUT US</a>
           </li>
           <li class="nav-item ">
             <a href="Section/impu.php" class="link text-white ps-3">IMPU</a>
@@ -142,7 +140,6 @@ if (isset($_POST['submit'])) {
       </nav>
     </div>
   </div>
->>>>>>> Stashed changes
 
   <div class="carousel-section">
     <div id="carouselExampleControls" class="carousel slide" data-mdb-ride="carousel">
@@ -189,14 +186,24 @@ if (isset($_POST['submit'])) {
     </div>
   </div>
 
-  <div class="p-2 col-sm-2 card_title text-white mt-5">
+  <!-- <div class="p-2 col-sm-2 card_title text-white mt-5">
     <h5>Announcement</h5>
-  </div>
+  </div> -->
+  <div class="container pt-5">
+      <div class="row">
+        <div class="osa-tag">
+          <p class="tag-info">ANNOUNCEMENT</p>
+          <!-- <p class="tag-sub ">halinat sumayaw</p> -->
+        </div>
+
+      </div>
+
+    </div>
   <div class="col justify-content-end d-flex p-3">
       <a href="Announcement/all_announcement.php">View all</a>
   </div>
   <div class="p-2">
-    <div class="container-fluid mt-4">
+    <div class="container mt-4">
         <div class="col g-4">
             <div class="card mb-3" style="max-width: 100%;">
               <div class="row g-0">
