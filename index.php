@@ -198,15 +198,16 @@ if (isset($_POST['submit'])) {
           <div class="card shadows mb-3" >
             <div class="row g-0">
               <div class="col-md-4">
-                <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                    <img src="img/osa-picture.jpg" class="card-img-top" alt="Hollywood Sign on The Hill"/>
-                    <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-                </div>
+                <img
+                  src="img/announcement_img.png"
+                  alt="Trendy Pants and Shoes"
+                  class="img-fluid rounded-start"
+                />
               </div>
-              <div class="col-md-9">
+              <div class="col-md-8">
                 <div class="card-body ">
                   <h5 class="text-success">OSA MISSION</h5>
-                  <div class="borders" >
+                  <hr>
                     <p class="text-muted pt-2">05-22-23</p>
                     <p class=" mission-info1">OSA shall promote the development of the students’ talents,
                       potentials and leadership capabilities through its program thrusts that promote
@@ -215,9 +216,10 @@ if (isset($_POST['submit'])) {
                     <a href="./Announcement/announcement_details.php">
                       <button type="button" class="btn btn-success btn-rounded shadow fw-bold" data-mdb-ripple-color="dark">View Details</button>
                     </a>
-                  <!-- </div> -->
+              
                 </div>
               </div>
+           
             </div>
           </div>
         </div>
@@ -260,8 +262,79 @@ if (isset($_POST['submit'])) {
     </div>
   </div>
 
+  
 
-  <?php include './Components/footer.php'?>
+  <div class="mt-5 footer-section " >
+  <footer class="text-center text-lg-start bg-light text-muted ">
+  
+    <!-- Section: Links  -->
+    <section class="" style="background-image: url(img/banner1.png);  background-size:100rem, 100rem; background-repeat: no-repeat;align-items: center; ">
+      <div class="container-fluid  text-md-start pt-3 ">
+        <!-- Grid row -->
+        <div class="row mt-3">
+          <!-- Grid column -->
+          <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+            <!-- Content -->
+            <img src="./img/clsu-logo.png " alt="" class="footer-logo text-center" style=" width: 5.5rem;">
+            
+            <p class="text-white" style="font-size: 25px; font-weight:500;">OFFICE OF STUDENT AFFAIRS</p>
+          </div>
+          <!-- Grid column -->
+
+          <!-- Grid column -->
+          <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+            <!-- Links -->
+            <h6 class="text-uppercase fw-bold mb-4 " style="color: #cdfb13;">Contact</h6>
+            <p class="text-white"><i class="fas fa-location-dot "></i> Central Luzon State University, Science City of Muñoz Nueva Ecija, Philippines</p>
+            <p class="text-white">
+              <i class="fas fa-envelope me-3 "></i>
+              osa@clsu.edu.ph
+            </p>
+            <p class="text-white"><i class="fas fa-phone me-3 "></i> (044) 940 7030</p>
+            <!-- <p><i class="fas fa-print me-3"></i> + 01 234 567 89</p> -->
+          </div>
+          <!-- Grid column -->
+        
+          <!-- Grid column -->
+          <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+            <!-- Links -->
+            <h6 class="text-uppercase fw-bold mb-4" style="color: #cdfb13;">
+              SOCIAL MEDIA
+            </h6>
+            <div>
+              <a href="https://www.facebook.com/officeofstudentaffairsCLSU" target="_blank" class="me-3 text-reset">
+                <i class="fab fa-facebook-square fa-lg text-white"></i>
+              </a>
+              <a href="https://twitter.com/clsu_official?lang=en" target="_blank" class="me-3 text-reset">
+                <i class="fab fa-twitter fa-lg text-white"></i>
+              </a>
+              <a href="" class="me-3 text-reset">
+                <i class="fab fa-google fa-lg text-white"></i>
+              </a>
+              <a href="" class="me-3 text-reset">
+                <i class="fab fa-instagram fa-lg text-white"></i>
+              </a>
+              <a href="" class="me-3 text-reset">
+                <i class="fab fa-linkedin fa-lg text-white"></i>
+              </a>
+              
+            </div>
+          </div>
+          <!-- Grid column -->
+        </div>
+        <!-- Grid row -->
+      </div>
+    </section>
+    <!-- Section: Links  -->
+
+    <!-- Copyright -->
+    <div class="text-center p-1 text-white" style="background: -webkit-linear-gradient(0deg, #008102, #93d12d);">
+      © Copyright 2023 Central Luzon State University All Rights Reserved
+      <!-- <a class="text-reset fw-bold" href="https://mdbootstrap.com/">MDBootstrap.com</a> -->
+    </div>
+    <!-- Copyright -->
+  </footer>
+</div>
     <!-- End your project here-->
 
     <!-- MDB -->

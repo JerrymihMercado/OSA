@@ -22,6 +22,11 @@
     .img-blur{
         filter: blur(4px);
     }
+    .chat-bot{
+        position: -webkit-sticky; /* Safari */
+        position: sticky;
+        bottom: 0;        
+    }
 </style>
 <body>
     <div class="container-fluid header-title">
@@ -129,9 +134,124 @@
         </div>
     </div>
 
-    <?php
-       include '../Components/footer.php';
-    ?>
+    
+    <div class="p-5 chat-bot d-flex justify-content-end">
+        <button type="button" class="btn btn-success btn-lg btn-floating" data-mdb-toggle="modal" data-mdb-target="#chatModal">
+            <i class="fas fa-comment"></i>
+        </button>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="chatModal" tabindex="-1" aria-labelledby="chatModal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="chatModal">Chat Me</h5>
+                <button type="button" class="btn-close text-white" data-mdb-dismiss="modal" aria-label="Close"></button>
+            </div>
+                <div class="modal-body">
+                    <div class="d-flex flex-row justify-content-start mb-4">
+                        <img src="../img/avatar.png"
+                        alt="avatar 1" style="width: 45px; height: 100%;">
+                        <div class="p-3 ms-3" style="border-radius: 15px; background-color: rgba(57, 192, 237,.2);">
+                            <p class="small mb-0">Hello and thank you for visiting MDBootstrap. Please click the video
+                                below.</p>
+                        </div>
+                        </div>
+
+                        <div class="d-flex flex-row justify-content-end mb-4">
+                            <div class="p-3 me-3 border" style="border-radius: 15px; background-color: #fbfbfb;">
+                            <p class="small mb-0">Thank you, I really like your product.</p>
+                            </div>
+                            <img src="../img/Dude Crew (900 × 500 px).png"
+                            alt="avatar 1" style="width: 45px; height: 100%;">
+                        </div>
+                        <div class="form-outline">
+                            <textarea class="form-control" id="textAreaExample" rows="4"></textarea>
+                            <label class="form-label" for="textAreaExample">Type your message</label>
+                        </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary">Send Message</button>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+    
+
+    <div class="mt-5 footer-section " >
+        <footer class="text-center text-lg-start bg-light text-muted ">
+        
+            <!-- Section: Links  -->
+            <section class="" style="background-image: url(../img/banner1.png);  background-size:100rem, 100rem; background-repeat: no-repeat;align-items: center; ">
+            <div class="container-fluid  text-md-start pt-3 ">
+                <!-- Grid row -->
+                <div class="row mt-3">
+                <!-- Grid column -->
+                <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                    <!-- Content -->
+                    <img src="../img/clsu-logo.png " alt="" class="footer-logo text-center" style=" width: 5.5rem;">
+                    
+                    <p class="text-white" style="font-size: 25px; font-weight:500;">OFFICE OF STUDENT AFFAIRS</p>
+                </div>
+                <!-- Grid column -->
+
+                <!-- Grid column -->
+                <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                    <!-- Links -->
+                    <h6 class="text-uppercase fw-bold mb-4 " style="color: #cdfb13;">Contact</h6>
+                    <p class="text-white"><i class="fas fa-location-dot "></i> Central Luzon State University, Science City of Muñoz Nueva Ecija, Philippines</p>
+                    <p class="text-white">
+                    <i class="fas fa-envelope me-3 "></i>
+                    osa@clsu.edu.ph
+                    </p>
+                    <p class="text-white"><i class="fas fa-phone me-3 "></i> (044) 940 7030</p>
+                    <!-- <p><i class="fas fa-print me-3"></i> + 01 234 567 89</p> -->
+                </div>
+                <!-- Grid column -->
+                
+                <!-- Grid column -->
+                <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                    <!-- Links -->
+                    <h6 class="text-uppercase fw-bold mb-4" style="color: #cdfb13;">
+                    SOCIAL MEDIA
+                    </h6>
+                    <div>
+                    <a href="https://www.facebook.com/officeofstudentaffairsCLSU" target="_blank" class="me-3 text-reset">
+                        <i class="fab fa-facebook-square fa-lg text-white"></i>
+                    </a>
+                    <a href="https://twitter.com/clsu_official?lang=en" target="_blank" class="me-3 text-reset">
+                        <i class="fab fa-twitter fa-lg text-white"></i>
+                    </a>
+                    <a href="" class="me-3 text-reset">
+                        <i class="fab fa-google fa-lg text-white"></i>
+                    </a>
+                    <a href="" class="me-3 text-reset">
+                        <i class="fab fa-instagram fa-lg text-white"></i>
+                    </a>
+                    <a href="" class="me-3 text-reset">
+                        <i class="fab fa-linkedin fa-lg text-white"></i>
+                    </a>
+                    
+                    </div>
+                </div>
+                <!-- Grid column -->
+                </div>
+                <!-- Grid row -->
+            </div>
+            </section>
+            <!-- Section: Links  -->
+
+            <!-- Copyright -->
+            <div class="text-center p-1 text-white" style="background: -webkit-linear-gradient(0deg, #008102, #93d12d);">
+            © Copyright 2023 Central Luzon State University All Rights Reserved
+            <!-- <a class="text-reset fw-bold" href="https://mdbootstrap.com/">MDBootstrap.com</a> -->
+            </div>
+            <!-- Copyright -->
+        </footer>
+    </div>
 
 
 <!-- MDB -->
