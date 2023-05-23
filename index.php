@@ -50,7 +50,7 @@ if (isset($_POST['submit'])) {
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <title>Office of Student Affairs</title>
     <link rel="stylesheet" href="./Style/style.css">
-    <link rel="stylesheet" href="./Style/style_about.css">
+    <!-- <link rel="stylesheet" href="./Style/style_about.css"> -->
      <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
     <!-- Google Fonts Roboto -->
@@ -212,13 +212,13 @@ if (isset($_POST['submit'])) {
             <div class="row no-gutter">
               <div class="col-md-3 card-pic">
                 <!-- <img src="img/Rectangle 266.png" class="card-img-top card-image" alt="Hollywood Sign on The Hill"/> -->
-                  <img src="img/osa-picture.jpg" alt="" class="card-pic card-img  ">
+                  <img src="img/osa-picture.jpg" alt="" class="pic card-img  ">
               </div>
               <div class="col-md-9">
                 <div class="card-body ">
                   <h5 class="text-success">OSA MISSION</h5>
                   <div class="borders" >
-                    <p class="text-muted pt-2">05-22-23</p>
+                    <p class="text-muted ">05-22-23</p>
                     <p class=" mission-info1">OSA shall promote the development of the students’ talents,
                       potentials and leadership capabilities through its program thrusts that promote
                       self- awareness, self-growth and development, self- management, cooperative

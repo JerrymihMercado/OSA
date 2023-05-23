@@ -1,10 +1,23 @@
 <!-- Footer -->
-<div class="mt-5">
-    <footer class="text-center text-lg-start bg-light text-muted">
+<style>
+  .footer-section{
+    /* background-image: url(../img/footer-image.jpg); */
+    /* background-color: #148D08; */
+    /* background-image: url(../img/banner1.png);
+    height: 40vh;
+    width: 100%; */
+    /* align-items: center; */
+    /* background-repeat: no-repeat;
+    background-size:contain; */
+    
+  }
+</style>
+<div class="mt-5 footer-section " >
+    <footer class="text-center text-lg-start bg-light text-muted ">
   
   <!-- Section: Links  -->
-  <section class="">
-    <div class="container-fluid  text-md-start pt-3">
+  <section class="" style="background-image: url(./img/banner1.png);  background-size:100rem, 100rem; background-repeat: no-repeat;align-items: center; ">
+    <div class="container-fluid  text-md-start pt-3 ">
       <!-- Grid row -->
       <div class="row mt-3">
         <!-- Grid column -->
@@ -12,20 +25,20 @@
           <!-- Content -->
           <img src="img/clsu-logo.png " alt="" class="footer-logo text-center" style=" width: 5.5rem;">
           
-          <p class="" style="font-size: 25px; font-weight:500;">OFFICE OF STUDENT AFFAIRS</p>
+          <p class="text-white" style="font-size: 25px; font-weight:500;">OFFICE OF STUDENT AFFAIRS</p>
         </div>
         <!-- Grid column -->
 
         <!-- Grid column -->
         <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
           <!-- Links -->
-          <h6 class="text-uppercase fw-bold mb-4 " style="color: #148D08;">Contact</h6>
-          <p><i class="fas fa-location-dot "></i> Central Luzon State University, Science City of Muñoz Nueva Ecija, Philippines</p>
-          <p>
-            <i class="fas fa-envelope me-3"></i>
+          <h6 class="text-uppercase fw-bold mb-4 " style="color: #cdfb13;">Contact</h6>
+          <p class="text-white"><i class="fas fa-location-dot "></i> Central Luzon State University, Science City of Muñoz Nueva Ecija, Philippines</p>
+          <p class="text-white">
+            <i class="fas fa-envelope me-3 "></i>
             osa@clsu.edu.ph
           </p>
-          <p><i class="fas fa-phone me-3"></i> (044) 940 7030</p>
+          <p class="text-white"><i class="fas fa-phone me-3 "></i> (044) 940 7030</p>
           <!-- <p><i class="fas fa-print me-3"></i> + 01 234 567 89</p> -->
         </div>
         <!-- Grid column -->
@@ -33,24 +46,24 @@
         <!-- Grid column -->
         <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
           <!-- Links -->
-          <h6 class="text-uppercase fw-bold mb-4" style="color: #148D08;">
+          <h6 class="text-uppercase fw-bold mb-4" style="color: #cdfb13;">
             SOCIAL MEDIA
           </h6>
           <div>
-            <a href="https://www.facebook.com/officeofstudentaffairsCLSU" class="me-3 text-reset">
-              <i class="fab fa-facebook-square fa-lg"></i>
+            <a href="https://www.facebook.com/officeofstudentaffairsCLSU" target="_blank" class="me-3 text-reset">
+              <i class="fab fa-facebook-square fa-lg text-white"></i>
             </a>
-            <a href="https://twitter.com/clsu_official?lang=en" class="me-3 text-reset">
-              <i class="fab fa-twitter fa-lg"></i>
-            </a>
-            <a href="" class="me-3 text-reset">
-              <i class="fab fa-google fa-lg"></i>
+            <a href="https://twitter.com/clsu_official?lang=en" target="_blank" class="me-3 text-reset">
+              <i class="fab fa-twitter fa-lg text-white"></i>
             </a>
             <a href="" class="me-3 text-reset">
-              <i class="fab fa-instagram fa-lg"></i>
+              <i class="fab fa-google fa-lg text-white"></i>
             </a>
             <a href="" class="me-3 text-reset">
-              <i class="fab fa-linkedin fa-lg"></i>
+              <i class="fab fa-instagram fa-lg text-white"></i>
+            </a>
+            <a href="" class="me-3 text-reset">
+              <i class="fab fa-linkedin fa-lg text-white"></i>
             </a>
             
           </div>
@@ -63,7 +76,7 @@
   <!-- Section: Links  -->
 
   <!-- Copyright -->
-  <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+  <div class="text-center p-4 text-white" style="background: -webkit-linear-gradient(0deg, #008102, #93d12d);">
     © Copyright 2023 Central Luzon State University All Rights Reserved
     <!-- <a class="text-reset fw-bold" href="https://mdbootstrap.com/">MDBootstrap.com</a> -->
   </div>
