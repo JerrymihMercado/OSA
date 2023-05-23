@@ -109,11 +109,11 @@
         <div class="row">
             <div class="col-sm-6">
                 <div class="card shadows">
-                    <div class="card-body">
-                        <h5 class="card-title">Handbook</h5>
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                        
-                    </div>
+                    <img
+  src="../img/studenthandbook.png"
+  class="img-fluid hover-shadow"
+  alt="Los Angeles Skyscrapers"
+/>
                 </div>
                 <div class="row mt-3">
                     <div class="col-auto">

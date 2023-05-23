@@ -1,3 +1,47 @@
+<?php
+
+session_start();
+include '../mysql_connect.php';
+
+if (isset($_POST['submit'])) {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
+   
+
+    $sql = "SELECT * FROM login
+      WHERE email = '$username'
+      AND password = '$password'";
+
+    $res = mysqli_query($conn, $sql);
+    if (mysqli_num_rows($res) == 1) {
+        $row = mysqli_fetch_assoc($res);
+        $_SESSION['user'] = $username;
+        $_SESSION['is_admin'] = $row['is_admin'];
+        
+
+        echo '<script language="javascript">';
+        echo 'alert("message successfully sent")';
+        echo '</script>';
+                if ($row['is_admin'] == 1) {    
+                    echo '<script language="javascript">';
+        echo 'alert("message successfully sent")';
+        echo '</script>';
+                    header("location:./sdb_index.php#login");
+                }
+                else {
+                    header("location:./sdb_index.php");
+                    echo '<script language="javascript">';
+        echo 'alert("message successfully sent")';
+        echo '</script>';
+                }
+            } else {
+        echo '<script language="javascript">';
+        echo 'alert("error")';
+        echo '</script>';
+            }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -62,14 +106,28 @@
             <a href="#" class="link text-white ps-3">GSU</a>
           </li>
           <li class="nav-item ">
-            <a href="#" class="link text-white ps-3">SOU</a>
+            <a href="./sdb_index.php" class="link text-white ps-3">SOU</a>
           </li>
           <li class="nav-item ">
             <a href="" class="link text-white ps-3">SDB</a>
           </li>
-          <li class="nav-item ">
-            <a href="#" class="link text-white ps-3">LOGIN</a>
-          </li>
+          <?php
+            if (isset($_SESSION['is_admin'])) {
+                if ($_SESSION['is_admin'] == 1 || $_SESSION['is_admin'] == 0) {
+                    echo '<li class="nav-item">
+                            <form action="../logout.php" method="POST">
+                                <button name="logout" class="btn btn-danger"  > Logout</button>
+                            </form>
+                          </li>';
+                }
+            }else{
+                echo '<li class="nav-item">
+                        <a href="" class="text-white ps-3 " data-mdb-toggle="modal" data-mdb-target="#login_Modal">
+                          LOGIN
+                        </a>
+                      </li>';
+            }
+          ?>
         </ul>
       </nav>
     </div>
@@ -134,12 +192,20 @@
         </div>
     </div>
 
-    
-    <div class="p-5 chat-bot d-flex justify-content-end">
-        <button type="button" class="btn btn-success btn-lg btn-floating" data-mdb-toggle="modal" data-mdb-target="#chatModal">
-            <i class="fas fa-comment"></i>
-        </button>
-    </div>
+   <?php
+        if (isset($_SESSION['is_admin'])) {
+            if ($_SESSION['is_admin'] == 1) {
+                echo ' <div class="p-5 chat-bot d-flex justify-content-end">
+                            <button type="button" class="btn btn-success btn-lg btn-floating" data-mdb-toggle="modal" data-mdb-target="#chatModal">
+                                <i class="fas fa-comment"></i>
+                            </button>
+                        </div>';
+            }
+        } else {
+            echo '';         
+        }
+
+    ?>
 
     <!-- Modal -->
     <div class="modal fade" id="chatModal" tabindex="-1" aria-labelledby="chatModal" aria-hidden="true">
@@ -179,8 +245,40 @@
             </div>
         </div>
     </div>
-    
+     <!-- Modal -->
+    <div class="modal fade" id="login_Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">LOGIN</h5>
+            <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            <form method="POST">
+                <!-- Email input -->
+                <div class="form-outline mb-4">
+                <input type="text" id="username" name="username" class="form-control" />
+                <label class="form-label" for="email">Email address</label>
+                </div>
 
+                <!-- Password input -->
+                <div class="form-outline mb-4">
+                <input type="password" id="password" name="password" class="form-control" />
+                <label class="form-label" for="password">Password</label>
+                </div>
+
+                <!-- 2 column grid layout for inline styling -->
+                <div class="row mb-4">
+                
+                    <a href="#!">Forgot password?</a>
+                </div>
+                <!-- Submit button -->
+                <button type="submit" name="submit" class="btn btn-primary btn-block">Login</button>
+            </form>
+            </div>
+        </div>
+        </div>
+    </div>
     <div class="mt-5 footer-section " >
         <footer class="text-center text-lg-start bg-light text-muted ">
         
