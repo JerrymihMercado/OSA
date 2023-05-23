@@ -203,12 +203,11 @@ if (isset($_POST['submit'])) {
                     <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
                 </div>
               </div>
-              <div class="col-md-8">
-                <div class="card-body">
-                    <h5 class="text-success">OSA MISSION</h5>
+              <div class="col-md-9">
+                <div class="card-body ">
+                  <h5 class="text-success">OSA MISSION</h5>
+                  <div class="borders" >
                     <p class="text-muted pt-2">05-22-23</p>
-                  <!-- <div class="borders" > -->
-                    <hr>
                     <p class=" mission-info1">OSA shall promote the development of the students’ talents,
                       potentials and leadership capabilities through its program thrusts that promote
                       self- awareness, self-growth and development, self- management, cooperative
