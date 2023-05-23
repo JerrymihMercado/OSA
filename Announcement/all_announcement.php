@@ -11,6 +11,15 @@
       include '../Links/link.php';
     ?>
 </head>
+<style>
+   a,
+    a:hover,
+    a:focus,
+    a:active {
+        text-decoration: none;
+        color: inherit;
+    }
+</style>
 <body>
   
     <div class="container-fluid header-title">
@@ -59,26 +68,25 @@
     </div>
   </div>
 
-    <div class="mt-3 p-3">
-        <nav aria-label="breadcrumb">
-            <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="../index.php">Announcement</a></li>
-                <li class="breadcrumb-item active" aria-current="page">View All</li>
-            </ol>
-            </nav>
-        </nav>
+  <div class="container pt-5">
+      <div class="row">
+        <div class="osa-tag">
+          <p class="tag-info">ANNOUNCEMENT LIST</p>
+          <p class="tag-sub">See all the announcement from the Office of Student Affairs(OSA)</p>
+        </div>
+
+      </div>
     </div>
 
+  <div class="container">
     <div class="p-2">
-        <div class="card mb-3 bg-success text-white" style="max-width: 100%;">
+        <div class="card mb-3 bg-success text-white shadows" style="max-width: 100%;">
             <div class="row g-0">
                 <div class="col-md-4">
-                    <img
-                        src="../img/Rectangle 290.png"
-                        alt="Trendy Pants and Shoes"
-                        class="img-fluid rounded-start"
-                    />
+                    <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                        <img src="../img/Rectangle 290.png" class="card-img-top" alt="Hollywood Sign on The Hill"/>
+                        <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                    </div>
                     </div>
                     <div class="col-md-8">
                     <div class="card-body">
@@ -95,44 +103,48 @@
             </div>
         </div>
     </div>
+  </div>
     
-    <div class="container-fluid">
-        <div class="row row-cols-1 row-cols-md-3 g-4">
-            <div class="col">
-                <a href="../Announcement/announcement_details.php">
-                    <div class="card h-100">
-                    <img src="../img/Rectangle 266.png" class="card-img-top" alt="Hollywood Sign on The Hill"/>
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">
-                        This is a longer card with supporting text below as a natural lead-in to
-                        additional content. This content is a little bit longer.
-                        </p>
+  <div class="container">
+      <div class="row row-cols-1 row-cols-md-3 g-4">
+          <div class="col">
+              <a href="../Announcement/announcement_details.php">
+                  <div class="card h-100 shadows">
+                    <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                          <img src="../img/Rectangle 266.png" class="card-img-top" alt="Hollywood Sign on The Hill"/>
+                          <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
                     </div>
-                </div>
-                </a>
-            </div>
-            <div class="col">
-                <div class="card h-100">
-                <img src="../img/Rectangle 266.png" class="card-img-top" alt="Palm Springs Road"/>
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a short card.</p>
-                </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card h-100">
-                <img src="../img/Rectangle 266.png" class="card-img-top" alt="Los Angeles Skyscrapers"/>
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
-                </div>
-                </div>
-            </div>
-        
-        </div>
-    </div>
+                  <div class="card-body">
+                      <h5 class="card-title">Card title</h5>
+                      <p class="card-text">
+                      This is a longer card with supporting text below as a natural lead-in to
+                      additional content. This content is a little bit longer.
+                      </p>
+                  </div>
+              </div>
+              </a>
+          </div>
+          <div class="col">
+              <div class="card h-100 shadows">
+              <img src="../img/Rectangle 266.png" class="card-img-top" alt="Palm Springs Road"/>
+              <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">This is a short card.</p>
+              </div>
+              </div>
+          </div>
+          <div class="col">
+              <div class="card h-100 shadows">
+              <img src="../img/Rectangle 266.png" class="card-img-top" alt="Los Angeles Skyscrapers"/>
+              <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
+              </div>
+              </div>
+          </div>
+      
+      </div>
+  </div>
 
     <?php
        include '../Components/footer.php';

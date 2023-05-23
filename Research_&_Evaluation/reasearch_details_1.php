@@ -59,24 +59,24 @@
     </div>
   </div>
 
-    <div class="mt-3 p-3">
-        <nav aria-label="breadcrumb">
-            <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="../Research_&_Evaluation/reasearch_page_1.php">Reaseach and Evaluation</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Details</li>
-            </ol>
-            </nav>
-        </nav>
+   <div class="container pt-5">
+      <div class="row">
+        <div class="osa-tag">
+          <p class="tag-info">RESEARCH & EVALUATION DETAILS</p>
+          <p class="tag-sub">Please read the details of R&E from the Office of Student Affairs(OSA)</p>
+        </div>
+      </div>
     </div>
 
-    <div class="mt-3 p-3">
+    <div class="container">
+      <div class="mt-3">
         <h4>CAGawaran: Pasiklabin ang Pusong Aggies 2023</h4>
-        <h6>Date: 05-22-23</h6>
+        <p><i class="fas fa-calendar text-success"></i> 05-22-23</p>
+    </div>
     </div>
 
-    <div class="container-fluid">
-        <div class="card mb-3" style="max-width: 100%;">
+    <div class="container">
+        <div class="card shadows mb-3" style="max-width: 100%;">
             <div class="row g-0">
                 <div class="col-md-4">
                 <img

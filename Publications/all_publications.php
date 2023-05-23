@@ -11,6 +11,15 @@
       include '../Links/link.php';
     ?>
 </head>
+<style>
+   a,
+    a:hover,
+    a:focus,
+    a:active {
+        text-decoration: none;
+        color: inherit;
+    }
+</style>
 <body>
   
     <div class="container-fluid header-title">
@@ -31,7 +40,7 @@
       <nav class="navbar main-header-mid navbar-expand-md">
         <ul class="navbar-nav">
           <li class="nav-item ">
-            <a href="index.php" class="link-home text-white">HOME</a>
+            <a href="../index.php" class="link-home text-white">HOME</a>
           </li>
           <li class="nav-item ">
             <a href="#" class="link text-white ps-3">ABOUT US</a>
@@ -72,24 +81,26 @@
             </div> -->
         </a>
     </div> 
+    <div class="container pt-5">
+      <div class="row">
+        <div class="osa-tag">
+          <p class="tag-info">PUBLICATION PAGE</p>
+          <p class="tag-sub">See all the publication page from the Office of Student Affairs(OSA)</p>
+        </div>
 
-    <div class="mt-3 p-3">
-        <nav aria-label="breadcrumb">
-            <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="../Section/impu.php">Publication</a></li>
-                <li class="breadcrumb-item active" aria-current="page">View All</li>
-            </ol>
-            </nav>
-        </nav>
+      </div>
     </div>
+    
 
-    <div class="container-fluid mt-4">
+    <div class="container mt-4">
         <div class="row row-cols-1 row-cols-md-3 g-4">
             <div class="col">
                 <a href="../Publications/publication_page_1.php">
-                    <div class="card h-100">
-                    <img src="../img/clsu-1.jpg" class="card-img-top" alt="Hollywood Sign on The Hill"/>
+                    <div class="card h-100 shadows">
+                    <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                        <img src="../img/clsu-1.jpg" class="card-img-top" alt="Hollywood Sign on The Hill"/>
+                        <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                    </div>
                     <div class="card-body">
                         <h5 class="card-title">Card title</h5>
                         <p class="card-text">
@@ -101,8 +112,11 @@
                 </a>
             </div>
             <div class="col">
-                <div class="card h-100">
-                <img src="../img/clsu-1.jpg" class="card-img-top" alt="Palm Springs Road"/>
+                <div class="card h-100 shadows">
+                <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                    <img src="../img/clsu-1.jpg" class="card-img-top" alt="Hollywood Sign on The Hill"/>
+                    <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                </div>
                 <div class="card-body">
                     <h5 class="card-title">Card title</h5>
                     <p class="card-text">This is a short card.</p>

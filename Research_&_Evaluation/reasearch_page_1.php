@@ -11,6 +11,15 @@
       include '../Links/link.php';
     ?>
 </head>
+<style>
+   a,
+    a:hover,
+    a:focus,
+    a:active {
+        text-decoration: none;
+        color: inherit;
+    }
+</style>
 <body>
   
     <div class="container-fluid header-title">
@@ -73,22 +82,20 @@
         </a>
     </div> 
 
-    <div class="mt-3 p-3">
-        <nav aria-label="breadcrumb">
-            <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="../Section/impu.php">Reaserch and Evaluation</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Page 1</li>
-            </ol>
-            </nav>
-        </nav>
+    <div class="container pt-5">
+      <div class="row">
+        <div class="osa-tag">
+          <p class="tag-info">RESEARCH & EVALUATION</p>
+          <p class="tag-sub">See all the research and evaluation from the Office of Student Affairs(OSA)</p>
+        </div>
+      </div>
     </div>
 
-    <div class="container-fluid">
+    <div class="container pt-5">
         <div class="row row-cols-1 row-cols-md-3 g-4">
             <div class="col">
                 <a href="../Research_&_Evaluation/reasearch_details_1.php">
-                    <div class="card h-100">
+                    <div class="card h-100 shadows">
                     <img src="../img/Rectangle 266.png" class="card-img-top" alt="Hollywood Sign on The Hill"/>
                     <div class="card-body">
                         <h5 class="card-title">Card title</h5>
@@ -101,7 +108,7 @@
                 </a>
             </div>
             <div class="col">
-                <div class="card h-100">
+                <div class="card h-100 shadows">
                 <img src="../img/Rectangle 266.png" class="card-img-top" alt="Palm Springs Road"/>
                 <div class="card-body">
                     <h5 class="card-title">Card title</h5>
@@ -110,7 +117,7 @@
                 </div>
             </div>
             <div class="col">
-                <div class="card h-100">
+                <div class="card h-100 shadows">
                 <img src="../img/Rectangle 266.png" class="card-img-top" alt="Los Angeles Skyscrapers"/>
                 <div class="card-body">
                     <h5 class="card-title">Card title</h5>

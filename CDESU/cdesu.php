@@ -11,6 +11,15 @@
       include '../Links/link.php';
     ?>
 </head>
+<style>
+   a,
+    a:hover,
+    a:focus,
+    a:active {
+        text-decoration: none;
+        color: inherit;
+    }
+</style>
 <body>
   
     <div class="container-fluid header-title">
@@ -34,13 +43,13 @@
             <a href="../index.php" class="link-home text-white">HOME</a>
           </li>
           <li class="nav-item ">
-            <a href="#" class="link text-white ps-3">ABOUT US</a>
+            <a href="../about_us.php" class="link text-white ps-3">ABOUT US</a>
           </li>
           <li class="nav-item ">
             <a href="../Section/impu.php" class="link text-white ps-3">IMPU</a>
           </li>
           <li class="nav-item ">
-            <a href="#" class="link text-white ps-3">CDESU</a>
+            <a href="" class="link text-white ps-3">CDESU</a>
           </li>
           <li class="nav-item ">
             <a href="#" class="link text-white ps-3">GSU</a>
@@ -49,7 +58,7 @@
             <a href="#" class="link text-white ps-3">SOU</a>
           </li>
           <li class="nav-item ">
-            <a href="#" class="link text-white ps-3">SDB</a>
+            <a href="../SDB/sdb_index.php" class="link text-white ps-3">SDB</a>
           </li>
           <li class="nav-item ">
             <a href="#" class="link text-white ps-3">LOGIN</a>
@@ -73,16 +82,24 @@
         </a>
     </div> 
 
-    <div class="mt-3 p-2 col-sm-2 card_title text-white">
-        <h5>LATEST JOB POSTS</h5>
+    <div class="container pt-5">
+      <div class="row">
+        <div class="osa-tag">
+          <p class="tag-info">LATEST JOB POST</p>
+          <p class="tag-sub">See all the latest post from the Career Development and Employment Services Unit- OSA</p>
+        </div>
+      </div>
     </div>
 
-    <div class="container-fluid mt-4">
+    <div class="container mt-4">
         <div class="row row-cols-1 row-cols-md-3 g-4">
             <div class="col">
                 <a href="../CDESU/cdesu_details.php">
-                    <div class="card h-100">
-                    <img src="../img/clsu-1.jpg" class="card-img-top" alt="Hollywood Sign on The Hill"/>
+                    <div class="card shadows h-100">
+                    <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                        <img src="../img/clsu-1.jpg" class="card-img-top" alt="Hollywood Sign on The Hill"/>
+                        <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                    </div>
                     <div class="card-body">
                         <h5 class="card-title">Card title</h5>
                         <p class="card-text">

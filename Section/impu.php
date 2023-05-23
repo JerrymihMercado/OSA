@@ -11,6 +11,15 @@
     ?>
     
 </head>
+<style>
+    a,
+    a:hover,
+    a:focus,
+    a:active {
+        text-decoration: none;
+        color: inherit;
+    }
+</style>
 <body>
     <div class="container-fluid header-title">
     <div class="row">
@@ -33,7 +42,7 @@
             <a href="../index.php" class="link-home text-white">HOME</a>
           </li>
           <li class="nav-item ">
-            <a href="#" class="link text-white ps-3">ABOUT US</a>
+            <a href="../about_us.php" class="link text-white ps-3">ABOUT US</a>
           </li>
           <li class="nav-item ">
             <a href="#" class="link text-white ps-3">IMPU</a>
@@ -74,25 +83,32 @@
     </div>
 
     <!-- brief history -->
-    <div class="p-5 text-center">
+    <!-- <div class="p-5 text-center">
         <p>"This unit is designed to assist in the best practice of student affairs and
         services in the university through the aid of research, publication and
         information management. The IMPU shall be responsible for the collection,
         organization, and control over the planning, processing, evaluating and
         reporting of relevant information in order to meet client objectives and to
         enable efficient and effective delivery of services."</p>
-    </div>
+    </div> -->
 
     <!-- student handbook -->
-    <div class="p-2 col-sm-2 card_title text-white">
+    <!-- <div class="p-2 col-sm-2 card_title text-white">
         <h5>Student Handbook</h5>
-    </div>
-    
+    </div> -->
+    <div class="container pt-5">
+      <div class="row">
+        <div class="osa-tag">
+          <p class="tag-info">STUDENT HANDBOOK</p>
+          <p class="tag-sub">Read the student handbook from the Office of Student Affairs(OSA)</p>
+        </div>
 
-    <div class="mt-3 container-fluid">
+      </div>
+    </div>
+    <div class="mt-3 container">
         <div class="row">
             <div class="col-sm-6">
-                <div class="card">
+                <div class="card shadows">
                     <div class="card-body">
                         <h5 class="card-title">Handbook</h5>
                         <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
@@ -109,7 +125,7 @@
                 </div>
             </div>
             <div class="col-sm-6">
-                <div class="card">
+                <div class="card shadows">
                 <div class="card-body">
                     <h5 class="card-title">Links</h5>
                     <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
@@ -121,17 +137,32 @@
     </div>
 
     <!-- publication -->
-    <div class="mt-3 p-2 col-sm-2 card_title text-white">
-        <h5>Publication</h5>
+    <div class="container pt-5">
+      <div class="row">
+        <div class="osa-tag">
+          <p class="tag-info">PUBLICATION</p>
+          <p class="tag-sub">See all the publication from the Office of Student Affairs(OSA)</p>
+        </div>
+      </div>
     </div>
-    <div class="col justify-content-end d-flex p-3">
-        <a href="./all_publications.php">View all</a>
+
+    <div class="container">
+      <div class="col justify-content-end d-flex p-3">
+          <a href="../Publications/all_publications.php">
+            <button type="button" class="btn fw-semibold shadows" data-mdb-ripple-color="dark">View All <i class="fas fa-angle-right"></i></button>
+          </a>
+      </div>
     </div>
-    <div class="container-fluid mt-4">
+
+    <div class="container">
         <div class="row row-cols-1 row-cols-md-3 g-4">
             <div class="col">
-                <div class="card h-100">
-                    <img src="../img/clsu-1.jpg" class="card-img-top" alt="Hollywood Sign on The Hill"/>
+                <a href="../Publications/publication_details_1.php">
+                  <div class="card h-100 shadows">
+                    <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                      <img src="../img/clsu-1.jpg" class="card-img-top" alt="Hollywood Sign on The Hill"/>
+                      <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                    </div>
                     <div class="card-body">
                         <h5 class="card-title">Card title</h5>
                         <p class="card-text">
@@ -140,10 +171,16 @@
                         </p>
                     </div>
                 </div>
+                </a>
             </div>
             <div class="col">
-                <div class="card h-100">
-                <img src="../img/clsu-1.jpg" class="card-img-top" alt="Palm Springs Road"/>
+                <div class="card h-100 shadows">
+                <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                      <img src="../img/clsu-1.jpg" class="card-img-top" alt="Hollywood Sign on The Hill"/>
+                    <a href="#!">
+                      <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                    </a>
+                  </div>
                 <div class="card-body">
                     <h5 class="card-title">Card title</h5>
                     <p class="card-text">This is a short card.</p>
@@ -153,29 +190,51 @@
         </div>
     </div>
     <!-- Research and evaluation -->
-    <div class="mt-3 p-2 col-sm-2 card_title text-white">
-        <h5>Research and Evaluation</h5>
+    <div class="container pt-5">
+      <div class="row">
+        <div class="osa-tag">
+          <p class="tag-info">RESEARCH AND EVALUATION</p>
+          <p class="tag-sub">See all the research and evaluation from the Office of Student Affairs(OSA)</p>
+        </div>
+
+      </div>
     </div>
-    <div class="col justify-content-end d-flex p-3">
-        <a href="../Research_&_Evaluation/reasearch_page_1.php">View all</a>
+
+    <div class="container">
+      <div class="col justify-content-end d-flex p-3">
+          <a href="../Research_&_Evaluation/reasearch_page_1.php">
+            <button type="button" class="btn fw-semibold shadows" data-mdb-ripple-color="dark">View All <i class="fas fa-angle-right"></i></button>
+          </a>
+      </div>
     </div>
-    <div class="container-fluid mt-4">
+
+    <div class="container">
         <div class="row row-cols-1 row-cols-md-3 g-4">
             <div class="col">
-                <div class="card h-100">
-                <img src="../img/clsu-1.jpg" class="card-img-top" alt="Hollywood Sign on The Hill"/>
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">
-                    This is a longer card with supporting text below as a natural lead-in to
-                    additional content. This content is a little bit longer.
-                    </p>
-                </div>
-                </div>
+                <a href="../Research_&_Evaluation/reasearch_details_1.php">
+                  <div class="card h-100 shadows">
+                    <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                        <img src="../img/clsu-1.jpg" class="card-img-top" alt="Hollywood Sign on The Hill"/>
+                        <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">
+                        This is a longer card with supporting text below as a natural lead-in to
+                        additional content. This content is a little bit longer.
+                        </p>
+                    </div>
+                  </div>
+                </a>
             </div>
             <div class="col">
-                <div class="card h-100">
-                <img src="../img/clsu-1.jpg" class="card-img-top" alt="Palm Springs Road"/>
+                <div class="card h-100 shadows">
+                <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                      <img src="../img/clsu-1.jpg" class="card-img-top" alt="Hollywood Sign on The Hill"/>
+                    <a href="#!">
+                      <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                    </a>
+                  </div>
                 <div class="card-body">
                     <h5 class="card-title">Card title</h5>
                     <p class="card-text">This is a short card.</p>

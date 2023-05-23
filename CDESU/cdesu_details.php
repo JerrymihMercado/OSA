@@ -1,41 +1,3 @@
-<?php
-
-session_start();
-include 'mysql_connect.php';
-
-if (isset($_POST['submit'])) {
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-
-
-    $sql = "SELECT * FROM user
-      WHERE email = '$email'
-      AND password = '$password'";
-
-    $res = mysqli_query($conn, $sql);
-    if (mysqli_num_rows($res) == 1) {
-        $row = mysqli_fetch_assoc($res);
-        $_SESSION['user'] = $email;
-        $_SESSION['role'] = $row['role'];
-        
-
-        $_SESSION['status_login'] = "success";
-        if ($row['role'] == 1) {    
-            // $_SESSION['status_login'] = "success";
-            alert("Success");
-            header("location:index.php#login");
-        }
-         else {
-            header("location:index.php");
-            // $_SESSION['status_login'] = "success";
-            alert("Success");
-        }
-    } else {
-        // $_SESSION['status'] = "error";
-        alert("Error"); 
-    }
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -97,23 +59,23 @@ if (isset($_POST['submit'])) {
     </div>
   </div>
 
-    <div class="mt-3 p-3">
-        <nav aria-label="breadcrumb">
-            <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="../CDESU/cdesu.php">CDESU</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Details</li>
-            </ol>
-            </nav>
-        </nav>
+  <div class="container pt-5">
+    <div class="row">
+      <div class="osa-tag">
+        <p class="tag-info">PEPSI COMPANY</p>
+        <p class="tag-sub">Please read the description of the job from the Career Development and Employment Services Unit- OSA</p>
+      </div>
     </div>
+  </div>
 
-    <div class="mt-3 p-3">
-        <h4>CAGawaran: Pasiklabin ang Pusong Aggies 2023</h4>
-        <h6>Date: 05-22-23</h6>
+  <div class="container pt-5">
+    <div class="mt-3">
+        <h4 class="">Call for Applications for the CHED SCHOLARSHIP PROGRAM FOR FUTURE STATISTICIANS FOR AY 2023-2024.</h4>
+        <p><i class="fas fa-calendar text-success"></i> 05-22-23</p>
     </div>
+  </div>
 
-    <div class="container-fluid">
+    <div class="container">
         <div class="row">
             <div class="col-sm-6">
                 <div class="card h-100">
@@ -123,7 +85,7 @@ if (isset($_POST['submit'])) {
                         <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
                         </a>
                     </div>
-                <div class="card-body bg-secondary text-white">
+                <div class="card-body bg-dark text-white">
                     <h5 class="card-title">Special title treatment</h5>
                     <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
                 </div>
@@ -132,16 +94,16 @@ if (isset($_POST['submit'])) {
             <div class="col-sm-6">
                 <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Special title treatment</h5>
+                    <h5 class="card-title tag-info">Job Details</h5>
                     <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                    
                 </div>
                 </div>
                 <div class="card mt-2">
                 <div class="card-body">
-                    <h5 class="card-title">Special title treatment</h5>
+                    <h5 class="card-title tag-info">Center Details</h5>
                     <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                    
                 </div>
                 </div>
             </div>

@@ -50,24 +50,24 @@ if (isset($_POST['submit'])) {
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <title>Office of Student Affairs</title>
     <link rel="stylesheet" href="./Style/style.css">
-    <link rel="stylesheet" href="./Style/style_about.css">
+    <!-- <link rel="stylesheet" href="./Style/style_about.css"> -->
      <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
     <!-- Google Fonts Roboto -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap"/>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic" rel="stylesheet" />
     <link rel="stylesheet" href="css/mdb.min.css" />
   </head>
   <style>
-    input:-webkit-autofill,
-    input:-webkit-autofill:hover, 
-    input:-webkit-autofill:focus, 
-    input:-webkit-autofill:active{
-        -webkit-box-shadow: 0 0 0 30px white inset !important;
-    }
+      a,
+      a:hover,
+      a:focus,
+      a:active {
+          text-decoration: none;
+          color: inherit;
+      }
   </style>
   <body>
-    <!-- Start your project here--> 
-    <!-- Start your project here-->
+   
     <div class="container-fluid header-title">
     <div class="row">
       <div class="col-md-1 ">
@@ -104,38 +104,25 @@ if (isset($_POST['submit'])) {
             <a href="#" class="link text-white ps-3">SOU</a>
           </li>
           <li class="nav-item ">
-            <a href="#" class="link text-white ps-3">SDB</a>
+            <a href="SDB/sdb_index.php" class="link text-white ps-3">SDB</a>
           </li>
-          <!-- <li class="nav-item ">
-            <a href="#" class="link text-white ps-3" >LOGIN</a>
-          </li> -->
-          <!-- <li class="nav-item">
-            <a href="" class="text-white ps-3 " data-mdb-toggle="modal" data-mdb-target="#login_Modal">
-              LOGIN
-            </a>
-          </li> -->
           <?php
-                        if (isset($_SESSION['is_admin'])) {
-                            if ($_SESSION['is_admin'] == 1 || $_SESSION['is_admin'] == 0) {
-                                echo ' <li class="nav-item">
-            
-                                    <form action="logout.php" method="POST">
-                                        <button name="logout" class="btn btn-danger"  > Logout</button>
-                                    </form>
-                                
-          </li>';
-                                
-                            }
-                        } else {
-                            echo '  <li class="nav-item">
-            <a href="" class="text-white ps-3 " data-mdb-toggle="modal" data-mdb-target="#login_Modal">
-              LOGIN
-            </a>
-          </li>';
-                                    
-                        }
-
-                        ?>
+            if (isset($_SESSION['is_admin'])) {
+                if ($_SESSION['is_admin'] == 1 || $_SESSION['is_admin'] == 0) {
+                    echo '<li class="nav-item">
+                            <form action="logout.php" method="POST">
+                                <button name="logout" class="btn btn-danger"  > Logout</button>
+                            </form>
+                          </li>';
+                }
+            }else{
+                echo '<li class="nav-item">
+                        <a href="" class="text-white ps-3 " data-mdb-toggle="modal" data-mdb-target="#login_Modal">
+                          LOGIN
+                        </a>
+                      </li>';
+            }
+          ?>
         </ul>
       </nav>
     </div>
@@ -155,22 +142,22 @@ if (isset($_POST['submit'])) {
               advisers. The OSA looks into all student-initiated and student-related 
               activities.
           </p>
-          <div class="pt-5">
+          <!-- <div class="pt-5">
             <button class="btn btn-success">Read More</button>
-          </div>
+          </div> -->
         </div>
       </div>
-        <div class="carousel-item">
-          <img src="img/banner2.png" class="d-block w-100" alt="Camera"/>
-          <div class="carousel-caption ">
-            <h1>CLSU MENTAL HEALTH PROVIDERS</h1>
-            <p>The Guidance Services Unit of OSA is providing online and  tele counseling services for all CLSU students. Counselors and mental health professionals can be reached by students through their Messenger account and mobile numbers.
-            </p>
-            <div class="pt-5">
-              <button class="btn btn-success">Read More</button>
-            </div>
-          </div>
+      <div class="carousel-item">
+        <img src="img/banner2.png" class="d-block w-100" alt="Camera"/>
+        <div class="carousel-caption b">
+          <h1>CLSU MENTAL HEALTH PROVIDERS</h1>
+          <p>The Guidance Services Unit of OSA is providing online and  tele counseling services for all CLSU students. Counselors and mental health professionals can be reached by students through their Messenger account and mobile numbers.
+          </p>
+          <!-- <div class="pt-5">
+            <button class="btn btn-success">Read More</button>
+          </div> -->
         </div>
+      </div>
         <!-- <div class="carousel-item">
           <img src="https://mdbcdn.b-cdn.net/img/new/slides/043.webp" class="d-block w-100" alt="Exotic Fruits"/>
         </div> -->
@@ -190,106 +177,54 @@ if (isset($_POST['submit'])) {
     <h5>Announcement</h5>
   </div> -->
   <div class="container pt-5">
-      <div class="row">
-        <div class="osa-tag">
-          <p class="tag-info">ANNOUNCEMENT</p>
-          <p class="tag-sub ">Read the latest announcemnet from the Office of Student Affairs(OSA)</p>
-        </div>
-
+    <div class="row">
+      <div class="osa-tag">
+        <p class="tag-info">ANNOUNCEMENT</p>
+        <p class="tag-sub ">Read the latest announcemnet from the Office of Student Affairs(OSA)</p>
       </div>
 
     </div>
-  <div class="container">
-  <div class="col justify-content-end d-flex p-3">
-      <a href="Announcement/all_announcement.php">View all</a>
-  </div>             
   </div>
+  <div class="container">
+      <div class="col justify-content-end d-flex mb-3">
+          <a href="Announcement/all_announcement.php">
+            <button type="button" class="btn fw-semibold shadows" data-mdb-ripple-color="dark">View All <i class="fas fa-angle-right"></i></button>
+          </a>
+      </div>
+    </div>
   <div class="container">
       <div class="row">
         <div class="col-12">
-          <div class="card shadow-5 h-100">
-            
-            <div class="row no-gutter">
-              <div class="col-md-3 card-pic">
-                <!-- <img src="img/Rectangle 266.png" class="card-img-top card-image" alt="Hollywood Sign on The Hill"/> -->
-                  <img src="img/osa-picture.jpg" alt="" class="card-pic card-img  ">
+          <div class="card shadows mb-3" >
+            <div class="row g-0">
+              <div class="col-md-4">
+                <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                    <img src="img/osa-picture.jpg" class="card-img-top" alt="Hollywood Sign on The Hill"/>
+                    <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                </div>
               </div>
-              <div class="col-md-9">
-                <div class="card-body ">
-                  <h5 class="text-success">OSA MISSION</h5>
-                  <div class="borders" >
+              <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="text-success">OSA MISSION</h5>
                     <p class="text-muted pt-2">05-22-23</p>
+                  <!-- <div class="borders" > -->
+                    <hr>
                     <p class=" mission-info1">OSA shall promote the development of the students’ talents,
                       potentials and leadership capabilities through its program thrusts that promote
                       self- awareness, self-growth and development, self- management, cooperative
-                      </p>
-                      
-                          <button type="button" class="btn btn-success shadow" data-mdb-ripple-color="dark">View Details</button>
-                    </div>
+                    </p>
+                    <a href="./Announcement/announcement_details.php">
+                      <button type="button" class="btn btn-success btn-rounded shadow fw-bold" data-mdb-ripple-color="dark">View Details</button>
+                    </a>
+                  <!-- </div> -->
                 </div>
               </div>
-            </div>  
+            </div>
           </div>
         </div>
       </div>
+      
     </div>
-  <!-- <div class="p-2">
-    <div class="container mt-4">
-        <div class="col g-4">
-            <div class="card mb-3" style="max-width: 100%;">
-              <div class="row g-0">
-                  <div class="col-md-4">
-                      <img
-                          src="./img/osa-picture.jpg"
-                          alt="Trendy Pants and Shoes"
-                          class="img-fluid rounded-start"
-                      />
-                      </div>
-                      <div class="col-md-8">
-                      <div class="card-body">
-                          <h5 class="card-title">Card title</h5>
-                          <p class="card-text">
-                          This is a wider card with supporting text below as a natural lead-in to
-                          additional content. This content is a little bit longer.
-                          </p>
-                          <p class="text-muted">05-22-23</p>
-                          <button type="button" class="btn btn-success shadow" data-mdb-ripple-color="dark">View Details</button>
-                      </div>
-                  </div>
-              </div>
-          </div>
-          <div class="card mb-3" style="max-width: 100%;">
-              <div class="row g-0">
-                  <div class="col-md-4">
-                      <img
-                          src="./img/osa-picture.jpg"
-                          alt="Trendy Pants and Shoes"
-                          class="img-fluid rounded-start"
-                      />
-                      </div>
-                      <div class="col-md-8">
-                      <div class="card-body">
-                          <h5 class="card-title">Card title</h5>
-                          <p class="card-text">
-                          This is a wider card with supporting text below as a natural lead-in to
-                          additional content. This content is a little bit longer.
-                          </p>
-                          <p class="text-muted">05-22-23</p>
-                          <button type="button" class="btn btn-success shadow" data-mdb-ripple-color="dark">View Details</button>
-                      </div>
-                  </div>
-              </div>
-          </div>
-        </div>
-    </div>
-        
-  </div> -->
-
-  <!-- login modal -->
-  <!-- Button trigger modal -->
-  <!-- <button type="button" class="btn btn-primary" data-mdb-toggle="modal" data-mdb-target="#login_Modal">
-    Launch demo modal
-  </button> -->
 
   <!-- Modal -->
   <div class="modal fade" id="login_Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

@@ -58,49 +58,48 @@
       </nav>
     </div>
   </div>
+  <div class="container pt-5">
+    <div class="row">
+      <div class="osa-tag">
+        <p class="tag-info">THE FLOWMAN ALBUM DETAILS</p>
+        <p class="tag-sub">Please free to read our new publish</p>
+      </div>
 
-    <div class="mt-3 p-3">
-        <nav aria-label="breadcrumb">
-            <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="../Section/impu.php">Publication</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Details</li>
-            </ol>
-            </nav>
-        </nav>
     </div>
+  </div>
 
-    <div class="mt-3 p-3">
-        <h4>CAGawaran: Pasiklabin ang Pusong Aggies 2023</h4>
-        <h6>Date: 05-22-23</h6>
+  <div class="container">
+    <div class="mt-3">
+        <h4>Call for Applications for the CHED SCHOLARSHIP PROGRAM FOR FUTURE STATISTICIANS FOR AY 2023-2024.</h4>
+        <p><i class="fas fa-calendar"></i> 05-22-23</p>
     </div>
+  </div>
 
-    <div class="container-fluid">
-        <div class="card mb-3" style="max-width: 100%;">
-            <div class="row g-0">
-                <div class="col-md-4">
-                <img
-                    src="../img/announcement_img.png"
-                    alt="Trendy Pants and Shoes"
-                    class="img-fluid rounded-start"
-                />
-                </div>
-                <div class="col-md-8">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">
-                    ICYMI | In celebration of 116th Founding Anniversary of Central Luzon State University (CLSU), College of Agriculture (CAg) launched various activities for CAg students, April 11.
-                    With the theme “CAGarawan: Pasiklabin ang Pusong Aggies” different activities such as tug-of-war, agawang buko, color fun run, and open mic live band were conducted.
-                    Agawan ng Buko: Akin lang ang BJ Ko
-                    Winner: Denver Luces
-                    TIKAS: Tibay at Lakas ng Aggies
-                    </p>
-                    
-                </div>
-                </div>
-            </div>
-        </div>
-    </div>
+  <div class="container">
+      <div class="card mb-3 shadows">
+          <div class="row g-0">
+              <div class="col-md-4">
+              <img
+                  src="../img/announcement_img.png"
+                  alt="Trendy Pants and Shoes"
+                  class="img-fluid rounded-start"
+              />
+              </div>
+              <div class="col-md-8">
+              <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">
+                  This is a wider card with supporting text below as a natural lead-in to
+                  additional content. This content is a little bit longer.
+                  </p>
+                  <p class="card-text">
+                  <small class="text-muted">Last updated 3 mins ago</small>
+                  </p>
+              </div>
+              </div>
+          </div>
+      </div>
+  </div>
 
     <?php
        include '../Components/footer.php';
