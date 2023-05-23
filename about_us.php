@@ -21,10 +21,10 @@
         <div class="row">
             <div class="col-12 text-center pt-5">
                 <img src="img/white-logo.png" alt="" class="banner_logo ">
-                <h2 class="text-center banner_text text-white">OFFICE OF STUDENT AFFAIRS</h2>    
-                <h3 class="text-white">"ABOUT US"</h3>
+                <p class="text-center banner_text text-white">OFFICE OF STUDENT AFFAIRS</p>    
+                <p class="text-white banner_text2nd">"ABOUT US"</p>
             </div>
-            <div class="col-12 d-flex justify-content-center pt-5">
+            <div class="col-12 d-flex justify-content-center ">
               <div class="card overview">
                 <div class="card-body   ">
                   <h4 class="card-title text-success view ps-2">OVERVIEW</h4>
@@ -49,11 +49,11 @@
               <div class="col-md-3">
                   <img src="img/osa-logo.jpg" alt="" class="card-img ">
               </div>
-              <div class="col-md-9">
+              <div class="col-md-9 ">
                 <div class="card-body ">
                   <h5 class="text-success">OSA MISSION</h5>
-                  <div class="borders" >
-                    <p class=" mission-info">OSA shall promote the development of the students’ talents,
+                  <div class="borders " >
+                    <p class=" mission-info ms-2">OSA shall promote the development of the students’ talents,
                       potentials and leadership capabilities through its program thrusts that promote
                       self- awareness, self-growth and development, self- management, cooperative
                       living and learning, leadership advancement, social responsibility, nationalism
@@ -64,21 +64,22 @@
             </div>  
           </div>
         </div>
+        
         <div class="col-12 pt-3">
           <div class="card shadows">
             <div class="row no-gutter">
-              <div class="col-md-9">
+              <div class="col-md-3">
+                  <img src="img/osa-picture.jpg" alt="" class="card-img ">
+              </div>
+              <div class="col-md-9 order-md-first" >
                 <div class="card-body ">
                   <h5 class="text-success">OSA VISION</h5>
                   <div class="borders" >
-                    <p class="vision-info ps-3">OSA-CLSU as a model center for student personnel services
+                  <p class="vision-info ps-3">OSA-CLSU as a model center for student personnel services
                       supportive of the co-curricular and extra-curricular needs of its clients for their
                       well- rounded growth and development</p>
                     </div>
                 </div>
-              </div>
-              <div class="col-md-3">
-                  <img src="img/osa-picture.jpg" alt="" class="card-img ">
               </div>
             </div>  
           </div>
@@ -216,17 +217,6 @@
     <!-- End your project here-->
 
 
-  <div class="chat-popup" id="myForm">
-    <form action="/action_page.php" class="form-container">
-      <h1>Chat</h1>
-
-      <label for="msg"><b>Message</b></label>
-      <textarea placeholder="Type message.." name="msg" required></textarea>
-
-      <button type="submit" class="btn">Send</button>
-      <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
-    </form>
-  </div>
 
 
 
