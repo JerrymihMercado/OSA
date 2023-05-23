@@ -16,32 +16,39 @@
   <body>
     <!-- Start your project here-->
     <?php include './header.php'?>
+    <!-- <h1 class="text-center pt-2">ABOUT US</h1>   -->
     
-    <div class="header_section container-fluid ">
-        <div class="row">
-            <div class="col-12 text-center pt-5">
+    <div class="bg-image ripple" data-mdb-ripple-color="light">
+        <img src="img/banner1.png" class="banner__img" />
+        <a href="#!">
+            <div class="mask" style="background-color: hsla(0, 0%, 0%, 0.5)">
+            <div class="row text-center">
+              <div class="col-12 pt-3">
                 <img src="img/white-logo.png" alt="" class="banner_logo ">
-                <p class="text-center banner_text text-white">OFFICE OF STUDENT AFFAIRS</p>    
-                <p class="text-white banner_text2nd">"ABOUT US"</p>
-            </div>
-            <div class="col-12 d-flex justify-content-center ">
-              <div class="card overview">
-                <div class="card-body   ">
-                  <h4 class="card-title text-success view ps-2">OVERVIEW</h4>
-                  <p class="card-text overview-info pt-3">The Office of Student Affairs was originally conceived as Student
-                    Institutional Services (SIS) in 1964 under the leadership of Dr. Teodoro Irabagon.
-                    In September 1971, the SIS was formally replaced by the Office of Student
-                    Affairs with Dr. Benito Abenes, a faculty member from the College of Education
-                    as Director. Three service units were retained such as Student Affairs, Guidance
-                    and Placement and Cultural and Recreational Services.</p>
-                  <!-- <button type="button" class="btn btn-primary">Button</button> -->
-                </div>
               </div>
+              <div class="col-12 pt-3">
+                 <h2 class="text-white mb-0">OFFICE OF STUDENT AFFAIRS</h2>
+              </div>
+
             </div>
-        </div>
+            <!-- <div class="d-flex justify-content-center align-items-center h-100 text-center">
+                
+            <h2 class="text-white mb-0">OFFICE OF STUDENT AFFAIRS</h2>
+            </div> -->
+            </div>
+        </a>
     </div>
-    
-    <div class="container">
+    <div class="container pt-5">
+      <div class="row">
+        <div class="osa-tag">
+          <p class="tag-info">OVERVIEW</p>
+          <p>The OSA serves as the center of information, activities, and services related to the co-curricular and extra-curricular needs of students. It also promotes the development of students’ talents, potentials, and leadership capabilities through its program thrusts of self-growth and awareness, cooperative living and learning, leadership development and enhancement, productive use of leisure, and enhanced cross-cultural adjustment.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="container pt-4">
       <div class="row">
         <div class="col-12">
           <div class="card shadows">

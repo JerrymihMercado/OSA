@@ -1,27 +1,25 @@
 
 .header_section{
     background-image: url(../img/banner1.png);
-    height: 80vh;
+    height: 10vh;
     width: 100%;
     /* align-items: center; */
     background-repeat: no-repeat;
-    background-size:contain;
+    /* background-size:contain; */
 }
 /* .banner{
     width: 100%;
     position: relative;
 } */
 .banner_logo{
-    /* position: absolute; */
-    
-    /* z-index: 1; */
-    height: 150px;
-    width: 150px;
+  
+    height: 120px;
+    width: 120px;
 }
-.banner_text{
-    /* position: absolute; */
+/* .banner_text{
+  
    padding-top:30px;
-    /* z-index: 1; */
+    
     font-size: 1.8em ;
     font-weight: bolder;
     
@@ -29,7 +27,7 @@
 .banner_text2nd{
     font-size: 1.5em ;
     font-weight: bolder;
-}
+} */
 .overview{
     /* margin: 25px, 10Spx, 10px, 25px; */
     width: 80%;
@@ -41,6 +39,7 @@
 .overview-info{
     border-top-style: dotted ;
     border-color: #BEBEBE;
+    font-size: 15px;
     
 }
 .card-img{
