@@ -125,6 +125,7 @@ if (isset($_POST['submit'])) {
 
                         <img src="../img/draw1.png"
                         class="img-fluid" alt="Sample image">
+                        
 
                     </div>
                     </div>
