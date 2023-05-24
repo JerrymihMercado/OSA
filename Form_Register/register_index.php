@@ -54,7 +54,7 @@ if (isset($_POST['submit'])) {
     <?php include '../Links/link.php' ?>
 </head>
 <body>
-    <section class="vh-100" style="background-color: #eee;">
+    <!-- <section class="vh-100" style="background-color: #eee;">
         <div class="container h-100">
             <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col-lg-12 col-xl-11">
@@ -96,7 +96,7 @@ if (isset($_POST['submit'])) {
                                 <input type="password" id="password" name="password" class="form-control" />
                                 <label class="form-label" for="password">Password</label>
                                 </div>
-                            </div>
+                            </div> -->
                             
 
                             <!-- <div class="d-flex flex-row align-items-center mb-4">
@@ -107,7 +107,7 @@ if (isset($_POST['submit'])) {
                                 </div>
                             </div> -->
 
-                            <div class="form-check d-flex justify-content-center mb-5">
+                            <!-- <div class="form-check d-flex justify-content-center mb-5">
                                 <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3c" />
                                 <label class="form-check-label" for="form2Example3">
                                 I agree all statements in <a href="#!">Terms of service</a>
@@ -134,11 +134,86 @@ if (isset($_POST['submit'])) {
             </div>
             </div>
         </div>
-    </section>
+    </section> -->
 
-
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 pt-5 text-center">
+                <h3 class="text-success">CLSU OFFICE OF STUDENT AFFAIRS</h3>
+                <div class="pt-5">
+                    <img src="../img/login-pic.png" alt="" class="login-pic">
+                </div>
+            </div>
+            <div class="col-md-6 pt-5">
+                <div class="card">
+                    <div class="card-body">
+                        <h4>Create your account</h4>
+                        <div class="row pt-3">
+                            <form action="POST" >
+                            <div class="col-md-12">
+                                <div class="form-outline " >
+                                <input type="text"  name="fname" id="fname"class="form-control" />
+                                <label class="form-label" for="form12">Full Name</label>
+                                </div>
+                            </div>
+                            <!-- <div class="col-md-6">
+                                <div class="form-outline " >
+                                <input type="email" id="form12" class="form-control" />
+                                <label class="form-label" for="form12">Last Name</label>
+                                </div>
+                            </div> -->
+                            <div class="col-md-12 pt-3">
+                                <div class="form-outline " >
+                                <input type="text"  name="username" id="username"class="form-control" />
+                                <label class="form-label" for="form12">User Name</label>
+                                </div>
+                            </div>
+                            <div class="col-md-12 pt-3">
+                                <div class="form-outline">
+                                    <input type="email"  name="email" id="email"class="form-control" />
+                                    <label class="form-label" for="form12">Email</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6 pt-3">
+                                <div class="form-outline">
+                                    <input type="password"  name="password" id="password"class="form-control" />
+                                    <label class="form-label" for="form12">Password</label>
+                                </div>
+                            </div>
+                            <!-- <div class="col-md-6 pt-3">
+                                <div class="form-outline">
+                                    <input type="password" id="form12" class="form-control" />
+                                    <label class="form-label" for="form12">Confirm Password</label>
+                                </div>
+                            </div> -->
+                            <div class="col-md-12 pt-3">
+                                <div class="form-check">
+                                    <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3c" />
+                                    <label class="form-check-label" for="form2Example3">
+                                    I agree all statements in <a href="#!">Terms of service</a>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        
+                        <div class="row pt-3">
+                            <div class="col-6">
+                                <a href="#">Login instead</a>
+                            </div>
+                            <div class="col-6 d-flex flex-row-reverse">
+                                <button type="submit" class="btn btn-primary" name="submit">Sign Up</button>
+                            </div>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <script type="text/javascript" src="js/mdb.min.js"></script>
     <!-- Custom scripts -->
     <script type="text/javascript"></script>
+    <script type="text/javascript"src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.1/mdb.min.js"></script>
 </body>
 </html>
