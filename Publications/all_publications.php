@@ -96,32 +96,33 @@
         <div class="row row-cols-1 row-cols-md-3 g-4">
             <div class="col">
                 <a href="../Publications/publication_page_1.php">
-                    <div class="card h-100 shadows">
-                    <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                        <img src="../img/clsu-1.jpg" class="card-img-top" alt="Hollywood Sign on The Hill"/>
+                  <div class="card h-100 shadows">
+                      <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                        <img src="../img/flow_man.jpg" class="card-img-top" alt="" style="height: 30vh; object-fit: cover;"/>
                         <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">
-                        This is a longer card with supporting text below as a natural lead-in to
-                        additional content. This content is a little bit longer.
-                        </p>
-                    </div>
-                </div>
+                      </div>
+                      <div class="card-body">
+                          <h5 class="card-title">The Flow Man</h5>
+                          <p class="card-text" align="justify">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur minima similique odio quod. Accusamus minima quae ullam quis delectus eligendi aspernatur repudiandae tenetur, repellendus velit animi quo recusandae ratione perferendis?
+                          </p>
+                      </div>
+                  </div>
                 </a>
             </div>
             <div class="col">
-                <div class="card h-100 shadows">
+              <div class="card h-100 shadows">
                 <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                    <img src="../img/clsu-1.jpg" class="card-img-top" alt="Hollywood Sign on The Hill"/>
-                    <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-                </div>
+                      <img src="../img/Rectangle 266.png" class="card-img-top" alt="" style="height: 30vh; object-fit: cover;"/>
+                    <a href="#!">
+                      <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                    </a>
+                  </div>
                 <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a short card.</p>
+                    <h5 class="card-title">Collegian</h5>
+                    <p class="card-text" align="justify">Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus quasi explicabo necessitatibus consequuntur! Sit assumenda, quisquam voluptatem nobis aliquid qui vitae eos velit autem corrupti, nulla quo fugiat impedit ut!</p>
                 </div>
-                </div>
+              </div>
             </div>
         </div>
     </div>

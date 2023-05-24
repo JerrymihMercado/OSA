@@ -43,22 +43,22 @@
             <a href="../index.php" class="link-home text-white">HOME</a>
           </li>
           <li class="nav-item ">
-            <a href="#" class="link text-white ps-3">ABOUT US</a>
+            <a href="../about_us.php" class="link text-white ps-3">ABOUT US</a>
           </li>
           <li class="nav-item ">
             <a href="../Section/impu.php" class="link text-white ps-3">IMPU</a>
           </li>
           <li class="nav-item ">
-            <a href="#" class="link text-white ps-3">CDESU</a>
+            <a href="../CDESU/cdesu.php" class="link text-white ps-3">CDESU</a>
           </li>
           <li class="nav-item ">
             <a href="#" class="link text-white ps-3">GSU</a>
           </li>
           <li class="nav-item ">
-            <a href="#" class="link text-white ps-3">SOU</a>
+            <a href="../SOU/sou_index.php" class="link text-white ps-3">SOU</a>
           </li>
           <li class="nav-item ">
-            <a href="#" class="link text-white ps-3">SDB</a>
+            <a href="../SDB/sdb_index.php" class="link text-white ps-3">SDB</a>
           </li>
           <li class="nav-item ">
             <a href="#" class="link text-white ps-3">LOGIN</a>
@@ -80,8 +80,8 @@
 
   <div class="container pt-5">
     <div class="mt-3">
-        <h4>Call for Applications for the CHED SCHOLARSHIP PROGRAM FOR FUTURE STATISTICIANS FOR AY 2023-2024.</h4>
-        <p><i class="fas fa-calendar text-success"></i> 05-22-23</p>
+        <h4>Attended the Leadership Seminar</h4>
+        <p><i class="fas fa-calendar-days"></i> 05-09-23</p>
     </div>
   </div>
 
@@ -90,20 +90,20 @@
           <div class="row g-0">
               <div class="col-md-4">
                 <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                    <img src="../img/announcement_img.png" class="card-img-top" alt="Hollywood Sign on The Hill"/>
+                    <img src="../img/osa-announcement.jpg" class="card-img" alt=""/>
                     <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
                 </div>
               </div>
               <div class="col-md-8">
                 <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">
-                    This is a wider card with supporting text below as a natural lead-in to
-                    additional content. This content is a little bit longer.
+                    
+                    <p class="card-text description-left-border">
+                      For those who attended the Leadership Seminar last April 14, 2023 at CLSU Auditorium, you may now claim your certificate of participation at Office of Student Affairs.
                     </p>
-                    <p class="card-text">
-                    <small class="text-muted">Last updated 3 mins ago</small>
+                    <p class="card-text description-left-border">
+                      For those who attended the Leadership Seminar last April 14, 2023 at CLSU Auditorium, you may now claim your certificate of participation at Office of Student Affairs.
                     </p>
+                    
                 </div>
               </div>
           </div>

@@ -55,7 +55,7 @@
             <a href="#" class="link text-white ps-3">GSU</a>
           </li>
           <li class="nav-item ">
-            <a href="#" class="link text-white ps-3">SOU</a>
+            <a href="../SOU/sou_index.php" class="link text-white ps-3">SOU</a>
           </li>
           <li class="nav-item ">
             <a href="../SDB/sdb_index.php" class="link text-white ps-3">SDB</a>
@@ -69,7 +69,7 @@
   </div>
   <!-- banner -->
     <div class="bg-image ripple" data-mdb-ripple-color="light">
-        <img src="../img/clsu-1.jpg" class="banner__img" />
+        <img src="../img/banner1.png" class="banner__img" />
         <a href="#!">
             <div class="mask" style="background-color: hsla(0, 0%, 0%, 0.5)">
             <div class="d-flex justify-content-center align-items-center h-100 text-center">

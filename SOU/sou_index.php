@@ -131,7 +131,7 @@ if (isset($_POST['submit'])) {
         <a href="#!">
             <div class="mask" style="background-color: hsla(0, 0%, 0%, 0.5)">
             <div class="d-flex justify-content-center align-items-center h-100 text-center">
-                <h2 class="text-white mb-0">INFORMATION MANAGEMENT AND PUBLICATION UNIT</h2>
+                <h2 class="text-white mb-0">Student Organizations Unit (SOU)</h2>
             </div>
             </div>
             <!-- <div class="hover-overlay">
@@ -142,179 +142,31 @@ if (isset($_POST['submit'])) {
 
     <!-- brief history -->
     <div class="container mt-5">
-        <p align="justify" class="impu-desc"><span class="fw-bold fs-3 g-0 p-0 m-0 text-success">T</span>his unit is designed to assist in the best practice of student affairs and
-        services in the university through the aid of research, publication and
-        information management. The IMPU shall be responsible for the collection,
-        organization, and control over the planning, processing, evaluating and
-        reporting of relevant information in order to meet client objectives and to
-        enable efficient and effective delivery of services.</p>
+        <p align="justify" class="impu-desc"><span class="fw-bold fs-3 g-0 p-0 m-0 text-success">T</span>he Student Organizations Unit is directly involved in the operation, 
+            management, and supervision of all recognized student organizations in 
+            Central Luzon State University. It is concerned with the planning, programming, 
+            and identifying the existing resources that can be fully utilized by the different 
+            Student Organizations for the benefit of their members in particular and the 
+            CLSU students in general.</p>
     </div>
+    <div class="container mt-5">
+        <p align="justify" class="impu-desc"><span class="fw-bold fs-3 g-0 p-0 m-0 text-success">T</span>The Student Organizations Unit also organizes other trainings/symposia in 
+        cooperation of other units in the campus such as the Guidance Services Unit, 
+        University Supreme Student Council, Environmental Management Institute, 
+        RM- CARES, etc.</p>
+    </div>
+     
     <div class="container pt-5">
       <div class="row">
         <div class="osa-tag">
-          <p class="tag-info">STUDENT HANDBOOK</p>
-          <p class="tag-sub">Read the student handbook from the Office of Student Affairs(OSA)</p>
-        </div>
-
-      </div>
-    </div>
-    <div class="mt-3 container">
-        <div class="row">
-            <div class="col-sm-6">
-                <div class="card shadows">
-                    <img
-                      src="../img/studenthandbook.png"
-                      class="img-fluid hover-shadow"
-                      alt="Los Angeles Skyscrapers"
-                      style="height: 60vh; object-fit: cover;"
-                    />
-                </div>
-                <div class="row mt-3">
-                    <div class="col-auto">
-                        
-                      <?php
-                        if (isset($_SESSION['is_admin'])) {
-                            if ($_SESSION['is_admin'] == 1 || $_SESSION['is_admin'] == 0) {
-                                echo '';
-                            }
-                        }else{
-                            echo '<h6>Please <span><a class="text-primary " data-mdb-toggle="modal" data-mdb-target="#login_Modal" style="cursor: pointer;">
-                          login
-                        </a></span>to view and download the student handbook</h6>';
-                        }
-                      ?>
-                    </div>
-                    <div class="col-md justify-content-end d-flex">
-                      <?php
-                        if (isset($_SESSION['is_admin'])) {
-                            if ($_SESSION['is_admin'] == 1 || $_SESSION['is_admin'] == 0) {
-                                echo '<a href="https://drive.google.com/uc?export=download&id=1FylpFFT3UyuQndDfatJ1R0jbZ5_2QwW4" class="btn btn-danger">Download</a>';
-                            }
-                        }else{
-                            echo '';
-                        }
-                      ?>
-                    </div>
-                </div>
-            </div>
-            <!-- <div class="col-sm-6">
-                <div class="card shadows">
-                <div class="card-body">
-                    <h5 class="card-title">Links</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    
-                </div>
-                </div>
-            </div> -->
-        </div>
-    </div>
-
-    <!-- publication -->
-    <div class="container pt-5">
-      <div class="row">
-        <div class="osa-tag">
-          <p class="tag-info">PUBLICATION</p>
-          <p class="tag-sub">See all the publication from the Office of Student Affairs(OSA)</p>
+          <p class="tag-info">OFFICIAL WEBSITE PAGE</p>
+          <p class="tag-sub">Visit our official website for Student Organizations Unit (SOU)</p>
         </div>
       </div>
     </div>
-
-    <div class="container">
-      <div class="col justify-content-end d-flex p-3">
-          <a href="../Publications/all_publications.php">
-            <button type="button" class="btn fw-semibold shadows" data-mdb-ripple-color="dark">View All <i class="fas fa-angle-right"></i></button>
-          </a>
-      </div>
+    <div class="container p-4">
+        <h6 class="fw-bold text-primary">Student-Organizations-Unit.com</h6>
     </div>
-
-    <div class="container">
-        <div class="row row-cols-1 row-cols-md-3 g-4">
-            <div class="col">
-                <a href="../Publications/publication_details_1.php">
-                  <div class="card h-100 shadows">
-                    <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                      <img src="../img/flowman-post-img.jpg" class="card-img-top" alt="" style="height: 30vh; object-fit: cover;"/>
-                      <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">PAGBATI, MIGHTY AGGIES</h5>
-                        <p class="card-text" align="justify">
-                          Kami ang bagong taludturan ng pagbabago sa ating paaralan. Ang aming plataporma ng kandidatura ay naglalayong ipaglaban ang inyong mga karapatan, iangat ang kalidad ng edukasyon, at palakasin ang boses ng bawat estudyante. 
-                        </p>
-                    </div>
-                </div>
-                </a>
-            </div>
-            <div class="col">
-              <div class="card h-100 shadows">
-                <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                      <img src="../img/Rectangle 266.png" class="card-img-top" alt="" style="height: 30vh; object-fit: cover;"/>
-                    <a href="#!">
-                      <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-                    </a>
-                  </div>
-                <div class="card-body">
-                    <h5 class="card-title">Collegian</h5>
-                    <p class="card-text" align="justify">Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus quasi explicabo necessitatibus consequuntur! Sit assumenda, quisquam voluptatem nobis aliquid qui vitae eos velit autem corrupti, nulla quo fugiat impedit ut!</p>
-                </div>
-              </div>
-            </div>
-        </div>
-    </div>
-    <!-- Research and evaluation -->
-    <div class="container pt-5">
-      <div class="row">
-        <div class="osa-tag">
-          <p class="tag-info">RESEARCH AND EVALUATION</p>
-          <p class="tag-sub">See all the research and evaluation from the Office of Student Affairs(OSA)</p>
-        </div>
-
-      </div>
-    </div>
-
-    <div class="container">
-      <div class="col justify-content-end d-flex p-3">
-          <a href="../Research_&_Evaluation/reasearch_page_1.php">
-            <button type="button" class="btn fw-semibold shadows" data-mdb-ripple-color="dark">View All <i class="fas fa-angle-right"></i></button>
-          </a>
-      </div>
-    </div>
-
-    <div class="container">
-        <div class="row row-cols-1 row-cols-md-3 g-4">
-            <div class="col">
-                <a href="../Research_&_Evaluation/reasearch_details_1.php">
-                  <div class="card h-100 shadows">
-                    <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                        <img src="../img/clsu-1.jpg" class="card-img-top" alt="Hollywood Sign on The Hill"/>
-                        <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">
-                        This is a longer card with supporting text below as a natural lead-in to
-                        additional content. This content is a little bit longer.
-                        </p>
-                    </div>
-                  </div>
-                </a>
-            </div>
-            <div class="col">
-                <div class="card h-100 shadows">
-                <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                      <img src="../img/clsu-1.jpg" class="card-img-top" alt="Hollywood Sign on The Hill"/>
-                    <a href="#!">
-                      <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-                    </a>
-                  </div>
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a short card.</p>
-                </div>
-                </div>
-            </div>
-        </div>
-    </div>  
 
     <!-- Modal -->
     <div class="modal fade" id="login_Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

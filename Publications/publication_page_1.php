@@ -78,89 +78,89 @@
     </div>
   </div>
 
-    <div class="container">
-      <div class="p-2">
-        <div class="card mb-3 bg-success text-white shadows" style="max-width: 100%;">
+  <div class="container">
+    <div class="">
+        <div class="card mb-3 shadows" style="max-width: 100%;">
             <div class="row g-0">
                 <div class="col-md-4">
-                    <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                      <img
-                        src="../img/Rectangle 290.png"
-                        alt="Trendy Pants and Shoes"
-                        class="img-fluid rounded-start"
-                      />
-                      <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-                  </div>
+                      <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                          <img src="../img/flowman-post-img.jpg" class="card-img" alt="" style="height: 40vh; object-fit: cover;"/>
+                          <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                      </div>
                     </div>
                     <div class="col-md-8">
                     <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
+                        <h5 class="card-title title-left-border">PAGBATI, MIGHTY AGGIES</h5>
                         <p class="card-text">
-                        This is a wider card with supporting text below as a natural lead-in to
-                        additional content. This content is a little bit longer.
+                          <small class="tag-sub">05-09-23</small>
                         </p>
-                        <p class="card-text">
-                        <small class="text-white">Last updated 3 mins ago</small>
-                        </p>
+                        <p class="card-text px-4">
+                          Kami ang bagong taludturan ng pagbabago sa ating paaralan. Ang aming plataporma ng kandidatura ay naglalayong ipaglaban ang inyong mga karapatan, iangat ang kalidad ng edukasyon, at palakasin ang boses ng bawat estudyante. 
+                          <br>
+                          <br>
+                          Kami ay naniniwala na ang bawat estudyante ay mahalaga. Layunin naming ipakilala ang <a href="../Publications/publication_details_1.php"><span class="fw-bold">..Read More</span></a>
+                      
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    </div>
+  </div>
     
-    <div class="container">
-        <div class="row row-cols-1 row-cols-md-3 g-4">
-            <div class="col">
-                <a href="../Publications/publication_details_1.php">
-                    <div class="card h-100 shadows">
+  <div class="container">
+      <div class="row row-cols-1 row-cols-md-3 g-4">
+          <div class="col">
+              <a href="../Publications/publication_details_1.php">
+                  <div class="card h-100 shadows">
                     <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                      <img src="../img/clsu-1.jpg" class="card-img-top" alt="Hollywood Sign on The Hill"/>
-                 
-                      <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-                   
-                  </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">
-                        This is a longer card with supporting text below as a natural lead-in to
-                        additional content. This content is a little bit longer.
-                        </p>
+                          <img src="../img/osa-announcement.jpg" class="card-img-top" alt="Hollywood Sign on The Hill"/>
+                          <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
                     </div>
-                </div>
-                </a>
-            </div>
-            <div class="col">
-                <div class="card h-100 shadows">
-                <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                      <img src="../img/clsu-1.jpg" class="card-img-top" alt="Hollywood Sign on The Hill"/>
-                    
-                      <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-                 
+                    <div class="card-body">
+                        <h5 class="card-title">Attended the Leadership Seminar</h5>
+                        <p class="card-text" align="justify">
+                          OSA shall promFor those who attended the Leadership Seminar last April 14, 2023 at CLSU Auditorium, you may now claim your certificate of participation at Office of Student Affairs.
+                          <br>
+                          Note: Students may only claim their certificate during office hours.
+                          </p>
+                    </div>
                   </div>
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a short card.</p>
-                </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card h-100 shadows">
+              </a>
+          </div>
+          <div class="col">
+              <div class="card h-100 shadows">
                 <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                      <img src="../img/clsu-1.jpg" class="card-img-top" alt="Hollywood Sign on The Hill"/>
-                    <a href="#!">
+                      <img src="../img/osa-announcement.jpg" class="card-img-top" alt="Hollywood Sign on The Hill"/>
                       <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-                    </a>
-                  </div>
+                </div>
                 <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
+                    <h5 class="card-title">Attended the Leadership Seminar</h5>
+                    <p class="card-text" align="justify">
+                      OSA shall promFor those who attended the Leadership Seminar last April 14, 2023 at CLSU Auditorium, you may now claim your certificate of participation at Office of Student Affairs.
+                      <br>
+                      Note: Students may only claim their certificate during office hours.
+                      </p>
                 </div>
+              </div>
+          </div>
+          <div class="col">
+              <div class="card h-100 shadows">
+                <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                      <img src="../img/osa-announcement.jpg" class="card-img-top" alt="Hollywood Sign on The Hill"/>
+                      <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
                 </div>
-            </div>
-        
-        </div>
-    </div>
+                <div class="card-body">
+                    <h5 class="card-title">Attended the Leadership Seminar</h5>
+                    <p class="card-text" align="justify">
+                      OSA shall promFor those who attended the Leadership Seminar last April 14, 2023 at CLSU Auditorium, you may now claim your certificate of participation at Office of Student Affairs.
+                      <br>
+                      Note: Students may only claim their certificate during office hours.
+                      </p>
+                </div>
+              </div>
+          </div>
+      </div>
+  </div>
 
     <div class="mt-5 footer-section " >
   <footer class="text-center text-lg-start bg-light text-muted ">
@@ -171,9 +171,9 @@
         <!-- Grid row -->
         <div class="row mt-3">
           <!-- Grid column -->
-          <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+          <div class="col-md-3 col-lg-4 col-xl-5 mx-auto mb-4">
             <!-- Content -->
-            <img src="../img/clsu-logo.png " alt="" class="footer-logo text-center" style=" width: 5.5rem;">
+            <img src="../img/logo-clsu.jpg" alt="" class="footer-logo text-center" style=" width: 5.5rem;">
             
             <p class="text-white" style="font-size: 25px; font-weight:500;">OFFICE OF STUDENT AFFAIRS</p>
           </div>

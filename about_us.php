@@ -14,10 +14,65 @@
     <link rel="stylesheet" href="css/mdb.min.css" />
   </head>
   <body>
-    <!-- Start your project here-->
-    <?php include './header.php'?>
-    <!-- <h1 class="text-center pt-2">ABOUT US</h1>   -->
-    
+    <div class="container-fluid header-title">
+    <div class="row">
+      <div class="col-md-1 ">
+        <img src="./img/clsu-logo.png" alt="" class="logo">
+      </div>
+      <div class="col">
+        <div class="logo-title">
+          <p class="pt-3 ps-3 header1">Central Luzon State University</p>
+          <p class="ps-3 header2">Science City of Muñoz, Nueva Ecija, Philippines 3120</p>
+        </div>  
+      </div>
+    </div>
+  </div>  
+    <div class="container-fluid">
+      <div class="row">
+        <nav class="navbar main-header-mid navbar-expand-md">
+          <ul class="navbar-nav">
+            <li class="nav-item ">
+              <a href="index.php" class="link-home text-white active">HOME</a>
+            </li>
+            <li class="nav-item ">
+              <a href="about_us.php" class="link text-white ps-3">ABOUT US</a>
+            </li>
+            <li class="nav-item ">
+              <a href="Section/impu.php" class="link text-white ps-3">IMPU</a>
+            </li>
+            <li class="nav-item ">
+              <a href="CDESU/cdesu.php" class="link text-white ps-3">CDESU</a>
+            </li>
+            <li class="nav-item ">
+              <a href="#" class="link text-white ps-3">GSU</a>
+            </li>
+            <li class="nav-item ">
+              <a href="#" class="link text-white ps-3">SOU</a>
+            </li>
+            <li class="nav-item ">
+              <a href="SDB/sdb_index.php" class="link text-white ps-3">SDB</a>
+            </li>
+            <?php
+              if (isset($_SESSION['is_admin'])) {
+                  if ($_SESSION['is_admin'] == 1 || $_SESSION['is_admin'] == 0) {
+                      echo '<li class="nav-item">
+                              <form action="logout.php" method="POST">
+                                  <button name="logout" class="btn btn-danger"  > Logout</button>
+                              </form>
+                            </li>';
+                  }
+              }else{
+                  echo '<li class="nav-item">
+                          <a href="" class="text-white ps-3 " data-mdb-toggle="modal" data-mdb-target="#login_Modal">
+                            LOGIN
+                          </a>
+                        </li>';
+              }
+            ?>
+          </ul>
+        </nav>
+      </div>
+    </div>
     <div class="bg-image ripple" data-mdb-ripple-color="light">
         <img src="img/banner1.png" class="banner__img" />
         <a href="#!">
@@ -162,7 +217,7 @@
           <!-- Grid column -->
           <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
             <!-- Content -->
-            <img src="./img/clsu-logo.png " alt="" class="footer-logo text-center" style=" width: 5.5rem;">
+            <img src="./img/logo-clsu.jpg" alt="" class="footer-logo text-center" style=" width: 5.5rem;">
             
             <p class="text-white" style="font-size: 25px; font-weight:500;">OFFICE OF STUDENT AFFAIRS</p>
           </div>

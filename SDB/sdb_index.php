@@ -12,6 +12,7 @@ if (isset($_POST['submit'])) {
     $sql = "SELECT * FROM login
       WHERE email = '$username'
       AND password = '$password'";
+    // $name = mysqli_fetch_assoc($sql);
 
     $res = mysqli_query($conn, $sql);
     if (mysqli_num_rows($res) == 1) {
@@ -67,7 +68,7 @@ if (isset($_POST['submit'])) {
         filter: blur(4px);
     }
     .chat-bot{
-        position: -webkit-sticky; /* Safari */
+        position: -webkit-sticky;
         position: sticky;
         bottom: 0;        
     }
@@ -135,7 +136,7 @@ if (isset($_POST['submit'])) {
 
     <!-- banner -->
     <div class="bg-image ripple" data-mdb-ripple-color="light">
-        <img src="../img/clsu-1.jpg" class="banner__img" />
+        <img src="../img/banner1.png" class="banner__img" />
         <a href="#!">
             <div class="mask" style="background-color: hsla(0, 0%, 0%, 0.5)">
             <div class="d-flex justify-content-center align-items-center h-100 text-center">
@@ -172,31 +173,142 @@ if (isset($_POST['submit'])) {
       </div>
     </div>
     
-    <div class="container">
-        <div class="row justify-content-center mt-5">
-            <a href="https://unsplash.it/1200/768.jpg?image=261" target="_blank" data-toggle="lightbox" data-gallery="hidden-images" class="col-4">
-                <img src="../img/Rectangle 273.png" class="img-fluid shadows">
-            </a>
-            <a href="https://unsplash.it/1200/768.jpg?image=260" target="_blank" data-toggle="lightbox" data-gallery="hidden-images" class="col-4">
-                <img src="../img/Rectangle 273.png" class="img-fluid img-blur shadows">
-            </a>
-            <a href="https://unsplash.it/1200/768.jpg?image=263" target="_blank" data-toggle="lightbox" data-gallery="hidden-images" class="col-4">
-                <img src="../img/Rectangle 273.png" class="img-fluid img-blur shadows">
-            </a>
-            <!-- elements not showing, use data-remote or data-src-->
-            <div data-toggle="lightbox" data-gallery="hidden-images" data-src="https://unsplash.it/1200/768.jpg?image=264" data-title="Hidden item 1"></div>
-            <div data-toggle="lightbox" data-gallery="hidden-images" data-src="https://www.youtube.com/embed/dQw4w9WgXcQ" data-title="Hidden item 2"></div>
-            <div data-toggle="lightbox" data-gallery="hidden-images" data-src="https://unsplash.it/1200/768.jpg?image=265" data-title="Hidden item 3"></div>
-            <div data-toggle="lightbox" data-gallery="hidden-images" data-src="https://unsplash.it/1200/768.jpg?image=266" data-title="Hidden item 4"></div>
-            <div data-toggle="lightbox" data-gallery="hidden-images" data-src="https://unsplash.it/1200/768.jpg?image=267" data-title="Hidden item 5"></div>
-        </div>
+    <!-- Modal gallery -->
+    <div class="container mt-5">
+        <section class="">
+            <!-- Section: Images -->
+            <section class="">
+                <div class="row">
+                    <div class="col-lg-4 col-md-12 mb-4 mb-lg-0 ">
+                        <div
+                        class="bg-image hover-overlay ripple shadow-1-strong rounded shadows"
+                        data-ripple-color="light"
+                        >
+                        <img
+                            src="../img/conduct-1.png"
+                            class="w-100"
+                        />
+                        <a href="#!" data-mdb-toggle="modal" data-mdb-target="#exampleModal1">
+                            <div class="mask" style="background-color: rgba(251, 251, 251, 0.2);"></div>
+                        </a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 mb-4 mb-lg-0">
+                        <div
+                        class="bg-image hover-overlay ripple shadow-1-strong rounded shadows"
+                        data-ripple-color="light"
+                        >
+                        <img
+                            src="../img/conduct-2.png"
+                            class="w-100"
+                        />
+                        <a href="#!" data-mdb-toggle="modal" data-mdb-target="#exampleModal2">
+                            <div class="mask" style="background-color: rgba(251, 251, 251, 0.2);"></div>
+                        </a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 mb-4 mb-lg-0">
+                        <div
+                        class="bg-image hover-overlay ripple shadow-1-strong rounded shadows"
+                        data-ripple-color="light"
+                        >
+                        <img
+                            src="../img/conduct-3.png"
+                            class="w-100"
+                        />
+                        <a href="#!" data-mdb-toggle="modal" data-mdb-target="#exampleModal3">
+                            <div class="mask" style="background-color: rgba(251, 251, 251, 0.2);"></div>
+                        </a>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+            <!-- Section: Images -->
+            <!-- Section: Modals -->
+            <section class="">
+                <!-- Modal 1 -->
+                <div
+                class="modal fade"
+                id="exampleModal1"
+                tabindex="-1"
+                aria-labelledby="exampleModal1Label"
+                aria-hidden="true"
+                >
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <img
+                        src="../img/conduct-1.png"
+                        class="w-100"
+                        />
+
+                    <div class="text-center py-3">
+                        <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">
+                        Close
+                        </button>
+                    </div>
+                    </div>
+                </div>
+                </div>
+                <!-- Modal 2 -->
+                <div
+                class="modal fade"
+                id="exampleModal2"
+                tabindex="-1"
+                aria-labelledby="exampleModal2Label"
+                aria-hidden="true"
+                >
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                    <img
+                        src="../img/conduct-2.png"
+                        class="w-100"
+                        />
+
+                    <div class="text-center py-3">
+                        <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">
+                        Close
+                        </button>
+                    </div>
+                    </div>
+                </div>
+                </div>
+                <!-- Modal 3 -->
+                <div
+                class="modal fade"
+                id="exampleModal3"
+                tabindex="-1"
+                aria-labelledby="exampleModal3Label"
+                aria-hidden="true"
+                >
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                    <img
+                        src="../img/conduct-3.png"
+                        class="w-100"
+                        />
+
+                    <div class="text-center py-3">
+                        <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">
+                        Close
+                        </button>
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </section>
+            <!-- Section: Modals -->
+        </section>
     </div>
+    <!-- Modal gallery -->
 
    <?php
         if (isset($_SESSION['is_admin'])) {
-            if ($_SESSION['is_admin'] == 1) {
+            if ($_SESSION['is_admin'] == 0) {
                 echo ' <div class="p-5 chat-bot d-flex justify-content-end">
-                            <button type="button" class="btn btn-success btn-lg btn-floating" data-mdb-toggle="modal" data-mdb-target="#chatModal">
+                            <button type="button" class="btn btn-primary btn-lg btn-floating" data-mdb-toggle="modal" data-mdb-target="#chatModal">
                                 <i class="fas fa-comment"></i>
                             </button>
                         </div>';
@@ -207,41 +319,75 @@ if (isset($_POST['submit'])) {
 
     ?>
 
+
+    <?php
+        $result = "SELECT * FROM login";
+        $query = mysqli_query($conn, $result);
+        $get = mysqli_fetch_assoc($query);
+    ?>
     <!-- Modal -->
     <div class="modal fade" id="chatModal" tabindex="-1" aria-labelledby="chatModal" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-            <div class="modal-header bg-primary text-white">
-                <h5 class="modal-title" id="chatModal">Chat Me</h5>
-                <button type="button" class="btn-close text-white" data-mdb-dismiss="modal" aria-label="Close"></button>
-            </div>
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="chatModal">Tell me something</h5>
+                    <button type="button" class="btn-close text-white" data-mdb-dismiss="modal" aria-label="Close"></button>
+                </div>
                 <div class="modal-body">
                     <div class="d-flex flex-row justify-content-start mb-4">
                         <img src="../img/avatar.png"
                         alt="avatar 1" style="width: 45px; height: 100%;">
                         <div class="p-3 ms-3" style="border-radius: 15px; background-color: rgba(57, 192, 237,.2);">
-                            <p class="small mb-0">Hello and thank you for visiting MDBootstrap. Please click the video
-                                below.</p>
-                        </div>
-                        </div>
-
-                        <div class="d-flex flex-row justify-content-end mb-4">
-                            <div class="p-3 me-3 border" style="border-radius: 15px; background-color: #fbfbfb;">
-                            <p class="small mb-0">Thank you, I really like your product.</p>
-                            </div>
-                            <img src="../img/Dude Crew (900 × 500 px).png"
-                            alt="avatar 1" style="width: 45px; height: 100%;">
-                        </div>
-                        <div class="form-outline">
-                            <textarea class="form-control" id="textAreaExample" rows="4"></textarea>
-                            <label class="form-label" for="textAreaExample">Type your message</label>
-                        </div>
-
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-primary">Send Message</button>
+                            <p class="small mb-0">Hello <?php echo $get['fullname']; ?>, if you have any concern, please fell free to tell us about your concern.</p>
                         </div>
                     </div>
+                    <div class="d-flex flex-row justify-content-start mb-4">
+                        <img src="../img/avatar.png"
+                        alt="avatar 1" style="width: 45px; height: 100%;">
+                        <div class="p-3 ms-3" style="border-radius: 15px; background-color: rgba(57, 192, 237,.2);">
+                            <p class="small mb-0">Just fill up the form bellow. Thank you!</p>
+                        </div>
+                    </div>
+                    <hr>
+                    <form>
+                        <!-- 2 column grid layout with text inputs for the first and last names -->
+                        <div class="row mb-4">
+                            <div class="col">
+                            <div class="form-outline">
+                                <input type="text" id="form6Example1" class="form-control" />
+                                <label class="form-label" for="form6Example1">First name</label>
+                            </div>
+                            </div>
+                            <div class="col">
+                            <div class="form-outline">
+                                <input type="text" id="form6Example2" class="form-control" />
+                                <label class="form-label" for="form6Example2">Last name</label>
+                            </div>
+                            </div>
+                        </div>
+                        <!-- Email input -->
+                        <div class="form-outline mb-4">
+                            <input type="email" id="form6Example5" class="form-control" />
+                            <label class="form-label" for="form6Example5">Email</label>
+                        </div>
+
+                        <!-- Number input -->
+                        <div class="form-outline mb-4">
+                            <input type="number" id="form6Example6" class="form-control" />
+                            <label class="form-label" for="form6Example6">Phone</label>
+                        </div>
+
+                        <!-- Message input -->
+                        <div class="form-outline mb-4">
+                            <textarea class="form-control" id="form6Example7" rows="4"></textarea>
+                            <label class="form-label" for="form6Example7">State your concern here</label>
+                        </div>
+                        
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary btn-rounded shadows">Send <i class="fas fa-paper-plane"></i></button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
@@ -288,9 +434,9 @@ if (isset($_POST['submit'])) {
                 <!-- Grid row -->
                 <div class="row mt-3">
                 <!-- Grid column -->
-                <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                <div class="col-md-3 col-lg-4 col-xl-5 mx-auto mb-4">
                     <!-- Content -->
-                    <img src="../img/clsu-logo.png " alt="" class="footer-logo text-center" style=" width: 5.5rem;">
+                    <img src="../img/logo-clsu.jpg" alt="" class="footer-logo text-center" style=" width: 5.5rem;">
                     
                     <p class="text-white" style="font-size: 25px; font-weight:500;">OFFICE OF STUDENT AFFAIRS</p>
                 </div>

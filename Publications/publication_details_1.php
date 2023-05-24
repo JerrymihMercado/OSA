@@ -68,10 +68,10 @@
     </div>
   </div>
 
-  <div class="container">
+  <div class="container pt-5">
     <div class="mt-3">
-        <h4>Call for Applications for the CHED SCHOLARSHIP PROGRAM FOR FUTURE STATISTICIANS FOR AY 2023-2024.</h4>
-        <p><i class="fas fa-calendar"></i> 05-22-23</p>
+        <h4>PAGBATI, MIGHTY AGGIES</h4>
+        <p><i class="fas fa-calendar-days"></i> 05-09-23</p>
     </div>
   </div>
 
@@ -79,23 +79,25 @@
       <div class="card mb-3 shadows">
           <div class="row g-0">
               <div class="col-md-4">
-              <img
-                  src="../img/announcement_img.png"
-                  alt="Trendy Pants and Shoes"
-                  class="img-fluid rounded-start"
-              />
+                <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                    <img src="../img/flowman-post-img.jpg" class="card-img" alt=""/>
+                    <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                </div>
               </div>
               <div class="col-md-8">
-              <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">
-                  This is a wider card with supporting text below as a natural lead-in to
-                  additional content. This content is a little bit longer.
-                  </p>
-                  <p class="card-text">
-                  <small class="text-muted">Last updated 3 mins ago</small>
-                  </p>
-              </div>
+                <div class="card-body">
+                    
+                    <p class="card-text description-left-border">
+                      Kami ang bagong taludturan ng pagbabago sa ating paaralan. Ang aming plataporma ng kandidatura ay naglalayong ipaglaban ang inyong mga karapatan, iangat ang kalidad ng edukasyon, at palakasin ang boses ng bawat estudyante. 
+                    </p>
+                    <p class="card-text description-left-border">
+                      Kami ay naniniwala na ang bawat estudyante ay mahalaga. Layunin naming ipakilala ang mga adhikain na tapat at maglilingkod sa inyong lahat. Determinasyon at dedikasyon ang aming tinataglay, upang bigyan ng tinig at solusyon ang mga pangangailangan ng bawat mag-aaral.
+                    </p>
+                    <p class="card-text description-left-border">
+                      Handa kaming magsilbi at magsulong ng mga programa at proyekto na naglalayong mapabuti ang inyong karanasan sa paaralan. Kasama ninyo kami sa paglikha ng isang espasyo na puno ng pag-unlad, pagkakataon, at pagkakaisa.                     
+                    </p>
+                    
+                </div>
               </div>
           </div>
       </div>

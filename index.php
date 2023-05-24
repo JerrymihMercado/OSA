@@ -101,7 +101,7 @@ if (isset($_POST['submit'])) {
             <a href="#" class="link text-white ps-3">GSU</a>
           </li>
           <li class="nav-item ">
-            <a href="#" class="link text-white ps-3">SOU</a>
+            <a href="SOU/sou_index.php" class="link text-white ps-3">SOU</a>
           </li>
           <li class="nav-item ">
             <a href="SDB/sdb_index.php" class="link text-white ps-3">SDB</a>
@@ -123,6 +123,20 @@ if (isset($_POST['submit'])) {
                       </li>';
             }
           ?>
+          <?php
+            if (isset($_SESSION['is_admin'])) {
+                if ($_SESSION['is_admin'] == 1 || $_SESSION['is_admin'] == 0) {
+                    echo '';
+                }
+            }else{
+                echo '<li class="nav-item">
+                        <a href="./Form_Register/register_index.php" class="text-white ps-3">
+                          REGISTER
+                        </a>
+                      </li>';
+            }
+          ?>
+          
         </ul>
       </nav>
     </div>
@@ -133,7 +147,7 @@ if (isset($_POST['submit'])) {
       <div class="carousel-inner">
         <div class="carousel-item active">
           <img src="img/banner1.png" class="d-block w-100" alt="Wild Landscape"/>
-        <div class="carousel-caption ">
+        <div class="carousel-caption" style="padding-top: 15vh">
           <h1>OFFICE OF STUDENT AFFAIRS</h1>
           <p>The Office for Student Affairs takes charge of the campus life of the students, 
               their welfare and discipline, and dormitory facilities. As such, it guides and 
@@ -149,7 +163,7 @@ if (isset($_POST['submit'])) {
       </div>
       <div class="carousel-item">
         <img src="img/banner2.png" class="d-block w-100" alt="Camera"/>
-        <div class="carousel-caption b">
+        <div class="carousel-caption" style="padding-top: 15vh">
           <h1>CLSU MENTAL HEALTH PROVIDERS</h1>
           <p>The Guidance Services Unit of OSA is providing online and  tele counseling services for all CLSU students. Counselors and mental health professionals can be reached by students through their Messenger account and mobile numbers.
           </p>
@@ -180,7 +194,7 @@ if (isset($_POST['submit'])) {
     <div class="row">
       <div class="osa-tag">
         <p class="tag-info">ANNOUNCEMENT</p>
-        <p class="tag-sub ">Read the latest announcemnet from the Office of Student Affairs(OSA)</p>
+        <p class="tag-sub ">Read the latest announcement from the Office of Student Affairs(OSA)</p>
       </div>
 
     </div>
@@ -193,39 +207,63 @@ if (isset($_POST['submit'])) {
       </div>
     </div>
   <div class="container">
-      <div class="row">
+    <div class="row">
         <div class="col-12">
-          <div class="card shadows mb-3" >
-            <div class="row g-0">
-              <div class="col-md-4">
-                <img
-                  src="img/announcement_img.png"
-                  alt="Trendy Pants and Shoes"
-                  class="img-fluid rounded-start"
-                />
-              </div>
-              <div class="col-md-8">
-                <div class="card-body ">
-                  <h5 class="text-success">OSA MISSION</h5>
-                  <hr>
-                    <p class="text-muted pt-2">05-22-23</p>
-                    <p class=" mission-info1">OSA shall promote the development of the students’ talents,
-                      potentials and leadership capabilities through its program thrusts that promote
-                      self- awareness, self-growth and development, self- management, cooperative
-                    </p>
-                    <a href="./Announcement/announcement_details.php">
-                      <button type="button" class="btn btn-success btn-rounded shadow fw-bold" data-mdb-ripple-color="dark">View Details</button>
-                    </a>
-              
+          <a href="Announcement/announcement_details.php">
+            <div class="card mb-3 shadows" style="max-width: 100%;">
+              <div class="row g-0">
+                <div class="col-md-4">
+                      <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                          <img src="img/osa-announcement.jpg" class="card-img" alt=""/>
+                          <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                      </div>
+                    </div>
+                    <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title title-left-border">Attended the Leadership Seminar</h5>
+                        <p class="card-text">
+                          <small class="tag-sub">05-09-23</small>
+                        </p>
+                        <p class="card-text px-4">
+                        OSA shall promFor those who attended the Leadership Seminar last April 14, 2023 at CLSU Auditorium, you may now claim your certificate of participation at Office of Student Affairs.
+                        <br>
+                        Note: Students may only claim their certificate during office hours.
+                        </p>
+                    </div>
                 </div>
-              </div>
-           
             </div>
-          </div>
+          </a>
         </div>
       </div>
-      
-    </div>
+        <div class="col-12">
+          <a href="Announcement/announcement_details.php">
+            <div class="card mb-3 shadows" style="max-width: 100%;">
+              <div class="row g-0">
+                <div class="col-md-4">
+                      <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                          <img src="img/osa-announcement.jpg" class="card-img" alt=""/>
+                          <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                      </div>
+                    </div>
+                    <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title title-left-border">Attended the Leadership Seminar</h5>
+                        <p class="card-text">
+                          <small class="tag-sub">05-09-23</small>
+                        </p>
+                        <p class="card-text px-4">
+                        OSA shall promFor those who attended the Leadership Seminar last April 14, 2023 at CLSU Auditorium, you may now claim your certificate of participation at Office of Student Affairs.
+                        <br>
+                        Note: Students may only claim their certificate during office hours.
+                        </p>
+                    </div>
+                </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>    
+  </div>
 
   <!-- Modal -->
   <div class="modal fade" id="login_Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -273,9 +311,9 @@ if (isset($_POST['submit'])) {
         <!-- Grid row -->
         <div class="row mt-3">
           <!-- Grid column -->
-          <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+          <div class="col-md-3 col-lg-4 col-xl-4 mx-auto mb-4">
             <!-- Content -->
-            <img src="./img/clsu-logo.png " alt="" class="footer-logo text-center" style=" width: 5.5rem;">
+            <img src="img/logo-clsu.jpg" alt="" class="footer-logo text-center" style=" width: 5.5rem;">
             
             <p class="text-white" style="font-size: 25px; font-weight:500;">OFFICE OF STUDENT AFFAIRS</p>
           </div>
