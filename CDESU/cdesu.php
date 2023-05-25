@@ -1,10 +1,54 @@
+<?php
+
+session_start();
+include '../mysql_connect.php';
+
+if (isset($_POST['submit'])) {
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+   
+
+    $sql = "SELECT * FROM account
+      WHERE email = '$email'
+      AND password = '$password'";
+
+    $res = mysqli_query($conn, $sql);
+    if (mysqli_num_rows($res) == 1) {
+        $row = mysqli_fetch_assoc($res);
+        $_SESSION['user'] = $email;
+        $_SESSION['role'] = $row['role'];
+        
+        echo '<script language="javascript">';
+        echo 'alert("message successfully sent")';
+        echo '</script>';
+        if ($row['role'] == 1) {    
+            echo '<script language="javascript">';
+            echo 'alert("message successfully sent")';
+            echo '</script>';
+            header("location:../CDESU/cdesu.php#login");
+        }
+        else {
+            header("location:index.php");
+            echo '<script language="javascript">';
+            echo 'alert("message successfully sent")';
+            echo '</script>';
+          }
+    } else {
+        echo '<script language="javascript">';
+        echo 'alert("error")';
+        echo '</script>';
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Office of Student Affairs</title>
+    <link rel="icon" href ="../img/logo.png" class="icon">
     <link rel="stylesheet" href="../Style/style.css">
 
     <?php
@@ -49,10 +93,10 @@
             <a href="../Section/impu.php" class="link text-white ps-3">IMPU</a>
           </li>
           <li class="nav-item ">
-            <a href="" class="link text-white ps-3">CDESU</a>
+            <a href="#" class="link text-white ps-3">CDESU</a>
           </li>
           <li class="nav-item ">
-            <a href="#" class="link text-white ps-3">GSU</a>
+            <a href="../GSU/gsu_index.php" class="link text-white ps-3">GSU</a>
           </li>
           <li class="nav-item ">
             <a href="../SOU/sou_index.php" class="link text-white ps-3">SOU</a>
@@ -60,10 +104,24 @@
           <li class="nav-item ">
             <a href="../SDB/sdb_index.php" class="link text-white ps-3">SDB</a>
           </li>
-          <li class="nav-item ">
-            <a href="#" class="link text-white ps-3">LOGIN</a>
-          </li>
-        </ul>
+            <?php
+              if (isset($_SESSION['role'])) {
+                  if ($_SESSION['role'] == 1 || $_SESSION['role'] == 0) {
+                      echo '<li class="nav-item">
+                              <form action="../logout.php" method="POST">
+                                  <button name="logout" class="btn bg-white fw-semibold px-5" > Logout</button>
+                              </form>
+                            </li>';
+                  }
+              }else{
+                  echo '<li class="nav-item">
+                          <a href="" class="text-white ps-3 " data-mdb-toggle="modal" data-mdb-target="#login_Modal">
+                            LOGIN
+                          </a>
+                        </li>';
+              }
+            ?>
+          </ul>
       </nav>
     </div>
   </div>
@@ -122,8 +180,43 @@
         </div>
     </div>
 
+     <div class="modal fade" id="login_Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">LOGIN</h5>
+            <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form method="POST">
+              <!-- Email input -->
+              <div class="form-outline mb-4">
+                <input type="text" id="email" name="email" class="form-control" required/>
+                <label class="form-label" for="email">Email address</label>
+              </div>
+
+              <!-- Password input -->
+              <div class="form-outline mb-4">
+                <input type="password" id="password" name="password" class="form-control" required/>
+                <label class="form-label" for="password">Password</label>
+              </div>
+
+              <!-- 2 column grid layout for inline styling -->
+              <div class="row mb-4">
+                
+                    <a href="#!">Forgot password?</a>
+              </div>
+              <!-- Submit button -->
+              <button type="submit" name="submit" class="btn btn-primary btn-block">Login</button>
+          </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="mt-5 footer-section " >
-  <footer class="text-center text-lg-start bg-light text-muted ">
+  <footer class="text-center text-lg-start bg-light text-muted" style="background-image: url(../img/banner1.png);  background-repeat: no-repeat; background-size: cover; ">
+
   
     <!-- Section: Links  -->
     <section class="" style="background-image: url(../img/banner1.png);  background-size:100rem, 100rem; background-repeat: no-repeat;align-items: center; ">
@@ -131,9 +224,9 @@
         <!-- Grid row -->
         <div class="row mt-3">
           <!-- Grid column -->
-          <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+          <div class="col-md-3 col-lg-4 col-xl-4 mx-auto mb-4">
             <!-- Content -->
-            <img src="../img/clsu-logo.png " alt="" class="footer-logo text-center" style=" width: 5.5rem;">
+            <img src="../img/logo-clsu.jpg " alt="" class="footer-logo text-center" style=" width: 5.5rem;">
             
             <p class="text-white" style="font-size: 25px; font-weight:500;">OFFICE OF STUDENT AFFAIRS</p>
           </div>
@@ -184,6 +277,8 @@
       </div>
     </section>
     <!-- Section: Links  -->
+
+   
 
     <!-- Copyright -->
     <div class="text-center p-1 text-white" style="background: -webkit-linear-gradient(0deg, #008102, #93d12d);">

@@ -90,16 +90,16 @@ if (isset($_POST['submit'])) {
             <a href="../about_us.php" class="link text-white ps-3">ABOUT US</a>
           </li>
           <li class="nav-item ">
-            <a href="../Section/impu.php" class="link text-white ps-3">IMPU</a>
+            <a href="" class="link text-white ps-3">IMPU</a>
           </li>
           <li class="nav-item ">
             <a href="../CDESU/cdesu.php" class="link text-white ps-3">CDESU</a>
           </li>
           <li class="nav-item ">
-            <a href="../GSU/gsu_index.php" class="link text-white ps-3">GSU</a>
+            <a href="#" class="link text-white ps-3">GSU</a>
           </li>
           <li class="nav-item ">
-            <a href="#" class="link text-white ps-3">SOU</a>
+            <a href="../SOU/sou_index.php" class="link text-white ps-3">SOU</a>
           </li>
           <li class="nav-item ">
             <a href="../SDB/sdb_index.php" class="link text-white ps-3">SDB</a>
@@ -140,7 +140,7 @@ if (isset($_POST['submit'])) {
         <a href="#!">
             <div class="mask" style="background-color: hsla(0, 0%, 0%, 0.5)">
             <div class="d-flex justify-content-center align-items-center h-100 text-center">
-                <h2 class="text-white mb-0">Student Organizations Unit (SOU)</h2>
+                <h2 class="text-white mb-0">Guidance Service Unit (GSU)</h2>
             </div>
             </div>
             <!-- <div class="hover-overlay">
@@ -151,35 +151,24 @@ if (isset($_POST['submit'])) {
 
     <!-- brief history -->
     <div class="container mt-5">
-        <p align="justify" class="impu-desc"><span class="fw-bold fs-3 g-0 p-0 m-0 text-success">T</span>he Student Organizations Unit is directly involved in the operation, 
-            management, and supervision of all recognized student organizations in 
-            Central Luzon State University. It is concerned with the planning, programming, 
-            and identifying the existing resources that can be fully utilized by the different 
-            Student Organizations for the benefit of their members in particular and the 
-            CLSU students in general.</p>
-    </div>
-    <div class="container mt-5">
-        <p align="justify" class="impu-desc"><span class="fw-bold fs-3 g-0 p-0 m-0 text-success">T</span>The Student Organizations Unit also organizes other trainings/symposia in 
-        cooperation of other units in the campus such as the Guidance Services Unit, 
-        University Supreme Student Council, Environmental Management Institute, 
-        RM- CARES, etc.</p>
+        <p align="justify" class="impu-desc"><span class="fw-bold fs-3 g-0 p-0 m-0 text-success">T</span>his unit provides programs and activities 
+        that aim at helping students adjust to college life by helping them 
+        understand themselves better, improve interpersonal relationship, make 
+        intelligent decisions and prepare for a lifelong career. It provides 
+        information to enable the students to explore occupational areas and to 
+        identity prospects for employment.</p>
     </div>
      
     <div class="container pt-5">
       <div class="row">
         <div class="osa-tag">
-          <p class="tag-info">LIST OF OFFICIAL ORGANIZATION</p>
-          <p class="tag-sub">Here the list of campus organization</p>
+          <p class="tag-info">OFFICIAL WEBSITE PAGE</p>
+          <p class="tag-sub">Visit our official website for Student Organizations Unit (SOU)</p>
         </div>
       </div>
     </div>
     <div class="container p-4">
-        <ul>
-          <li>Org 1</li>
-          <li>Org 2</li>
-          <li>Org 3</li>
-          <li>Org 4</li>
-        </ul>
+        <h6 class="fw-bold text-primary">gsu.edu.ph</h6>
     </div>
 
     <!-- Modal -->
@@ -227,7 +216,7 @@ if (isset($_POST['submit'])) {
             <!-- Grid row -->
             <div class="row mt-3">
               <!-- Grid column -->
-              <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+              <div class="col-md-3 col-lg-4 col-xl-5 mx-auto mb-4">
                 <!-- Content -->
                 <img src="../img/logo-clsu.jpg" alt="" class="footer-logo text-center" style=" width: 5.5rem;">
                 

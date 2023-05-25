@@ -4,42 +4,41 @@ session_start();
 include 'mysql_connect.php';
 
 if (isset($_POST['submit'])) {
-    $username = $_POST['username'];
+    $email = $_POST['email'];
     $password = $_POST['password'];
 
    
 
-    $sql = "SELECT * FROM login
-      WHERE email = '$username'
+    $sql = "SELECT * FROM account
+      WHERE email = '$email'
       AND password = '$password'";
 
     $res = mysqli_query($conn, $sql);
     if (mysqli_num_rows($res) == 1) {
         $row = mysqli_fetch_assoc($res);
-        $_SESSION['user'] = $username;
-        $_SESSION['is_admin'] = $row['is_admin'];
+        $_SESSION['user'] = $email;
+        $_SESSION['role'] = $row['role'];
         
-
         echo '<script language="javascript">';
         echo 'alert("message successfully sent")';
         echo '</script>';
-                if ($row['is_admin'] == 1) {    
-                    echo '<script language="javascript">';
-        echo 'alert("message successfully sent")';
-        echo '</script>';
-                    header("location:index.php#login");
-                }
-                else {
-                    header("location:index.php");
-                    echo '<script language="javascript">';
-        echo 'alert("message successfully sent")';
-        echo '</script>';
-                }
-            } else {
+        if ($row['role'] == 1) {    
+            echo '<script language="javascript">';
+            echo 'alert("message successfully sent")';
+            echo '</script>';
+            header("location:index.php#login");
+        }
+        else {
+            header("location:index.php");
+            echo '<script language="javascript">';
+            echo 'alert("message successfully sent")';
+            echo '</script>';
+          }
+    } else {
         echo '<script language="javascript">';
         echo 'alert("error")';
         echo '</script>';
-            }
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -49,6 +48,7 @@ if (isset($_POST['submit'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <title>Office of Student Affairs</title>
+    <link rel="icon" href ="img/logo.png" class="icon">
     <link rel="stylesheet" href="./Style/style.css">
     <!-- <link rel="stylesheet" href="./Style/style_about.css"> -->
      <!-- Font Awesome -->
@@ -98,7 +98,7 @@ if (isset($_POST['submit'])) {
             <a href="CDESU/cdesu.php" class="link text-white ps-3">CDESU</a>
           </li>
           <li class="nav-item ">
-            <a href="#" class="link text-white ps-3">GSU</a>
+            <a href="GSU/gsu_index.php" class="link text-white ps-3">GSU</a>
           </li>
           <li class="nav-item ">
             <a href="SOU/sou_index.php" class="link text-white ps-3">SOU</a>
@@ -107,13 +107,21 @@ if (isset($_POST['submit'])) {
             <a href="SDB/sdb_index.php" class="link text-white ps-3">SDB</a>
           </li>
           <?php
-            if (isset($_SESSION['is_admin'])) {
-                if ($_SESSION['is_admin'] == 1 || $_SESSION['is_admin'] == 0) {
+            if (isset($_SESSION['role'])) {
+                if ($_SESSION['role'] == 1 || $_SESSION['role'] == 0) {
                     echo '<li class="nav-item">
-                            <form action="logout.php" method="POST">
-                                <button name="logout" class="btn btn-danger"  > Logout</button>
-                            </form>
-                          </li>';
+                            <div class="btn-group shadow-0">
+                            <a type="button" class="link text-white ps-3 dropdown-toggle" data-mdb-toggle="dropdown" aria-expanded="false">
+                                LOGOUT
+                            </a>
+                            <ul class="dropdown-menu">
+                                
+                                <form action="logout.php" method="POST">
+                                    <li><button class="dropdown-item rounded-5" name="logout">Logout</button></li>
+                                </form>
+                            </ul>
+                            </div>
+                        </li>';
                 }
             }else{
                 echo '<li class="nav-item">
@@ -124,14 +132,14 @@ if (isset($_POST['submit'])) {
             }
           ?>
           <?php
-            if (isset($_SESSION['is_admin'])) {
-                if ($_SESSION['is_admin'] == 1 || $_SESSION['is_admin'] == 0) {
+            if (isset($_SESSION['role'])) {
+                if ($_SESSION['role'] == 1 || $_SESSION['role'] == 0) {
                     echo '';
                 }
             }else{
                 echo '<li class="nav-item">
                         <a href="./Form_Register/register_index.php" class="text-white ps-3">
-                          REGISTER
+                          Register?
                         </a>
                       </li>';
             }
@@ -277,13 +285,13 @@ if (isset($_POST['submit'])) {
           <form method="POST">
             <!-- Email input -->
             <div class="form-outline mb-4">
-              <input type="text" id="username" name="username" class="form-control" />
+              <input type="email" id="email" name="email" class="form-control" required/>
               <label class="form-label" for="email">Email address</label>
             </div>
 
             <!-- Password input -->
             <div class="form-outline mb-4">
-              <input type="password" id="password" name="password" class="form-control" />
+              <input type="password" id="password" name="password" class="form-control" required/>
               <label class="form-label" for="password">Password</label>
             </div>
 
@@ -303,76 +311,75 @@ if (isset($_POST['submit'])) {
   
 
   <div class="mt-5 footer-section " >
-  <footer class="text-center text-lg-start bg-light text-muted ">
-  
-    <!-- Section: Links  -->
-    <section class="" style="background-image: url(img/banner1.png);  background-size:100rem, 100rem; background-repeat: no-repeat;align-items: center; ">
-      <div class="container-fluid  text-md-start pt-3 ">
-        <!-- Grid row -->
-        <div class="row mt-3">
-          <!-- Grid column -->
-          <div class="col-md-3 col-lg-4 col-xl-4 mx-auto mb-4">
-            <!-- Content -->
-            <img src="img/logo-clsu.jpg" alt="" class="footer-logo text-center" style=" width: 5.5rem;">
-            
-            <p class="text-white" style="font-size: 25px; font-weight:500;">OFFICE OF STUDENT AFFAIRS</p>
-          </div>
-          <!-- Grid column -->
-
-          <!-- Grid column -->
-          <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-            <!-- Links -->
-            <h6 class="text-uppercase fw-bold mb-4 " style="color: #cdfb13;">Contact</h6>
-            <p class="text-white"><i class="fas fa-location-dot "></i> Central Luzon State University, Science City of Muñoz Nueva Ecija, Philippines</p>
-            <p class="text-white">
-              <i class="fas fa-envelope me-3 "></i>
-              osa@clsu.edu.ph
-            </p>
-            <p class="text-white"><i class="fas fa-phone me-3 "></i> (044) 940 7030</p>
-            <!-- <p><i class="fas fa-print me-3"></i> + 01 234 567 89</p> -->
-          </div>
-          <!-- Grid column -->
-        
-          <!-- Grid column -->
-          <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-            <!-- Links -->
-            <h6 class="text-uppercase fw-bold mb-4" style="color: #cdfb13;">
-              SOCIAL MEDIA
-            </h6>
-            <div>
-              <a href="https://www.facebook.com/officeofstudentaffairsCLSU" target="_blank" class="me-3 text-reset">
-                <i class="fab fa-facebook-square fa-lg text-white"></i>
-              </a>
-              <a href="https://twitter.com/clsu_official?lang=en" target="_blank" class="me-3 text-reset">
-                <i class="fab fa-twitter fa-lg text-white"></i>
-              </a>
-              <a href="" class="me-3 text-reset">
-                <i class="fab fa-google fa-lg text-white"></i>
-              </a>
-              <a href="" class="me-3 text-reset">
-                <i class="fab fa-instagram fa-lg text-white"></i>
-              </a>
-              <a href="" class="me-3 text-reset">
-                <i class="fab fa-linkedin fa-lg text-white"></i>
-              </a>
+    <footer class="text-center text-lg-start bg-light text-muted " style="background-image: url(img/banner1.png);  background-repeat: no-repeat; background-size: cover; ">
+      <!-- Section: Links  -->
+      <section class="">
+        <div class="container-fluid  text-md-start pt-3 " >
+          <!-- Grid row -->
+          <div class="row mt-3" >
+            <!-- Grid column -->
+            <div class="col-md-3 col-lg-4 col-xl-4 mx-auto mb-4">
+              <!-- Content -->
+              <img src="img/logo-clsu.jpg" alt="" class="footer-logo text-center">
               
+              <p class="text-white" style="font-size: 25px; font-weight:500;">OFFICE OF STUDENT AFFAIRS</p>
             </div>
-          </div>
-          <!-- Grid column -->
-        </div>
-        <!-- Grid row -->
-      </div>
-    </section>
-    <!-- Section: Links  -->
+            <!-- Grid column -->
 
-    <!-- Copyright -->
-    <div class="text-center p-1 text-white" style="background: -webkit-linear-gradient(0deg, #008102, #93d12d);">
-      © Copyright 2023 Central Luzon State University All Rights Reserved
-      <!-- <a class="text-reset fw-bold" href="https://mdbootstrap.com/">MDBootstrap.com</a> -->
-    </div>
-    <!-- Copyright -->
-  </footer>
-</div>
+            <!-- Grid column -->
+            <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+              <!-- Links -->
+              <h6 class="text-uppercase fw-bold mb-4 " style="color: #cdfb13;">Contact</h6>
+              <p class="text-white"><i class="fas fa-location-dot "></i> Central Luzon State University, Science City of Muñoz Nueva Ecija, Philippines</p>
+              <p class="text-white">
+                <i class="fas fa-envelope me-3 "></i>
+                osa@clsu.edu.ph
+              </p>
+              <p class="text-white"><i class="fas fa-phone me-3 "></i> (044) 940 7030</p>
+              <!-- <p><i class="fas fa-print me-3"></i> + 01 234 567 89</p> -->
+            </div>
+            <!-- Grid column -->
+          
+            <!-- Grid column -->
+            <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+              <!-- Links -->
+              <h6 class="text-uppercase fw-bold mb-4" style="color: #cdfb13;">
+                SOCIAL MEDIA
+              </h6>
+              <div>
+                <a href="https://www.facebook.com/officeofstudentaffairsCLSU" target="_blank" class="me-3 text-reset">
+                  <i class="fab fa-facebook-square fa-lg text-white"></i>
+                </a>
+                <a href="https://twitter.com/clsu_official?lang=en" target="_blank" class="me-3 text-reset">
+                  <i class="fab fa-twitter fa-lg text-white"></i>
+                </a>
+                <a href="" class="me-3 text-reset">
+                  <i class="fab fa-google fa-lg text-white"></i>
+                </a>
+                <a href="" class="me-3 text-reset">
+                  <i class="fab fa-instagram fa-lg text-white"></i>
+                </a>
+                <a href="" class="me-3 text-reset">
+                  <i class="fab fa-linkedin fa-lg text-white"></i>
+                </a>
+                
+              </div>
+            </div>
+            <!-- Grid column -->
+          </div>
+          <!-- Grid row -->
+        </div>
+      </section>
+      <!-- Section: Links  -->
+
+      <!-- Copyright -->
+      <div class="text-center p-1 text-white" style="background: -webkit-linear-gradient(0deg, #008102, #93d12d);">
+        © Copyright 2023 Central Luzon State University All Rights Reserved
+        <!-- <a class="text-reset fw-bold" href="https://mdbootstrap.com/">MDBootstrap.com</a> -->
+      </div>
+      <!-- Copyright -->
+    </footer>
+  </div>
     <!-- End your project here-->
 
     <!-- MDB -->

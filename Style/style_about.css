@@ -58,17 +58,6 @@
     border-left: 8px solid #148D08;
     margin-top: 25px;
 }
-.tag-info{
-    border-left: 8px solid #FFD600;
-    font-size: 23px;
-    font-weight: 500;
-    color: #148D08;
-    padding-left:10px ;
-}
-.tag-sub{
-    margin-top: -20px;
-    margin-left: 21px;
-}
 @media screen and (max-width: 420px) {
    .banner_logo{
     height: 50px;

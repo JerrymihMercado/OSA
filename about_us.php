@@ -5,16 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <title>Office of Student Affairs</title>
+    <link rel="icon" href ="img/logo.png" class="icon">
     <link rel="stylesheet" href="./Style/style.css">
     <link rel="stylesheet" href="./Style/style_about.css">
      <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
     <!-- Google Fonts Roboto -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap"/>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic" rel="stylesheet" />
     <link rel="stylesheet" href="css/mdb.min.css" />
   </head>
   <body>
-    <div class="container-fluid header-title">
+  <div class="container-fluid header-title">
     <div class="row">
       <div class="col-md-1 ">
         <img src="./img/clsu-logo.png" alt="" class="logo">
@@ -44,10 +45,10 @@
               <a href="CDESU/cdesu.php" class="link text-white ps-3">CDESU</a>
             </li>
             <li class="nav-item ">
-              <a href="#" class="link text-white ps-3">GSU</a>
+              <a href="GSU/gsu_index.php" class="link text-white ps-3">GSU</a>
             </li>
             <li class="nav-item ">
-              <a href="#" class="link text-white ps-3">SOU</a>
+              <a href="SOU/sou_index.php" class="link text-white ps-3">SOU</a>
             </li>
             <li class="nav-item ">
               <a href="SDB/sdb_index.php" class="link text-white ps-3">SDB</a>
@@ -207,10 +208,11 @@
       </div>
     </div>
   
-    <footer class="text-center text-lg-start bg-light text-muted ">
+    <footer class="text-center text-lg-start bg-light text-muted" style="background-image: url(img/banner1.png);  background-repeat: no-repeat; background-size: cover; ">
+
   
     <!-- Section: Links  -->
-    <section class="" style="background-image: url(img/banner1.png);  background-size:100rem, 100rem; background-repeat: no-repeat;align-items: center; ">
+    <section class="" >
       <div class="container-fluid  text-md-start pt-3 ">
         <!-- Grid row -->
         <div class="row mt-3">

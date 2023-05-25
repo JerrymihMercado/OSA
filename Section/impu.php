@@ -4,42 +4,41 @@ session_start();
 include '../mysql_connect.php';
 
 if (isset($_POST['submit'])) {
-    $username = $_POST['username'];
+    $email = $_POST['email'];
     $password = $_POST['password'];
 
    
 
-    $sql = "SELECT * FROM login
-      WHERE email = '$username'
+    $sql = "SELECT * FROM account
+      WHERE email = '$email'
       AND password = '$password'";
 
     $res = mysqli_query($conn, $sql);
     if (mysqli_num_rows($res) == 1) {
         $row = mysqli_fetch_assoc($res);
-        $_SESSION['user'] = $username;
-        $_SESSION['is_admin'] = $row['is_admin'];
+        $_SESSION['user'] = $email;
+        $_SESSION['role'] = $row['role'];
         
-
         echo '<script language="javascript">';
         echo 'alert("message successfully sent")';
         echo '</script>';
-                if ($row['is_admin'] == 1) {    
-                    echo '<script language="javascript">';
-        echo 'alert("message successfully sent")';
-        echo '</script>';
-                    header("location:../Section/impu.php#login");
-                }
-                else {
-                    header("location:../Section/impu.php");
-                    echo '<script language="javascript">';
-        echo 'alert("message successfully sent")';
-        echo '</script>';
-                }
-            } else {
+        if ($row['role'] == 1) {    
+            echo '<script language="javascript">';
+            echo 'alert("message successfully sent")';
+            echo '</script>';
+            header("location:../Section/impu.php#login");
+        }
+        else {
+            header("location:index.php");
+            echo '<script language="javascript">';
+            echo 'alert("message successfully sent")';
+            echo '</script>';
+          }
+    } else {
         echo '<script language="javascript">';
         echo 'alert("error")';
         echo '</script>';
-            }
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -48,7 +47,8 @@ if (isset($_POST['submit'])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Office of Student Affairs</title>
+    <link rel="icon" href ="../img/logo.png" class="icon">
     <link rel="stylesheet" href="../Style/style.css">
     <?php
       include '../Links/link.php';
@@ -104,13 +104,21 @@ if (isset($_POST['submit'])) {
             <a href="../SDB/sdb_index.php" class="link text-white ps-3">SDB</a>
           </li>
           <?php
-            if (isset($_SESSION['is_admin'])) {
-                if ($_SESSION['is_admin'] == 1 || $_SESSION['is_admin'] == 0) {
+            if (isset($_SESSION['role'])) {
+                if ($_SESSION['role'] == 1 || $_SESSION['role'] == 0) {
                     echo '<li class="nav-item">
-                            <form action="../logout.php" method="POST">
-                                <button name="logout" class="btn bg-white fw-semibold px-5" > Logout</button>
-                            </form>
-                          </li>';
+                            <div class="btn-group shadow-0">
+                            <a type="button" class="link text-white ps-3 dropdown-toggle" data-mdb-toggle="dropdown" aria-expanded="false">
+                                LOGOUT
+                            </a>
+                            <ul class="dropdown-menu">
+                                
+                                <form action="../logout.php" method="POST">
+                                    <li><button class="dropdown-item rounded-5" name="logout">Logout</button></li>
+                                </form>
+                            </ul>
+                            </div>
+                        </li>';
                 }
             }else{
                 echo '<li class="nav-item">
@@ -173,8 +181,8 @@ if (isset($_POST['submit'])) {
                     <div class="col-auto">
                         
                       <?php
-                        if (isset($_SESSION['is_admin'])) {
-                            if ($_SESSION['is_admin'] == 1 || $_SESSION['is_admin'] == 0) {
+                        if (isset($_SESSION['role'])) {
+                            if ($_SESSION['role'] == 1 || $_SESSION['role'] == 0) {
                                 echo '';
                             }
                         }else{
@@ -186,8 +194,8 @@ if (isset($_POST['submit'])) {
                     </div>
                     <div class="col-md justify-content-end d-flex">
                       <?php
-                        if (isset($_SESSION['is_admin'])) {
-                            if ($_SESSION['is_admin'] == 1 || $_SESSION['is_admin'] == 0) {
+                        if (isset($_SESSION['role'])) {
+                            if ($_SESSION['role'] == 1 || $_SESSION['role'] == 0) {
                                 echo '<a href="https://drive.google.com/uc?export=download&id=1FylpFFT3UyuQndDfatJ1R0jbZ5_2QwW4" class="btn btn-danger">Download</a>';
                             }
                         }else{
@@ -328,13 +336,13 @@ if (isset($_POST['submit'])) {
             <form method="POST">
               <!-- Email input -->
               <div class="form-outline mb-4">
-                <input type="text" id="username" name="username" class="form-control" />
+                <input type="text" id="email" name="email" class="form-control" required/>
                 <label class="form-label" for="email">Email address</label>
               </div>
 
               <!-- Password input -->
               <div class="form-outline mb-4">
-                <input type="password" id="password" name="password" class="form-control" />
+                <input type="password" id="password" name="password" class="form-control" required/>
                 <label class="form-label" for="password">Password</label>
               </div>
 
@@ -352,10 +360,10 @@ if (isset($_POST['submit'])) {
     </div>
 
     <div class="mt-5 footer-section " >
-      <footer class="text-center text-lg-start bg-light text-muted ">
+      <footer class="text-center text-lg-start bg-light text-muted" style="background-image: url(../img/banner1.png);  background-repeat: no-repeat; background-size: cover; ">
       
         <!-- Section: Links  -->
-        <section class="" style="background-image: url(../img/banner1.png);  background-size:100rem, 100rem; background-repeat: no-repeat;align-items: center; ">
+        <section class="">
           <div class="container-fluid  text-md-start pt-3 ">
             <!-- Grid row -->
             <div class="row mt-3">
