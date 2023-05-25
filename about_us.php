@@ -1,3 +1,7 @@
+<?php
+session_start();
+
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -54,20 +58,24 @@
               <a href="SDB/sdb_index.php" class="link text-white ps-3">SDB</a>
             </li>
             <?php
-              if (isset($_SESSION['is_admin'])) {
-                  if ($_SESSION['is_admin'] == 1 || $_SESSION['is_admin'] == 0) {
+              if (isset($_SESSION['role'])) {
+                  if ($_SESSION['role'] == 1 || $_SESSION['role'] == 0) {
                       echo '<li class="nav-item">
-                              <form action="logout.php" method="POST">
-                                  <button name="logout" class="btn btn-danger"  > Logout</button>
-                              </form>
-                            </li>';
+                            <div class="btn-group shadow-0">
+                            <a type="button" class="link text-white ps-3 dropdown-toggle" data-mdb-toggle="dropdown" aria-expanded="false">
+                                LOGOUT
+                            </a>
+                            <ul class="dropdown-menu">
+                                
+                                <form action="logout.php" method="POST">
+                                    <li><button class="dropdown-item rounded-5" name="logout">Logout</button></li>
+                                </form>
+                            </ul>
+                            </div>
+                        </li>';
                   }
               }else{
-                  echo '<li class="nav-item">
-                          <a href="" class="text-white ps-3 " data-mdb-toggle="modal" data-mdb-target="#login_Modal">
-                            LOGIN
-                          </a>
-                        </li>';
+                  echo '';
               }
             ?>
           </ul>
@@ -83,7 +91,7 @@
                 <img src="img/white-logo.png" alt="" class="banner_logo ">
               </div>
               <div class="col-12 pt-3">
-                 <h2 class="text-white mb-0">OFFICE OF STUDENT AFFAIRS</h2>
+                 <h4 class="text-white mb-0 fw-bold">OFFICE OF STUDENT AFFAIRS</h4>
               </div>
 
             </div>
@@ -98,14 +106,14 @@
       <div class="row">
         <div class="osa-tag">
           <p class="tag-info">OVERVIEW</p>
-          <p>The OSA serves as the center of information, activities, and services related to the co-curricular and extra-curricular needs of students. It also promotes the development of students’ talents, potentials, and leadership capabilities through its program thrusts of self-growth and awareness, cooperative living and learning, leadership development and enhancement, productive use of leisure, and enhanced cross-cultural adjustment.</p>
+          <p class="tag-sub ">The OSA serves as the center of information, activities, and services related to the co-curricular and extra-curricular needs of students. It also promotes the development of students’ talents, potentials, and leadership capabilities through its program thrusts of self-growth and awareness, cooperative living and learning, leadership development and enhancement, productive use of leisure, and enhanced cross-cultural adjustment.</p>
         </div>
 
       </div>
     </div>
 
     <div class="container pt-4">
-      <div class="row">
+      <!-- <div class="row">
         <div class="col-12">
           <div class="card shadows">
             <div class="row no-gutter">
@@ -145,6 +153,54 @@
                 </div>
               </div>
             </div>  
+          </div>
+        </div>
+      </div> -->
+      <div class="card mb-3 shadows border">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img
+              src="img/osa-logo.jpg"
+              alt="Trendy Pants and Shoes"
+              class="img-fluid rounded-start"
+              style="height: 40vh; object-fit: cover;"
+            />
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h4 class="card-title fw-semibold">OSA MISSION</h4>
+              <p class="card-text">
+                OSA shall promote the development of the students’ talents,
+                potentials and leadership capabilities through its program thrusts that promote
+                self- awareness, self-growth and development, self- management, cooperative
+                living and learning, leadership advancement, social responsibility, nationalism
+                and patriotism and wise use and management of relevant information.
+              </p>
+            
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card mb-3 shadows border">
+        <div class="row g-0">
+          <div class="col-md-8">
+            <div class="card-body">
+              <h4 class="card-title fw-semibold">OSA VISION</h5>
+              <p class="card-text">
+                OSA-CLSU as a model center for student personnel services
+                supportive of the co-curricular and extra-curricular needs of its clients for their
+                well- rounded growth and development
+              </p>
+            
+            </div>
+          </div>
+          <div class="col-md-4">
+            <img
+              src="img/osa-logo.jpg"
+              alt="Trendy Pants and Shoes"
+              class="img-fluid rounded-end"
+              style="height: 40vh; object-fit: cover;"
+            />
           </div>
         </div>
       </div>
@@ -217,18 +273,18 @@
         <!-- Grid row -->
         <div class="row mt-3">
           <!-- Grid column -->
-          <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+          <div class="col-md-3 col-lg-4 col-xl-4 mx-auto mb-4">
             <!-- Content -->
-            <img src="./img/logo-clsu.jpg" alt="" class="footer-logo text-center" style=" width: 5.5rem;">
-            
-            <p class="text-white" style="font-size: 25px; font-weight:500;">OFFICE OF STUDENT AFFAIRS</p>
+              <img src="./img/white-logo.png" alt="" class="footer-logo text-center" style="height: 88px;">
+              <h4 class="text-white fw-bold mt-2">OFFICE OF STUDENT AFFAIRS</h5>
+              <p class="text-white fw-lighter">Science City of Muñoz, Nueva Ecija</p>
           </div>
           <!-- Grid column -->
 
           <!-- Grid column -->
           <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
             <!-- Links -->
-            <h6 class="text-uppercase fw-bold mb-4 " style="color: #cdfb13;">Contact</h6>
+            <h5 class="text-uppercase fw-bold mb-4 " style="color: #cdfb13;">Contact</h5>
             <p class="text-white"><i class="fas fa-location-dot "></i> Central Luzon State University, Science City of Muñoz Nueva Ecija, Philippines</p>
             <p class="text-white">
               <i class="fas fa-envelope me-3 "></i>
@@ -242,9 +298,9 @@
           <!-- Grid column -->
           <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
             <!-- Links -->
-            <h6 class="text-uppercase fw-bold mb-4" style="color: #cdfb13;">
+            <h5 class="text-uppercase fw-bold mb-4" style="color: #cdfb13;">
               SOCIAL MEDIA
-            </h6>
+            </h5>
             <div>
               <a href="https://www.facebook.com/officeofstudentaffairsCLSU" target="_blank" class="me-3 text-reset">
                 <i class="fab fa-facebook-square fa-lg text-white"></i>

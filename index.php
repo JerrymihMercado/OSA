@@ -139,7 +139,7 @@ if (isset($_POST['submit'])) {
             }else{
                 echo '<li class="nav-item">
                         <a href="./Form_Register/register_index.php" class="text-white ps-3">
-                          Register?
+                          REGISTER
                         </a>
                       </li>';
             }
@@ -168,7 +168,7 @@ if (isset($_POST['submit'])) {
       <div class="carousel-inner">
         <div class="carousel-item active">
           <img src="img/banner1.png" class="d-block w-100" alt="Wild Landscape"/>
-        <div class="carousel-caption" style="padding-top: 15vh">
+        <div class="carousel-caption">
           <h1>OFFICE OF STUDENT AFFAIRS</h1>
           <p>The Office for Student Affairs takes charge of the campus life of the students, 
               their welfare and discipline, and dormitory facilities. As such, it guides and 
@@ -184,7 +184,7 @@ if (isset($_POST['submit'])) {
       </div>
       <div class="carousel-item">
         <img src="img/banner2.png" class="d-block w-100" alt="Camera"/>
-        <div class="carousel-caption" style="padding-top: 15vh">
+        <div class="carousel-caption">
           <h1>CLSU MENTAL HEALTH PROVIDERS</h1>
           <p>The Guidance Services Unit of OSA is providing online and  tele counseling services for all CLSU students. Counselors and mental health professionals can be reached by students through their Messenger account and mobile numbers.
           </p>
@@ -315,16 +315,16 @@ if (isset($_POST['submit'])) {
             <!-- Grid column -->
             <div class="col-md-3 col-lg-4 col-xl-4 mx-auto mb-4">
               <!-- Content -->
-              <img src="img/logo-clsu.jpg" alt="" class="footer-logo text-center">
-              
-              <p class="text-white" style="font-size: 25px; font-weight:500;">OFFICE OF STUDENT AFFAIRS</p>
+              <img src="img/white-logo.png" alt="" class="footer-logo text-center" style="height: 88px;">
+              <h4 class="text-white fw-bold mt-2">OFFICE OF STUDENT AFFAIRS</h5>
+              <p class="text-white fw-lighter">Science City of Muñoz, Nueva Ecija</p>
             </div>
             <!-- Grid column -->
 
             <!-- Grid column -->
             <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
               <!-- Links -->
-              <h6 class="text-uppercase fw-bold mb-4 " style="color: #cdfb13;">Contact</h6>
+              <h5 class="text-uppercase fw-bold mb-4 " style="color: #cdfb13;">Contact</h5>
               <p class="text-white"><i class="fas fa-location-dot "></i> Central Luzon State University, Science City of Muñoz Nueva Ecija, Philippines</p>
               <p class="text-white">
                 <i class="fas fa-envelope me-3 "></i>
@@ -338,9 +338,9 @@ if (isset($_POST['submit'])) {
             <!-- Grid column -->
             <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
               <!-- Links -->
-              <h6 class="text-uppercase fw-bold mb-4" style="color: #cdfb13;">
+              <h5 class="text-uppercase fw-bold mb-4" style="color: #cdfb13;">
                 SOCIAL MEDIA
-              </h6>
+              </h5>
               <div>
                 <a href="https://www.facebook.com/officeofstudentaffairsCLSU" target="_blank" class="me-3 text-reset">
                   <i class="fab fa-facebook-square fa-lg text-white"></i>
@@ -368,9 +368,8 @@ if (isset($_POST['submit'])) {
       <!-- Section: Links  -->
 
       <!-- Copyright -->
-      <div class="text-center p-1 text-white" style="background: -webkit-linear-gradient(0deg, #008102, #93d12d);">
-        © Copyright 2023 Central Luzon State University All Rights Reserved
-        <!-- <a class="text-reset fw-bold" href="https://mdbootstrap.com/">MDBootstrap.com</a> -->
+      <div class="text-center text-white fw-light" style="background: -webkit-linear-gradient(0deg, #008102, #93d12d);">
+          © Copyright 2023 Central Luzon State University All Rights Reserved
       </div>
       <!-- Copyright -->
     </footer>
