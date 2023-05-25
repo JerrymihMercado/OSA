@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-include 'mysql_connect.php';
+include '../mysql_connect.php';
 
 if (isset($_POST['submit'])) {
     $email = $_POST['email'];
@@ -49,13 +49,13 @@ if (isset($_POST['submit'])) {
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <title>Office of Student Affairs</title>
     <link rel="icon" href ="img/logo.png" class="icon">
-    <link rel="stylesheet" href="./Style/style.css">
+    <link rel="stylesheet" href="../Style/style.css">
     <!-- <link rel="stylesheet" href="./Style/style_about.css"> -->
      <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
     <!-- Google Fonts Roboto -->
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic" rel="stylesheet" />
-    <link rel="stylesheet" href="css/mdb.min.css" />
+    <link rel="stylesheet" href="../css/mdb.min.css" />
   </head>
   <style>
       a,
@@ -71,7 +71,7 @@ if (isset($_POST['submit'])) {
     <div class="container-fluid header-title">
     <div class="row">
       <div class="col-md-1 ">
-        <img src="./img/clsu-logo.png" alt="" class="logo">
+        <img src="../img/clsu-logo.png" alt="" class="logo">
       </div>
       <div class="col">
         <div class="logo-title">
@@ -86,7 +86,7 @@ if (isset($_POST['submit'])) {
       <nav class="navbar main-header-mid navbar-expand-md">
         <ul class="navbar-nav">
           <li class="nav-item ">
-            <a href="index.php" class="link-home text-white active">HOME</a>
+            <a href="../index.php" class="link-home text-white active">HOME</a>
           </li>
           <li class="nav-item ">
             <a href="about_us.php" class="link text-white ps-3">ABOUT US</a>
@@ -116,7 +116,7 @@ if (isset($_POST['submit'])) {
                             </a>
                             <ul class="dropdown-menu">
                                 
-                                <form action="logout.php" method="POST">
+                                <form action="../logout.php" method="POST">
                                     <li><button class="dropdown-item rounded-5" name="logout">Logout</button></li>
                                 </form>
                             </ul>
@@ -131,80 +131,10 @@ if (isset($_POST['submit'])) {
                       </li>';
             }
           ?>
-          <?php
-            if (isset($_SESSION['role'])) {
-                if ($_SESSION['role'] == 1 || $_SESSION['role'] == 0) {
-                    echo '';
-                }
-            }else{
-                echo '<li class="nav-item">
-                        <a href="./Form_Register/register_index.php" class="text-white ps-3">
-                          Register?
-                        </a>
-                      </li>';
-            }
-          ?>
-          <?php
-            if (isset($_SESSION['role'])) {
-                if ($_SESSION['role'] == 1) {
-                    echo '<li class="nav-item">
-                        <a href="./Archive/archive_index.php" class="text-white ps-3">
-                          ARCHIVES
-                        </a>
-                      </li>';
-                }
-            }else{
-                echo '';
-            }
-          ?>
+     
           
         </ul>
       </nav>
-    </div>
-  </div>
-
-  <div class="carousel-section">
-    <div id="carouselExampleControls" class="carousel slide" data-mdb-ride="carousel">
-      <div class="carousel-inner">
-        <div class="carousel-item active">
-          <img src="img/banner1.png" class="d-block w-100" alt="Wild Landscape"/>
-        <div class="carousel-caption" style="padding-top: 15vh">
-          <h1>OFFICE OF STUDENT AFFAIRS</h1>
-          <p>The Office for Student Affairs takes charge of the campus life of the students, 
-              their welfare and discipline, and dormitory facilities. As such, it guides and 
-              supervises the recognized student organizations, the student councils, the 
-              COMELECs; and conducts capability-building seminars for the organization 
-              advisers. The OSA looks into all student-initiated and student-related 
-              activities.
-          </p>
-          <!-- <div class="pt-5">
-            <button class="btn btn-success">Read More</button>
-          </div> -->
-        </div>
-      </div>
-      <div class="carousel-item">
-        <img src="img/banner2.png" class="d-block w-100" alt="Camera"/>
-        <div class="carousel-caption" style="padding-top: 15vh">
-          <h1>CLSU MENTAL HEALTH PROVIDERS</h1>
-          <p>The Guidance Services Unit of OSA is providing online and  tele counseling services for all CLSU students. Counselors and mental health professionals can be reached by students through their Messenger account and mobile numbers.
-          </p>
-          <!-- <div class="pt-5">
-            <button class="btn btn-success">Read More</button>
-          </div> -->
-        </div>
-      </div>
-        <!-- <div class="carousel-item">
-          <img src="https://mdbcdn.b-cdn.net/img/new/slides/043.webp" class="d-block w-100" alt="Exotic Fruits"/>
-        </div> -->
-      </div>
-      <button class="carousel-control-prev" type="button" data-mdb-target="#carouselExampleControls" data-mdb-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-mdb-target="#carouselExampleControls" data-mdb-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
     </div>
   </div>
 
@@ -214,33 +144,26 @@ if (isset($_POST['submit'])) {
   <div class="container pt-5">
     <div class="row">
       <div class="osa-tag">
-        <p class="tag-info">ANNOUNCEMENT</p>
-        <p class="tag-sub ">Read the latest announcement from the Office of Student Affairs(OSA)</p>
+        <p class="tag-info">ARCHIVES</p>
+        <p class="tag-sub ">See all achives here</p>
       </div>
 
     </div>
   </div>
-  <div class="container">
-      <div class="col justify-content-end d-flex mb-3">
-          <a href="Announcement/all_announcement.php">
-            <button type="button" class="btn fw-semibold shadows" data-mdb-ripple-color="dark">View All <i class="fas fa-angle-right"></i></button>
-          </a>
-      </div>
-    </div>
+
   <div class="container">
     <div class="row">
             <?php
-              $sql = "SELECT * FROM announcement WHERE is_archive=0";
+              $sql = "SELECT * FROM announcement WHERE is_archive=1";
               $res = mysqli_query($conn, $sql);
               if(mysqli_num_rows($res) > 0){
                   while ($row = mysqli_fetch_assoc($res)) {?>
-      <a href="<?php echo 'Announcement/announcement_details.php?announcement_id=' . $row['id']; ?>">
         <div class="col-12">
             <div class="card mb-3 shadows" style="max-width: 100%;">
               <div class="row g-0">
                 <div class="col-md-4">
                       <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                          <img src="./upload/<?php echo $row['image']; ?>" class="card-img" alt="" style="height: 35vh; object-fit: cover;"/>
+                          <img src="../upload/<?php echo $row['image']; ?>" class="card-img" alt=""/>
                           <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
                       </div>
                     </div>
@@ -256,7 +179,6 @@ if (isset($_POST['submit'])) {
                     </div>
                 </div>
             </div>
-          </a>
         </div>
       </div>
       
@@ -267,46 +189,10 @@ if (isset($_POST['submit'])) {
             ?> 
     </div>    
   </div>
-
-  <!-- Modal -->
-  <div class="modal fade" id="login_Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">LOGIN</h5>
-          <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form method="POST">
-            <!-- Email input -->
-            <div class="form-outline mb-4">
-              <input type="email" id="email" name="email" class="form-control" required/>
-              <label class="form-label" for="email">Email address</label>
-            </div>
-
-            <!-- Password input -->
-            <div class="form-outline mb-4">
-              <input type="password" id="password" name="password" class="form-control" required/>
-              <label class="form-label" for="password">Password</label>
-            </div>
-
-            <!-- 2 column grid layout for inline styling -->
-            <div class="row mb-4">
-              
-                  <a href="#!">Forgot password?</a>
-            </div>
-            <!-- Submit button -->
-            <button type="submit" name="submit" class="btn btn-primary btn-block">Login</button>
-        </form>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  
+   
 
   <div class="mt-5 footer-section " >
-    <footer class="text-center text-lg-start bg-light text-muted " style="background-image: url(img/banner1.png);  background-repeat: no-repeat; background-size: cover; ">
+    <footer class="text-center text-lg-start bg-light text-muted " style="background-image: url(../img/banner1.png);  background-repeat: no-repeat; background-size: cover; ">
       <!-- Section: Links  -->
       <section class="">
         <div class="container-fluid  text-md-start pt-3 " >
@@ -315,7 +201,7 @@ if (isset($_POST['submit'])) {
             <!-- Grid column -->
             <div class="col-md-3 col-lg-4 col-xl-4 mx-auto mb-4">
               <!-- Content -->
-              <img src="img/logo-clsu.jpg" alt="" class="footer-logo text-center">
+              <img src="../img/logo-clsu.jpg" alt="" class="footer-logo text-center">
               
               <p class="text-white" style="font-size: 25px; font-weight:500;">OFFICE OF STUDENT AFFAIRS</p>
             </div>
@@ -378,7 +264,7 @@ if (isset($_POST['submit'])) {
     <!-- End your project here-->
 
     <!-- MDB -->
-    <script type="text/javascript" src="js/mdb.min.js"></script>
+    <script type="text/javascript" src="../js/mdb.min.js"></script>
     <!-- Custom scripts -->
     <script type="text/javascript"></script>
   </body>

@@ -60,7 +60,8 @@ if(isset($_POST["handle_submit"])){
             image='$directory',
             title = '$titles',
             date_created='$created_at',
-            descriptions='$descriptions';";
+            descriptions='$descriptions',
+            is_archive=0;";
             
     if (mysqli_query($conn, $sql)) {
             header("location:../Announcement/all_announcement.php");
@@ -188,7 +189,7 @@ if(isset($_POST["handle_submit"])){
   <div class="container">
     <div class="">
       <?php
-        $sql = "SELECT * FROM announcement ORDER BY date_created desc limit 1 ";
+        $sql = "SELECT * FROM announcement WHERE is_archive=0 ORDER BY date_created desc limit 1";
         $res = mysqli_query($conn, $sql);
         if(mysqli_num_rows($res) > 0){
             while ($row = mysqli_fetch_assoc($res)) {?>
@@ -196,7 +197,7 @@ if(isset($_POST["handle_submit"])){
                 <div class="row g-0">
                     <div class="col-md-4">
                           <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                              <img src="<?php echo $row['image']; ?>" class="card-img" alt=""/>
+                              <img src="<?php echo $row['image']; ?>" class="card-img" alt="" style="height: 35vh; object-fit: cover;"/>
                               <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
                           </div>
                         </div>
@@ -236,7 +237,7 @@ if(isset($_POST["handle_submit"])){
   </div>
     
 
-  <!-- Modal -->
+  <!-- Add Announcement Modal -->
   <div class="modal fade" id="add_announcement" tabindex="-1" aria-labelledby="add_announcement" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -255,12 +256,7 @@ if(isset($_POST["handle_submit"])){
                 <div class="mb-3">
                     <label for="title">Announcement Title<span class="text-danger"> *</span></label>
                     <input type="text" name="title" class="form-control" id="title" placeholder="Enter Name of Location" required>
-                    <!-- <h6 id="title_validate" class="errorstyle"></h6> -->
                 </div>
-                <!-- <div class="mb-3">
-                    <label for="place">Date Created<span class="text-danger"> *</span></label>
-                    <input type="date" name="date" class="form-control" id="date" placeholder="Enter date" required>
-                </div> -->
                 <div class="mb-3">
                     <label for="description">Description<span class="text-danger"> *</span></label>
                     <textarea class="form-control " rows="5" id="description" name="description" minlength="30" maxlength="5000" required></textarea>
@@ -277,12 +273,12 @@ if(isset($_POST["handle_submit"])){
   <div class="container">
       <div class="row row-cols-1 row-cols-md-3 g-4">
         <?php
-          $sql = "SELECT * FROM announcement";
+          $sql = "SELECT * FROM announcement WHERE is_archive=0";
           $res = mysqli_query($conn, $sql);
           if(mysqli_num_rows($res) > 0){
               while ($row = mysqli_fetch_assoc($res)) {?>
           <div class="col">
-              <a href="../Announcement/announcement_details.php">
+              <a href="<?php echo '../Announcement/announcement_details.php?announcement_id=' . $row['id']; ?>">
                 
                   <div class="card h-100 shadows">
                     <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
@@ -296,7 +292,6 @@ if(isset($_POST["handle_submit"])){
                         </p>
                     </div>
                   </div>
-                  
               </a>
           </div>
         <?php     
