@@ -165,7 +165,7 @@
       <div class="row row-cols-1 row-cols-md-4 g-4">
         <div class="col">
           <div class="card h-100 shadows">
-            <img src="./img/Dude Crew (900 × 500 px).png" class="card-img-top" alt="Hollywood Sign on The Hill"/>
+            <img src="./img/Dude Crew (900 × 500 px).png" class="card-img-top" alt="clsu-image"/>
             <div class="card-body">
               <h5 class="card-title">Card title</h5>
               <p class="card-text">

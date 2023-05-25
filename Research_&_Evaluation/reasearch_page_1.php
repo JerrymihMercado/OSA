@@ -97,7 +97,7 @@
             <div class="col">
                 <a href="../Research_&_Evaluation/reasearch_details_1.php">
                     <div class="card h-100 shadows">
-                    <img src="../img/Rectangle 266.png" class="card-img-top" alt="Hollywood Sign on The Hill"/>
+                    <img src="../img/Rectangle 266.png" class="card-img-top" alt="clsu-image"/>
                     <div class="card-body">
                         <h5 class="card-title">Card title</h5>
                         <p class="card-text">

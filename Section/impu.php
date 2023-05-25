@@ -294,7 +294,7 @@ if (isset($_POST['submit'])) {
                 <a href="../Research_&_Evaluation/reasearch_details_1.php">
                   <div class="card h-100 shadows">
                     <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                        <img src="../img/clsu-1.jpg" class="card-img-top" alt="Hollywood Sign on The Hill"/>
+                        <img src="../img/clsu-1.jpg" class="card-img-top" alt="clsu-image"/>
                         <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
                     </div>
                     <div class="card-body">
@@ -310,7 +310,7 @@ if (isset($_POST['submit'])) {
             <div class="col">
                 <div class="card h-100 shadows">
                 <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                      <img src="../img/clsu-1.jpg" class="card-img-top" alt="Hollywood Sign on The Hill"/>
+                      <img src="../img/clsu-1.jpg" class="card-img-top" alt="clsu-image"/>
                     <a href="#!">
                       <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
                     </a>
