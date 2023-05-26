@@ -29,7 +29,7 @@ if (isset($_POST['submit'])) {
             header("location:../Section/impu.php#login");
         }
         else {
-            header("location:index.php");
+            header("location:../Section/impu.php#login");
             echo '<script language="javascript">';
             echo 'alert("message successfully sent")';
             echo '</script>';
@@ -39,6 +39,10 @@ if (isset($_POST['submit'])) {
         echo 'alert("error")';
         echo '</script>';
     }
+}
+if(isset($_POST['view'])){
+  header("content-type: application/pdf");
+  readfile('../Handbook/CLSU-STUDENT-HANDBOOK-2022-2023.pdf');
 }
 ?>
 <!DOCTYPE html>
@@ -62,6 +66,11 @@ if (isset($_POST['submit'])) {
     a:active {
         text-decoration: none;
         color: inherit;
+    }
+    .view-pdf-button .btn{
+      margin-top: -30vh;
+      position: absolute;
+      font-weight: 600;
     }
 </style>
 <body>
@@ -121,11 +130,7 @@ if (isset($_POST['submit'])) {
                         </li>';
                 }
             }else{
-                echo '<li class="nav-item">
-                        <a href="" class="text-white ps-3 " data-mdb-toggle="modal" data-mdb-target="#login_Modal">
-                          LOGIN
-                        </a>
-                      </li>';
+                echo '';
             }
           ?>
         </ul>
@@ -169,14 +174,28 @@ if (isset($_POST['submit'])) {
     <div class="mt-3 container">
         <div class="row">
             <div class="col-sm-6">
-                <div class="card shadows">
+              <form action="" method="POST">
+                <div class="card shadows card-handbook">
                     <img
                       src="../img/studenthandbook.png"
                       class="img-fluid hover-shadow"
                       alt="Los Angeles Skyscrapers"
                       style="height: 60vh; object-fit: cover;"
                     />
-                </div>
+                     <?php
+                        if (isset($_SESSION['role'])) {
+                            if ($_SESSION['role'] == 1 || $_SESSION['role'] == 0) {
+                                echo '<div class="d-flex justify-content-center view-pdf-button">
+                                        <button class="btn btn-light shadows px-5" name="view">View</button>
+                                      </div>';
+                            }
+                        }else{
+                            echo '';
+                        }
+                      ?>
+                  </div>
+              </form>
+                
                 <div class="row mt-3">
                     <div class="col-auto">
                         
@@ -294,7 +313,7 @@ if (isset($_POST['submit'])) {
                 <a href="../Research_&_Evaluation/reasearch_details_1.php">
                   <div class="card h-100 shadows">
                     <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                        <img src="../img/clsu-1.jpg" class="card-img-top" alt="Hollywood Sign on The Hill"/>
+                        <img src="../img/clsu-1.jpg" class="card-img-top" alt="clsu-image"/>
                         <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
                     </div>
                     <div class="card-body">
@@ -310,7 +329,7 @@ if (isset($_POST['submit'])) {
             <div class="col">
                 <div class="card h-100 shadows">
                 <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                      <img src="../img/clsu-1.jpg" class="card-img-top" alt="Hollywood Sign on The Hill"/>
+                      <img src="../img/clsu-1.jpg" class="card-img-top" alt="clsu-image"/>
                     <a href="#!">
                       <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
                     </a>
@@ -368,18 +387,18 @@ if (isset($_POST['submit'])) {
             <!-- Grid row -->
             <div class="row mt-3">
               <!-- Grid column -->
-              <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+              <div class="col-md-3 col-lg-4 col-xl-4 mx-auto mb-4">
                 <!-- Content -->
-                <img src="../img/logo-clsu.jpg" alt="" class="footer-logo text-center" style=" width: 5.5rem;">
-                
-                <p class="text-white" style="font-size: 25px; font-weight:500;">OFFICE OF STUDENT AFFAIRS</p>
+                <img src="../img/white-logo.png" alt="" class="footer-logo text-center" style="height: 88px;">
+                <h4 class="text-white fw-bold mt-2">OFFICE OF STUDENT AFFAIRS</h5>
+                <p class="text-white fw-lighter">Science City of Muñoz, Nueva Ecija</p>
               </div>
               <!-- Grid column -->
 
               <!-- Grid column -->
               <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
                 <!-- Links -->
-                <h6 class="text-uppercase fw-bold mb-4 " style="color: #cdfb13;">Contact</h6>
+                <h5 class="text-uppercase fw-bold mb-4 " style="color: #cdfb13;">Contact</h6>
                 <p class="text-white"><i class="fas fa-location-dot "></i> Central Luzon State University, Science City of Muñoz Nueva Ecija, Philippines</p>
                 <p class="text-white">
                   <i class="fas fa-envelope me-3 "></i>
@@ -393,9 +412,9 @@ if (isset($_POST['submit'])) {
               <!-- Grid column -->
               <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
                 <!-- Links -->
-                <h6 class="text-uppercase fw-bold mb-4" style="color: #cdfb13;">
+                <h5 class="text-uppercase fw-bold mb-4" style="color: #cdfb13;">
                   SOCIAL MEDIA
-                </h6>
+                </h5>
                 <div>
                   <a href="https://www.facebook.com/officeofstudentaffairsCLSU" target="_blank" class="me-3 text-reset">
                     <i class="fab fa-facebook-square fa-lg text-white"></i>
