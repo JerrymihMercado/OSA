@@ -114,11 +114,7 @@ if (isset($_POST['submit'])) {
                             </li>';
                   }
               }else{
-                  echo '<li class="nav-item">
-                          <a href="" class="text-white ps-3 " data-mdb-toggle="modal" data-mdb-target="#login_Modal">
-                            LOGIN
-                          </a>
-                        </li>';
+                  echo '';
               }
             ?>
           </ul>
@@ -153,7 +149,7 @@ if (isset($_POST['submit'])) {
         <div class="row row-cols-1 row-cols-md-3 g-4">
             <div class="col">
                 <a href="../CDESU/cdesu_details.php">
-                    <div class="card shadows h-100">
+                    <div class="card shadows h-100 border">
                     <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
                         <img src="../img/clsu-1.jpg" class="card-img-top" alt="clsu-image"/>
                         <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
@@ -168,15 +164,7 @@ if (isset($_POST['submit'])) {
                 </div>
                 </a>
             </div>
-            <div class="col">
-                <div class="card h-100">
-                <img src="../img/clsu-1.jpg" class="card-img-top" alt="Palm Springs Road"/>
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a short card.</p>
-                </div>
-                </div>
-            </div>
+            
         </div>
     </div>
 
@@ -225,17 +213,17 @@ if (isset($_POST['submit'])) {
         <div class="row mt-3">
           <!-- Grid column -->
           <div class="col-md-3 col-lg-4 col-xl-4 mx-auto mb-4">
-            <!-- Content -->
-            <img src="../img/logo-clsu.jpg " alt="" class="footer-logo text-center" style=" width: 5.5rem;">
-            
-            <p class="text-white" style="font-size: 25px; font-weight:500;">OFFICE OF STUDENT AFFAIRS</p>
+              <!-- Content -->
+            <img src="../img/white-logo.png" alt="" class="footer-logo text-center" style="height: 88px;">
+            <h4 class="text-white fw-bold mt-2">OFFICE OF STUDENT AFFAIRS</h5>
+            <p class="text-white fw-lighter">Science City of Muñoz, Nueva Ecija</p>
           </div>
           <!-- Grid column -->
 
           <!-- Grid column -->
           <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
             <!-- Links -->
-            <h6 class="text-uppercase fw-bold mb-4 " style="color: #cdfb13;">Contact</h6>
+            <h5 class="text-uppercase fw-bold mb-4 " style="color: #cdfb13;">Contact</h5>
             <p class="text-white"><i class="fas fa-location-dot "></i> Central Luzon State University, Science City of Muñoz Nueva Ecija, Philippines</p>
             <p class="text-white">
               <i class="fas fa-envelope me-3 "></i>
@@ -249,9 +237,9 @@ if (isset($_POST['submit'])) {
           <!-- Grid column -->
           <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
             <!-- Links -->
-            <h6 class="text-uppercase fw-bold mb-4" style="color: #cdfb13;">
+            <h5 class="text-uppercase fw-bold mb-4" style="color: #cdfb13;">
               SOCIAL MEDIA
-            </h6>
+            </h5>
             <div>
               <a href="https://www.facebook.com/officeofstudentaffairsCLSU" target="_blank" class="me-3 text-reset">
                 <i class="fab fa-facebook-square fa-lg text-white"></i>

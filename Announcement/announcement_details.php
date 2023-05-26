@@ -143,9 +143,27 @@ if(isset($_POST["handle_submit_update"])){
           <li class="nav-item ">
             <a href="../SDB/sdb_index.php" class="link text-white ps-3">SDB</a>
           </li>
-          <li class="nav-item ">
-            <a href="#" class="link text-white ps-3">LOGIN</a>
-          </li>
+          <?php
+            if (isset($_SESSION['role'])) {
+                if ($_SESSION['role'] == 1 || $_SESSION['role'] == 0) {
+                    echo '<li class="nav-item">
+                            <div class="btn-group shadow-0">
+                            <a type="button" class="link text-white ps-3 dropdown-toggle" data-mdb-toggle="dropdown" aria-expanded="false">
+                                LOGOUT
+                            </a>
+                            <ul class="dropdown-menu">
+                                
+                                <form action="../logout.php" method="POST">
+                                    <li><button class="dropdown-item rounded-5" name="logout">Logout</button></li>
+                                </form>
+                            </ul>
+                            </div>
+                        </li>';
+                }
+            }else{
+                echo '';
+            }
+          ?>
         </ul>
       </nav>
     </div>
@@ -282,16 +300,16 @@ if(isset($_POST["handle_submit_update"])){
           <!-- Grid column -->
           <div class="col-md-3 col-lg-4 col-xl-4 mx-auto mb-4">
             <!-- Content -->
-            <img src="../img/logo-clsu.jpg" alt="" class="footer-logo text-center" style=" width: 5.5rem;">
-            
-            <p class="text-white" style="font-size: 25px; font-weight:500;">OFFICE OF STUDENT AFFAIRS</p>
+            <img src="../img/white-logo.png" alt="" class="footer-logo text-center" style="height: 88px;">
+            <h4 class="text-white fw-bold mt-2">OFFICE OF STUDENT AFFAIRS</h5>
+            <p class="text-white fw-lighter">Science City of Muñoz, Nueva Ecija</p>
           </div>
           <!-- Grid column -->
 
           <!-- Grid column -->
           <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
             <!-- Links -->
-            <h6 class="text-uppercase fw-bold mb-4 " style="color: #cdfb13;">Contact</h6>
+            <h5 class="text-uppercase fw-bold mb-4 " style="color: #cdfb13;">Contact</h5>
             <p class="text-white"><i class="fas fa-location-dot "></i> Central Luzon State University, Science City of Muñoz Nueva Ecija, Philippines</p>
             <p class="text-white">
               <i class="fas fa-envelope me-3 "></i>
@@ -305,9 +323,9 @@ if(isset($_POST["handle_submit_update"])){
           <!-- Grid column -->
           <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
             <!-- Links -->
-            <h6 class="text-uppercase fw-bold mb-4" style="color: #cdfb13;">
+            <h5 class="text-uppercase fw-bold mb-4" style="color: #cdfb13;">
               SOCIAL MEDIA
-            </h6>
+            </h5>
             <div>
               <a href="https://www.facebook.com/officeofstudentaffairsCLSU" target="_blank" class="me-3 text-reset">
                 <i class="fab fa-facebook-square fa-lg text-white"></i>

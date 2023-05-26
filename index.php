@@ -236,7 +236,7 @@ if (isset($_POST['submit'])) {
                   while ($row = mysqli_fetch_assoc($res)) {?>
       <a href="<?php echo 'Announcement/announcement_details.php?announcement_id=' . $row['id']; ?>">
         <div class="col-12">
-            <div class="card mb-3 shadows" style="max-width: 100%;">
+            <div class="card mb-3 shadows border" style="max-width: 100%;">
               <div class="row g-0">
                 <div class="col-md-4">
                       <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
