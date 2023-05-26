@@ -215,7 +215,7 @@ if (isset($_POST['submit'])) {
     <div class="row">
       <div class="osa-tag">
         <p class="tag-info">ANNOUNCEMENT</p>
-        <p class="tag-sub ">Read the latest announcement from the Office of Student Affairs(OSA)</p>
+        <p class="tag-sub ">Stay updated with the latest announcements from the Office of Student Affairs (OSA)</p>
       </div>
 
     </div>

@@ -1,46 +1,7 @@
 <?php
 
 session_start();
-include '../mysql_connect.php';
 
-if (isset($_POST['submit'])) {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-
-   
-
-    $sql = "SELECT * FROM login
-      WHERE email = '$username'
-      AND password = '$password'";
-
-    $res = mysqli_query($conn, $sql);
-    if (mysqli_num_rows($res) == 1) {
-        $row = mysqli_fetch_assoc($res);
-        $_SESSION['user'] = $username;
-        $_SESSION['is_admin'] = $row['is_admin'];
-        
-
-        echo '<script language="javascript">';
-        echo 'alert("message successfully sent")';
-        echo '</script>';
-                if ($row['is_admin'] == 1) {    
-                    echo '<script language="javascript">';
-        echo 'alert("message successfully sent")';
-        echo '</script>';
-                    header("location:../Section/impu.php#login");
-                }
-                else {
-                    header("location:../Section/impu.php");
-                    echo '<script language="javascript">';
-        echo 'alert("message successfully sent")';
-        echo '</script>';
-                }
-            } else {
-        echo '<script language="javascript">';
-        echo 'alert("error")';
-        echo '</script>';
-            }
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -99,14 +60,14 @@ if (isset($_POST['submit'])) {
             <a href="../GSU/gsu_index.php" class="link text-white ps-3">GSU</a>
           </li>
           <li class="nav-item ">
-            <a href="#" class="link text-white ps-3">SOU</a>
+            <a href="../SOU/sou_index.php" class="link text-white ps-3">SOU</a>
           </li>
           <li class="nav-item ">
             <a href="../SDB/sdb_index.php" class="link text-white ps-3">SDB</a>
           </li>
           <?php
-            if (isset($_SESSION['is_admin'])) {
-                if ($_SESSION['is_admin'] == 1 || $_SESSION['is_admin'] == 0) {
+            if (isset($_SESSION['role'])) {
+                if ($_SESSION['role'] == 1 || $_SESSION['role'] == 0) {
                     echo '<li class="nav-item">
                             <div class="btn-group shadow-0">
                             <a type="button" class="link text-white ps-3 dropdown-toggle" data-mdb-toggle="dropdown" aria-expanded="false">
@@ -122,11 +83,7 @@ if (isset($_POST['submit'])) {
                         </li>';
                 }
             }else{
-                echo '<li class="nav-item">
-                        <a href="" class="text-white ps-3 " data-mdb-toggle="modal" data-mdb-target="#login_Modal">
-                          LOGIN
-                        </a>
-                      </li>';
+                echo '';
             }
           ?>
         </ul>
@@ -180,42 +137,7 @@ if (isset($_POST['submit'])) {
           <li>Org 3</li>
           <li>Org 4</li>
         </ul>
-    </div>
-
-    <!-- Modal -->
-    <div class="modal fade" id="login_Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">LOGIN</h5>
-            <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <form method="POST">
-              <!-- Email input -->
-              <div class="form-outline mb-4">
-                <input type="text" id="username" name="username" class="form-control" />
-                <label class="form-label" for="email">Email address</label>
-              </div>
-
-              <!-- Password input -->
-              <div class="form-outline mb-4">
-                <input type="password" id="password" name="password" class="form-control" />
-                <label class="form-label" for="password">Password</label>
-              </div>
-
-              <!-- 2 column grid layout for inline styling -->
-              <div class="row mb-4">
-                
-                    <a href="#!">Forgot password?</a>
-              </div>
-              <!-- Submit button -->
-              <button type="submit" name="submit" class="btn btn-primary btn-block">Login</button>
-          </form>
-          </div>
-        </div>
-      </div>
-    </div>
+    </div>  
 
     <div class="mt-5 footer-section " >
       <footer class="text-center text-lg-start bg-light text-muted" style="background-image: url(../img/banner1.png);  background-repeat: no-repeat; background-size: cover; ">
@@ -227,18 +149,18 @@ if (isset($_POST['submit'])) {
             <!-- Grid row -->
             <div class="row mt-3">
               <!-- Grid column -->
-              <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-                <!-- Content -->
-                <img src="../img/logo-clsu.jpg" alt="" class="footer-logo text-center" style=" width: 5.5rem;">
-                
-                <p class="text-white" style="font-size: 25px; font-weight:500;">OFFICE OF STUDENT AFFAIRS</p>
+              <div class="col-md-3 col-lg-4 col-xl-4 mx-auto mb-4">
+              <!-- Content -->
+                <img src="../img/white-logo.png" alt="" class="footer-logo text-center" style="height: 88px;">
+                <h4 class="text-white fw-bold mt-2">OFFICE OF STUDENT AFFAIRS</h5>
+                <p class="text-white fw-lighter">Science City of Muñoz, Nueva Ecija</p>
               </div>
               <!-- Grid column -->
 
               <!-- Grid column -->
               <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
                 <!-- Links -->
-                <h6 class="text-uppercase fw-bold mb-4 " style="color: #cdfb13;">Contact</h6>
+                <h5 class="text-uppercase fw-bold mb-4 " style="color: #cdfb13;">Contact</h5>
                 <p class="text-white"><i class="fas fa-location-dot "></i> Central Luzon State University, Science City of Muñoz Nueva Ecija, Philippines</p>
                 <p class="text-white">
                   <i class="fas fa-envelope me-3 "></i>
@@ -252,9 +174,9 @@ if (isset($_POST['submit'])) {
               <!-- Grid column -->
               <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
                 <!-- Links -->
-                <h6 class="text-uppercase fw-bold mb-4" style="color: #cdfb13;">
+                <h5 class="text-uppercase fw-bold mb-4" style="color: #cdfb13;">
                   SOCIAL MEDIA
-                </h6>
+                </h5>
                 <div>
                   <a href="https://www.facebook.com/officeofstudentaffairsCLSU" target="_blank" class="me-3 text-reset">
                     <i class="fab fa-facebook-square fa-lg text-white"></i>

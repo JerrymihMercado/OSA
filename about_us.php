@@ -210,7 +210,7 @@ session_start();
       <div class="row">
         <div class="osa-tag">
           <p class="tag-info">OSA ADMINISTRATION</p>
-          <p class="tag-sub ">Meet the Administrators and Staff</p>
+          <p class="tag-sub ">Meet all the Administrators and Staffs</p>
         </div>
 
       </div>

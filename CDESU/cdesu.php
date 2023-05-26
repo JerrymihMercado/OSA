@@ -1,45 +1,7 @@
 <?php
 
 session_start();
-include '../mysql_connect.php';
 
-if (isset($_POST['submit'])) {
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-
-   
-
-    $sql = "SELECT * FROM account
-      WHERE email = '$email'
-      AND password = '$password'";
-
-    $res = mysqli_query($conn, $sql);
-    if (mysqli_num_rows($res) == 1) {
-        $row = mysqli_fetch_assoc($res);
-        $_SESSION['user'] = $email;
-        $_SESSION['role'] = $row['role'];
-        
-        echo '<script language="javascript">';
-        echo 'alert("message successfully sent")';
-        echo '</script>';
-        if ($row['role'] == 1) {    
-            echo '<script language="javascript">';
-            echo 'alert("message successfully sent")';
-            echo '</script>';
-            header("location:../CDESU/cdesu.php#login");
-        }
-        else {
-            header("location:index.php");
-            echo '<script language="javascript">';
-            echo 'alert("message successfully sent")';
-            echo '</script>';
-          }
-    } else {
-        echo '<script language="javascript">';
-        echo 'alert("error")';
-        echo '</script>';
-    }
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -108,10 +70,18 @@ if (isset($_POST['submit'])) {
               if (isset($_SESSION['role'])) {
                   if ($_SESSION['role'] == 1 || $_SESSION['role'] == 0) {
                       echo '<li class="nav-item">
-                              <form action="../logout.php" method="POST">
-                                  <button name="logout" class="btn bg-white fw-semibold px-5" > Logout</button>
-                              </form>
-                            </li>';
+                            <div class="btn-group shadow-0">
+                            <a type="button" class="link text-white ps-3 dropdown-toggle" data-mdb-toggle="dropdown" aria-expanded="false">
+                                LOGOUT
+                            </a>
+                            <ul class="dropdown-menu">
+                                
+                                <form action="../logout.php" method="POST">
+                                    <li><button class="dropdown-item rounded-5" name="logout">Logout</button></li>
+                                </form>
+                            </ul>
+                            </div>
+                        </li>';
                   }
               }else{
                   echo '';
@@ -166,40 +136,6 @@ if (isset($_POST['submit'])) {
             </div>
             
         </div>
-    </div>
-
-     <div class="modal fade" id="login_Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">LOGIN</h5>
-            <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <form method="POST">
-              <!-- Email input -->
-              <div class="form-outline mb-4">
-                <input type="text" id="email" name="email" class="form-control" required/>
-                <label class="form-label" for="email">Email address</label>
-              </div>
-
-              <!-- Password input -->
-              <div class="form-outline mb-4">
-                <input type="password" id="password" name="password" class="form-control" required/>
-                <label class="form-label" for="password">Password</label>
-              </div>
-
-              <!-- 2 column grid layout for inline styling -->
-              <div class="row mb-4">
-                
-                    <a href="#!">Forgot password?</a>
-              </div>
-              <!-- Submit button -->
-              <button type="submit" name="submit" class="btn btn-primary btn-block">Login</button>
-          </form>
-          </div>
-        </div>
-      </div>
     </div>
 
     <div class="mt-5 footer-section " >

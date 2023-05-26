@@ -104,10 +104,10 @@ if(isset($_POST['view'])){
             <a href="../CDESU/cdesu.php" class="link text-white ps-3">CDESU</a>
           </li>
           <li class="nav-item ">
-            <a href="#" class="link text-white ps-3">GSU</a>
+            <a href="../GSU/gsu_index.php" class="link text-white ps-3">GSU</a>
           </li>
           <li class="nav-item ">
-            <a href="#" class="link text-white ps-3">SOU</a>
+            <a href="../SOU/sou_index.php" class="link text-white ps-3">SOU</a>
           </li>
           <li class="nav-item ">
             <a href="../SDB/sdb_index.php" class="link text-white ps-3">SDB</a>
@@ -254,22 +254,22 @@ if(isset($_POST['view'])){
       </div>
     </div>
 
-    <div class="container">
+    <div class="container mt-4">
         <div class="row row-cols-1 row-cols-md-3 g-4">
             <div class="col">
-                <a href="../Publications/publication_details_1.php">
+                <a href="../Publications/publication_page_1.php">
                   <div class="card h-100 shadows">
-                    <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                      <img src="../img/flowman-post-img.jpg" class="card-img-top" alt="" style="height: 30vh; object-fit: cover;"/>
-                      <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">PAGBATI, MIGHTY AGGIES</h5>
-                        <p class="card-text" align="justify">
-                          Kami ang bagong taludturan ng pagbabago sa ating paaralan. Ang aming plataporma ng kandidatura ay naglalayong ipaglaban ang inyong mga karapatan, iangat ang kalidad ng edukasyon, at palakasin ang boses ng bawat estudyante. 
-                        </p>
-                    </div>
-                </div>
+                      <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                        <img src="../img/flow_man.jpg" class="card-img-top" alt="" style="height: 30vh; object-fit: cover;"/>
+                        <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                      </div>
+                      <div class="card-body">
+                          <h5 class="card-title">The Flow Man</h5>
+                          <p class="card-text" align="justify">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur minima similique odio quod. Accusamus minima quae ullam quis delectus eligendi aspernatur repudiandae tenetur, repellendus velit animi quo recusandae ratione perferendis?
+                          </p>
+                      </div>
+                  </div>
                 </a>
             </div>
             <div class="col">

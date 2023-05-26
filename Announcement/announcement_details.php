@@ -135,7 +135,7 @@ if(isset($_POST["handle_submit_update"])){
             <a href="../CDESU/cdesu.php" class="link text-white ps-3">CDESU</a>
           </li>
           <li class="nav-item ">
-            <a href="#" class="link text-white ps-3">GSU</a>
+            <a href="../GSU/gsu_index.php" class="link text-white ps-3">GSU</a>
           </li>
           <li class="nav-item ">
             <a href="../SOU/sou_index.php" class="link text-white ps-3">SOU</a>
@@ -173,7 +173,7 @@ if(isset($_POST["handle_submit_update"])){
       <div class="row">
         <div class="osa-tag">
           <p class="tag-info">ANNOUNCEMENT DETAILS</p>
-          <p class="tag-sub">Please read the announcement from the Office of Student Affairs(OSA)</p>
+          <p class="tag-sub">Here are the detail of the announcements provided by the Office of Student Affairs (OSA)</p>
         </div>
 
       </div>
@@ -187,7 +187,7 @@ if(isset($_POST["handle_submit_update"])){
   </div>
 
   <div class="container">
-      <div class="card mb-3 shadows">
+      <div class="card mb-3 shadows border">
           <div class="row g-0">
               <div class="col-md-4">
                 <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">

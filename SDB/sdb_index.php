@@ -130,11 +130,7 @@ if (isset($_POST['submit'])) {
                         </li>';
                 }
             }else{
-                echo '<li class="nav-item">
-                        <a href="" class="text-white ps-3 " data-mdb-toggle="modal" data-mdb-target="#login_Modal">
-                          LOGIN
-                        </a>
-                      </li>';
+                echo '';
             }
           ?>
         </ul>
@@ -183,58 +179,39 @@ if (isset($_POST['submit'])) {
     
     <!-- Modal gallery -->
     <div class="container mt-5">
-        <section class="">
-            <!-- Section: Images -->
-            <section class="">
-                <div class="row">
-                    <div class="col-lg-4 col-md-12 mb-4 mb-lg-0 ">
-                        <div
-                        class="bg-image hover-overlay ripple shadow-1-strong rounded shadows"
-                        data-ripple-color="light"
-                        >
-                        <img
-                            src="../img/conduct-1.png"
-                            class="w-100"
-                        />
-                        <a href="#!" data-mdb-toggle="modal" data-mdb-target="#exampleModal1">
-                            <div class="mask" style="background-color: rgba(251, 251, 251, 0.2);"></div>
-                        </a>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 mb-4 mb-lg-0">
-                        <div
-                        class="bg-image hover-overlay ripple shadow-1-strong rounded shadows"
-                        data-ripple-color="light"
-                        >
-                        <img
-                            src="../img/conduct-2.png"
-                            class="w-100"
-                        />
-                        <a href="#!" data-mdb-toggle="modal" data-mdb-target="#exampleModal2">
-                            <div class="mask" style="background-color: rgba(251, 251, 251, 0.2);"></div>
-                        </a>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 mb-4 mb-lg-0">
-                        <div
-                        class="bg-image hover-overlay ripple shadow-1-strong rounded shadows"
-                        data-ripple-color="light"
-                        >
-                        <img
-                            src="../img/conduct-3.png"
-                            class="w-100"
-                        />
-                        <a href="#!" data-mdb-toggle="modal" data-mdb-target="#exampleModal3">
-                            <div class="mask" style="background-color: rgba(251, 251, 251, 0.2);"></div>
-                        </a>
-                        </div>
-                    </div>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            <div class="col">
+                <div class="bg-image hover-overlay ripple shadow-1-strong rounded shadows" data-ripple-color="light">
+                    <img src="../img/conduct-1.png" class="w-100"/>
+                    <a href="#!" data-mdb-toggle="modal" data-mdb-target="#exampleModal1">
+                        <div class="mask" style="background-color: rgba(251, 251, 251, 0.2);"></div>
+                    </a>
                 </div>
-
-            </section>
-            <!-- Section: Images -->
+            </div>
+            <div class="col">
+                <div class="bg-image hover-overlay ripple shadow-1-strong rounded shadows" data-ripple-color="light">
+                    <img src="../img/conduct-2.png" class="w-100"/>
+                    <a href="#!" data-mdb-toggle="modal" data-mdb-target="#exampleModal1">
+                        <div class="mask" style="background-color: rgba(251, 251, 251, 0.2);"></div>
+                    </a>
+                </div>
+            </div>
+            <div class="col">
+                <div class="bg-image hover-overlay ripple shadow-1-strong rounded shadows" data-ripple-color="light">
+                    <img src="../img/conduct-3.png" class="w-100"/>
+                    <a href="#!" data-mdb-toggle="modal" data-mdb-target="#exampleModal1">
+                        <div class="mask" style="background-color: rgba(251, 251, 251, 0.2);"></div>
+                    </a>
+                </div>
+            </div>
+            <!-- <div class="col">
+                <div class="card h-100">
+                
+                </div>
+            </div> -->
+        </div>
+        <section class="">
+       
             <!-- Section: Modals -->
             <section class="">
                 <!-- Modal 1 -->
@@ -443,18 +420,18 @@ if (isset($_POST['submit'])) {
                 <!-- Grid row -->
                 <div class="row mt-3">
                 <!-- Grid column -->
-                <div class="col-md-3 col-lg-4 col-xl-5 mx-auto mb-4">
-                    <!-- Content -->
-                    <img src="../img/logo-clsu.jpg" alt="" class="footer-logo text-center" style=" width: 5.5rem;">
-                    
-                    <p class="text-white" style="font-size: 25px; font-weight:500;">OFFICE OF STUDENT AFFAIRS</p>
+                <div class="col-md-3 col-lg-4 col-xl-4 mx-auto mb-4">
+              <!-- Content -->
+                    <img src="../img/white-logo.png" alt="" class="footer-logo text-center" style="height: 88px;">
+                    <h4 class="text-white fw-bold mt-2">OFFICE OF STUDENT AFFAIRS</h5>
+                    <p class="text-white fw-lighter">Science City of Muñoz, Nueva Ecija</p>
                 </div>
                 <!-- Grid column -->
 
                 <!-- Grid column -->
                 <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
                     <!-- Links -->
-                    <h6 class="text-uppercase fw-bold mb-4 " style="color: #cdfb13;">Contact</h6>
+                    <h5 class="text-uppercase fw-bold mb-4 " style="color: #cdfb13;">Contact</h6>
                     <p class="text-white"><i class="fas fa-location-dot "></i> Central Luzon State University, Science City of Muñoz Nueva Ecija, Philippines</p>
                     <p class="text-white">
                     <i class="fas fa-envelope me-3 "></i>
@@ -468,9 +445,9 @@ if (isset($_POST['submit'])) {
                 <!-- Grid column -->
                 <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
                     <!-- Links -->
-                    <h6 class="text-uppercase fw-bold mb-4" style="color: #cdfb13;">
+                    <h5 class="text-uppercase fw-bold mb-4" style="color: #cdfb13;">
                     SOCIAL MEDIA
-                    </h6>
+                    </h5>
                     <div>
                     <a href="https://www.facebook.com/officeofstudentaffairsCLSU" target="_blank" class="me-3 text-reset">
                         <i class="fab fa-facebook-square fa-lg text-white"></i>

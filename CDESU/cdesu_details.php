@@ -1,3 +1,8 @@
+<?php
+
+session_start();
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -52,9 +57,27 @@
           <li class="nav-item ">
             <a href="#" class="link text-white ps-3">SDB</a>
           </li>
-          <li class="nav-item ">
-            <a href="#" class="link text-white ps-3">LOGIN</a>
-          </li>
+           <?php
+              if (isset($_SESSION['role'])) {
+                  if ($_SESSION['role'] == 1 || $_SESSION['role'] == 0) {
+                      echo '<li class="nav-item">
+                            <div class="btn-group shadow-0">
+                            <a type="button" class="link text-white ps-3 dropdown-toggle" data-mdb-toggle="dropdown" aria-expanded="false">
+                                LOGOUT
+                            </a>
+                            <ul class="dropdown-menu">
+                                
+                                <form action="../logout.php" method="POST">
+                                    <li><button class="dropdown-item rounded-5" name="logout">Logout</button></li>
+                                </form>
+                            </ul>
+                            </div>
+                        </li>';
+                  }
+              }else{
+                  echo '';
+              }
+            ?>
         </ul>
       </nav>
     </div>
@@ -72,7 +95,7 @@
   <div class="container pt-5">
     <div class="mt-3">
         <h4 class="">Call for Applications for the CHED SCHOLARSHIP PROGRAM FOR FUTURE STATISTICIANS FOR AY 2023-2024.</h4>
-        <p><i class="fas fa-calendar text-success"></i> 05-22-23</p>
+        <p>Date: 05-22-23</p>
     </div>
   </div>
 
@@ -93,18 +116,20 @@
                 </div>
             </div>
             <div class="col-sm-6">
-                <div class="card">
+                <div class="card border shadows">
                 <div class="card-body">
-                    <h5 class="card-title tag-info">Job Details</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    
+                    <div class="osa-tag">
+                      <p class="tag-info">Job Details</p>
+                      <p class="tag-sub">With supporting text below as a natural lead-in to additional content.</p>
+                    </div>
                 </div>
                 </div>
-                <div class="card mt-2">
+                <div class="card mt-2 border shadows">
                 <div class="card-body">
-                    <h5 class="card-title tag-info">Center Details</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    
+                    <div class="osa-tag">
+                      <p class="tag-info">Center Details</p>
+                      <p class="tag-sub">With supporting text below as a natural lead-in to additional content.</p>
+                    </div>
                 </div>
                 </div>
             </div>
@@ -121,18 +146,18 @@
         <!-- Grid row -->
         <div class="row mt-3">
           <!-- Grid column -->
-          <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-            <!-- Content -->
-            <img src="../img/clsu-logo.png " alt="" class="footer-logo text-center" style=" width: 5.5rem;">
-            
-            <p class="text-white" style="font-size: 25px; font-weight:500;">OFFICE OF STUDENT AFFAIRS</p>
+          <div class="col-md-3 col-lg-4 col-xl-4 mx-auto mb-4">
+              <!-- Content -->
+            <img src="../img/white-logo.png" alt="" class="footer-logo text-center" style="height: 88px;">
+            <h4 class="text-white fw-bold mt-2">OFFICE OF STUDENT AFFAIRS</h5>
+            <p class="text-white fw-lighter">Science City of Muñoz, Nueva Ecija</p>
           </div>
           <!-- Grid column -->
 
           <!-- Grid column -->
           <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
             <!-- Links -->
-            <h6 class="text-uppercase fw-bold mb-4 " style="color: #cdfb13;">Contact</h6>
+            <h5 class="text-uppercase fw-bold mb-4 " style="color: #cdfb13;">Contact</h5>
             <p class="text-white"><i class="fas fa-location-dot "></i> Central Luzon State University, Science City of Muñoz Nueva Ecija, Philippines</p>
             <p class="text-white">
               <i class="fas fa-envelope me-3 "></i>
@@ -146,9 +171,9 @@
           <!-- Grid column -->
           <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
             <!-- Links -->
-            <h6 class="text-uppercase fw-bold mb-4" style="color: #cdfb13;">
+            <h5 class="text-uppercase fw-bold mb-4" style="color: #cdfb13;">
               SOCIAL MEDIA
-            </h6>
+            </h5>
             <div>
               <a href="https://www.facebook.com/officeofstudentaffairsCLSU" target="_blank" class="me-3 text-reset">
                 <i class="fab fa-facebook-square fa-lg text-white"></i>
