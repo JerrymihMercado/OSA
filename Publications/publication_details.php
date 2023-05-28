@@ -1,5 +1,15 @@
 <?php
 session_start();
+include '../mysql_connect.php';
+if (isset($_GET['publication_ID'])) {
+    $id = $_GET['publication_ID'];
+    $sql = "SELECT * FROM  publish_post WHERE id=".$id;
+    $result = mysqli_query($conn, $sql);
+    if (mysqli_num_rows($result) > 0) {
+
+        $publish = mysqli_fetch_assoc($result);
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -83,26 +93,26 @@ session_start();
   <div class="container pt-5">
     <div class="row">
       <div class="osa-tag">
-        <p class="tag-info">THE FLOWMAN ALBUM DETAILS</p>
+        <p class="tag-info">THE PUBLICATION DETAILS</p>
         <p class="tag-sub">Please free to read our new publish</p>
       </div>
 
     </div>
   </div>
 
-  <div class="container pt-5">
+  <!-- <div class="container pt-5">
     <div class="mt-3">
-        <h4>PAGBATI, MIGHTY AGGIES</h4>
-        <p><i class="fas fa-calendar-days"></i> 05-09-23</p>
+        <h4><?php echo $publish['title'];?></h4>
+        <p><i class="fas fa-calendar-days"></i> <?php echo $publish['date_created'];?></p>
     </div>
-  </div>
+  </div> -->
 
-  <div class="container">
+  <!-- <div class="container">
       <div class="card mb-3 shadows border">
           <div class="row g-0">
               <div class="col-md-4">
                 <div class=" hover-overlay ripple" data-mdb-ripple-color="light">
-                    <img src="../img/flowman-post-img.jpg" class="img-fluid rounded-start" alt="" style="height: 60vh; object-fit: cover;"/>
+                    <img src="../upload/<?php echo $publish['image']; ?>" class="img-fluid rounded-start" alt="" />
                     <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
                 </div>
               </div>
@@ -110,22 +120,36 @@ session_start();
                 <div class="card-body">
                     
                     <p class="card-text description-left-border">
-                      Kami ang bagong taludturan ng pagbabago sa ating paaralan. Ang aming plataporma ng kandidatura ay naglalayong ipaglaban ang inyong mga karapatan, iangat ang kalidad ng edukasyon, at palakasin ang boses ng bawat estudyante. 
+                      <?php echo $publish['descriptions'];?>
                     </p>
-                    <p class="card-text description-left-border">
-                      Kami ay naniniwala na ang bawat estudyante ay mahalaga. Layunin naming ipakilala ang mga adhikain na tapat at maglilingkod sa inyong lahat. Determinasyon at dedikasyon ang aming tinataglay, upang bigyan ng tinig at solusyon ang mga pangangailangan ng bawat mag-aaral.
-                    </p>
-                    <p class="card-text description-left-border">
-                      Handa kaming magsilbi at magsulong ng mga programa at proyekto na naglalayong mapabuti ang inyong karanasan sa paaralan. Kasama ninyo kami sa paglikha ng isang espasyo na puno ng pag-unlad, pagkakataon, at pagkakaisa.                     
-                    </p>
+                    
                     
                 </div>
               </div>
           </div>
       </div>
+  </div> -->
+
+  <div class="container">
+    <img src="../upload/<?php echo $publish['image']; ?>" class="img-fluid rounded" alt="" style="width: 100vw; height: 50vh; object-fit: cover"/>
+    <div class="col boder">
+      <div class="card-body">
+        <div class="row mt-3">
+          <div class="col ">
+            <h5><?php echo $publish['title'];?></h5>
+          </div>
+          <div class="col text-muted d-flex justify-content-end">
+            <p><?php echo $publish['date_created'];?></p>
+          </div>
+        </div>
+        <p class="card-text description-left-border mt-5">
+          <?php echo $publish['descriptions'];?>
+        </p>         
+      </div>
+    </div>
   </div>
 
-    <div class="mt-5 footer-section " >
+<div class="mt-5 footer-section " >
   <footer class="text-center text-lg-start bg-light text-muted" style="background-image: url(../img/banner1.png);  background-repeat: no-repeat; background-size: cover; ">
 
   

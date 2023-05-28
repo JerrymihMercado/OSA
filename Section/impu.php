@@ -256,36 +256,32 @@ if(isset($_POST['view'])){
 
     <div class="container mt-4">
         <div class="row row-cols-1 row-cols-md-3 g-4">
+          <?php
+          $sql = "SELECT * FROM publication_page";
+          $res = mysqli_query($conn, $sql);
+          if(mysqli_num_rows($res) > 0){
+            while ($row = mysqli_fetch_assoc($res)) {?>
             <div class="col">
-                <a href="../Publications/publication_page_1.php">
+                <a href="<?php echo '../Publications/publication_page.php?publication_ID=' . $row['id']; ?>">
                   <div class="card h-100 shadows">
                       <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                        <img src="../img/flow_man.jpg" class="card-img-top" alt="" style="height: 30vh; object-fit: cover;"/>
+                        <img src="../upload/<?php echo $row['image']; ?>" class="card-img-top" alt="" style="height: 30vh; object-fit: cover;"/>
                         <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
                       </div>
                       <div class="card-body">
-                          <h5 class="card-title">The Flow Man</h5>
+                          <h5 class="card-title"><?php echo $row['title']; ?></h5>
                           <p class="card-text" align="justify">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur minima similique odio quod. Accusamus minima quae ullam quis delectus eligendi aspernatur repudiandae tenetur, repellendus velit animi quo recusandae ratione perferendis?
+                            <?php echo $row['descriptions']; ?>
                           </p>
                       </div>
                   </div>
                 </a>
             </div>
-            <div class="col">
-              <div class="card h-100 shadows">
-                <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                      <img src="../img/Rectangle 266.png" class="card-img-top" alt="" style="height: 30vh; object-fit: cover;"/>
-                    <a href="#!">
-                      <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-                    </a>
-                  </div>
-                <div class="card-body">
-                    <h5 class="card-title">Collegian</h5>
-                    <p class="card-text" align="justify">Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus quasi explicabo necessitatibus consequuntur! Sit assumenda, quisquam voluptatem nobis aliquid qui vitae eos velit autem corrupti, nulla quo fugiat impedit ut!</p>
-                </div>
-              </div>
-            </div>
+            
+            <?php     
+              }
+          }
+          ?> 
         </div>
     </div>
     <!-- Research and evaluation -->

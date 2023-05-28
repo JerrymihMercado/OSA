@@ -1,5 +1,41 @@
 <?php
 session_start();
+include '../mysql_connect.php';
+
+if(isset($_POST["handle_submit"])){
+   
+    $title = $_POST['title'];
+    $titles = str_replace("'","\'",$title);
+    $description = stripslashes($_POST['description']);
+    $descriptions = str_replace("'","\'",$description);
+
+    $date = date_create();
+    $stamp = date_format($date, "Y");
+    $temp = $_FILES['myfile']['tmp_name'];
+    $directory = "../upload/" . $stamp . $_FILES['myfile']['name'];   
+
+    if (move_uploaded_file($temp, $directory)) {
+        $sql = "INSERT INTO publication_page SET 
+            image='$directory',
+            title = '$titles',
+            descriptions='$descriptions';";
+            
+    if (mysqli_query($conn, $sql)) {
+            header("location:../Publications/all_publications.php");
+            echo '<script language="javascript">';
+            echo 'alert("message successfully sent")';
+            echo '</script>';
+            unset($_POST['handle_submit']);
+            
+        } else {
+            echo mysqli_error($conn);
+            echo '<script>';
+            echo "alert('Error Occur!');" . mysqli_error($conn);
+            echo '</script>';
+        }
+    }
+    
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -112,40 +148,81 @@ session_start();
 
       </div>
     </div>
-    
+    <!-- Button trigger modal -->
+  <div class="container d-flex justify-content-end mb-3">
+    <?php
+      if (isset($_SESSION['role'])) {
+          if ($_SESSION['role'] == 1) {
+              echo '<button type="button" class="btn btn-success" data-mdb-toggle="modal" data-mdb-target="#add_page">
+                      Add Publication Page
+                    </button>';
+          }
+      }else{
+          echo '';
+      }
+    ?>
+  </div>
+
+  <div class="modal fade" id="add_page" tabindex="-1" aria-labelledby="add_page" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form action="" method="POST" enctype="multipart/form-data">
+            <div class="modal-header">
+                <h5 class="modal-title">Add New Page</h1>
+                <i data-bs-dismiss="modal" aria-label="Close"></i>
+            </div>
+            <div class="modal-body">
+               
+                <div class="mb-3">
+                    <label for="myfile">Image<span class="text-danger"> *</span></label>
+                    <img class="card-img-top movie_input_img" id="output" src="../img/avatar.png" alt="Card image" style="width: 100%; height: auto; ">
+                    <input type="file" class="form-control mt-2" id="myfile"  name="myfile" accept="image/*" onchange="loadFile(event)" required/>
+                </div>
+                <div class="mb-3">
+                    <label for="title">Page Title<span class="text-danger"> *</span></label>
+                    <input type="text" name="title" class="form-control" id="title" placeholder="Enter Name of Location" required>
+                </div>
+                <div class="mb-3">
+                    <label for="description">Description<span class="text-danger"> *</span></label>
+                    <textarea class="form-control " rows="5" id="description" name="description" minlength="30" maxlength="5000" required></textarea>
+                </div>
+            </div>
+            <div class="modal-footer pt-4 ">                  
+                <button type="submit" name = "handle_submit" class="btn mx-auto w-100 btn-success fw-semibold" >Submit</button>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
 
     <div class="container mt-4">
         <div class="row row-cols-1 row-cols-md-3 g-4">
+        <?php
+          $sql = "SELECT * FROM publication_page";
+          $res = mysqli_query($conn, $sql);
+          if(mysqli_num_rows($res) > 0){
+            while ($row = mysqli_fetch_assoc($res)) {?>
             <div class="col">
-                <a href="../Publications/publication_page_1.php">
+                <a href="<?php echo '../Publications/publication_page.php?publication_ID=' . $row['id']; ?>">
                   <div class="card h-100 shadows">
                       <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                        <img src="../img/flow_man.jpg" class="card-img-top" alt="" style="height: 30vh; object-fit: cover;"/>
+                        <img src="../upload/<?php echo $row['image']; ?>" class="card-img-top" alt="" style="height: 30vh; object-fit: cover;"/>
                         <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
                       </div>
                       <div class="card-body">
-                          <h5 class="card-title">The Flow Man</h5>
+                          <h5 class="card-title"><?php echo $row['title']; ?></h5>
                           <p class="card-text" align="justify">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur minima similique odio quod. Accusamus minima quae ullam quis delectus eligendi aspernatur repudiandae tenetur, repellendus velit animi quo recusandae ratione perferendis?
+                            <?php echo $row['descriptions']; ?>
                           </p>
                       </div>
                   </div>
                 </a>
             </div>
-            <div class="col">
-              <div class="card h-100 shadows">
-                <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                      <img src="../img/Rectangle 266.png" class="card-img-top" alt="" style="height: 30vh; object-fit: cover;"/>
-                    <a href="#!">
-                      <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-                    </a>
-                  </div>
-                <div class="card-body">
-                    <h5 class="card-title">Collegian</h5>
-                    <p class="card-text" align="justify">Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus quasi explicabo necessitatibus consequuntur! Sit assumenda, quisquam voluptatem nobis aliquid qui vitae eos velit autem corrupti, nulla quo fugiat impedit ut!</p>
-                </div>
-              </div>
-            </div>
+            
+          <?php     
+              }
+          }
+          ?> 
         </div>
     </div>
 
@@ -225,5 +302,13 @@ session_start();
 
 <!-- MDB -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.0/mdb.min.js"></script>
+<script>
+      var loadFile = function(event) {
+          var image = document.getElementById('output');
+          image.src = URL.createObjectURL(event.target.files[0]);
+          image.setAttribute("class", "out");
+      };
+      
+  </script>
 </body>
 </html>

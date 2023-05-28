@@ -1,5 +1,54 @@
 <?php
 session_start();
+include '../mysql_connect.php';
+if (isset($_GET['publication_ID'])) {
+    $id = $_GET['publication_ID'];
+    $sql = "SELECT * FROM  publication_page WHERE id=".$id;
+    $result = mysqli_query($conn, $sql);
+    if (mysqli_num_rows($result) > 0) {
+
+        $publication = mysqli_fetch_assoc($result);
+    }
+}
+if(isset($_POST["handle_submit"])){
+
+    $id = $_GET['publication_ID']; 
+    $title = $_POST['title'];
+    $titles = str_replace("'","\'",$title);
+    $date_created = date_create();
+    $created_at = date_format($date_created, "Y-M-d");
+    $description = stripslashes($_POST['description']);
+    $descriptions = str_replace("'","\'",$description);
+
+    $date = date_create();
+    $stamp = date_format($date, "Y");
+    $temp = $_FILES['myfile']['tmp_name'];
+    $directory = "../upload/" . $stamp . $_FILES['myfile']['name'];   
+
+    if (move_uploaded_file($temp, $directory)) {
+        $sql = "INSERT INTO publish_post SET 
+            image='$directory',
+            title = '$titles',
+            date_created='$created_at',
+            descriptions='$descriptions',
+            own_by='$id';";
+            
+    if (mysqli_query($conn, $sql)) {
+            header("location:../Publications/publication_page.php?publication_ID=".$id);
+            echo '<script language="javascript">';
+            echo 'alert("message successfully sent")';
+            echo '</script>';
+            unset($_POST['handle_submit']);
+            
+        } else {
+            echo mysqli_error($conn);
+            echo '<script>';
+            echo "alert('Error Occur!');" . mysqli_error($conn);
+            echo '</script>';
+        }
+    }
+    
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -93,94 +142,123 @@ session_start();
   <div class="container pt-5">
     <div class="row">
       <div class="osa-tag">
-        <p class="tag-info">THE FLOWMAN</p>
+        <p class="tag-info text-capitalize"><?php echo $publication['title']; ?></p>
         <p class="tag-sub">See all the latest publish here</p>
       </div>
-
     </div>
   </div>
 
   <div class="container">
     <div class="">
+      <?php
+        $id = $_GET['publication_ID']; 
+        $sql = "SELECT * FROM publish_post WHERE own_by=$id ORDER BY date_created desc limit 1";
+        $res = mysqli_query($conn, $sql);
+        if(mysqli_num_rows($res) > 0){
+            while ($row = mysqli_fetch_assoc($res)) {?>
         <div class="card mb-3 shadows" style="max-width: 100%;">
             <div class="row g-0">
                 <div class="col-md-4">
                       <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                          <img src="../img/flowman-post-img.jpg" class="card-img" alt="" style="height: 40vh; object-fit: cover;"/>
+                          <img src="../upload/<?php echo $row['image']; ?>" class="card-img" alt="" style="height: 40vh; object-fit: cover;"/>
                           <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
                       </div>
                     </div>
                     <div class="col-md-8">
                     <div class="card-body">
-                        <h5 class="card-title title-left-border">PAGBATI, MIGHTY AGGIES</h5>
+                        <h5 class="card-title title-left-border"><?php echo $row['title']; ?></h5>
                         <p class="card-text">
-                          <small class="tag-sub">05-09-23</small>
+                          <small class="tag-sub"><?php echo $row['date_created']; ?></small>
                         </p>
                         <p class="card-text px-4">
-                          Kami ang bagong taludturan ng pagbabago sa ating paaralan. Ang aming plataporma ng kandidatura ay naglalayong ipaglaban ang inyong mga karapatan, iangat ang kalidad ng edukasyon, at palakasin ang boses ng bawat estudyante. 
-                          <br>
-                          <br>
-                          Kami ay naniniwala na ang bawat estudyante ay mahalaga. Layunin naming ipakilala ang <a href="../Publications/publication_details_1.php"><span class="fw-bold">..Read More</span></a>
-                      
+                          <?php echo $row['descriptions']; ?>
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
+        <?php     
+          }
+      }
+      ?> 
+    </div>
+  </div>
+
+  <div class="container d-flex justify-content-end mb-3">
+    <?php
+      if (isset($_SESSION['role'])) {
+          if ($_SESSION['role'] == 1) {
+              echo '<button type="button" class="btn btn-success" data-mdb-toggle="modal" data-mdb-target="#add_post">
+                      Add Publication Post
+                    </button>';
+          }
+      }else{
+          echo '';
+      }
+    ?>
+  </div>
+
+  <div class="modal fade" id="add_post" tabindex="-1" aria-labelledby="add_post" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form action="" method="POST" enctype="multipart/form-data">
+            <div class="modal-header">
+                <h5 class="modal-title">Add New Post</h1>
+                <i data-bs-dismiss="modal" aria-label="Close"></i>
+            </div>
+            <div class="modal-body">
+               
+                <div class="mb-3">
+                    <label for="myfile">Image<span class="text-danger"> *</span></label>
+                    <img class="card-img-top movie_input_img" id="output" src="../img/avatar.png" alt="Card image" style="width: 100%; height: auto; ">
+                    <input type="file" class="form-control mt-2" id="myfile"  name="myfile" accept="image/*" onchange="loadFile(event)" required/>
+                </div>
+                <div class="mb-3">
+                    <label for="title">Page Title<span class="text-danger"> *</span></label>
+                    <input type="text" name="title" class="form-control" id="title" placeholder="Enter Name of Location" required>
+                </div>
+                <div class="mb-3">
+                    <label for="description">Description<span class="text-danger"> *</span></label>
+                    <textarea class="form-control " rows="5" id="description" name="description" minlength="30" maxlength="5000" required></textarea>
+                </div>
+            </div>
+            <div class="modal-footer pt-4 ">                  
+                <button type="submit" name = "handle_submit" class="btn mx-auto w-100 btn-success fw-semibold" >Submit</button>
+            </div>
+        </form>
+      </div>
     </div>
   </div>
     
   <div class="container">
       <div class="row row-cols-1 row-cols-md-3 g-4">
+        <?php
+        $id = $_GET['publication_ID']; 
+        $sql = "SELECT * FROM publish_post WHERE own_by=$id";
+        $res = mysqli_query($conn, $sql);
+        if(mysqli_num_rows($res) > 0){
+            while ($row = mysqli_fetch_assoc($res)) {?>
           <div class="col">
-              <a href="../Publications/publication_details_1.php">
+              <a href="<?php echo '../Publications/publication_details.php?publication_ID=' . $row['id']; ?>">
                   <div class="card h-100 shadows">
                     <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                          <img src="../img/osa-announcement.jpg" class="card-img-top" alt="clsu-image"/>
+                          <img src="../upload/<?php echo $row['image']; ?>" class="card-img-top" alt="clsu-image"/>
                           <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title">Attended the Leadership Seminar</h5>
+                        <h5 class="card-title"><?php echo $row['title']; ?></h5>
                         <p class="card-text" align="justify">
-                          OSA shall promFor those who attended the Leadership Seminar last April 14, 2023 at CLSU Auditorium, you may now claim your certificate of participation at Office of Student Affairs.
-                          <br>
-                          Note: Students may only claim their certificate during office hours.
+                           <?php echo $row['descriptions']; ?>
                           </p>
                     </div>
                   </div>
               </a>
           </div>
-          <div class="col">
-              <div class="card h-100 shadows">
-                <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                      <img src="../img/osa-announcement.jpg" class="card-img-top" alt="clsu-image"/>
-                      <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">Attended the Leadership Seminar</h5>
-                    <p class="card-text" align="justify">
-                      OSA shall promFor those who attended the Leadership Seminar last April 14, 2023 at CLSU Auditorium, you may now claim your certificate of participation at Office of Student Affairs.
-                      <br>
-                      Note: Students may only claim their certificate during office hours.
-                      </p>
-                </div>
-              </div>
-          </div>
-          <div class="col">
-              <div class="card h-100 shadows">
-                <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                      <img src="../img/osa-announcement.jpg" class="card-img-top" alt="clsu-image"/>
-                      <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">Attended the Leadership Seminar</h5>
-                    <p class="card-text" align="justify">
-                      OSA shall promFor those who attended the Leadership Seminar last April 14, 2023 at CLSU Auditorium, you may now claim your certificate of participation at Office of Student Affairs.
-                      <br>
-                      Note: Students may only claim their certificate during office hours.
-                      </p>
-                </div>
-              </div>
-          </div>
+         
+          <?php     
+            }
+        }
+        ?> 
       </div>
   </div>
 
@@ -260,5 +338,13 @@ session_start();
 
 <!-- MDB -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.0/mdb.min.js"></script>
+<script>
+      var loadFile = function(event) {
+          var image = document.getElementById('output');
+          image.src = URL.createObjectURL(event.target.files[0]);
+          image.setAttribute("class", "out");
+      };
+      
+  </script>
 </body>
 </html>
