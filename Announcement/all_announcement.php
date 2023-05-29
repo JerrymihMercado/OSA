@@ -108,7 +108,7 @@ if(isset($_POST["handle_submit"])){
 </style>
 <body>
   
-  <div class="container-fluid header-title">
+<div class="container-fluid header-title">
     <div class="row">
       <div class="col-md-1 ">
         <img src="../img/clsu-logo.png" alt="" class="logo">

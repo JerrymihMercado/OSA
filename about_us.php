@@ -32,69 +32,7 @@ session_start();
       }
 </style>
   <body>
-  <!-- <div class="container-fluid header-title">
-    <div class="row">
-      <div class="col-md-1 ">
-        <img src="./img/clsu-logo.png" alt="" class="logo">
-      </div>
-      <div class="col">
-        <div class="logo-title">
-          <p class="pt-3 ps-3 header1">Central Luzon State University</p>
-          <p class="ps-3 header2">Science City of Muñoz, Nueva Ecija, Philippines 3120</p>
-        </div>  
-      </div>
-    </div>
-  </div>  
-    <div class="container-fluid">
-      <div class="row">
-        <nav class="navbar main-header-mid navbar-expand-md">
-          <ul class="navbar-nav">
-            <li class="nav-item ">
-              <a href="index.php" class="link-home text-white active">HOME</a>
-            </li>
-            <li class="nav-item ">
-              <a href="about_us.php" class="link text-white ps-3">ABOUT US</a>
-            </li>
-            <li class="nav-item ">
-              <a href="Section/impu.php" class="link text-white ps-3">IMPU</a>
-            </li>
-            <li class="nav-item ">
-              <a href="CDESU/cdesu.php" class="link text-white ps-3">CDESU</a>
-            </li>
-            <li class="nav-item ">
-              <a href="GSU/gsu_index.php" class="link text-white ps-3">GSU</a>
-            </li>
-            <li class="nav-item ">
-              <a href="SOU/sou_index.php" class="link text-white ps-3">SOU</a>
-            </li>
-            <li class="nav-item ">
-              <a href="SDB/sdb_index.php" class="link text-white ps-3">SDB</a>
-            </li>
-            <?php
-              if (isset($_SESSION['role'])) {
-                  if ($_SESSION['role'] == 1 || $_SESSION['role'] == 0) {
-                      echo '<li class="nav-item">
-                            <div class="btn-group shadow-0">
-                            <a type="button" class="link text-white ps-3 dropdown-toggle" data-mdb-toggle="dropdown" aria-expanded="false">
-                                LOGOUT
-                            </a>
-                            <ul class="dropdown-menu">
-                                
-                                <form action="logout.php" method="POST">
-                                    <li><button class="dropdown-item rounded-5" name="logout">Logout</button></li>
-                                </form>
-                            </ul>
-                            </div>
-                        </li>';
-                  }
-              }else{
-                  echo '';
-              }
-            ?>
-          </ul>
-        </nav>
-      </div>
-    </div> -->
+
     <div class="logo-header ">
         <div class="container-fluid">
             <div class="row d-flex justify-content-between">

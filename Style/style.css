@@ -54,46 +54,10 @@
     font-size: 13px;
     display: block;
 }
-/* .logo {
-    height: 128px;
-    width: 128px;
-    position: absolute;
-    z-index: 1;
-} */
-
-
-/* .header1 {
-    font-family: Arial, sans-serif;
-    font-size: 28px;
-    font-weight: 700;
-    text-transform: uppercase;
-    background: -webkit-linear-gradient(0deg, #008102, #93d12d);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-} */
-
-/* .header2 {
-    font-family: 'Uniform Bold', Arial, sans-serif;
-    margin-top: -15px;
-    background: -webkit-linear-gradient(0deg, #008102, #93d12d);
-    font-size: 13px;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-} */
-
-
-
-/* .navbar {
-    background: -webkit-linear-gradient(0deg, #008102, #93d12d);
-    position: relative;
-    display: flex;
-   
-    padding-top: .5rem;
-    padding-bottom: .5rem;
-
-    padding-top: 15rem;
-    padding-bottom: .5rem;
-} */
+ul,li
+      {
+          list-style-type: none;
+      }
 
 .nav-item a {
     /* border-right-style: solid; */

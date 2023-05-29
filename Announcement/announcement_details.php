@@ -105,7 +105,7 @@ if(isset($_POST["handle_submit_update"])){
 </style>
 <body>
   
-    <div class="container-fluid header-title">
+<div class="container-fluid header-title">
     <div class="row">
       <div class="col-md-1 ">
         <img src="../img/clsu-logo.png" alt="" class="logo">
@@ -135,7 +135,7 @@ if(isset($_POST["handle_submit_update"])){
             <a href="../CDESU/cdesu.php" class="link text-white ps-3">CDESU</a>
           </li>
           <li class="nav-item ">
-            <a href="../GSU/gsu_index.php" class="link text-white ps-3">GSU</a>
+            <a href="#" class="link text-white ps-3">GSU</a>
           </li>
           <li class="nav-item ">
             <a href="../SOU/sou_index.php" class="link text-white ps-3">SOU</a>
@@ -168,7 +168,6 @@ if(isset($_POST["handle_submit_update"])){
       </nav>
     </div>
   </div>
-
   <div class="container pt-5">
       <div class="row">
         <div class="osa-tag">
