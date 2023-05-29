@@ -36,6 +36,7 @@ if (isset($_POST['submit'])) {
     $check_result = mysqli_query($conn, $check_user);
     $count = mysqli_num_rows($check_result);
     
+     
     if($count > 0){
         $_SESSION['status_exist'] = "error";
 
@@ -95,69 +96,7 @@ if (isset($_POST['submit'])) {
    
 
     <div class="container">
-        <!-- <div class="mt-5">
-            
-            <form method="POST" class="row g-3 needs-validation" novalidate>
-                <div class="col-md-4">
-                    <div class="form-outline">
-                        <input type="text" class="form-control" id="fullname" name="fullname" required/>
-                        <label for="fullname" class="form-label" >Fullname</label>
-                    </div>
-                    <p id="errorid" class="text-danger"></p>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-outline">
-                    <input type="text" class="form-control" id="gender" name="gender" required />
-                    <label for="gender" class="form-label">Gender</label>
-                    </div>
-                    <p id="error_gender" class="text-danger"></p>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-outline">
-                    <input type="text" class="form-control" id="course" name="course" required />
-                    <label for="course" class="form-label">course</label>
-                    </div>
-                    <p id="error_course" class="text-danger"></p>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-outline">
-                    <input type="email" class="form-control" id="email" name="email" required />
-                    <label for="email" class="form-label">Email</label>
-                    
-                    </div>
-                    <p id="error_email" class="text-danger"></p>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-outline">
-                    <input type="text" class="form-control" id="password" name="password" required/>
-                    <label for="password" class="form-label">Password</label>
-                    </div>
-                    <p id="error_password" class="text-danger"></p>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-outline">
-                    <input type="text" class="form-control" id="confirm_password" name="confirm_password" required/>
-                    <label for="confirm_password" class="form-label">Confirm Password</label>
-                    </div>
-                    <p id="error_confirm_password" class="text-danger"></p>
-                    <p id="error_not_match" class="text-warning"></p>
-                </div>
-                <div class="col-12">
-                    <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required />
-                    <label class="form-check-label" for="invalidCheck">Agree to terms and conditions</label>
-                    <div class="invalid-feedback">You must agree before submitting.</div>
-                    </div>
-                </div>
-                <div class="col-12">
-                    <button class="btn btn-primary" type="submit" name="submit">Submit form</button>
-                </div>
-                <div class="col-6">
-                    <a href="../index.php">Login instead</a>
-                </div>
-            </form>
-
-        </div> -->
+        
 
         <div class="p-4">
             <div>
