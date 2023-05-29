@@ -10,6 +10,45 @@ if (isset($_GET['publication_ID'])) {
         $publish = mysqli_fetch_assoc($result);
     }
 }
+if(isset($_POST["handle_submit_update"])){
+   
+    $id = $publish['id'];
+    $title = $_POST['title'];
+    $titles = str_replace("'","\'",$title);
+    $date_created = date_create();
+    $created_at = date_format($date_created, "Y-M-d");
+    $description = stripslashes($_POST['description']);
+    $descriptions = str_replace("'","\'",$description);
+
+    $date = date_create();
+    $stamp = date_format($date, "Y");
+    $temp = $_FILES['myfile']['tmp_name'];
+    $directory = "../upload/" . $stamp . $_FILES['myfile']['name'];   
+
+    if (move_uploaded_file($temp, $directory)) {
+        $sql = "UPDATE publish_post SET 
+            image='$directory',
+            title = '$titles',
+            date_created='$created_at',
+            descriptions='$descriptions'
+            WHERE id=".$id;
+            
+    if (mysqli_query($conn, $sql)) {
+            $_SESSION['status_success'] = "success";
+            header("location:../Publications/publication_details.php?publication_ID=".$id);
+            unlink("../upload/".$publish['image']);
+            // unset($_POST['handle_submit_update']);
+            
+        } else {
+            echo mysqli_error($conn);
+            $_SESSION['status_error'] = "error";
+            echo '<script>';
+            echo "alert('Error Occur!');" . mysqli_error($conn);
+            echo '</script>';
+        }
+    }
+    
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,6 +58,10 @@ if (isset($_GET['publication_ID'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Office of Student Affairs</title>
     <link rel="icon" href ="../img/logo.png" class="icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+    <!-- Google Fonts Roboto -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/mdb.min.css" />
     <link rel="stylesheet" href="../Style/style.css">
 
     <?php
@@ -130,9 +173,9 @@ if (isset($_GET['publication_ID'])) {
       </div>
   </div> -->
 
-  <div class="container">
-    <img src="../upload/<?php echo $publish['image']; ?>" class="img-fluid rounded" alt="" style="width: 100vw; height: 50vh; object-fit: cover"/>
-    <div class="col boder">
+  <div class="container p-2 mt-2">
+    <img src="../upload/<?php echo $publish['image']; ?>" class="img-fluid rounded shadows" alt="" style="width: 100vw; height: 50vh; object-fit: cover"/>
+    <div class="col">
       <div class="card-body">
         <div class="row mt-3">
           <div class="col ">
@@ -145,6 +188,54 @@ if (isset($_GET['publication_ID'])) {
         <p class="card-text description-left-border mt-5">
           <?php echo $publish['descriptions'];?>
         </p>         
+      </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col">
+          
+          <?php
+            if (isset($_SESSION['role'])) {
+                if ($_SESSION['role'] == 1) {
+                    echo '
+                    <button class="btn btn-success fw-semibold" data-mdb-toggle="modal" data-mdb-target="#update_publication">Update</button>
+                    <button class="btn btn-danger fw-semibold" data-mdb-toggle="modal" data-mdb-target="#archive">Archive</button>';
+                }
+            }else{
+                echo '';
+            }
+          ?>
+        </div>
+      </div>
+  </div>
+  <!-- Update Modal -->
+   <div class="modal fade" id="update_publication" tabindex="-1" aria-labelledby="update_publication" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form action="" method="POST" enctype="multipart/form-data">
+            <div class="modal-header">
+                <h5 class="modal-title">Add New Announcement</h1>
+                <i data-bs-dismiss="modal" aria-label="Close"></i>
+            </div>
+            <div class="modal-body">
+               
+                <div class="mb-3">
+                    <label for="myfile">Image<span class="text-danger"> *</span></label>
+                    <img class="card-img-top movie_input_img" id="output" src="../upload/<?php echo $publish['image']; ?>" alt="Card image" style="width: 100%; height: auto; ">
+                    <input type="file" class="form-control mt-2" id="myfile"  name="myfile" accept="image/*" onchange="loadFile(event)" value="<?php echo $publish['image']; ?>"/>
+                </div>
+                <div class="mb-3">
+                    <label for="title">Announcement Title<span class="text-danger"> *</span></label>
+                    <input value="<?php echo $publish['title']; ?>" type="text" name="title" class="form-control" id="title" placeholder="Enter Name of Location" required>
+                </div>
+                <div class="mb-3">
+                    <label for="description">Description<span class="text-danger"> *</span></label>
+                    <textarea class="form-control " rows="5" id="description" name="description" minlength="30" maxlength="5000" required><?php echo $publish['descriptions']; ?></textarea>
+                </div>
+            </div>
+            <div class="modal-footer pt-4 ">                  
+                <button type="submit" name="handle_submit_update" class="btn mx-auto w-100 btn-success fw-semibold" >Submit</button>
+            </div>
+        </form>
       </div>
     </div>
   </div>
@@ -222,8 +313,59 @@ if (isset($_GET['publication_ID'])) {
   </footer>
 </div>
 
+<script src="../js/sweetalert2.js"></script>
+    <?php
+    if(isset($_SESSION['status_success']) ){
+        ?>
+        <script>
+             const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+            })
+            Toast.fire({
+            icon: 'success',
+            title: 'Record Successfully Updated!'
+            })
 
-<!-- MDB -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.0/mdb.min.js"></script>
+        </script>
+        <?php
+        unset($_SESSION['status_success']);
+    }
+    
+    if(isset($_SESSION['status_error'])){
+        ?>
+        <script>
+            Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Something went wrong!',
+           
+            })
+
+        </script>
+        <?php
+        unset($_SESSION['status_error']);
+    }
+    ?>
+    <script>
+      var loadFile = function(event) {
+          var image = document.getElementById('output');
+          image.src = URL.createObjectURL(event.target.files[0]);
+          image.setAttribute("class", "out");
+      };
+      
+  </script>
+    <!-- MDB -->
+    <script type="text/javascript" src="js/mdb.min.js"></script>
+    <!-- Custom scripts -->
+    <script type="text/javascript"></script>
+    <script type="text/javascript"src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.1/mdb.min.js"></script>
 </body>
 </html>

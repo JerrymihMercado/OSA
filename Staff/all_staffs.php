@@ -142,123 +142,33 @@ if(isset($_POST["handle_submit"])){
   <div class="container pt-5">
     <div class="row">
       <div class="osa-tag">
-        <p class="tag-info text-capitalize"><?php echo $publication['title']; ?></p>
-        <p class="tag-sub">See all the latest publish here</p>
-      </div>
-    </div>
-  </div>
-
-  <div class="container">
-    <div class="">
-      <?php
-        $id = $_GET['publication_ID']; 
-        $sql = "SELECT * FROM publish_post WHERE own_by=$id ORDER BY date_created desc limit 1";
-        $res = mysqli_query($conn, $sql);
-        if(mysqli_num_rows($res) > 0){
-            while ($row = mysqli_fetch_assoc($res)) {?>
-        <div class="card mb-3 shadows" style="max-width: 100%;">
-            <div class="row g-0">
-                <div class="col-md-4">
-                      <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                          <img src="../upload/<?php echo $row['image']; ?>" class="card-img" alt="" style="height: 40vh; object-fit: cover;"/>
-                          <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-                      </div>
-                    </div>
-                    <div class="col-md-8">
-                    <div class="card-body">
-                        <h5 class="card-title title-left-border"><?php echo $row['title']; ?></h5>
-                        <p class="card-text">
-                          <small class="tag-sub"><?php echo $row['date_created']; ?></small>
-                        </p>
-                        <p class="card-text px-4">
-                          <?php echo $row['descriptions']; ?>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <?php     
-          }
-      }
-      ?> 
-    </div>
-  </div>
-
-  <div class="container d-flex justify-content-end mb-3">
-    <?php
-      if (isset($_SESSION['role'])) {
-          if ($_SESSION['role'] == 1) {
-              echo '<button type="button" class="btn btn-success" data-mdb-toggle="modal" data-mdb-target="#add_post">
-                      Add Publication Post
-                    </button>';
-          }
-      }else{
-          echo '';
-      }
-    ?>
-  </div>
-
-  <div class="modal fade" id="add_post" tabindex="-1" aria-labelledby="add_post" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <form action="" method="POST" enctype="multipart/form-data">
-            <div class="modal-header">
-                <h5 class="modal-title">Add New Post</h1>
-                <i data-bs-dismiss="modal" aria-label="Close"></i>
-            </div>
-            <div class="modal-body">
-               
-                <div class="mb-3">
-                    <label for="myfile">Image<span class="text-danger"> *</span></label>
-                    <img class="card-img-top movie_input_img" id="output" src="../img/avatar.png" alt="Card image" style="width: 100%; height: auto; ">
-                    <input type="file" class="form-control mt-2" id="myfile"  name="myfile" accept="image/*" onchange="loadFile(event)" required/>
-                </div>
-                <div class="mb-3">
-                    <label for="title">Page Title<span class="text-danger"> *</span></label>
-                    <input type="text" name="title" class="form-control" id="title" placeholder="Enter Name of Location" required>
-                </div>
-                <div class="mb-3">
-                    <label for="description">Description<span class="text-danger"> *</span></label>
-                    <textarea class="form-control " rows="5" id="description" name="description" minlength="30" maxlength="5000" required></textarea>
-                </div>
-            </div>
-            <div class="modal-footer pt-4 ">                  
-                <button type="submit" name = "handle_submit" class="btn mx-auto w-100 btn-success fw-semibold" >Submit</button>
-            </div>
-        </form>
+        <p class="tag-info text-capitalize">All Staff Here</p>
+        <p class="tag-sub">See all the staff</p>
       </div>
     </div>
   </div>
     
   <div class="container">
       <div class="row row-cols-1 row-cols-md-3 g-4">
-        <?php
-        $id = $_GET['publication_ID']; 
-        $sql = "SELECT * FROM publish_post WHERE own_by=$id";
-        $res = mysqli_query($conn, $sql);
-        if(mysqli_num_rows($res) > 0){
-            while ($row = mysqli_fetch_assoc($res)) {?>
+        
           <div class="col">
-              <a href="<?php echo '../Publications/publication_details.php?publication_ID=' . $row['id']; ?>">
+              
                   <div class="card h-100 shadows">
                     <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                          <img src="../upload/<?php echo $row['image']; ?>" class="card-img-top" alt="clsu-image" style="height: 35vh; object-fit: cover;"/>
+                          <img src="../img/avatar.png" class="card-img-top" alt="clsu-image" style="height: 35vh; object-fit: cover;"/>
                           <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title"><?php echo $row['title']; ?></h5>
+                        <h5 class="card-title">title</h5>
                         <p class="card-text" align="justify">
-                           <?php echo $row['descriptions']; ?>
+                           hello world
                           </p>
                     </div>
                   </div>
-              </a>
+           </a>
           </div>
          
-          <?php     
-            }
-        }
-        ?> 
+       
       </div>
   </div>
 
@@ -338,13 +248,5 @@ if(isset($_POST["handle_submit"])){
 
 <!-- MDB -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.0/mdb.min.js"></script>
-<script>
-      var loadFile = function(event) {
-          var image = document.getElementById('output');
-          image.src = URL.createObjectURL(event.target.files[0]);
-          image.setAttribute("class", "out");
-      };
-      
-  </script>
 </body>
 </html>

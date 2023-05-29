@@ -18,6 +18,15 @@ session_start();
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic" rel="stylesheet" />
     <link rel="stylesheet" href="css/mdb.min.css" />
   </head>
+  <style>
+   a,
+    a:hover,
+    a:focus,
+    a:active {
+        text-decoration: none;
+        color: inherit;
+    }
+</style>
   <body>
   <div class="container-fluid header-title">
     <div class="row">
@@ -220,23 +229,20 @@ session_start();
     <div class="container mb-5">
       <div class="row row-cols-1 row-cols-md-4 g-4">
         <div class="col">
-          <div class="card h-100 shadows">
+          <a href="Staff/all_staffs.php">
+            <div class="card h-100 shadows">
             <img src="./img/Dude Crew (900 × 500 px).png" class="card-img-top" alt="clsu-image"/>
             <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">
-                This is a longer card with supporting text below as a natural lead-in to
-                additional content. This content is a little bit longer.
-              </p>
+              <h5 class="card-title mt-5 text-center">Information Management and Publication Unit</h5>
             </div>
           </div>
+          </a>
         </div>
         <div class="col">
           <div class="card h-100 shadows">
             <img src="./img/Dude Crew.png" class="card-img-top" alt="Palm Springs Road"/>
             <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">This is a short card.</p>
+              <h5 class="card-title mt-5 text-center">Career Development and Employment Services Unit</h5>
             </div>
           </div>
         </div>
@@ -244,8 +250,7 @@ session_start();
           <div class="card h-100 shadows">
             <img src="./img/Dude Crew (900 × 500 px).png" class="card-img-top" alt="Los Angeles Skyscrapers"/>
             <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
+              <h5 class="card-title mt-5 text-center">Guidance Service Unit</h5>
             </div>
           </div>
         </div>
@@ -253,11 +258,7 @@ session_start();
           <div class="card h-100 shadows">
             <img src="./img/Dude Crew.png" class="card-img-top" alt="Skyscrapers"/>
             <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">
-                This is a longer card with supporting text below as a natural lead-in to
-                additional content. This content is a little bit longer.
-              </p>
+              <h5 class="card-title mt-5 text-center">Student Organization Unit</h5>
             </div>
           </div>
         </div>
