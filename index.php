@@ -81,20 +81,55 @@ if (isset($_POST['submit'])) {
   </style>
   <body>
    
-    <div class="container-fluid header-title">
-    <div class="row">
-      <div class="col-md-1 ">
-        <img src="./img/clsu-logo.png" alt="" class="logo">
+  <!-- <div class="container-fluid header-title">
+    <div class="row roman">
+      <div class="col-lg-1  col-md-2 col-sm-4   logo-con bg-primary ">
+        <img src="./img/clsu-logo.png" alt="" class="logo img-fluid">
       </div>
-      <div class="col">
-        <div class="logo-title">
-          <p class="pt-3 ps-3 header1">Central Luzon State University</p>
-          <p class="ps-3 header2">Science City of Muñoz, Nueva Ecija, Philippines 3120</p>
+      <div class="col-lg-11 col-md-6 col-sm-4  head-text ">
+        <div class="logo-title ms-3 ">
+          <div class="row">
+            <div class="col-sm-12" > 
+              <p class="pt-3 ps-3 header1 ">Central Luzon State University</p>
+            </div>
+            <div class="col-sm-12">
+              <p class="ps-3 header2 ">Science City of Muñoz, Nueva Ecija, Philippines 3120</p>
+            </div>
+          </div>
+          
         </div>  
       </div>
+      <div class="col">
+
+      </div>
     </div>
-  </div>  
-  <div class="container-fluid">
+  </div>   -->
+  <div class="logo-header ">
+        <div class="container-fluid">
+            <div class="row d-flex justify-content-between">
+                <div class="logo-header-left col-xl-7 col-md-7 col-xs-7 dp-xs-flex flex-row">
+                    <div class="logo mr-xs-3">
+                        <img src="./img/clsu-logo.png" alt="" >
+                        
+                    </div>
+                    <div class="logo-text m-xs-0">
+                        <span class="logo-title">Central Luzon State University</span>
+                        <span class="logo-sub">Science City of Muñoz, Nueva Ecija, Philippines 3120</span>
+                    </div>
+                </div>
+                <!-- <div class="logo-header-right col-xl-5 col-md-5 col-xs-5">
+                        <div class="logo-links">
+                            <a href="http://ggc.clsu.edu.ph/" target="_blank">Transparency Seal</a>
+                            <a href="about-us/au-contact-us.php">Contact Us</a>
+                        </div>
+                    </div> -->
+
+            </div>
+        </div>
+    </div>
+  
+
+  <!-- <div class="container-fluid ">
     <div class="row">
       <nav class="navbar main-header-mid navbar-expand-md">
         <ul class="navbar-nav">
@@ -174,9 +209,132 @@ if (isset($_POST['submit'])) {
         </ul>
       </nav>
     </div>
-  </div>
+  </div> -->
+  
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <!-- Container wrapper -->
+    <div class="container-fluid navi-section">
+      <!-- Toggle button -->
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-mdb-toggle="collapse"
+        data-mdb-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <i class="fas fa-bars text-white"></i>
+      </button>
+  
+      <!-- Collapsible wrapper -->
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <!-- Navbar brand -->
+        <!-- <a class="navbar-brand mt-2 mt-lg-0" href="#">
+          <img
+            src="https://mdbcdn.b-cdn.net/img/logo/mdb-transaprent-noshadows.webp"
+            height="15"
+            alt="MDB Logo"
+            loading="lazy"
+          />
+        </a> -->
+        <!-- Left links -->
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item me-2">
+            <a class="nav-link text-white" href="index.php">HOME</a>
+          </li>
+          <li class="nav-item me-2">
+            <a class="nav-link text-white" href="about_us.php">ABOUT US</a>
+          </li>
+          <li class="nav-item me-2">
+            <a class="nav-link text-white" href="Section/impu.php">IMPU</a>
+          </li>
+          <li class="nav-item me-2">
+            <a class="nav-link text-white" href="CDESU/cdesu.php">CDESU</a>
+          </li>
+          <li class="nav-item me-2">
+            <a class="nav-link text-white" href="GSU/gsu_index.php">GSU</a>
+          </li>
+          <li class="nav-item me-2">
+            <a class="nav-link text-white" href="SOU/sou_index.php">SOU</a>
+          </li>
+          <li class="nav-item me-2">
+            <a class="nav-link text-white" href="SDB/sdb_index.php">SDB</a>
+          </li>
+        </ul>
+        <!-- Left links -->
+      </div>
+      <!-- Collapsible wrapper -->
+  
+      <!-- Right elements -->
+      <div class="d-flex align-items-center">
+        <!-- Icon -->
+        <!-- <a class="text-white me-3 " href="#">
+            <i class="fas fa-circle-user text-white"></i>
+            LOGIN
+        </a> -->
+        <?php
+            if (isset($_SESSION['role'])) {
+                if ($_SESSION['role'] == 1 || $_SESSION['role'] == 0) {
+                    echo '<li class="nav-item">
+                            <div class="btn-group shadow-0">
+                            <a type="button" class="link text-white ps-3 dropdown-toggle" data-mdb-toggle="dropdown" aria-expanded="false">
+                                LOGOUT
+                            </a>
+                            <ul class="dropdown-menu">
+                                
+                                <form action="logout.php" method="POST">
+                                    <li><button class="dropdown-item rounded-5" name="logout">Logout</button></li>
+                                </form>
+                            </ul>
+                            </div>
+                        </li>';
+                }
+            }else{
+                echo '
+                        <a href="" class="text-white ps-3 " data-mdb-toggle="modal" data-mdb-target="#login_Modal">
+                        <i class="fas fa-circle-user text-white"></i>  
+                        LOGIN
+                        </a>
+                      ';
+            }
+          ?>
+          <?php
+            if (isset($_SESSION['role'])) {
+                if ($_SESSION['role'] == 1 || $_SESSION['role'] == 0) {
+                    echo '';
+                }
+            }
+            // else{
+            //     echo '<li class="nav-item">
+            //             <a href="./Form_Register/register_index.php" class="text-white ps-3">
+            //               REGISTER
+            //             </a>
+            //           </li>';
+            // }
+          ?>
+          <?php
+            if (isset($_SESSION['role'])) {
+                if ($_SESSION['role'] == 1) {
+                    echo '<li class="nav-item">
+                        <a href="./Archive/archive_index.php" class="text-white ps-3">
+                          ARCHIVES
+                        </a>
+                      </li>';
+                }
+            }else{
+                echo '';
+            }
+          ?>
+  
+        
+      </div>
+      <!-- Right elements -->
+    </div>
+    <!-- Container wrapper -->
+  </nav>
 
-  <div class="carousel-section">
+  <div class="carousel-section d-none d-sm-block">
     <div id="carouselExampleControls" class="carousel slide" data-mdb-ride="carousel">
       <div class="carousel-inner">
         <div class="carousel-item active">
@@ -304,18 +462,20 @@ if (isset($_POST['submit'])) {
             </div>
 
             <!-- Password input -->
-            <div class="form-outline mb-4">
+            <div class="form-outline mb-2">
               <input type="password" id="password" name="password" class="form-control" required/>
               <label class="form-label" for="password">Password</label>
             </div>
 
             <!-- 2 column grid layout for inline styling -->
             <div class="row mb-4">
-              
                   <a href="#!">Forgot password?</a>
             </div>
             <!-- Submit button -->
             <button type="submit" name="submit" class="btn btn-primary btn-block">Login</button>
+            <div class="pt-3 text-center">
+              <a href="./Form_Register/register_index.php" class="text-success">Register Account</a>
+            </div>
         </form>
         </div>
       </div>
