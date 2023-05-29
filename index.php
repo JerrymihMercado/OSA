@@ -7,37 +7,50 @@ if (isset($_POST['submit'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-   
+   $ciphering = "AES-128-CTR";
+    $option = 0;
+    $encryption_iv = '1234567890123456';
+    $encryption_key = "info";
+    $encryption_email = openssl_encrypt($email,$ciphering,$encryption_key,$option,$encryption_iv);
+
+    $ciphering = "AES-128-CTR";
+    $option = 0;
+    $encryption_iv = '1234567890123456';
+    $encryption_key = "info";
+    $encryption_password = openssl_encrypt($password,$ciphering,$encryption_key,$option,$encryption_iv);
 
     $sql = "SELECT * FROM account
-      WHERE email = '$email'
-      AND password = '$password'";
-
+      WHERE email = '$encryption_email'
+      AND password = '$encryption_password'";
+    
     $res = mysqli_query($conn, $sql);
     if (mysqli_num_rows($res) == 1) {
         $row = mysqli_fetch_assoc($res);
-        $_SESSION['user'] = $email;
+
+        $ciphering = "AES-128-CTR";
+        $option = 0;
+        $decryption_key = "info";
+        $decryption_iv = '1234567890123456';
+        $decryption = openssl_decrypt($row['email'],$ciphering,$decryption_key,$option,$decryption_iv);
+        $session_email = $decryption;
+
+        $_SESSION['fullname'] = $row['fullname'];
+        $_SESSION['email'] = $session_email;
+        $_SESSION['course'] = $row['course'];
+        
         $_SESSION['role'] = $row['role'];
         
-        echo '<script language="javascript">';
-        echo 'alert("message successfully sent")';
-        echo '</script>';
         if ($row['role'] == 1) {    
-            echo '<script language="javascript">';
-            echo 'alert("message successfully sent")';
-            echo '</script>';
-            header("location:index.php#login");
+          $_SESSION['status_success_admin'] = "success";
+          header("location:index.php");
         }
         else {
             header("location:index.php");
-            echo '<script language="javascript">';
-            echo 'alert("message successfully sent")';
-            echo '</script>';
+            $_SESSION['status_success_user'] = "success";
           }
     } else {
-        echo '<script language="javascript">';
-        echo 'alert("error")';
-        echo '</script>';
+            $_SESSION['status_error'] = "error";
+
     }
 }
 ?>
@@ -214,6 +227,12 @@ if (isset($_POST['submit'])) {
   <div class="container pt-5">
     <div class="row">
       <div class="osa-tag">
+        <!-- <?php
+        if(isset($_SESSION['email']) != ''){
+          
+          echo 'name"'.$_SESSION['email'].'"';
+        }
+        ?> -->
         <p class="tag-info">ANNOUNCEMENT</p>
         <p class="tag-sub ">Stay updated with the latest announcements from the Office of Student Affairs (OSA)</p>
       </div>
@@ -303,8 +322,6 @@ if (isset($_POST['submit'])) {
     </div>
   </div>
 
-  
-
   <div class="mt-5 footer-section " >
     <footer class="text-center text-lg-start bg-light text-muted " style="background-image: url(img/banner1.png);  background-repeat: no-repeat; background-size: cover; ">
       <!-- Section: Links  -->
@@ -375,6 +392,82 @@ if (isset($_POST['submit'])) {
     </footer>
   </div>
     <!-- End your project here-->
+          
+
+
+  <script src="js/sweetalert2.js"></script>
+    <?php
+    if(isset($_SESSION['status_success_admin']) ){
+        ?>
+        <script>
+             const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+            })
+            Toast.fire({
+            icon: 'success',
+            title: 'Welcome Back Admin!'
+            })
+
+        </script>
+        <?php
+        unset($_SESSION['status_success']);
+    }
+    if(isset($_SESSION['status_success_user']) ){
+        ?>
+        <script>
+            const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+            })
+            Toast.fire({
+            icon: 'success',
+            title: 'Welcome <?php echo $_SESSION['fullname']?>!'
+            })
+
+        </script>
+        <?php
+        unset($_SESSION['status_success']);
+    }
+    
+    if(isset($_SESSION['status_error'])){
+        ?>
+        <script>
+            const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+            })
+            Toast.fire({
+            icon: 'error',
+            title: 'Credentials error'
+            })
+
+        </script>
+        <?php
+        unset($_SESSION['status_error']);
+    }
+    ?>
 
     <!-- MDB -->
     <script type="text/javascript" src="js/mdb.min.js"></script>

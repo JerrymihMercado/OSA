@@ -3,6 +3,10 @@
 session_start();
 include '../mysql_connect.php';
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
 if (isset($_POST['submit'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
@@ -40,7 +44,130 @@ if (isset($_POST['submit'])) {
         echo '</script>';
     }
 }
+if (isset($_POST['submitMail'])) {
 
+	require '../includes/PHPMailer.php';
+	require '../includes/SMTP.php';
+	require '../includes/Exception.php';
+
+    $fullname = $_POST['fullname'];
+    $course = $_POST['course'];
+    $email = $_POST['email'];
+    $message = $_POST['message'];
+    $user_message = str_replace("'","\'",$message);
+ 
+    $sql = "INSERT INTO complainant_message SET 
+            user_file=0,
+            user_name = '$fullname',
+            user_course = '$course',
+            user_email = '$email',
+            user_message='$user_message';";
+            
+    if (mysqli_query($conn, $sql)) {
+           
+            unset($_POST['handle_submit']);
+            
+        } else {
+            echo mysqli_error($conn);
+            echo '<script>';
+            echo "alert('Error Occur!');" . mysqli_error($conn);
+            echo '</script>';
+        }
+    
+     $body = '  <body>
+                    <div class="fluid-container" style="padding: 5% 20% 10px">
+                        <div class="card-box"
+                            style="
+                                display: block;
+                                justify-content: center;
+                                border: 1px solid #f5f5f5f5;
+                                border-radius: 10px;
+                            "
+                        >
+                            <div
+                                class="img-card"
+                                align="center"
+                                style="width: 100%; margin-top: 30px"
+                            >
+                                <img
+                                    src="https://i.imgur.com/DTcwEeE.png"
+                                    alt="email_logo"
+                                    style="height: 150px"
+                                />
+                            </div>
+                            <div
+                                class="card-body-container"
+                                style="width: 84%; margin: 8% 0% 0% 8%"
+                            >
+                                <h1
+                                    class="card-title-name"
+                                    align="center"
+                                    style="color: #006000"
+                                >
+                                    Complained Received
+                                </h1>
+                                <br />
+                                <h3 class="card-text-content">Good day, <b>' . $_POST['fullname'] . '</b></h3>
+                                <p>
+                                    We truly appreciate you taking the time to share your relevant concerns with us. 
+                                    Rest assured that we will evaluate your situation as soon as possible. Please wait until you receive an official email message from the Office of Student Affairs.
+                                </p>
+                                <p>Thank You!</p>
+
+                            </div>
+                            <div
+                                class="card-footer-name"
+                                align="center"
+                                style="
+                                    background: #006000;
+                                    color: #ffff;
+                                    border-radius: 3px;
+                                    padding: 10px;
+                                "
+                            >
+                                <b>CLSU | Office of Student Affairs</b>
+                            </div>
+                        </div>
+                    </div>
+                </body>';
+    //Create instance of PHPMailer
+        $mail = new PHPMailer();
+    //Set mailer to use smtp
+        $mail->isSMTP();
+    //Define smtp host
+        $mail->Host = "smtp.gmail.com";
+    //Enable smtp authentication
+        $mail->SMTPAuth = true;
+    //Set smtp encryption type (ssl/tls)
+        $mail->SMTPSecure = "tls";
+    //Port to connect smtp
+        $mail->Port = "587";
+    //Set gmail username
+        $mail->Username = "noreply.clsu.osa@gmail.com";
+    //Set gmail password
+        $mail->Password = "vxysdrlygvebegfg";
+    //Email subject
+        $mail->Subject = "Complained";
+    //Set sender email
+        $mail->setFrom('noreply.clsu.osa@gmail.com');
+    //Enable HTML
+        $mail->isHTML(true);
+    //Attachment
+        // $mail->addAttachment('img/attachment.png');
+    //Email body
+        $mail->Body = $body;
+    //Add recipient
+        $mail->addAddress($_POST['email']);
+        // $mail->addAddress('noreply.clsu.osa@gmail.com');
+    //Finally send email
+        if ( $mail->Send() ) {
+            $_SESSION['status_success'] = "success";
+        }else{
+            echo 'Message could not be sent. Mailer Error: '[$mail->ErrorInfo];
+        }
+    //Closing smtp connection
+        $mail->smtpClose();
+} 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -153,20 +280,7 @@ if (isset($_POST['submit'])) {
         </a>
     </div>
 
-    <!-- brief history -->
-    <!-- <div class="p-5 text-center">
-        <p>"This unit is designed to assist in the best practice of student affairs and
-        services in the university through the aid of research, publication and
-        information management. The IMPU shall be responsible for the collection,
-        organization, and control over the planning, processing, evaluating and
-        reporting of relevant information in order to meet client objectives and to
-        enable efficient and effective delivery of services."</p>
-    </div> -->
-
-    <!-- student handbook -->
-    <!-- <div class="p-2 col-sm-2 card_title text-white">
-        <h5>Student Handbook</h5>
-    </div> -->
+    
     <div class="container pt-5">
       <div class="row">
         <div class="osa-tag">
@@ -304,12 +418,6 @@ if (isset($_POST['submit'])) {
 
     ?>
 
-
-    <?php
-        $result = "SELECT * FROM account";
-        $query = mysqli_query($conn, $result);
-        $get = mysqli_fetch_assoc($query);
-    ?>
     <!-- Modal -->
     <div class="modal fade" id="chatModal" tabindex="-1" aria-labelledby="chatModal" aria-hidden="true">
         <div class="modal-dialog">
@@ -319,57 +427,43 @@ if (isset($_POST['submit'])) {
                     <button type="button" class="btn-close text-white" data-mdb-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="d-flex flex-row justify-content-start mb-4">
-                        <img src="../img/avatar.png"
-                        alt="avatar 1" style="width: 45px; height: 100%;">
-                        <div class="p-3 ms-3" style="border-radius: 15px; background-color: rgba(57, 192, 237,.2);">
-                            <p class="small mb-0">Hello <?php echo $get['fullname']; ?>, if you have any concern, please fell free to tell us about your concern.</p>
-                        </div>
-                    </div>
-                    <div class="d-flex flex-row justify-content-start mb-4">
-                        <img src="../img/avatar.png"
-                        alt="avatar 1" style="width: 45px; height: 100%;">
-                        <div class="p-3 ms-3" style="border-radius: 15px; background-color: rgba(57, 192, 237,.2);">
-                            <p class="small mb-0">Just fill up the form bellow. Thank you!</p>
-                        </div>
-                    </div>
-                    <hr>
-                    <form>
+                    
+                    <form method="POST">
                         <!-- 2 column grid layout with text inputs for the first and last names -->
                         <div class="row mb-4">
                             <div class="col">
-                            <div class="form-outline">
-                                <input type="text" id="form6Example1" class="form-control" />
-                                <label class="form-label" for="form6Example1">First name</label>
+                                <div class="form-outline">
+                                    <input type="text" id="fullname" name="fullname" class="form-control" required/>
+                                    <label class="form-label" for="fullname">Fullname</label>
+                                </div>
                             </div>
-                            </div>
-                            <div class="col">
-                            <div class="form-outline">
-                                <input type="text" id="form6Example2" class="form-control" />
-                                <label class="form-label" for="form6Example2">Last name</label>
-                            </div>
-                            </div>
+                            
+                        </div>
+                        <!-- course input -->
+                        <div class="form-outline mb-4">
+                            <input type="text" id="course" name="course" class="form-control"  required/>
+                            <label class="form-label" for="course">Course</label>
                         </div>
                         <!-- Email input -->
                         <div class="form-outline mb-4">
-                            <input type="email" id="form6Example5" class="form-control" />
-                            <label class="form-label" for="form6Example5">Email</label>
+                            <input type="email" id="email" name="email" class="form-control"  required/>
+                            <label class="form-label" for="email">Email</label>
                         </div>
-
-                        <!-- Number input -->
-                        <div class="form-outline mb-4">
-                            <input type="number" id="form6Example6" class="form-control" />
-                            <label class="form-label" for="form6Example6">Phone</label>
-                        </div>
+                        <!-- Upload file -->
+                        <!-- <div class="mb-4">
+                            <label class="form-label" for="myfile">Optional</label>
+                            <input type="file" class="form-control" id="myfile" name="myfile" multiple/>
+                        </div> -->
+                        
 
                         <!-- Message input -->
                         <div class="form-outline mb-4">
-                            <textarea class="form-control" id="form6Example7" rows="4"></textarea>
-                            <label class="form-label" for="form6Example7">State your concern here</label>
+                            <textarea class="form-control" id="message" rows="4" name="message" required></textarea>
+                            <label class="form-label" for="message">State your concern here</label>
                         </div>
                         
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-primary btn-rounded shadows">Send <i class="fas fa-paper-plane"></i></button>
+                            <button type="submit" name="submitMail" id="submitMail" class="btn btn-primary btn-rounded shadows">Send <i class="fas fa-paper-plane"></i></button>
                         </div>
                     </form>
                 </div>
@@ -483,9 +577,43 @@ if (isset($_POST['submit'])) {
         </footer>
     </div>
 
+    <script src="../js/sweetalert2.js"></script>
+    <?php
+    if(isset($_SESSION['status_success']) ){
+        ?>
+        <script>
+             const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+            })
+            Toast.fire({
+            icon: 'success',
+            title: 'Email Send!'
+            })
+
+        </script>
+        <?php
+        unset($_SESSION['status_success']);
+    }
+    ?>
 
 <!-- MDB -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.0/mdb.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bs5-lightbox@1.8.3/dist/index.bundle.min.js"></script>
+<script>
+    var loadFile = function(event) {
+        var image = document.getElementById('output');
+        image.src = URL.createObjectURL(event.target.files[0]);
+        image.setAttribute("class", "out");
+    };
+    
+</script>
 </body>
 </html>

@@ -6,44 +6,57 @@ include '../mysql_connect.php';
 if (isset($_POST['submit'])) {
     $fullname = $_POST['fullname'];
     $gender = $_POST['gender'];
-    $section = $_POST['section'];
+    $course = $_POST['course'];
     $email = $_POST['email'];
-
     $password = $_POST['password'];
     $confirm_password = $_POST['confirm_password'];
     $role = 0;
 
+    $ciphering = "AES-128-CTR";
+    $option = 0;
+    $encryption_iv = '1234567890123456';
+    $encryption_key = "info";
+    $encryption_email = openssl_encrypt($email,$ciphering,$encryption_key,$option,$encryption_iv);
+
+    $ciphering = "AES-128-CTR";
+    $option = 0;
+    $encryption_iv = '1234567890123456';
+    $encryption_key = "info";
+    $encryption_password = openssl_encrypt($password,$ciphering,$encryption_key,$option,$encryption_iv);
+    
+    $ciphering = "AES-128-CTR";
+    $option = 0;
+    $encryption_iv = '1234567890123456';
+    $encryption_key = "info";
+    $encryption_confirm_password = openssl_encrypt($confirm_password,$ciphering,$encryption_key,$option,$encryption_iv);
+    
     $check_user = "SELECT * FROM account
-      WHERE email = '$email'";
+      WHERE email = '$encryption_email'";
 
     $check_result = mysqli_query($conn, $check_user);
     $count = mysqli_num_rows($check_result);
     
     if($count > 0){
-        echo '<script language="javascript">';
-        echo 'alert("email is already register!")';
-        echo '</script>';
+        $_SESSION['status_exist'] = "error";
+
     }
     else{
         $sql = "INSERT INTO account SET 
             fullname='$fullname',
             gender='$gender',
-            section='$section',
-            email = '$email',
-            password='$password',
-            confirm_password='$confirm_password',
+            course='$course',
+            email = '$encryption_email',
+            password='$encryption_password',
+            confirm_password='$encryption_confirm_password',
             role='$role';";
     
             if (mysqli_query($conn, $sql)) {
-                echo '<script language="javascript">';
-                echo 'alert("message successfully sent")';
-                echo '</script>';
+                $_SESSION['status_success'] = "success";
+
                 
             } else {
-                echo mysqli_error($conn);
-                echo '<script>';
-                echo "alert('Error Occur!');" . mysqli_error($conn);
-                echo '</script>';
+                $_SESSION['status_error'] = "error";
+
             }
     }
    
@@ -108,8 +121,8 @@ if (isset($_POST['submit'])) {
                                 </div>
                                 <div class="col-md-12 pt-3">
                                     <div class="form-outline " >
-                                    <input type="text"  name="section" id="section"class="form-control" />
-                                    <label class="form-label" for="section">Section</label>
+                                    <input type="text"  name="course" id="course"class="form-control" />
+                                    <label class="form-label" for="course">course</label>
                                     </div>
                                 </div>
                                 <div class="col-md-12 pt-3">
@@ -178,10 +191,10 @@ if (isset($_POST['submit'])) {
                 </div>
                 <div class="col-md-4">
                     <div class="form-outline">
-                    <input type="text" class="form-control" id="section" name="section" required />
-                    <label for="section" class="form-label">Section</label>
+                    <input type="text" class="form-control" id="course" name="course" required />
+                    <label for="course" class="form-label">course</label>
                     </div>
-                    <p id="error_section" class="text-danger"></p>
+                    <p id="error_course" class="text-danger"></p>
                 </div>
                 <div class="col-md-4">
                     <div class="form-outline">
@@ -247,10 +260,10 @@ if (isset($_POST['submit'])) {
                         </div>
                         <div class="col">
                             <div class="form-outline">
-                            <input type="text" class="form-control form-control-lg" id="section" name="section" required />
-                            <label for="section" class="form-label">Section</label>
+                            <input type="text" class="form-control form-control-lg" id="course" name="course" required />
+                            <label for="course" class="form-label">course</label>
                             </div>
-                            <p id="error_section" class="text-danger"></p>
+                            <p id="error_course" class="text-danger"></p>
                         </div>
                         <div class="col">
                             <div class="form-outline">
@@ -262,14 +275,14 @@ if (isset($_POST['submit'])) {
                         </div>
                         <div class="col">
                             <div class="form-outline">
-                            <input type="text" class="form-control form-control-lg" id="password" name="password" required/>
+                            <input type="password" class="form-control form-control-lg" id="password" name="password" required/>
                             <label for="password" class="form-label">Password</label>
                             </div>
                             <p id="error_password" class="text-danger"></p>
                         </div>
                         <div class="col">
                             <div class="form-outline">
-                            <input type="text" class="form-control form-control-lg" id="confirm_password" name="confirm_password" required/>
+                            <input type="password" class="form-control form-control-lg" id="confirm_password" name="confirm_password" required/>
                             <label for="confirm_password" class="form-label">Confirm Password</label>
                             <!-- <div class="invalid-feedback">Please provide a valid zip.</div> -->
                             </div>
@@ -290,7 +303,6 @@ if (isset($_POST['submit'])) {
     </div>
 
     <script>
-
         (function () {
         'use strict'
 
@@ -310,7 +322,7 @@ if (isset($_POST['submit'])) {
         // function checkPassword(form) {
         //         fullname = form.fullname.value;
         //         gender = form.gender.value;
-        //         section = form.section.value;
+        //         course = form.course.value;
         //         email = form.email.value;
         //         password = form.password.value;
         //         confirm_password = form.confirm_password.value;
@@ -321,8 +333,8 @@ if (isset($_POST['submit'])) {
         //             document.getElementById("errorid").innerHTML = "Enter your full name";
         //         if (gender == '')
         //             document.getElementById("error_gender").innerHTML = "Enter your gender";
-        //         if (section == '')
-        //             document.getElementById("error_section").innerHTML = "Enter your section";
+        //         if (course == '')
+        //             document.getElementById("error_course").innerHTML = "Enter your course";
         //         if (email == '')
         //             document.getElementById("error_email").innerHTML = "Enter your email";
         //         if (password == '')
@@ -352,6 +364,61 @@ if (isset($_POST['submit'])) {
         // }
        
     </script>
+    <script src="../js/sweetalert2.js"></script>
+    <?php
+    if(isset($_SESSION['status_success']) ){
+        ?>
+        <script>
+             const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+            })
+            Toast.fire({
+            icon: 'success',
+            title: 'Record Successfully Added!'
+            })
+
+        </script>
+        <?php
+        unset($_SESSION['status_success']);
+    }
+    
+    if(isset($_SESSION['status_error'])){
+        ?>
+        <script>
+            Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Something went wrong!',
+           
+            })
+
+        </script>
+        <?php
+        unset($_SESSION['status_error']);
+    }
+    if(isset($_SESSION['status_exist'])){
+        ?>
+        <script>
+            Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Email is already registered',
+           
+            })
+
+        </script>
+        <?php
+        unset($_SESSION['status_exist']);
+    }
+    ?>
 
 
 
