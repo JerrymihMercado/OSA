@@ -78,6 +78,10 @@ if (isset($_POST['submit'])) {
           text-decoration: none;
           color: inherit;
       }
+      ul,li
+      {
+          list-style-type: none;
+      }
   </style>
   <body>
    
@@ -293,7 +297,7 @@ if (isset($_POST['submit'])) {
             }else{
                 echo '
                         <a href="" class="text-white ps-3 " data-mdb-toggle="modal" data-mdb-target="#login_Modal">
-                        <i class="fas fa-circle-user text-white"></i>  
+                        <i class="fas fa-circle-user"></i>
                         LOGIN
                         </a>
                       ';

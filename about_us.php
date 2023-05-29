@@ -26,9 +26,13 @@ session_start();
         text-decoration: none;
         color: inherit;
     }
+    ul,li
+      {
+          list-style-type: none;
+      }
 </style>
   <body>
-  <div class="container-fluid header-title">
+  <!-- <div class="container-fluid header-title">
     <div class="row">
       <div class="col-md-1 ">
         <img src="./img/clsu-logo.png" alt="" class="logo">
@@ -90,7 +94,152 @@ session_start();
           </ul>
         </nav>
       </div>
+    </div> -->
+    <div class="logo-header ">
+        <div class="container-fluid">
+            <div class="row d-flex justify-content-between">
+                <div class="logo-header-left col-xl-7 col-md-7 col-xs-7 dp-xs-flex flex-row">
+                    <div class="logo mr-xs-3">
+                        <img src="./img/clsu-logo.png" alt="" >
+                        
+                    </div>
+                    <div class="logo-text m-xs-0">
+                        <span class="logo-title">Central Luzon State University</span>
+                        <span class="logo-sub">Science City of Muñoz, Nueva Ecija, Philippines 3120</span>
+                    </div>
+                </div>
+                <!-- <div class="logo-header-right col-xl-5 col-md-5 col-xs-5">
+                        <div class="logo-links">
+                            <a href="http://ggc.clsu.edu.ph/" target="_blank">Transparency Seal</a>
+                            <a href="about-us/au-contact-us.php">Contact Us</a>
+                        </div>
+                    </div> -->
+
+            </div>
+        </div>
     </div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <!-- Container wrapper -->
+    <div class="container-fluid navi-section">
+      <!-- Toggle button -->
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-mdb-toggle="collapse"
+        data-mdb-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <i class="fas fa-bars text-white"></i>
+      </button>
+  
+      <!-- Collapsible wrapper -->
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <!-- Navbar brand -->
+        <!-- <a class="navbar-brand mt-2 mt-lg-0" href="#">
+          <img
+            src="https://mdbcdn.b-cdn.net/img/logo/mdb-transaprent-noshadows.webp"
+            height="15"
+            alt="MDB Logo"
+            loading="lazy"
+          />
+        </a> -->
+        <!-- Left links -->
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item me-2">
+            <a class="nav-link text-white" href="index.php">HOME</a>
+          </li>
+          <li class="nav-item me-2">
+            <a class="nav-link text-white" href="about_us.php">ABOUT US</a>
+          </li>
+          <li class="nav-item me-2">
+            <a class="nav-link text-white" href="Section/impu.php">IMPU</a>
+          </li>
+          <li class="nav-item me-2">
+            <a class="nav-link text-white" href="CDESU/cdesu.php">CDESU</a>
+          </li>
+          <li class="nav-item me-2">
+            <a class="nav-link text-white" href="GSU/gsu_index.php">GSU</a>
+          </li>
+          <li class="nav-item me-2">
+            <a class="nav-link text-white" href="SOU/sou_index.php">SOU</a>
+          </li>
+          <li class="nav-item me-2">
+            <a class="nav-link text-white" href="SDB/sdb_index.php">SDB</a>
+          </li>
+        </ul>
+        <!-- Left links -->
+      </div>
+      <!-- Collapsible wrapper -->
+  
+      <!-- Right elements -->
+      <div class="d-flex align-items-center">
+        <!-- Icon -->
+        <!-- <a class="text-white me-3 " href="#">
+            <i class="fas fa-circle-user text-white"></i>
+            LOGIN
+        </a> -->
+        <?php
+            if (isset($_SESSION['role'])) {
+                if ($_SESSION['role'] == 1 || $_SESSION['role'] == 0) {
+                    echo '<li class="nav-item">
+                            <div class="btn-group shadow-0">
+                            <a type="button" class="link text-white ps-3 dropdown-toggle" data-mdb-toggle="dropdown" aria-expanded="false">
+                                LOGOUT
+                            </a>
+                            <ul class="dropdown-menu">
+                                
+                                <form action="logout.php" method="POST">
+                                    <li><button class="dropdown-item rounded-5" name="logout">Logout</button></li>
+                                </form>
+                            </ul>
+                            </div>
+                        </li>';
+                }
+            }else{
+                echo '
+                        <a href="" class="text-white ps-3 " data-mdb-toggle="modal" data-mdb-target="#login_Modal">
+                        <i class="fas fa-circle-user text-white"></i>  
+                        LOGIN
+                        </a>
+                      ';
+            }
+          ?>
+          <?php
+            if (isset($_SESSION['role'])) {
+                if ($_SESSION['role'] == 1 || $_SESSION['role'] == 0) {
+                    echo '';
+                }
+            }
+            // else{
+            //     echo '<li class="nav-item">
+            //             <a href="./Form_Register/register_index.php" class="text-white ps-3">
+            //               REGISTER
+            //             </a>
+            //           </li>';
+            // }
+          ?>
+          <?php
+            if (isset($_SESSION['role'])) {
+                if ($_SESSION['role'] == 1) {
+                    echo '<li class="nav-item">
+                        <a href="./Archive/archive_index.php" class="text-white ps-3">
+                          ARCHIVES
+                        </a>
+                      </li>';
+                }
+            }else{
+                echo '';
+            }
+          ?>
+  
+        
+      </div>
+      <!-- Right elements -->
+    </div>
+    <!-- Container wrapper -->
+  </nav>
     <div class="bg-image ripple" data-mdb-ripple-color="light">
         <img src="img/banner1.png" class="banner__img" />
         <a href="#!">
@@ -104,10 +253,7 @@ session_start();
               </div>
 
             </div>
-            <!-- <div class="d-flex justify-content-center align-items-center h-100 text-center">
-                
-            <h2 class="text-white mb-0">OFFICE OF STUDENT AFFAIRS</h2>
-            </div> -->
+   
             </div>
         </a>
     </div>
