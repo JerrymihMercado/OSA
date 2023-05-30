@@ -203,7 +203,7 @@ if(isset($_POST["handle_submit"])){
                             </a>
                             <ul class="dropdown-menu">
                                 
-                                <form action="logout.php" method="POST">
+                                <form action="../logout.php" method="POST">
                                     <li><button class="dropdown-item rounded-5" name="logout">Logout</button></li>
                                 </form>
                             </ul>
@@ -212,10 +212,7 @@ if(isset($_POST["handle_submit"])){
                 }
             }else{
                 echo '
-                        <a href="" class="text-white ps-3 " data-mdb-toggle="modal" data-mdb-target="#login_Modal">
-                        <i class="fas fa-circle-user"></i>
-                        LOGIN
-                        </a>
+                        
                       ';
             }
           ?>
@@ -274,10 +271,8 @@ if(isset($_POST["handle_submit"])){
             <div class="card mb-3 shadows border" style="max-width: 100%;">
                 <div class="row g-0">
                     <div class="col-md-4">
-                          <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                              <img src="<?php echo $row['image']; ?>" class="card-img" alt="" style="height: 35vh; object-fit: cover;"/>
-                              <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-                          </div>
+                        <img src="<?php echo $row['image']; ?>" class="img-fluid rounded-start" alt="" style="height: 35vh; object-fit: cover;"/>
+
                         </div>
                         <div class="col-md-8">
                         <div class="card-body">
@@ -359,10 +354,8 @@ if(isset($_POST["handle_submit"])){
               <a href="<?php echo '../Announcement/announcement_details.php?announcement_id=' . $row['id']; ?>">
                 
                   <div class="card h-100 shadows border">
-                    <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                          <img src="<?php echo $row['image']; ?>" class="card-img-top" alt="clsu-image" style="height: 35vh; object-fit: cover;"/>
-                          <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-                    </div>
+                      <img src="<?php echo $row['image']; ?>" class="card-img-top" alt="clsu-image" style="height: 35vh; object-fit: cover;"/>
+
                     <div class="card-body">
                         <h5 class="card-title"><?php echo $row['title']; ?></h5>
                         <p class="card-text" align="justify">

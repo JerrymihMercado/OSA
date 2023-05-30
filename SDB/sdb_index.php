@@ -7,43 +7,55 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-if (isset($_POST['submit'])) {
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-
-   
-
-    $sql = "SELECT * FROM account
-      WHERE email = '$email'
-      AND password = '$password'";
-
-    $res = mysqli_query($conn, $sql);
-    if (mysqli_num_rows($res) == 1) {
-        $row = mysqli_fetch_assoc($res);
-        $_SESSION['user'] = $email;
-        $_SESSION['role'] = $row['role'];
-        
-        echo '<script language="javascript">';
-        echo 'alert("message successfully sent")';
-        echo '</script>';
-        if ($row['role'] == 1) {    
-            echo '<script language="javascript">';
-            echo 'alert("message successfully sent")';
-            echo '</script>';
-            header("location:../SDB/sdb_index.php#login");
-        }
-        else {
-            header("location:../SDB/sdb_index.php#login");
-            echo '<script language="javascript">';
-            echo 'alert("message successfully sent")';
-            echo '</script>';
-          }
-    } else {
-        echo '<script language="javascript">';
-        echo 'alert("error")';
-        echo '</script>';
-    }
-}
+if(isset($_POST['submit'])){ 
+    // File upload configuration 
+    $targetDir = "../upload/"; 
+    $allowTypes = array('jpg','png','jpeg','gif'); 
+     
+    $statusMsg = $errorMsg = $insertValuesSQL = $errorUpload = $errorUploadType = ''; 
+    $fileNames = array_filter($_FILES['files']['name']); 
+    if(!empty($fileNames)){ 
+        foreach($_FILES['files']['name'] as $key=>$val){ 
+            // File upload path 
+            $fileName = basename($_FILES['files']['name'][$key]); 
+            $targetFilePath = $targetDir . $fileName; 
+             
+            // Check whether file type is valid 
+            $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION); 
+            if(in_array($fileType, $allowTypes)){ 
+                // Upload file to server 
+                if(move_uploaded_file($_FILES["files"]["tmp_name"][$key], $targetFilePath)){ 
+                    // Image db insert sql 
+                    $insertValuesSQL .= "('".$fileName."', NOW()),"; 
+                }else{ 
+                    $errorUpload .= $_FILES['files']['name'][$key].' | '; 
+                } 
+            }else{ 
+                $errorUploadType .= $_FILES['files']['name'][$key].' | '; 
+            } 
+        } 
+         
+        // Error message 
+        $errorUpload = !empty($errorUpload)?'Upload Error: '.trim($errorUpload, ' | '):''; 
+        $errorUploadType = !empty($errorUploadType)?'File Type Error: '.trim($errorUploadType, ' | '):''; 
+        $errorMsg = !empty($errorUpload)?'<br/>'.$errorUpload.'<br/>'.$errorUploadType:'<br/>'.$errorUploadType; 
+         
+        if(!empty($insertValuesSQL)){ 
+            $insertValuesSQL = trim($insertValuesSQL, ','); 
+            // Insert image file name into database 
+            $insert = $conn->query("INSERT INTO code_of_conduct_images (file_name, uploaded_on) VALUES $insertValuesSQL"); 
+            if($insert){ 
+                $statusMsg = "Files are uploaded successfully.".$errorMsg; 
+            }else{ 
+                $statusMsg = "Sorry, there was an error uploading your file."; 
+            } 
+        }else{ 
+            $statusMsg = "Upload failed! ".$errorMsg; 
+        } 
+    }else{ 
+        $statusMsg = 'Please select a file to upload.'; 
+    } 
+} 
 if (isset($_POST['submitMail'])) {
 
 	require '../includes/PHPMailer.php';
@@ -296,7 +308,7 @@ if (isset($_POST['submitMail'])) {
                             </a>
                             <ul class="dropdown-menu">
                                 
-                                <form action="logout.php" method="POST">
+                                <form action="../logout.php" method="POST">
                                     <li><button class="dropdown-item rounded-5" name="logout">Logout</button></li>
                                 </form>
                             </ul>
@@ -305,10 +317,7 @@ if (isset($_POST['submitMail'])) {
                 }
             }else{
                 echo '
-                        <a href="" class="text-white ps-3 " data-mdb-toggle="modal" data-mdb-target="#login_Modal">
-                        <i class="fas fa-circle-user"></i>
-                        LOGIN
-                        </a>
+                        
                       ';
             }
           ?>
@@ -372,6 +381,66 @@ if (isset($_POST['submitMail'])) {
 
       </div>
     </div>
+
+    <!-- Button trigger modal -->
+    <div class="container d-flex justify-content-end">
+        <button type="button" class="btn btn-primary fw-semibold" data-mdb-toggle="modal" data-mdb-target="#upload">
+            Upload Files
+        </button>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="upload" tabindex="-1" aria-labelledby="upload" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="upload">Upload File</h5>
+            <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form method="POST" enctype="multipart/form-data">
+            <div class="modal-body">
+                
+                <?php if(!empty($statusMsg)){?>
+                    <div class="rounded" style="background-color: #FFEBEE;">
+                        <p class="text-dark p-3"> <?php echo $statusMsg; ?></p>
+                    </div>
+                <?php }?>
+                <label class="form-label" for="file">Select Image Files to Upload:</label>
+                <input type="file" name="files[]" multiple class="form-control" id="file" />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
+                <button type="submit" name="submit" class="btn btn-primary">Upload</button>
+            </div>
+        </form>
+        </div>
+    </div>
+    </div>
+
+    <!-- <?php if(!empty($statusMsg)){?>
+        <p class="status-msg"> <?php echo $statusMsg; ?></p>
+    <?php }?>
+    <form method="POST" enctype="multipart/form-data">
+        Select Image Files to Upload:
+        <input type="file" name="files[]" multiple >
+        <input type="submit" name="submit" value="UPLOAD">
+    </form> -->
+    <?php
+        // Include the database configuration file
+      
+
+        // Get images from the database
+        $query = $conn->query("SELECT * FROM code_of_conduct_images ORDER BY id DESC");
+
+        if($query->num_rows > 0){
+            while($row = $query->fetch_assoc()){
+                $imageURL = '../upload/'.$row["file_name"];
+        ?>
+            <img src="<?php echo $imageURL; ?>" alt="" />
+        <?php }
+        }else{ ?>
+            <p>No image(s) found...</p>
+    <?php } ?> 
     
     <!-- Modal gallery -->
     <div class="container mt-5">

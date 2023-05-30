@@ -118,7 +118,7 @@
                             </a>
                             <ul class="dropdown-menu">
                                 
-                                <form action="logout.php" method="POST">
+                                <form action="../logout.php" method="POST">
                                     <li><button class="dropdown-item rounded-5" name="logout">Logout</button></li>
                                 </form>
                             </ul>
@@ -127,10 +127,7 @@
                 }
             }else{
                 echo '
-                        <a href="" class="text-white ps-3 " data-mdb-toggle="modal" data-mdb-target="#login_Modal">
-                        <i class="fas fa-circle-user"></i>
-                        LOGIN
-                        </a>
+                        
                       ';
             }
           ?>

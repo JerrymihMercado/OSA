@@ -47,8 +47,8 @@ if (isset($_POST['submit'])) {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>Office of Student Affairs</title>
-    <link rel="icon" href ="img/logo.png" class="icon">
+    <title>OSA | Archives</title>
+    <link rel="icon" href ="../img/logo.png" class="icon">
     <link rel="stylesheet" href="../Style/style.css">
     <!-- <link rel="stylesheet" href="./Style/style_about.css"> -->
      <!-- Font Awesome -->
@@ -163,7 +163,7 @@ if (isset($_POST['submit'])) {
                             </a>
                             <ul class="dropdown-menu">
                                 
-                                <form action="logout.php" method="POST">
+                                <form action="../logout.php" method="POST">
                                     <li><button class="dropdown-item rounded-5" name="logout">Logout</button></li>
                                 </form>
                             </ul>
@@ -172,10 +172,7 @@ if (isset($_POST['submit'])) {
                 }
             }else{
                 echo '
-                        <a href="" class="text-white ps-3 " data-mdb-toggle="modal" data-mdb-target="#login_Modal">
-                        <i class="fas fa-circle-user"></i>
-                        LOGIN
-                        </a>
+                        
                       ';
             }
           ?>
@@ -227,7 +224,7 @@ if (isset($_POST['submit'])) {
     </div>
   </div>
 
-  <div class="container">
+  <div class="container mt-5">
     <div class="row">
             <?php
               $sql = "SELECT * FROM announcement WHERE is_archive=1";
@@ -235,13 +232,11 @@ if (isset($_POST['submit'])) {
               if(mysqli_num_rows($res) > 0){
                   while ($row = mysqli_fetch_assoc($res)) {?>
         <div class="col-12">
-            <div class="card mb-3 shadows" style="max-width: 100%;">
+            <div class="card mb-3 shadows border" style="max-width: 100%;">
               <div class="row g-0">
                 <div class="col-md-4">
-                      <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                          <img src="../upload/<?php echo $row['image']; ?>" class="card-img" alt=""/>
-                          <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-                      </div>
+                    <img src="../upload/<?php echo $row['image']; ?>" class="img-fluid rounded-start" alt=""/>
+
                     </div>
                     <div class="col-md-8">
                     <div class="card-body">
@@ -277,9 +272,9 @@ if (isset($_POST['submit'])) {
             <!-- Grid column -->
             <div class="col-md-3 col-lg-4 col-xl-4 mx-auto mb-4">
               <!-- Content -->
-              <img src="../img/logo-clsu.jpg" alt="" class="footer-logo text-center">
-              
-              <p class="text-white" style="font-size: 25px; font-weight:500;">OFFICE OF STUDENT AFFAIRS</p>
+              <img src="../img/white-logo.png" alt="" class="footer-logo text-center" style="height: 88px;">
+              <h4 class="text-white fw-bold mt-2">OFFICE OF STUDENT AFFAIRS</h5>
+              <p class="text-white fw-lighter">Science City of Muñoz, Nueva Ecija</p>
             </div>
             <!-- Grid column -->
 

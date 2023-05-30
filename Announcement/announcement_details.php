@@ -200,7 +200,7 @@ if(isset($_POST["handle_submit_update"])){
                             </a>
                             <ul class="dropdown-menu">
                                 
-                                <form action="logout.php" method="POST">
+                                <form action="../logout.php" method="POST">
                                     <li><button class="dropdown-item rounded-5" name="logout">Logout</button></li>
                                 </form>
                             </ul>
@@ -209,10 +209,7 @@ if(isset($_POST["handle_submit_update"])){
                 }
             }else{
                 echo '
-                        <a href="" class="text-white ps-3 " data-mdb-toggle="modal" data-mdb-target="#login_Modal">
-                        <i class="fas fa-circle-user"></i>
-                        LOGIN
-                        </a>
+                        
                       ';
             }
           ?>
@@ -271,10 +268,8 @@ if(isset($_POST["handle_submit_update"])){
       <div class="card mb-3 shadows border">
           <div class="row g-0">
               <div class="col-md-4">
-                <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                    <img src="../upload/<?php echo $announcement_details['image']; ?>" class="card-img" alt=""/>
-                    <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-                </div>
+                <img src="../upload/<?php echo $announcement_details['image']; ?>" class="img-fluid rounded-start" alt=""/>
+
               </div>
               <div class="col-md-8">
                 <div class="card-body">

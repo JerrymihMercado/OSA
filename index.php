@@ -43,6 +43,7 @@ if (isset($_POST['submit'])) {
         if ($row['role'] == 1) {    
           $_SESSION['status_success_admin'] = "success";
           header("location:index.php");
+          
         }
         else {
             header("location:index.php");
@@ -190,10 +191,9 @@ if (isset($_POST['submit'])) {
                 }
             }else{
                 echo '
-                        <a href="" class="text-white ps-3 " data-mdb-toggle="modal" data-mdb-target="#login_Modal">
-                        <i class="fas fa-circle-user"></i>
-                        LOGIN
-                        </a>
+                        <button type="button" class="btn btn-white px-3 me-2" data-mdb-toggle="modal" data-mdb-target="#login_Modal">
+                          Login / Register
+                        </button>
                       ';
             }
           ?>
@@ -314,10 +314,8 @@ if (isset($_POST['submit'])) {
             <div class="card mb-3 shadows border" style="max-width: 100%;">
               <div class="row g-0">
                 <div class="col-md-4">
-                      <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                          <img src="./upload/<?php echo $row['image']; ?>" class="card-img" alt="" style="height: 35vh; object-fit: cover;"/>
-                          <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-                      </div>
+                    <img src="./upload/<?php echo $row['image']; ?>" class="img-fluid rounded-start" alt="" style="height: 35vh; object-fit: cover;"/>
+
                     </div>
                     <div class="col-md-8">
                     <div class="card-body">
@@ -455,29 +453,32 @@ if (isset($_POST['submit'])) {
 
   <script src="js/sweetalert2.js"></script>
     <?php
-    if(isset($_SESSION['status_success_admin']) ){
-        ?>
-        <script>
-             const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-            })
-            Toast.fire({
-            icon: 'success',
-            title: 'Welcome Back Admin!'
-            })
+   
+      if(isset($_SESSION['status_success_admin']) ){
+          ?>
+          <script>
+              const Toast = Swal.mixin({
+              toast: true,
+              position: 'top-end',
+              showConfirmButton: false,
+              timer: 3000,
+              timerProgressBar: true,
+              didOpen: (toast) => {
+                  toast.addEventListener('mouseenter', Swal.stopTimer)
+                  toast.addEventListener('mouseleave', Swal.resumeTimer)
+              }
+              })
+              Toast.fire({
+              icon: 'success',
+              title: 'Welcome Back Admin!'
+              })
 
-        </script>
-        <?php
-        unset($_SESSION['status_success']);
-    }
+          </script>
+          <?php
+   
+          unset($_SESSION['status_success_admin']);
+      }
+
     if(isset($_SESSION['status_success_user']) ){
         ?>
         <script>
@@ -499,7 +500,7 @@ if (isset($_POST['submit'])) {
 
         </script>
         <?php
-        unset($_SESSION['status_success']);
+        unset($_SESSION['status_success_user']);
     }
     
     if(isset($_SESSION['status_error'])){

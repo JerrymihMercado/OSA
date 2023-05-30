@@ -36,10 +36,23 @@ if (isset($_POST['submit'])) {
     $check_result = mysqli_query($conn, $check_user);
     $count = mysqli_num_rows($check_result);
     
-     
+    $str = $email;
+    $pattern = "/[A-Za-z]+\.[A-Za-z0-9]+@clsu2\.edu\.ph/i";
+
+    // $pass_regex = "/^.*(?=.*[a-zA-Z])(?=.*\d)(?=.*[!#$%&?@.']).*$/";
+
     if($count > 0){
         $_SESSION['status_exist'] = "error";
-
+    }
+    // else if($encryption_password != $pass_regex){
+    //     $_SESSION['status_length'] = "error";
+    // }
+    else if($encryption_password != $encryption_confirm_password){
+        $_SESSION['status_pass'] = "error";
+        
+    }
+    else if(preg_match($pattern, $str)==0){
+        $_SESSION['status_invalid_email'] = "error";
     }
     else{
         $sql = "INSERT INTO account SET 
@@ -110,6 +123,7 @@ if (isset($_POST['submit'])) {
                             <div class="form-outline">
                                 <input type="text" class="form-control form-control-lg" id="fullname" name="fullname" required/>
                                 <label for="fullname" class="form-label" >Fullname</label>
+                                
                             </div>
                             <p id="errorid" class="text-danger"></p>
                         </div>
@@ -279,6 +293,48 @@ if (isset($_POST['submit'])) {
         </script>
         <?php
         unset($_SESSION['status_exist']);
+    }
+    if(isset($_SESSION['status_pass'])){
+        ?>
+        <script>
+            Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Password Not Match',
+           
+            })
+
+        </script>
+        <?php
+        unset($_SESSION['status_pass']);
+    }
+    if(isset($_SESSION['status_invalid_email'])){
+        ?>
+        <script>
+            Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Invalid Email clsu account only!',
+           
+            })
+
+        </script>
+        <?php
+        unset($_SESSION['status_invalid_email']);
+    }
+    if(isset($_SESSION['status_length'])){
+        ?>
+        <script>
+            Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'The password must 8 character long that consist of Capital, small letters, numbers, symbols.',
+           
+            })
+
+        </script>
+        <?php
+        unset($_SESSION['status_length']);
     }
     ?>
 

@@ -4,6 +4,6 @@ session_start();
 if (isset($_POST['logout'])) {
     session_destroy();
     unset($_SESSION['user']);
-    unset($_SESSION['is_admin']);
+    unset($_SESSION['role']);
     header('Location:index.php');
 }
