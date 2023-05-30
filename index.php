@@ -391,6 +391,7 @@ if (isset($_POST['submit'])) {
               <img src="img/white-logo.png" alt="" class="footer-logo text-center" style="height: 88px;">
               <h4 class="text-white fw-bold mt-2">OFFICE OF STUDENT AFFAIRS</h5>
               <p class="text-white fw-lighter">Science City of Muñoz, Nueva Ecija</p>
+              <p class="text-white" style="font-size: 13px;">© Copyright 2023 Central Luzon State University All Rights Reserved</p>
             </div>
             <!-- Grid column -->
 
@@ -438,13 +439,7 @@ if (isset($_POST['submit'])) {
           <!-- Grid row -->
         </div>
       </section>
-      <!-- Section: Links  -->
-
-      <!-- Copyright -->
-      <div class="text-center text-white fw-light" style="background: -webkit-linear-gradient(0deg, #008102, #93d12d);">
-          © Copyright 2023 Central Luzon State University All Rights Reserved
-      </div>
-      <!-- Copyright -->
+      
     </footer>
   </div>
     <!-- End your project here-->

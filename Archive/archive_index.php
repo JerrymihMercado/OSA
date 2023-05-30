@@ -272,16 +272,17 @@ if (isset($_POST['submit'])) {
             <!-- Grid column -->
             <div class="col-md-3 col-lg-4 col-xl-4 mx-auto mb-4">
               <!-- Content -->
-              <img src="../img/white-logo.png" alt="" class="footer-logo text-center" style="height: 88px;">
+              <img src="img/white-logo.png" alt="" class="footer-logo text-center" style="height: 88px;">
               <h4 class="text-white fw-bold mt-2">OFFICE OF STUDENT AFFAIRS</h5>
               <p class="text-white fw-lighter">Science City of Muñoz, Nueva Ecija</p>
+              <p class="text-white" style="font-size: 13px;">© Copyright 2023 Central Luzon State University All Rights Reserved</p>
             </div>
             <!-- Grid column -->
 
             <!-- Grid column -->
             <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
               <!-- Links -->
-              <h6 class="text-uppercase fw-bold mb-4 " style="color: #cdfb13;">Contact</h6>
+              <h5 class="text-uppercase fw-bold mb-4 " style="color: #cdfb13;">Contact</h5>
               <p class="text-white"><i class="fas fa-location-dot "></i> Central Luzon State University, Science City of Muñoz Nueva Ecija, Philippines</p>
               <p class="text-white">
                 <i class="fas fa-envelope me-3 "></i>
@@ -295,9 +296,9 @@ if (isset($_POST['submit'])) {
             <!-- Grid column -->
             <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
               <!-- Links -->
-              <h6 class="text-uppercase fw-bold mb-4" style="color: #cdfb13;">
+              <h5 class="text-uppercase fw-bold mb-4" style="color: #cdfb13;">
                 SOCIAL MEDIA
-              </h6>
+              </h5>
               <div>
                 <a href="https://www.facebook.com/officeofstudentaffairsCLSU" target="_blank" class="me-3 text-reset">
                   <i class="fab fa-facebook-square fa-lg text-white"></i>
@@ -322,14 +323,7 @@ if (isset($_POST['submit'])) {
           <!-- Grid row -->
         </div>
       </section>
-      <!-- Section: Links  -->
-
-      <!-- Copyright -->
-      <div class="text-center p-1 text-white" style="background: -webkit-linear-gradient(0deg, #008102, #93d12d);">
-        © Copyright 2023 Central Luzon State University All Rights Reserved
-        <!-- <a class="text-reset fw-bold" href="https://mdbootstrap.com/">MDBootstrap.com</a> -->
-      </div>
-      <!-- Copyright -->
+      
     </footer>
   </div>
     <!-- End your project here-->

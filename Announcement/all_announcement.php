@@ -408,20 +408,19 @@ if(isset($_POST["handle_submit"])){
   </div>
 
   <div class="mt-5 footer-section " >
-    <footer class="text-center text-lg-start bg-light text-muted" style="background-image: url(../img/banner1.png);  background-repeat: no-repeat; background-size: cover; ">
-
-    
+    <footer class="text-center text-lg-start bg-light text-muted " style="background-image: url(../img/banner1.png);  background-repeat: no-repeat; background-size: cover; ">
       <!-- Section: Links  -->
-      <section class="" style="background-image: url(../img/banner1.png);  background-size:100rem, 100rem; background-repeat: no-repeat;align-items: center; ">
-        <div class="container-fluid  text-md-start pt-3 ">
+      <section class="">
+        <div class="container-fluid  text-md-start pt-3 " >
           <!-- Grid row -->
-          <div class="row mt-3">
+          <div class="row mt-3" >
             <!-- Grid column -->
             <div class="col-md-3 col-lg-4 col-xl-4 mx-auto mb-4">
               <!-- Content -->
-              <img src="../img/white-logo.png" alt="" class="footer-logo text-center" style="height: 88px;">
+              <img src="img/white-logo.png" alt="" class="footer-logo text-center" style="height: 88px;">
               <h4 class="text-white fw-bold mt-2">OFFICE OF STUDENT AFFAIRS</h5>
               <p class="text-white fw-lighter">Science City of Muñoz, Nueva Ecija</p>
+              <p class="text-white" style="font-size: 13px;">© Copyright 2023 Central Luzon State University All Rights Reserved</p>
             </div>
             <!-- Grid column -->
 
@@ -469,14 +468,7 @@ if(isset($_POST["handle_submit"])){
           <!-- Grid row -->
         </div>
       </section>
-      <!-- Section: Links  -->
-
-      <!-- Copyright -->
-      <div class="text-center p-1 text-white" style="background: -webkit-linear-gradient(0deg, #008102, #93d12d);">
-        © Copyright 2023 Central Luzon State University All Rights Reserved
-        <!-- <a class="text-reset fw-bold" href="https://mdbootstrap.com/">MDBootstrap.com</a> -->
-      </div>
-      <!-- Copyright -->
+      
     </footer>
   </div>
 
