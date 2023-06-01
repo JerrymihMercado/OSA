@@ -2,6 +2,59 @@
 session_start();
 include '../mysql_connect.php';
 
+if (isset($_POST['submit'])) {
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+   $ciphering = "AES-128-CTR";
+    $option = 0;
+    $encryption_iv = '1234567890123456';
+    $encryption_key = "info";
+    $encryption_email = openssl_encrypt($email,$ciphering,$encryption_key,$option,$encryption_iv);
+
+    $ciphering = "AES-128-CTR";
+    $option = 0;
+    $encryption_iv = '1234567890123456';
+    $encryption_key = "info";
+    $encryption_password = openssl_encrypt($password,$ciphering,$encryption_key,$option,$encryption_iv);
+
+    $sql = "SELECT * FROM account
+      WHERE email = '$encryption_email'
+      AND password = '$encryption_password'";
+    
+    $res = mysqli_query($conn, $sql);
+    if (mysqli_num_rows($res) == 1) {
+        $row = mysqli_fetch_assoc($res);
+
+        $ciphering = "AES-128-CTR";
+        $option = 0;
+        $decryption_key = "info";
+        $decryption_iv = '1234567890123456';
+        $decryption = openssl_decrypt($row['email'],$ciphering,$decryption_key,$option,$decryption_iv);
+        $session_email = $decryption;
+
+        $_SESSION['fullname'] = $row['fullname'];
+        $_SESSION['email'] = $session_email;
+        $_SESSION['course'] = $row['course'];
+        
+        $_SESSION['role'] = $row['role'];
+        
+        if ($row['role'] == 1) {    
+          header("location:../Publications/all_publications.php");
+          $_SESSION['status_success_admin'] = "success";
+          session_unset($_SESSION['status_success_admin']);
+          
+        }
+        else {
+          $_SESSION['status_success_user'] = "success";
+          header("location:../Publications/all_publications.php");
+          session_unset($_SESSION['status_success_user']);
+
+          }
+    } else {
+            $_SESSION['status_error'] = "error";
+    }
+}
 if(isset($_POST["handle_submit"])){
    
     $title = $_POST['title'];
@@ -46,7 +99,7 @@ if(isset($_POST["handle_submit"])){
     <title>Office of Student Affairs</title>
     <link rel="icon" href ="../img/logo.png" class="icon">
     <link rel="stylesheet" href="../Style/style.css">
-
+    <script src="https://cdn.tiny.cloud/1/n46xtsacbhbxjsimv4eyp5etxtgm41hzte71yebrsou8dm4r/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
     <?php
       include '../Links/link.php';
     ?>
@@ -75,135 +128,10 @@ if(isset($_POST["handle_submit"])){
                         <span class="logo-sub">Science City of Muñoz, Nueva Ecija, Philippines 3120</span>
                     </div>
                 </div>
-                <!-- <div class="logo-header-right col-xl-5 col-md-5 col-xs-5">
-                        <div class="logo-links">
-                            <a href="http://ggc.clsu.edu.ph/" target="_blank">Transparency Seal</a>
-                            <a href="about-us/au-contact-us.php">Contact Us</a>
-                        </div>
-                    </div> -->
-
             </div>
         </div>
     </div>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <!-- Container wrapper -->
-    <div class="container-fluid navi-section">
-      <!-- Toggle button -->
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-mdb-toggle="collapse"
-        data-mdb-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <i class="fas fa-bars text-white"></i>
-      </button>
-  
-      <!-- Collapsible wrapper -->
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <!-- Navbar brand -->
-        <!-- <a class="navbar-brand mt-2 mt-lg-0" href="#">
-          <img
-            src="https://mdbcdn.b-cdn.net/img/logo/mdb-transaprent-noshadows.webp"
-            height="15"
-            alt="MDB Logo"
-            loading="lazy"
-          />
-        </a> -->
-        <!-- Left links -->
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item me-2">
-            <a class="nav-link text-white" href="../index.php">HOME</a>
-          </li>
-          <li class="nav-item me-2">
-            <a class="nav-link text-white" href="../about_us.php">ABOUT US</a>
-          </li>
-          <li class="nav-item me-2">
-            <a class="nav-link text-white" href="../Section/impu.php">IMPU</a>
-          </li>
-          <li class="nav-item me-2">
-            <a class="nav-link text-white" href="../CDESU/cdesu.php">CDESU</a>
-          </li>
-          <li class="nav-item me-2">
-            <a class="nav-link text-white" href="../GSU/gsu_index.php">GSU</a>
-          </li>
-          <li class="nav-item me-2">
-            <a class="nav-link text-white" href="../SOU/sou_index.php">SOU</a>
-          </li>
-          <li class="nav-item me-2">
-            <a class="nav-link text-white" href="../SDB/sdb_index.php">SDB</a>
-          </li>
-        </ul>
-        <!-- Left links -->
-      </div>
-      <!-- Collapsible wrapper -->
-  
-      <!-- Right elements -->
-      <div class="d-flex align-items-center">
-        <!-- Icon -->
-        <!-- <a class="text-white me-3 " href="#">
-            <i class="fas fa-circle-user text-white"></i>
-            LOGIN
-        </a> -->
-        <?php
-            if (isset($_SESSION['role'])) {
-                if ($_SESSION['role'] == 1 || $_SESSION['role'] == 0) {
-                    echo '<li class="nav-item">
-                            <div class="btn-group shadow-0">
-                            <a type="button" class="link text-white ps-3 dropdown-toggle" data-mdb-toggle="dropdown" aria-expanded="false">
-                                LOGOUT
-                            </a>
-                            <ul class="dropdown-menu">
-                                
-                                <form action="../logout.php" method="POST">
-                                    <li><button class="dropdown-item rounded-5" name="logout">Logout</button></li>
-                                </form>
-                            </ul>
-                            </div>
-                        </li>';
-                }
-            }else{
-                echo '
-                        
-                      ';
-            }
-          ?>
-          <?php
-            if (isset($_SESSION['role'])) {
-                if ($_SESSION['role'] == 1 || $_SESSION['role'] == 0) {
-                    echo '';
-                }
-            }
-            // else{
-            //     echo '<li class="nav-item">
-            //             <a href="./Form_Register/register_index.php" class="text-white ps-3">
-            //               REGISTER
-            //             </a>
-            //           </li>';
-            // }
-          ?>
-          <?php
-            if (isset($_SESSION['role'])) {
-                if ($_SESSION['role'] == 1) {
-                    echo '<li class="nav-item">
-                        <a href="./Archive/archive_index.php" class="text-white ps-3">
-                          ARCHIVES
-                        </a>
-                      </li>';
-                }
-            }else{
-                echo '';
-            }
-          ?>
-  
-        
-      </div>
-      <!-- Right elements -->
-    </div>
-    <!-- Container wrapper -->
-  </nav>
+  <?php include '../Components/header.php'; ?>
   <!-- banner -->
     <div class="bg-image ripple" data-mdb-ripple-color="light">
         <img src="../img/clsu-1.jpg" class="banner__img" />
@@ -213,9 +141,6 @@ if(isset($_POST["handle_submit"])){
                 <h3 class="text-white mb-0 fw-bold">PUBLICATIONS</h3>
             </div>
             </div>
-            <!-- <div class="hover-overlay">
-            <div class="mask" style="background-color: hsla(0, 0%,98%, 0.2)"></div>
-            </div> -->
         </a>
     </div> 
     <div class="container pt-5">
@@ -243,7 +168,7 @@ if(isset($_POST["handle_submit"])){
   </div>
 
   <div class="modal fade" id="add_page" tabindex="-1" aria-labelledby="add_page" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <form action="" method="POST" enctype="multipart/form-data">
             <div class="modal-header">
@@ -254,19 +179,20 @@ if(isset($_POST["handle_submit"])){
                
                 <div class="mb-3">
                     <label for="myfile">Image<span class="text-danger"> *</span></label>
-                    <img class="card-img-top movie_input_img" id="output" src="../img/avatar.png" alt="Card image" style="width: 100%; height: auto; ">
+                    <img class="card-img-top movie_input_img" id="output" src="../img/Default_images.svg" alt="Card image" style="width: 100%; height: auto; ">
                     <input type="file" class="form-control mt-2" id="myfile"  name="myfile" accept="image/*" onchange="loadFile(event)" required/>
                 </div>
                 <div class="mb-3">
                     <label for="title">Page Title<span class="text-danger"> *</span></label>
-                    <input type="text" name="title" class="form-control" id="title" placeholder="Enter Name of Location" required>
+                    <input type="text" name="title" class="form-control" id="title" placeholder="Input Title" required>
                 </div>
                 <div class="mb-3">
                     <label for="description">Description<span class="text-danger"> *</span></label>
-                    <textarea class="form-control " rows="5" id="description" name="description" minlength="30" maxlength="5000" required></textarea>
+                    <textarea class="form-control" id="mytextarea" name="description"></textarea>
                 </div>
             </div>
-            <div class="modal-footer pt-4 ">                  
+            <div class="modal-footer pt-4 "> 
+                <button type="reset" name = "" class="btn mx-auto w-100 btn-light fw-semibold" data-mdb-dismiss="modal" >Cancel</button>
                 <button type="submit" name = "handle_submit" class="btn mx-auto w-100 btn-success fw-semibold" >Submit</button>
             </div>
         </form>
@@ -274,104 +200,114 @@ if(isset($_POST["handle_submit"])){
     </div>
   </div>
 
-    <div class="container mt-4">
-        <div class="row row-cols-1 row-cols-md-3 g-4">
+ <div class="container mt-4">
+      <div class="row row-cols-1 row-cols-md-3 g-4">
         <?php
-          $sql = "SELECT * FROM publication_page";
-          $res = mysqli_query($conn, $sql);
-          if(mysqli_num_rows($res) > 0){
-            while ($row = mysqli_fetch_assoc($res)) {?>
-            <div class="col">
-                <a href="<?php echo '../Publications/publication_page.php?publication_ID=' . $row['id']; ?>">
-                  <div class="card h-100 shadows">
-                      <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                        <img src="../upload/<?php echo $row['image']; ?>" class="card-img-top" alt="" style="height: 30vh; object-fit: cover;"/>
-                        <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-                      </div>
-                      <div class="card-body">
-                          <h5 class="card-title"><?php echo $row['title']; ?></h5>
-                          <p class="card-text" align="justify">
-                            <?php echo $row['descriptions']; ?>
-                          </p>
-                      </div>
-                  </div>
-                </a>
+        $sql = "SELECT * FROM publication_page";
+        $res = mysqli_query($conn, $sql);
+        if(mysqli_num_rows($res) > 0){
+          while ($row = mysqli_fetch_assoc($res)) {?>
+          <div class="col">
+            <div class="card h-100 shadows">
+                <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                  <img src="../upload/<?php echo $row['image']; ?>" class="card-img-top" alt="" style="height: 30vh; object-fit: cover;"/>
+                  <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title"><?php echo $row['title']; ?></h5>
+                    <p class="card-text" align="justify">
+                      <?php echo $row['descriptions']; ?>
+                    </p>
+                    
+                </div>
+                <div class="card-footer bg-transparent border-0">
+                  <a href="<?php echo '../Publications/publication_page.php?publication_ID=' . $row['id']; ?>">
+                    <button class="btn btn-success px-4">View More</button>
+                  </a>
+                </div>
             </div>
-            
-          <?php     
-              }
-          }
-          ?> 
-        </div>
-    </div>
-
-    <div class="mt-5 footer-section " >
-    <footer class="text-center text-lg-start bg-light text-muted " style="background-image: url(../img/banner1.png);  background-repeat: no-repeat; background-size: cover; ">
-      <!-- Section: Links  -->
-      <section class="">
-        <div class="container-fluid  text-md-start pt-3 " >
-          <!-- Grid row -->
-          <div class="row mt-3" >
-            <!-- Grid column -->
-            <div class="col-md-3 col-lg-4 col-xl-4 mx-auto mb-4">
-              <!-- Content -->
-              <img src="img/white-logo.png" alt="" class="footer-logo text-center" style="height: 88px;">
-              <h4 class="text-white fw-bold mt-2">OFFICE OF STUDENT AFFAIRS</h5>
-              <p class="text-white fw-lighter">Science City of Muñoz, Nueva Ecija</p>
-              <p class="text-white" style="font-size: 13px;">© Copyright 2023 Central Luzon State University All Rights Reserved</p>
-            </div>
-            <!-- Grid column -->
-
-            <!-- Grid column -->
-            <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-              <!-- Links -->
-              <h5 class="text-uppercase fw-bold mb-4 " style="color: #cdfb13;">Contact</h5>
-              <p class="text-white"><i class="fas fa-location-dot "></i> Central Luzon State University, Science City of Muñoz Nueva Ecija, Philippines</p>
-              <p class="text-white">
-                <i class="fas fa-envelope me-3 "></i>
-                osa@clsu.edu.ph
-              </p>
-              <p class="text-white"><i class="fas fa-phone me-3 "></i> (044) 940 7030</p>
-              <!-- <p><i class="fas fa-print me-3"></i> + 01 234 567 89</p> -->
-            </div>
-            <!-- Grid column -->
-          
-            <!-- Grid column -->
-            <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-              <!-- Links -->
-              <h5 class="text-uppercase fw-bold mb-4" style="color: #cdfb13;">
-                SOCIAL MEDIA
-              </h5>
-              <div>
-                <a href="https://www.facebook.com/officeofstudentaffairsCLSU" target="_blank" class="me-3 text-reset">
-                  <i class="fab fa-facebook-square fa-lg text-white"></i>
-                </a>
-                <a href="https://twitter.com/clsu_official?lang=en" target="_blank" class="me-3 text-reset">
-                  <i class="fab fa-twitter fa-lg text-white"></i>
-                </a>
-                <a href="" class="me-3 text-reset">
-                  <i class="fab fa-google fa-lg text-white"></i>
-                </a>
-                <a href="" class="me-3 text-reset">
-                  <i class="fab fa-instagram fa-lg text-white"></i>
-                </a>
-                <a href="" class="me-3 text-reset">
-                  <i class="fab fa-linkedin fa-lg text-white"></i>
-                </a>
-                
-              </div>
-            </div>
-            <!-- Grid column -->
           </div>
-          <!-- Grid row -->
-        </div>
-      </section>
-      
-    </footer>
+          <?php     
+            }
+        }
+        ?> 
+      </div>
   </div>
 
+<?php include_once '../Components/footer.php' ?>
 
-<!-- MDB -->
+<script src="../js/sweetalert2.js"></script>
+  <?php
+    if(isset($_SESSION['status_success_admin']) ){
+        ?>
+        <script>
+            const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+            })
+            Toast.fire({
+            icon: 'success',
+            title: 'Welcome Back Admin!'
+            })
+
+        </script>
+        <?php
+            unset($_SESSION['status_success_admin']);
+        
+    }
+    if(isset($_SESSION['status_success_user']) ){
+        ?>
+        <script>
+            const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+            })
+            Toast.fire({
+            icon: 'success',
+            title: 'Welcome <?php echo $_SESSION['fullname']?>!'
+            })
+        </script>
+        <?php
+        unset($_SESSION['status_success_user']);
+    }
+    if(isset($_SESSION['status_error'])){
+        ?>
+        <script>
+            const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+            })
+            Toast.fire({
+            icon: 'error',
+            title: 'Credentials error'
+            })
+
+        </script>
+        <?php
+        
+    }
+  ?>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.0/mdb.min.js"></script>
 <script>
       var loadFile = function(event) {
@@ -379,7 +315,12 @@ if(isset($_POST["handle_submit"])){
           image.src = URL.createObjectURL(event.target.files[0]);
           image.setAttribute("class", "out");
       };
-      
   </script>
+<script>
+      tinymce.init({
+    selector: '#mytextarea',
+      toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+  });
+</script>
 </body>
 </html>

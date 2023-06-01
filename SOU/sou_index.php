@@ -228,7 +228,7 @@ session_start();
             <!-- Grid column -->
             <div class="col-md-3 col-lg-4 col-xl-4 mx-auto mb-4">
               <!-- Content -->
-              <img src="img/white-logo.png" alt="" class="footer-logo text-center" style="height: 88px;">
+              <img src="../img/white-logo.png" alt="" class="footer-logo text-center" style="height: 88px;">
               <h4 class="text-white fw-bold mt-2">OFFICE OF STUDENT AFFAIRS</h5>
               <p class="text-white fw-lighter">Science City of Muñoz, Nueva Ecija</p>
               <p class="text-white" style="font-size: 13px;">© Copyright 2023 Central Luzon State University All Rights Reserved</p>

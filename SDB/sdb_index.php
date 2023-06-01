@@ -179,7 +179,16 @@ if (isset($_POST['submitMail'])) {
         }
     //Closing smtp connection
         $mail->smtpClose();
-} 
+}
+if (isset($_GET['image_id'])) {
+    $id = $_GET['image_id'];
+    $sql = "SELECT * FROM  code_of_conduct_images WHERE id=".$id;
+    $result = mysqli_query($conn, $sql);
+    if (mysqli_num_rows($result) > 0) {
+
+        $conduct_image = mysqli_fetch_assoc($result);
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -383,106 +392,84 @@ if (isset($_POST['submitMail'])) {
     </div>
 
     <!-- Button trigger modal -->
-    <div class="container d-flex justify-content-end">
-        <button type="button" class="btn btn-primary fw-semibold" data-mdb-toggle="modal" data-mdb-target="#upload">
-            Upload Files
-        </button>
-    </div>
+    
+    <?php
+        if (isset($_SESSION['role'])) {
+            if ($_SESSION['role'] == 1) {
+                echo '<div class="container d-flex justify-content-end">
+                            <button type="button" class="btn btn-primary fw-semibold" data-mdb-toggle="modal" data-mdb-target="#upload">
+                                Upload Files
+                            </button>
+                        </div>';
+            }
+        }else{
+            echo '';
+        }
+    ?>
 
     <!-- Modal -->
     <div class="modal fade" id="upload" tabindex="-1" aria-labelledby="upload" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="upload">Upload File</h5>
-            <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <form method="POST" enctype="multipart/form-data">
-            <div class="modal-body">
-                
-                <?php if(!empty($statusMsg)){?>
-                    <div class="rounded" style="background-color: #FFEBEE;">
-                        <p class="text-dark p-3"> <?php echo $statusMsg; ?></p>
-                    </div>
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="upload">Upload File</h5>
+                <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form method="POST" enctype="multipart/form-data">
+                <div class="modal-body">
+            
+                    <?php if(!empty($statusMsg)){?>
+                        <div class="rounded" style="background-color: #B3E5FC;">
+                            <p class="text-dark p-3"> <?php echo $statusMsg; ?></p>
+                        </div>
                 <?php }?>
-                <label class="form-label" for="file">Select Image Files to Upload:</label>
-                <input type="file" name="files[]" multiple class="form-control" id="file" />
+
+                    <label class="form-label" for="file">Select Image Files to Upload:</label>
+                    <input type="file" name="files[]" multiple class="form-control" id="file" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
+                    <button type="submit" name="submit" class="btn btn-primary">Upload</button>
+                </div>
+            </form>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
-                <button type="submit" name="submit" class="btn btn-primary">Upload</button>
-            </div>
-        </form>
         </div>
     </div>
-    </div>
 
-    <!-- <?php if(!empty($statusMsg)){?>
-        <p class="status-msg"> <?php echo $statusMsg; ?></p>
-    <?php }?>
-    <form method="POST" enctype="multipart/form-data">
-        Select Image Files to Upload:
-        <input type="file" name="files[]" multiple >
-        <input type="submit" name="submit" value="UPLOAD">
-    </form> -->
-    <?php
-        // Include the database configuration file
-      
-
-        // Get images from the database
-        $query = $conn->query("SELECT * FROM code_of_conduct_images ORDER BY id DESC");
-
-        if($query->num_rows > 0){
-            while($row = $query->fetch_assoc()){
-                $imageURL = '../upload/'.$row["file_name"];
-        ?>
-            <img src="<?php echo $imageURL; ?>" alt="" />
-        <?php }
-        }else{ ?>
-            <p>No image(s) found...</p>
-    <?php } ?> 
     
     <!-- Modal gallery -->
     <div class="container mt-5">
         <div class="row row-cols-1 row-cols-md-3 g-4">
+        <?php
+          $sql = "SELECT * FROM code_of_conduct_images";
+          $res = mysqli_query($conn, $sql);
+          if(mysqli_num_rows($res) > 0){
+              while ($row = mysqli_fetch_assoc($res)) {
+                $imageURL = '../upload/'.$row["file_name"];?>
             <div class="col">
                 <div class="bg-image hover-overlay ripple shadow-1-strong rounded shadows" data-ripple-color="light">
-                    <img src="../img/conduct-1.png" class="w-100"/>
-                    <a href="#!" data-mdb-toggle="modal" data-mdb-target="#exampleModal1">
+                    <img src="<?php echo $imageURL; ?>" class="w-100"/>
+                    <a href="#!" data-mdb-toggle="modal" data-mdb-target="#<?php echo $row['status'];?>">
                         <div class="mask" style="background-color: rgba(251, 251, 251, 0.2);"></div>
                     </a>
                 </div>
             </div>
-            <div class="col">
-                <div class="bg-image hover-overlay ripple shadow-1-strong rounded shadows" data-ripple-color="light">
-                    <img src="../img/conduct-2.png" class="w-100"/>
-                    <a href="#!" data-mdb-toggle="modal" data-mdb-target="#exampleModal1">
-                        <div class="mask" style="background-color: rgba(251, 251, 251, 0.2);"></div>
-                    </a>
-                </div>
+             <?php     
+            }
+        }else{?>
+            <div class="container p-2">
+                <h1 class="text-warning">No Image(s) Found!</h1>
             </div>
-            <div class="col">
-                <div class="bg-image hover-overlay ripple shadow-1-strong rounded shadows" data-ripple-color="light">
-                    <img src="../img/conduct-3.png" class="w-100"/>
-                    <a href="#!" data-mdb-toggle="modal" data-mdb-target="#exampleModal1">
-                        <div class="mask" style="background-color: rgba(251, 251, 251, 0.2);"></div>
-                    </a>
-                </div>
-            </div>
-            <!-- <div class="col">
-                <div class="card h-100">
-                
-                </div>
-            </div> -->
+        <?php  }
+                ?>
         </div>
         <section class="">
        
-            <!-- Section: Modals -->
             <section class="">
-                <!-- Modal 1 -->
+                
                 <div
                 class="modal fade"
-                id="exampleModal1"
+                id="1"
                 tabindex="-1"
                 aria-labelledby="exampleModal1Label"
                 aria-hidden="true"
@@ -502,51 +489,7 @@ if (isset($_POST['submitMail'])) {
                     </div>
                 </div>
                 </div>
-                <!-- Modal 2 -->
-                <div
-                class="modal fade"
-                id="exampleModal2"
-                tabindex="-1"
-                aria-labelledby="exampleModal2Label"
-                aria-hidden="true"
-                >
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                    <img
-                        src="../img/conduct-2.png"
-                        class="w-100"
-                        />
-
-                    <div class="text-center py-3">
-                        <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">
-                        Close
-                        </button>
-                    </div>
-                    </div>
-                </div>
-                </div>
-                <!-- Modal 3 -->
-                <div
-                class="modal fade"
-                id="exampleModal3"
-                tabindex="-1"
-                aria-labelledby="exampleModal3Label"
-                aria-hidden="true"
-                >
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                    <img
-                        src="../img/conduct-3.png"
-                        class="w-100"
-                        />
-
-                    <div class="text-center py-3">
-                        <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">
-                        Close
-                        </button>
-                    </div>
-                    </div>
-                </div>
+               
                 </div>
             </section>
             <!-- Section: Modals -->
@@ -579,7 +522,7 @@ if (isset($_POST['submitMail'])) {
                 </div>
                 <div class="modal-body">
                     
-                    <form method="POST">
+                    <form method="POST" enctype="multipart/form-data">
                         <!-- 2 column grid layout with text inputs for the first and last names -->
                         <div class="row mb-4">
                             <div class="col">
@@ -666,7 +609,7 @@ if (isset($_POST['submitMail'])) {
             <!-- Grid column -->
             <div class="col-md-3 col-lg-4 col-xl-4 mx-auto mb-4">
               <!-- Content -->
-              <img src="img/white-logo.png" alt="" class="footer-logo text-center" style="height: 88px;">
+              <img src="../img/white-logo.png" alt="" class="footer-logo text-center" style="height: 88px;">
               <h4 class="text-white fw-bold mt-2">OFFICE OF STUDENT AFFAIRS</h5>
               <p class="text-white fw-lighter">Science City of Muñoz, Nueva Ecija</p>
               <p class="text-white" style="font-size: 13px;">© Copyright 2023 Central Luzon State University All Rights Reserved</p>

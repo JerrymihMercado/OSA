@@ -1,3 +1,7 @@
+ @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap');
+ *{
+    font-family: 'Poppins', sans-serif;
+ }
  a,
  a:hover,
  a:focus,
@@ -38,10 +42,6 @@
     -webkit-text-fill-color: transparent;
 }
 
-/* .flex-row {
-    -ms-flex-direction: row!important;
-    flex-direction: row!important;
-} */
 .logo-title {
     font-family: 'Uniform Bold', Arial, sans-serif;
     font-size: 28px;
@@ -58,13 +58,26 @@ ul,li
       {
           list-style-type: none;
       }
-
+.nav-item-out{
+    font-family: 'LFranklin Semibold', Arial, sans-serif;
+    color: white;
+    padding: 0px 1.1rem !important;
+    text-transform: uppercase;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+}
 .nav-item a {
     /* border-right-style: solid; */
     /* border-width: thin; */
     /* padding-right: 30px; */
-    font-weight: 700;
+    font-family: 'LFranklin Semibold', Arial, sans-serif;
+    color: white;
+    border-right: 1px solid #0b5300;
+    padding: 0px 1.1rem !important;
+    text-transform: uppercase;
     font-size: 13px;
+    font-weight: 600;
 }
 
 /* .link-home {
@@ -132,7 +145,7 @@ input:-webkit-autofill:active {
 }
 .tag-info {
     border-left: 8px solid #FFD600;
-    font-size: 23px;
+    font-size: 25px;
     font-weight:700;
     color: #148D08;
     padding-left: 10px;
@@ -148,14 +161,14 @@ input:-webkit-autofill:active {
 }
 .impu-desc {
     border-left: 8px solid #FFD600;
-    /* font-size: 20px; */
-    font-weight:500;
+    font-weight: 500;
     padding-left: 10px;
 }
 
 .tag-sub {
     margin-top: -20px;
     margin-left: 21px;
+    font-size: 19px;
 }
 .borders {
     border-top-style: dotted;
