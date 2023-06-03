@@ -4,8 +4,10 @@ session_start();
 include '../mysql_connect.php';
 
 if (isset($_POST['submit'])) {
+    $student_id = $_POST['student_id'];
     $fullname = $_POST['fullname'];
     $gender = $_POST['gender'];
+    $college = $_POST['college'];
     $course = $_POST['course'];
     $email = $_POST['email'];
     $password = $_POST['password'];
@@ -56,8 +58,10 @@ if (isset($_POST['submit'])) {
     }
     else{
         $sql = "INSERT INTO account SET 
+            student_id='$student_id',
             fullname='$fullname',
             gender='$gender',
+            college='$college',
             course='$course',
             email = '$encryption_email',
             password='$encryption_password',
@@ -86,6 +90,7 @@ if (isset($_POST['submit'])) {
     <link rel="icon" href ="../img/logo.png" class="icon">
      <?php include '../Links/link.php' ?> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <!-- Google Fonts Roboto -->
     
     <link rel="stylesheet" href="../css/mdb.min.css" />
@@ -106,77 +111,174 @@ if (isset($_POST['submit'])) {
 }
   </style>
 <body>
-   
-
-    <div class="container">
-        
-
-        <div class="p-4">
-            <div>
-                <h4 class="fw-bold">Register Your Account</h4>
-                <p class="text-muted">Please <span class="text-primary"><a href="../index.php">Login</a></span> if you already have an account.</p>
+<div class="container-fluid">
+    <div class="row " >
+        <div class="right-side col-md-6 text-center d-none d-md-block">
+            <div class="logo-con pt-5">
+                <img src="../img/clsu-logo.png" alt="" style="height: 250px; width: 250px;">
             </div>
-            <div class="row mt-4">
-                <div class="col-md-5 pt-5">
-                    <form method="POST" class="needs-validation" novalidate>
-                        <div class="col">
-                            <div class="form-outline">
-                                <input type="text" class="form-control form-control-lg" id="fullname" name="fullname" required/>
-                                <label for="fullname" class="form-label" >Fullname</label>
-                                
-                            </div>
-                            <p id="errorid" class="text-danger"></p>
-                        </div>
-                        <div class="col">
-                            <div class="form-outline">
-                            <input type="text" class="form-control form-control-lg" id="gender" name="gender" required />
-                            <label for="gender" class="form-label">Gender</label>
-                            </div>
-                            <p id="error_gender" class="text-danger"></p>
-                        </div>
-                        <div class="col">
-                            <div class="form-outline">
-                            <input type="text" class="form-control form-control-lg" id="course" name="course" required />
-                            <label for="course" class="form-label">course</label>
-                            </div>
-                            <p id="error_course" class="text-danger"></p>
-                        </div>
-                        <div class="col">
-                            <div class="form-outline">
-                            <input type="email" class="form-control form-control-lg" id="email" name="email" required />
-                            <label for="email" class="form-label">Email</label>
-                            
-                            </div>
-                            <p id="error_email" class="text-danger"></p>
-                        </div>
-                        <div class="col">
-                            <div class="form-outline">
-                            <input type="password" class="form-control form-control-lg" id="password" name="password" required/>
-                            <label for="password" class="form-label">Password</label>
-                            </div>
-                            <p id="error_password" class="text-danger"></p>
-                        </div>
-                        <div class="col">
-                            <div class="form-outline">
-                            <input type="password" class="form-control form-control-lg" id="confirm_password" name="confirm_password" required/>
-                            <label for="confirm_password" class="form-label">Confirm Password</label>
-                            <!-- <div class="invalid-feedback">Please provide a valid zip.</div> -->
-                            </div>
-                            <p id="error_confirm_password" class="text-danger"></p>
-                            <p id="error_not_match" class="text-warning"></p>
-                        </div>
-                        <div class="col">
-                            <button class="btn btn-light fw-semibold shadows" type="submit" name="submit" style="width: 100%;">Register</button>
-                        </div>
-                    </form>
-                </div>
-                <div class="col">
-                    <img src="../img/register.svg" alt="">
-                </div>
+            <div class="title-con pt-2 ">
+                <h1 class="text-white">CLSU</h1>
+                <p class="text-white">OFFICE OF STUDENT AFFAIRS</p>
+                <a href="../index.php">
+                    <button class="btn btn-light  btn-login">Login</button>
+                </a>
             </div>
+            <footer class="footer-left">
+                <p class="text-white">© Copyright 2023 Central Luzon State University All Rights Reserved</p>
+            </footer>
         </div>
-     
+        <div class="col-md-6  pt-4">
+            <div class="form-title">
+                <h3 class="text-center">Registration for Student</h3>
+                <p class="text-center">Please provide all information requested below</p>
+            </div>
+          
+          <div class="form-info container px-5">
+            <h5>Personal information</h5>
+            <form method="POST" class="needs-validation" novalidate>
+            <div class="row ">
+                <div class="col-md-4 pt-2">
+                    <div class="form-outline ">
+                        <input type="text" id="student_id" class="form-control" name="student_id" required/>
+                        <label class="form-label" for="form12">Student ID</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row ">
+                <div class="col-md-12 pt-3">
+                    <div class="form-outline ">
+                        <input type="text" id="fullname" class="form-control" name="fullname" required/>
+                        <label class="form-label" for="form12">Full Name</label>
+                    </div>
+                    <p id="errorid" class="text-danger"></p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-7 pt-3">
+                    <select class="form-select" aria-label="Default select example" name="college" id="college" required>
+                        <option selected value="0">Choose your college</option>
+                        <option value="COLLEGE OF AGRICULTURE">COLLEGE OF AGRICULTURE</option>
+                        <option value="COLLEGE OF ARTS AND SOCIAL SCIENCES">COLLEGE OF ARTS AND SOCIAL SCIENCES</option>
+                        <option value="COLLEGE OF BUSINESS ADMINISTRATION AND ACCOUNTANCY">COLLEGE OF BUSINESS ADMINISTRATION AND ACCOUNTANCY</option>
+                        <option value="COLLEGE OF EDUCATION">COLLEGE OF EDUCATION</option>
+                        <option value="COLLEGE OF ENGINEERING">COLLEGE OF ENGINEERING</option>
+                        <option value="COLLEGE OF FISHERIES">COLLEGE OF FISHERIES</option>
+                        <option value="COLLEGE OF HOME SCIENCE AND INDUSTRY">COLLEGE OF HOME SCIENCE AND INDUSTRY</option>
+                        <option value="COLLEGE OF VETERINARY SCIENCE AND MEDICINE">COLLEGE OF VETERINARY SCIENCE AND MEDICINE</option>
+                        <option value="COLLEGE OF SCIENCE">COLLEGE OF SCIENCE</option>
+                    </select>
+                </div>
+                <div class="col-md-5 pt-3">
+                    <select class="form-select" aria-label="Default select example" name="course" id="course"required>
+                        <option selected value="">Choose your course</option>
+                       
+                    </select>
+                </div>
+            </div>
+            
+                <div class="row">
+                    <div class="col-md-6 pt-3">
+                        <select class="form-select" aria-label="Default select example" name="gender" id="gender" required>
+                            <option selected >Choose your gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>  
+                        </select>
+                        <p id="error_gender" class="text-danger"></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 pt-3">
+                        <div class="form-outline ">
+                            <input type="email" id="email" class="form-control" name="email" required/>
+                            <label class="form-label" for="form12">Email</label>
+                        </div>
+                        <p id="error_email" class="text-danger"></p>
+                    </div>
+                </div>
+            <div class="row">
+                <div class="col-md-6 pt-3">
+                    <div class="form-outline ">
+                        <input type="password"  class="form-control" id="password" name="password" required/>
+                        <label class="form-label" for="form12">Password</label>
+                    </div>
+                    <p id="error_password" class="text-danger"></p>
+                </div>
+                <div class="col-md-6 pt-3">
+                    <div class="form-outline ">
+                        <input type="password"  class="form-control" id="confirm_password" name="confirm_password" required/>
+                        <label class="form-label" for="form12">Confirm Password</label>
+                    </div>
+                    <p id="error_confirm_password" class="text-danger"></p>
+                    <p id="error_not_match" class="text-warning"></p>
+                </div>
+            </div>
+            <div class="pt-2 button-con">
+                <input type="checkbox" onclick="myFunction()">Show Password
+            </div>
+            <div class="button-con py-4">
+                <button type="submit" class="btn btn">Cancel</button>
+                <button type="submit" class="btn btn-success" name="submit">Register</button>
+            </div>
+          </form>
+          </div>
+        </div>
+        <div class="footer-mobile">
+            <footer>
+                <p class="m-0">© Copyright 2023 Central Luzon State University All Rights Reserved</p>
+            </footer>
+        </div>
     </div>
+  </div>
+
+  <script>
+  function myFunction() {
+  var x = document.getElementById("password");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+  var x = document.getElementById("confirm_password");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+}
+$(document).ready(function () {
+    $("#college").change(function () {
+        var val = $(this).val();
+        if (val == "COLLEGE OF AGRICULTURE") {
+            $("#course").html("<option value='Bachelor of Science in Agribusiness'>Bachelor of Science in Agribusiness</option><option value='Bachelor of Science in Agriculture'>Bachelor of Science in Agriculture</option>");
+        } else if (val == "COLLEGE OF ARTS AND SOCIAL SCIENCES") {
+            $("#course").html("<option value='Bachelor of Arts in Filipino'>Bachelor of Arts in Filipino</option><option value='Bachelor of Arts in Literature'>Bachelor of Arts in Literature</option><option value='Bachelor of Arts in Social Sciences'>Bachelor of Arts in Social Sciences</option><option value='Bachelor of Science in Psychology'>Bachelor of Science in Psychology</option><option value='Bachelor of Science in Development Communication'>Bachelor of Science in Development Communication</option>");
+        } else if (val == "COLLEGE OF BUSINESS ADMINISTRATION AND ACCOUNTANCY") {
+            $("#course").html("<option value='Bachelor of Science in Accountancy'>Bachelor of Science in Accountancy</option><option value='Bachelor of Science in Business Administration'>Bachelor of Science in Business Administration</option><option value='Bachelor of Science in Entrepreneurship'>Bachelor of Science in Entrepreneurship</option><option value='Bachelor of Science in Management Accounting'>Bachelor of Science in Management Accounting</option>");
+        } else if (val == "COLLEGE OF EDUCATION") {
+            $("#course").html("<option value='Bachelor of Culture and Arts Education'>Bachelor of Culture and Arts Education</option><option value='Bachelor of Early Childhood Education'>Bachelor of Early Childhood Education</option><option value='Bachelor of Elementary Education'>Bachelor of Elementary Education</option><option value='Bachelor of Secondary Education'>Bachelor of Secondary Education</option>");
+        }
+        else if (val == "COLLEGE OF ENGINEERING") {
+            $("#course").html("<option value='Bachelor of Science in Agricultural and Biosystems Engineering'>Bachelor of Science in Agricultural and Biosystems Engineering</option><option value='Bachelor of Science in Civil Engineering'>Bachelor of Science in Civil Engineering</option><option value='Bachelor of Science in Information Technology'>Bachelor of Science in Information Technology</option><option value='Bachelor of Science in Meteorology'>Bachelor of Science in Meteorology</option>");
+        }
+        else if (val == "COLLEGE OF FISHERIES") {
+            $("#course").html("<option value='Bachelor of Science in Fisheries'>Bachelor of Science in Fisheries</option>");
+        }
+        else if (val == "COLLEGE OF HOME SCIENCE AND INDUSTRY") {
+            $("#course").html("<option value='Bachelor of Science in Fashion and Textile Technology'>Bachelor of Science in Fashion and Textile Technology</option><option value='Bachelor of Science in Hospitality Management'>Bachelor of Science in Hospitality Management</option><option value='Bachelor of Science in Tourism Management'>Bachelor of Science in Tourism Management</option><option value='Bachelor of Science in Food Technology'>Bachelor of Science in Food Technology</option>");
+        }
+        else if (val == "COLLEGE OF VETERINARY SCIENCE AND MEDICINE") {
+            $("#course").html("<option value='Doctor of Veterinary Medicine'>Doctor of Veterinary Medicine</option>");
+        }
+        else if (val == "COLLEGE OF SCIENCE") {
+            $("#course").html("<option value='Bachelor of Science in Biology'>Bachelor of Science in Biology</option><option value='Bachelor of Science in Chemistry'>Bachelor of Science in Chemistry</option><option value='Bachelor of Science in Environmental Science'>Bachelor of Science in Environmental Science</option><option value='Bachelor of Science in Mathematics'>Bachelor of Science in Mathematics</option><option value='Bachelor of Science in Statistics'>Bachelor of Science in Statistics</option>");
+        }
+        else if (val == "0") {
+            $("#course").html("<option value=''>Choose your course</option>");
+        }
+    });
+});
+</script>
 
     <script>
         (function () {
