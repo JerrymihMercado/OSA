@@ -39,14 +39,14 @@ if (isset($_POST['submit'])) {
         $_SESSION['role'] = $row['role'];
         
         if ($row['role'] == 1) {    
-          header("location:index.php");
+          header("location:about_us.php");
           $_SESSION['status_success_admin'] = "success";
           session_unset($_SESSION['status_success_admin']);
           
         }
         else {
+          header("location:about_us.php");
           $_SESSION['status_success_user'] = "success";
-          header("location:index.php");
           session_unset($_SESSION['status_success_user']);
 
           }
@@ -83,6 +83,21 @@ if (isset($_POST['submit'])) {
       {
           list-style-type: none;
       }
+    .carousel__control__prev{
+        padding: 10px 10px 20px 10px;
+        width: fit-content;
+        /* background: #C8E6C9; */
+        transition: .4s ease;
+    }
+  
+    .carousel__control__next{
+        padding: 10px 10px 20px 10px;
+        width: fit-content;
+        /* background: #C8E6C9; */
+        transition: .4s ease;
+        margin-left: 20px;
+    }
+ 
 </style>
   <body>
 
@@ -265,7 +280,7 @@ if (isset($_POST['submit'])) {
     </div>
   </div>
   <div class="container mb-5">
-    <div class="row row-cols-1 row-cols-md-5 g-4">
+    <!-- <div class="row row-cols-1 row-cols-md-5 g-4">
       <div class="col">
         <a href="Staff/all_staffs.php">
           <div class="card h-100 shadows border">
@@ -307,6 +322,131 @@ if (isset($_POST['submit'])) {
             <h5 class="card-title mt-5 text-center">Student Organization Unit</h5>
           </div>
         </div>
+      </div>
+    </div> -->
+    <!-- Carousel wrapper -->
+    <div
+      id="carouselMultiItemExample"
+      class="carousel slide carousel-dark text-center"
+      data-mdb-ride="carousel"
+    >
+      <!-- Controls -->
+      <div class="container">
+          <div class="d-flex justify-content-end">
+              <button class="carousel-control-prev carousel__control__prev position-relative rounded shadows border" type="button" data-mdb-target="#carouselMultiItemExample"
+                  data-mdb-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true" style="width: 20px;"></span>
+                  <span class="visually-hidden">Previous</span>
+              </button>
+              <button class="carousel-control-next carousel__control__next position-relative rounded shadows border" type="button" data-mdb-target="#carouselMultiItemExample"
+                  data-mdb-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true" style="width: 20px;"></span>
+                  <span class="visually-hidden">Next</span>
+              </button>
+          </div>
+        </div>
+      <!-- Inner -->
+      <div class="carousel-inner py-4">
+        <!-- Single item -->
+        <div class="carousel-item active">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-4">
+                <div class="card h-100">
+                  <img
+                    src="img/Hired-pana.png"
+                    class="card-img-top"
+                    alt="Waterfall"
+                  />
+                  <div class="card-body">
+                    <h5 class="card-title">Information Management and Publication Unit</h5>
+                    
+                    <a href="Staff/all_staffs.php" class="btn btn-success">View All</a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-4 d-none d-lg-block ">
+                <div class="card h-100">
+                  <img
+                    src="img/Hired-pana.png"
+                    class="card-img-top"
+                    alt="Sunset Over the Sea"
+                  />
+                  <div class="card-body">
+                    <h5 class="card-title">Career Development and Employment Services Unit</h5>
+                    <a href="Staff/all_staffs.php" class="btn btn-success">View All</a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-4 d-none d-lg-block">
+                <div class="card h-100">
+                  <img
+                    src="img/Hired-pana.png"
+                    class="card-img-top"
+                    alt="Sunset over the Sea"
+                  />
+                  <div class="card-body">
+                    <h5 class="card-title">Guidance Service Unit</h5>
+                    <a href="Staff/all_staffs.php" class="btn btn-success">View All</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Single item -->
+        <div class="carousel-item">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-4 col-md-12">
+                <div class="card h-100">
+                  <img
+                    src="img/Hired-pana.png"
+                    class="card-img-top"
+                    alt="Fissure in Sandstone"
+                  />
+                  <div class="card-body">
+                    <h5 class="card-title">Student Organization Unit</h5>
+                    <a href="Staff/all_staffs.php" class="btn btn-success">View All</a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-4 d-none d-lg-block">
+                <div class="card h-100">
+                  <img
+                    src="img/Hired-pana.png"
+                    class="card-img-top"
+                    alt="Storm Clouds"
+                  />
+                  <div class="card-body">
+                    <h5 class="card-title">Student Code of Conduct and Discipline</h5>
+                    <a href="Staff/all_staffs.php" class="btn btn-success">View All</a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-4 d-none d-lg-block">
+                <div class="card h-100">
+                  <img
+                    src="img/Hired-pana.png"
+                    class="card-img-top"
+                    alt="Hot Air Balloons"
+                  />
+                  <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <a href="Staff/all_staffs.php" class="btn btn-success">View All</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+   
       </div>
     </div>
   </div>
@@ -392,6 +532,82 @@ if (isset($_POST['submit'])) {
       </section>
     </footer>
   </div>
+
+<script src="js/sweetalert2.js"></script>
+    <?php
+      if(isset($_SESSION['status_success_admin']) ){
+          ?>
+          <script>
+              const Toast = Swal.mixin({
+              toast: true,
+              position: 'top-end',
+              showConfirmButton: false,
+              timer: 3000,
+              timerProgressBar: true,
+              didOpen: (toast) => {
+                  toast.addEventListener('mouseenter', Swal.stopTimer)
+                  toast.addEventListener('mouseleave', Swal.resumeTimer)
+              }
+              })
+              Toast.fire({
+              icon: 'success',
+              title: 'Welcome Back Admin!'
+              })
+
+          </script>
+          <?php
+              unset($_SESSION['status_success_admin']);
+         
+      }
+
+    if(isset($_SESSION['status_success_user']) ){
+        ?>
+        <script>
+            const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+            })
+            Toast.fire({
+            icon: 'success',
+            title: 'Welcome <?php echo $_SESSION['fullname']?>!'
+            })
+        </script>
+        <?php
+        unset($_SESSION['status_success_user']);
+    }
+    
+    if(isset($_SESSION['status_error'])){
+        ?>
+        <script>
+            const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+            })
+            Toast.fire({
+            icon: 'error',
+            title: 'Credentials error'
+            })
+
+        </script>
+        <?php
+        
+    }
+    ?>
+
   <!-- MDB -->
   <script type="text/javascript" src="js/mdb.min.js"></script>
   <!-- Custom scripts -->

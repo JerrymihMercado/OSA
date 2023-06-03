@@ -5,7 +5,7 @@ if (isset($_POST['submit'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-   $ciphering = "AES-128-CTR";
+    $ciphering = "AES-128-CTR";
     $option = 0;
     $encryption_iv = '1234567890123456';
     $encryption_key = "info";

@@ -7,7 +7,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-if(isset($_POST['submit'])){ 
+if(isset($_POST['upload'])){ 
     // File upload configuration 
     $targetDir = "../upload/"; 
     $allowTypes = array('jpg','png','jpeg','gif'); 
@@ -62,22 +62,27 @@ if (isset($_POST['submitMail'])) {
 	require '../includes/SMTP.php';
 	require '../includes/Exception.php';
 
-    $fullname = $_POST['fullname'];
-    $course = $_POST['course'];
-    $email = $_POST['email'];
+    $fullname = $_SESSION['fullname'];
+    $course = $_SESSION['course'];
+    $email = $_SESSION['email'];
     $message = $_POST['message'];
     $user_message = str_replace("'","\'",$message);
- 
-    $sql = "INSERT INTO complainant_message SET 
-            user_file=0,
-            user_name = '$fullname',
-            user_course = '$course',
-            user_email = '$email',
-            user_message='$user_message';";
+
+    $date = date_create();
+    $stamp = date_format($date, "Y");
+    $temp = $_FILES['myfile']['tmp_name'];
+    $directory = "../Complain_upload/" . $stamp . $_FILES['myfile']['name'];   
+
+    if (move_uploaded_file($temp, $directory)) {
+        $sql = "INSERT INTO complainant_message SET 
+                user_file='$directory',
+                user_name = '$fullname',
+                user_course = '$course',
+                user_email = '$email',
+                user_message='$user_message';";
             
     if (mysqli_query($conn, $sql)) {
-           
-            unset($_POST['handle_submit']);
+            unset($_POST['submitMail']);
             
         } else {
             echo mysqli_error($conn);
@@ -85,6 +90,7 @@ if (isset($_POST['submitMail'])) {
             echo "alert('Error Occur!');" . mysqli_error($conn);
             echo '</script>';
         }
+    }
     
      $body = '  <body>
                     <div class="fluid-container" style="padding: 5% 20% 10px">
@@ -119,7 +125,7 @@ if (isset($_POST['submitMail'])) {
                                     Complained Received
                                 </h1>
                                 <br />
-                                <h3 class="card-text-content">Good day, <b>' . $_POST['fullname'] . '</b></h3>
+                                <h3 class="card-text-content">Good day, <b>' . $_SESSION['fullname'] . '</b></h3>
                                 <p>
                                     We truly appreciate you taking the time to share your relevant concerns with us. 
                                     Rest assured that we will evaluate your situation as soon as possible. Please wait until you receive an official email message from the Office of Student Affairs.
@@ -169,11 +175,12 @@ if (isset($_POST['submitMail'])) {
     //Email body
         $mail->Body = $body;
     //Add recipient
-        $mail->addAddress($_POST['email']);
+        $mail->addAddress($_SESSION['email']);
         // $mail->addAddress('noreply.clsu.osa@gmail.com');
     //Finally send email
         if ( $mail->Send() ) {
-            $_SESSION['status_success'] = "success";
+            $_SESSION['status_success_send'] = "success";
+            // session_unset($_SESSION['status_success_send']);
         }else{
             echo 'Message could not be sent. Mailer Error: '[$mail->ErrorInfo];
         }
@@ -189,6 +196,58 @@ if (isset($_GET['image_id'])) {
         $conduct_image = mysqli_fetch_assoc($result);
     }
 }
+if (isset($_POST['submit'])) {
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+   $ciphering = "AES-128-CTR";
+    $option = 0;
+    $encryption_iv = '1234567890123456';
+    $encryption_key = "info";
+    $encryption_email = openssl_encrypt($email,$ciphering,$encryption_key,$option,$encryption_iv);
+
+    $ciphering = "AES-128-CTR";
+    $option = 0;
+    $encryption_iv = '1234567890123456';
+    $encryption_key = "info";
+    $encryption_password = openssl_encrypt($password,$ciphering,$encryption_key,$option,$encryption_iv);
+
+    $sql = "SELECT * FROM account
+      WHERE email = '$encryption_email'
+      AND password = '$encryption_password'";
+    
+    $res = mysqli_query($conn, $sql);
+    if (mysqli_num_rows($res) == 1) {
+        $row = mysqli_fetch_assoc($res);
+
+        $ciphering = "AES-128-CTR";
+        $option = 0;
+        $decryption_key = "info";
+        $decryption_iv = '1234567890123456';
+        $decryption = openssl_decrypt($row['email'],$ciphering,$decryption_key,$option,$decryption_iv);
+        $session_email = $decryption;
+
+        $_SESSION['fullname'] = $row['fullname'];
+        $_SESSION['email'] = $session_email;
+        $_SESSION['course'] = $row['course'];
+        
+        $_SESSION['role'] = $row['role'];
+        
+        if ($row['role'] == 1) {    
+          header("location:../SDB/sdb_index.php");
+          $_SESSION['status_success_admin'] = "success";
+          session_unset($_SESSION['status_success_admin']);
+          
+        }
+        else {
+          $_SESSION['status_success_user'] = "success";
+          header("location:../SDB/sdb_index.php");
+          session_unset($_SESSION['status_success_user']);
+          }
+    } else {
+            $_SESSION['status_error'] = "error";
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -199,6 +258,7 @@ if (isset($_GET['image_id'])) {
     <title>Office of Student Affairs</title>
     <link rel="icon" href ="../img/logo.png" class="icon">
     <link rel="stylesheet" href="../Style/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
     <?php
       include '../Links/link.php';
     ?>
@@ -216,484 +276,194 @@ if (isset($_GET['image_id'])) {
         filter: blur(4px);
     }
     .chat-bot{
-        position: -webkit-sticky;
-        position: sticky;
-        bottom: 0;        
+        display: none; /* Hidden by default */
+        position: fixed; /* Fixed/sticky position */
+        bottom: 20px; /* Place the button at the bottom of the page */
+        right: 30px; /* Place the button 30px from the right */
+        z-index: 99; /* Make sure it does not overlap */
+        border: none; /* Remove borders */
+        outline: none; /* Remove outline */
+        color: white; /* Text color */
+        cursor: pointer; /* Add a mouse pointer on hover */
+        padding: 15px; /* Some padding */
+        border-radius: 10px; /* Rounded corners */
+        font-size: 18px; /* Increase font size */    
     }
+    textarea {
+        overflow-y: scroll;
+        height: 100px;
+        resize: none; /* Remove this if you want the user to resize the textarea */
+    }
+
 </style>
 <body>
 <div class="logo-header ">
-        <div class="container-fluid">
-            <div class="row d-flex justify-content-between">
-                <div class="logo-header-left col-xl-7 col-md-7 col-xs-7 dp-xs-flex flex-row">
-                    <div class="logo mr-xs-3">
-                        <img src="../img/clsu-logo.png" alt="" >
-                        
-                    </div>
-                    <div class="logo-text m-xs-0">
-                        <span class="logo-title">Central Luzon State University</span>
-                        <span class="logo-sub">Science City of Muñoz, Nueva Ecija, Philippines 3120</span>
-                    </div>
-                </div>
-                <!-- <div class="logo-header-right col-xl-5 col-md-5 col-xs-5">
-                        <div class="logo-links">
-                            <a href="http://ggc.clsu.edu.ph/" target="_blank">Transparency Seal</a>
-                            <a href="about-us/au-contact-us.php">Contact Us</a>
-                        </div>
-                    </div> -->
-
-            </div>
-        </div>
-    </div>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <!-- Container wrapper -->
-    <div class="container-fluid navi-section">
-      <!-- Toggle button -->
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-mdb-toggle="collapse"
-        data-mdb-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <i class="fas fa-bars text-white"></i>
-      </button>
-  
-      <!-- Collapsible wrapper -->
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <!-- Navbar brand -->
-        <!-- <a class="navbar-brand mt-2 mt-lg-0" href="#">
-          <img
-            src="https://mdbcdn.b-cdn.net/img/logo/mdb-transaprent-noshadows.webp"
-            height="15"
-            alt="MDB Logo"
-            loading="lazy"
-          />
-        </a> -->
-        <!-- Left links -->
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item me-2">
-            <a class="nav-link text-white" href="../index.php">HOME</a>
-          </li>
-          <li class="nav-item me-2">
-            <a class="nav-link text-white" href="../about_us.php">ABOUT US</a>
-          </li>
-          <li class="nav-item me-2">
-            <a class="nav-link text-white" href="../Section/impu.php">IMPU</a>
-          </li>
-          <li class="nav-item me-2">
-            <a class="nav-link text-white" href="../CDESU/cdesu.php">CDESU</a>
-          </li>
-          <li class="nav-item me-2">
-            <a class="nav-link text-white" href="../GSU/gsu_index.php">GSU</a>
-          </li>
-          <li class="nav-item me-2">
-            <a class="nav-link text-white" href="../SOU/sou_index.php">SOU</a>
-          </li>
-          <li class="nav-item me-2">
-            <a class="nav-link text-white" href="../SDB/sdb_index.php">SDB</a>
-          </li>
-        </ul>
-        <!-- Left links -->
-      </div>
-      <!-- Collapsible wrapper -->
-  
-      <!-- Right elements -->
-      <div class="d-flex align-items-center">
-        <!-- Icon -->
-        <!-- <a class="text-white me-3 " href="#">
-            <i class="fas fa-circle-user text-white"></i>
-            LOGIN
-        </a> -->
-        <?php
-            if (isset($_SESSION['role'])) {
-                if ($_SESSION['role'] == 1 || $_SESSION['role'] == 0) {
-                    echo '<li class="nav-item">
-                            <div class="btn-group shadow-0">
-                            <a type="button" class="link text-white ps-3 dropdown-toggle" data-mdb-toggle="dropdown" aria-expanded="false">
-                                LOGOUT
-                            </a>
-                            <ul class="dropdown-menu">
-                                
-                                <form action="../logout.php" method="POST">
-                                    <li><button class="dropdown-item rounded-5" name="logout">Logout</button></li>
-                                </form>
-                            </ul>
-                            </div>
-                        </li>';
-                }
-            }else{
-                echo '
-                        
-                      ';
-            }
-          ?>
-          <?php
-            if (isset($_SESSION['role'])) {
-                if ($_SESSION['role'] == 1 || $_SESSION['role'] == 0) {
-                    echo '';
-                }
-            }
-            // else{
-            //     echo '<li class="nav-item">
-            //             <a href="./Form_Register/register_index.php" class="text-white ps-3">
-            //               REGISTER
-            //             </a>
-            //           </li>';
-            // }
-          ?>
-          <?php
-            if (isset($_SESSION['role'])) {
-                if ($_SESSION['role'] == 1) {
-                    echo '<li class="nav-item">
-                        <a href="./Archive/archive_index.php" class="text-white ps-3">
-                          ARCHIVES
-                        </a>
-                      </li>';
-                }
-            }else{
-                echo '';
-            }
-          ?>
-  
-        
-      </div>
-      <!-- Right elements -->
-    </div>
-    <!-- Container wrapper -->
-  </nav>
-
-    <!-- banner -->
-    <div class="bg-image ripple" data-mdb-ripple-color="light">
-        <img src="../img/banner1.png" class="banner__img" />
-        <a href="#!">
-            <div class="mask" style="background-color: hsla(0, 0%, 0%, 0.5)">
-            <div class="d-flex justify-content-center align-items-center h-100 text-center">
-                <h2 class="text-white mb-0">CLSU STUDENT CODE OF CONDUCT AND DISCIPLINE</h2>
-            </div>
-            </div>
-            <!-- <div class="hover-overlay">
-            <div class="mask" style="background-color: hsla(0, 0%,98%, 0.2)"></div>
-            </div> -->
-        </a>
-    </div>
-
-    
-    <div class="container pt-5">
-      <div class="row">
-        <div class="osa-tag">
-          <p class="tag-info">CODE OF CONDUCT AND DISCIPLINE</p>
-          <p class="tag-sub">Read the student conduct and discipline from the Office of Student Affairs(OSA)</p>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- Button trigger modal -->
-    
-    <?php
-        if (isset($_SESSION['role'])) {
-            if ($_SESSION['role'] == 1) {
-                echo '<div class="container d-flex justify-content-end">
-                            <button type="button" class="btn btn-primary fw-semibold" data-mdb-toggle="modal" data-mdb-target="#upload">
-                                Upload Files
-                            </button>
-                        </div>';
-            }
-        }else{
-            echo '';
-        }
-    ?>
-
-    <!-- Modal -->
-    <div class="modal fade" id="upload" tabindex="-1" aria-labelledby="upload" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="upload">Upload File</h5>
-                <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form method="POST" enctype="multipart/form-data">
-                <div class="modal-body">
-            
-                    <?php if(!empty($statusMsg)){?>
-                        <div class="rounded" style="background-color: #B3E5FC;">
-                            <p class="text-dark p-3"> <?php echo $statusMsg; ?></p>
-                        </div>
-                <?php }?>
-
-                    <label class="form-label" for="file">Select Image Files to Upload:</label>
-                    <input type="file" name="files[]" multiple class="form-control" id="file" />
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
-                    <button type="submit" name="submit" class="btn btn-primary">Upload</button>
-                </div>
-            </form>
-            </div>
-        </div>
-    </div>
-
-    
-    <!-- Modal gallery -->
-    <div class="container mt-5">
-        <div class="row row-cols-1 row-cols-md-3 g-4">
-        <?php
-          $sql = "SELECT * FROM code_of_conduct_images";
-          $res = mysqli_query($conn, $sql);
-          if(mysqli_num_rows($res) > 0){
-              while ($row = mysqli_fetch_assoc($res)) {
-                $imageURL = '../upload/'.$row["file_name"];?>
-            <div class="col">
-                <div class="bg-image hover-overlay ripple shadow-1-strong rounded shadows" data-ripple-color="light">
-                    <img src="<?php echo $imageURL; ?>" class="w-100"/>
-                    <a href="#!" data-mdb-toggle="modal" data-mdb-target="#<?php echo $row['status'];?>">
-                        <div class="mask" style="background-color: rgba(251, 251, 251, 0.2);"></div>
-                    </a>
-                </div>
-            </div>
-             <?php     
-            }
-        }else{?>
-            <div class="container p-2">
-                <h1 class="text-warning">No Image(s) Found!</h1>
-            </div>
-        <?php  }
-                ?>
-        </div>
-        <section class="">
-       
-            <section class="">
-                
-                <div
-                class="modal fade"
-                id="1"
-                tabindex="-1"
-                aria-labelledby="exampleModal1Label"
-                aria-hidden="true"
-                >
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <img
-                        src="../img/conduct-1.png"
-                        class="w-100"
-                        />
-
-                    <div class="text-center py-3">
-                        <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">
-                        Close
-                        </button>
-                    </div>
-                    </div>
-                </div>
-                </div>
-               
-                </div>
-            </section>
-            <!-- Section: Modals -->
-        </section>
-    </div>
-    <!-- Modal gallery -->
-
-   <?php
-        if (isset($_SESSION['role'])) {
-            if ($_SESSION['role'] == 0) {
-                echo ' <div class="p-5 chat-bot d-flex justify-content-end">
-                            <button type="button" class="btn btn-primary btn-lg btn-floating" data-mdb-toggle="modal" data-mdb-target="#chatModal">
-                                <i class="fas fa-comment"></i>
-                            </button>
-                        </div>';
-            }
-        } else {
-            echo '';         
-        }
-
-    ?>
-
-    <!-- Modal -->
-    <div class="modal fade" id="chatModal" tabindex="-1" aria-labelledby="chatModal" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header bg-primary text-white">
-                    <h5 class="modal-title" id="chatModal">Tell me something</h5>
-                    <button type="button" class="btn-close text-white" data-mdb-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
+    <div class="container-fluid">
+        <div class="row d-flex justify-content-between">
+            <div class="logo-header-left col-xl-7 col-md-7 col-xs-7 dp-xs-flex flex-row">
+                <div class="logo mr-xs-3">
+                    <img src="../img/clsu-logo.png" alt="" >
                     
-                    <form method="POST" enctype="multipart/form-data">
-                        <!-- 2 column grid layout with text inputs for the first and last names -->
-                        <div class="row mb-4">
-                            <div class="col">
-                                <div class="form-outline">
-                                    <input type="text" id="fullname" name="fullname" class="form-control" required/>
-                                    <label class="form-label" for="fullname">Fullname</label>
-                                </div>
-                            </div>
-                            
-                        </div>
-                        <!-- course input -->
-                        <div class="form-outline mb-4">
-                            <input type="text" id="course" name="course" class="form-control"  required/>
-                            <label class="form-label" for="course">Course</label>
-                        </div>
-                        <!-- Email input -->
-                        <div class="form-outline mb-4">
-                            <input type="email" id="email" name="email" class="form-control"  required/>
-                            <label class="form-label" for="email">Email</label>
-                        </div>
-                        <!-- Upload file -->
-                        <!-- <div class="mb-4">
-                            <label class="form-label" for="myfile">Optional</label>
-                            <input type="file" class="form-control" id="myfile" name="myfile" multiple/>
-                        </div> -->
-                        
-
-                        <!-- Message input -->
-                        <div class="form-outline mb-4">
-                            <textarea class="form-control" id="message" rows="4" name="message" required></textarea>
-                            <label class="form-label" for="message">State your concern here</label>
-                        </div>
-                        
-                        <div class="modal-footer">
-                            <button type="submit" name="submitMail" id="submitMail" class="btn btn-primary btn-rounded shadows">Send <i class="fas fa-paper-plane"></i></button>
-                        </div>
-                    </form>
+                </div>
+                <div class="logo-text m-xs-0">
+                    <span class="logo-title">Central Luzon State University</span>
+                    <span class="logo-sub">Science City of Muñoz, Nueva Ecija, Philippines 3120</span>
                 </div>
             </div>
         </div>
     </div>
-     <!-- Modal -->
-    <div class="modal fade" id="login_Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+</div>
+
+<?php include '../Components/header.php'; ?>
+
+<!-- banner -->
+<div class="bg-image ripple" data-mdb-ripple-color="light">
+    <img src="../img/banner1.png" class="banner__img" />
+    <a href="#!">
+        <div class="mask" style="background-color: hsla(0, 0%, 0%, 0.5)">
+        <div class="d-flex justify-content-center align-items-center h-100 text-center">
+            <h2 class="text-white mb-0">CLSU STUDENT CODE OF CONDUCT AND DISCIPLINE</h2>
+        </div>
+        </div>
+    </a>
+</div>
+
+<div class="container pt-5">
+    <div class="row">
+    <div class="osa-tag">
+        <p class="tag-info">CODE OF CONDUCT AND DISCIPLINE</p>
+        <p class="tag-sub">Read the student conduct and discipline from the Office of Student Affairs(OSA)</p>
+    </div>
+    </div>
+</div>
+
+<!-- Button trigger modal -->
+<?php
+    if (isset($_SESSION['role'])) {
+        if ($_SESSION['role'] == 1) {
+            echo '<div class="container d-flex justify-content-end">
+                        <button type="button" class="btn btn-primary fw-semibold" data-mdb-toggle="modal" data-mdb-target="#upload">
+                            Upload Files
+                        </button>
+                    </div>';
+        }
+    }else{
+        echo '';
+    }
+?>
+
+<div class="container">
+    <div class="row row-cols-1 row-cols-md-3 g-4 mt-4">
+        <?php
+        $sql = "SELECT * FROM code_of_conduct_images";
+        $res = mysqli_query($conn, $sql);
+        if(mysqli_num_rows($res) > 0){
+          while ($row = mysqli_fetch_assoc($res)) {?>
+        <div class="col">
+            <div class="card h-100 shadows">
+                <img src="../upload/<?php echo $row['file_name']?>" class="card-img-top" alt="<?php echo $row['file_name']?>"/>
+            </div>
+        </div> 
+        <?php     
+            }
+    }else{?>
+        <div class="container p-2 justify-content-center d-flex">
+            <h1 class="text-warning">No Data Found!</h1>
+        </div>
+    <?php  }
+            ?>   
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="upload" tabindex="-1" aria-labelledby="upload" aria-hidden="true">
+    <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">LOGIN</h5>
+        <div class="modal-header">
+            <h5 class="modal-title" id="upload">Upload File</h5>
             <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form method="POST" enctype="multipart/form-data">
+            <div class="modal-body">
+        
+                <?php if(!empty($statusMsg)){?>
+                    <div class="rounded" style="background-color: #B3E5FC;">
+                        <p class="text-dark p-3"> <?php echo $statusMsg; ?></p>
+                    </div>
+            <?php }?>
+
+                <label class="form-label" for="file">Select Image Files to Upload:</label>
+                <input type="file" name="files[]" multiple class="form-control" id="file" />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
+                <button type="submit" name="upload" class="btn btn-primary">Upload</button>
+            </div>
+        </form>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    
+</div>
+
+<?php
+    if (isset($_SESSION['role'])) {
+        if ($_SESSION['role'] == 0) {
+            echo ' <div class="p-5 chat-bot d-flex justify-content-end">
+                        <button type="button" class="btn btn-primary btn-lg btn-floating" data-mdb-toggle="modal" data-mdb-target="#chatModal">
+                            <i class="fas fa-comment"></i>
+                        </button>
+                    </div>';
+        }
+    } else {
+        echo '';         
+    }
+
+?>
+<!-- Modal -->
+<div class="modal fade" id="chatModal" tabindex="-1" aria-labelledby="chatModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="chatModal">Form</h5>
+                <button type="button" class="btn-close text-white" data-mdb-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-            <form method="POST">
-                <!-- Email input -->
-                <div class="form-outline mb-4">
-                <input type="email" id="email" name="email" class="form-control" />
-                <label class="form-label" for="email">Email address</label>
-                </div>
-
-                <!-- Password input -->
-                <div class="form-outline mb-4">
-                <input type="password" id="password" name="password" class="form-control" />
-                <label class="form-label" for="password">Password</label>
-                </div>
-
-                <!-- 2 column grid layout for inline styling -->
-                <div class="row mb-4">
                 
-                    <a href="#!">Forgot password?</a>
-                </div>
-                <!-- Submit button -->
-                <button type="submit" name="submit" class="btn btn-primary btn-block">Login</button>
-            </form>
+                <form method="POST" enctype="multipart/form-data">
+                    <!-- 2 column grid layout with text inputs for the first and last names -->
+                    <div class="form-outline mb-4">
+                        <p> <b>Fullname:</b> <?php echo $_SESSION['fullname'];?> </p>
+                    </div>
+                    <!-- course input -->
+                    <div class="form-outline mb-4">
+                        <p> <b>Course:</b> <?php echo $_SESSION['course'];?> </p>
+                    </div>
+                    <!-- Email input -->
+                    <div class="form-outline mb-4">
+                       <p> <b>Email:</b> <?php echo $_SESSION['email'];?> </p>
+                    </div>
+                    <!-- Upload file -->
+                    <div class="mb-4">
+                        <label class="form-label" for="myfile">Optional</label>
+                        <input type="file" class="form-control" id="myfile" name="myfile" multiple/>
+                    </div>
+                    <!-- Message input -->
+                    <div class="form-outline mb-4">
+                        <textarea class="form-control border rounded" id="message" rows="4" name="message" required></textarea>
+                        <label class="form-label" for="message">State your concern here</label>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" name="submitMail" id="submitMail" class="btn btn-primary btn-rounded shadows">Send &nbsp; <i class="fas fa-paper-plane"></i></button>
+                    </div>
+                </form>
             </div>
-        </div>
         </div>
     </div>
-   
-    <div class="mt-5 footer-section " >
-    <footer class="text-center text-lg-start bg-light text-muted " style="background-image: url(../img/banner1.png);  background-repeat: no-repeat; background-size: cover; ">
-      <!-- Section: Links  -->
-      <section class="">
-        <div class="container-fluid  text-md-start pt-3 " >
-          <!-- Grid row -->
-          <div class="row mt-3" >
-            <!-- Grid column -->
-            <div class="col-md-3 col-lg-4 col-xl-4 mx-auto mb-4">
-              <!-- Content -->
-              <img src="../img/white-logo.png" alt="" class="footer-logo text-center" style="height: 88px;">
-              <h4 class="text-white fw-bold mt-2">OFFICE OF STUDENT AFFAIRS</h5>
-              <p class="text-white fw-lighter">Science City of Muñoz, Nueva Ecija</p>
-              <p class="text-white" style="font-size: 13px;">© Copyright 2023 Central Luzon State University All Rights Reserved</p>
-            </div>
-            <!-- Grid column -->
-
-            <!-- Grid column -->
-            <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-              <!-- Links -->
-              <h5 class="text-uppercase fw-bold mb-4 " style="color: #cdfb13;">Contact</h5>
-              <p class="text-white"><i class="fas fa-location-dot "></i> Central Luzon State University, Science City of Muñoz Nueva Ecija, Philippines</p>
-              <p class="text-white">
-                <i class="fas fa-envelope me-3 "></i>
-                osa@clsu.edu.ph
-              </p>
-              <p class="text-white"><i class="fas fa-phone me-3 "></i> (044) 940 7030</p>
-              <!-- <p><i class="fas fa-print me-3"></i> + 01 234 567 89</p> -->
-            </div>
-            <!-- Grid column -->
-          
-            <!-- Grid column -->
-            <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-              <!-- Links -->
-              <h5 class="text-uppercase fw-bold mb-4" style="color: #cdfb13;">
-                SOCIAL MEDIA
-              </h5>
-              <div>
-                <a href="https://www.facebook.com/officeofstudentaffairsCLSU" target="_blank" class="me-3 text-reset">
-                  <i class="fab fa-facebook-square fa-lg text-white"></i>
-                </a>
-                <a href="https://twitter.com/clsu_official?lang=en" target="_blank" class="me-3 text-reset">
-                  <i class="fab fa-twitter fa-lg text-white"></i>
-                </a>
-                <a href="" class="me-3 text-reset">
-                  <i class="fab fa-google fa-lg text-white"></i>
-                </a>
-                <a href="" class="me-3 text-reset">
-                  <i class="fab fa-instagram fa-lg text-white"></i>
-                </a>
-                <a href="" class="me-3 text-reset">
-                  <i class="fab fa-linkedin fa-lg text-white"></i>
-                </a>
-                
-              </div>
-            </div>
-            <!-- Grid column -->
-          </div>
-          <!-- Grid row -->
-        </div>
-      </section>
-      
-    </footer>
-  </div>
-
-    <script src="../js/sweetalert2.js"></script>
-    <?php
-    if(isset($_SESSION['status_success']) ){
-        ?>
-        <script>
-             const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-            })
-            Toast.fire({
-            icon: 'success',
-            title: 'Email Send!'
-            })
-
-        </script>
-        <?php
-        unset($_SESSION['status_success']);
-    }
-    ?>
-
-<!-- MDB -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.0/mdb.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bs5-lightbox@1.8.3/dist/index.bundle.min.js"></script>
+</div>
+<?php include_once '../Components/footer.php' ?>
 <script>
     var loadFile = function(event) {
         var image = document.getElementById('output');
@@ -702,5 +472,8 @@ if (isset($_GET['image_id'])) {
     };
     
 </script>
+<!-- MDB -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.0/mdb.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bs5-lightbox@1.8.3/dist/index.bundle.min.js"></script>
 </body>
 </html>

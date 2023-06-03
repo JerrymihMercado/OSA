@@ -60,6 +60,36 @@ if(isset($_POST['view'])){
   header("content-type: application/pdf");
   readfile('../Handbook/CLSU-STUDENT-HANDBOOK-2022-2023.pdf');
 }
+
+if(isset($_POST["handle_upload"])){
+   
+
+    $date = date_create();
+    $stamp = date_format($date, "d-m-Y");
+    $temp = $_FILES['handbook']['tmp_name'];
+    $directory = "../Handbook/".$_FILES['handbook']['name'];   
+
+    if (move_uploaded_file($temp, $directory)) {
+        $sql = "INSERT INTO student_handbook SET 
+            file_name='$directory',
+            uploaded_on='$stamp';";
+            
+    if (mysqli_query($conn, $sql)) {
+            header("location:../Section/impu.php");
+            echo '<script language="javascript">';
+            echo 'alert("message successfully sent")';
+            echo '</script>';
+            unset($_POST['handle_upload']);
+            
+        } else {
+            echo mysqli_error($conn);
+            echo '<script>';
+            echo "alert('Error Occur!');" . mysqli_error($conn);
+            echo '</script>';
+        }
+    }
+    
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -121,8 +151,6 @@ if(isset($_POST['view'])){
 
 <!-- brief history -->
 <div class="container mt-5">
-    <!-- <p align="justify" class="impu-desc fw-normal" style="font-size: 1.2rem">
-    </p> -->
     <div class="osa-tag">
       <p class="tag-info">OVERVIEW</p>
       <p class="tag-sub ">
@@ -248,9 +276,13 @@ if(isset($_POST['view'])){
           </div>
         </div>
         <?php     
-          }
-      }
-      ?> 
+            }
+    }else{?>
+        <div class="container p-2 justify-content-center d-flex">
+            <h1 class="text-warning">No Data Found!</h1>
+        </div>
+    <?php  }
+            ?>   
     </div>
 </div>
 <!-- Research and evaluation -->
@@ -335,28 +367,34 @@ if(isset($_POST['view'])){
           </div>
         </div>
         <?php     
-          }
-      }
-      ?> 
+            }
+    }else{?>
+        <div class="container p-2 justify-content-center d-flex">
+            <h1 class="text-warning">No Data Found!</h1>
+        </div>
+    <?php  }
+            ?>   
     </div>
 </div>
 
 <!--Upload Modal -->
-<div class="modal fade" id="update" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="upload" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Upload Student Handbook</h5>
         <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
-        <label class="form-label" for="customFile">Default file input example</label>
-        <input type="file" class="form-control" id="customFile" />
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
+      <form action="" method="POST" enctype="multipart/form-data">
+        <div class="modal-body">
+          <label class="form-label" for="handbook">Upload</label>
+          <input type="file" class="form-control" id="handbook" name="handbook"/>
+        </div>
+        <div class="modal-footer">
+          <button type="reset" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary" name="handle_upload">Save changes</button>
+        </div>
+      </form>
     </div>
   </div>
 </div>

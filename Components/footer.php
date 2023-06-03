@@ -46,3 +46,94 @@
         </section>
     </footer>
 </div>
+<script src="../js/sweetalert2.js"></script>
+    <?php
+      if(isset($_SESSION['status_success_admin']) ){ ?>
+        <script>
+            const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+            })
+            Toast.fire({
+            icon: 'success',
+            title: 'Welcome Back Admin!'
+            })
+        </script>
+        <?php
+            unset($_SESSION['status_success_admin']);
+    }
+    if(isset($_SESSION['status_success_user']) ){
+        ?>
+        <script>
+            const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+            })
+            Toast.fire({
+            icon: 'success',
+            title: 'Welcome <?php echo $_SESSION['fullname']?>!'
+            })
+        </script>
+        <?php
+        unset($_SESSION['status_success_user']);
+    }
+    
+    if(isset($_SESSION['status_error'])){
+        ?>
+        <script>
+            const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+            })
+            Toast.fire({
+            icon: 'error',
+            title: 'Credentials error'
+            })
+
+        </script>
+        <?php
+        unset($_SESSION['status_error']);
+    }
+    if(isset($_SESSION['status_success_send']) ){ ?>
+        <script>
+            const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+            })
+            Toast.fire({
+            icon: 'success',
+            title: 'Email Send!'
+            })
+        </script>
+        <?php
+            unset($_SESSION['status_success_send']);
+    }
+    ?>

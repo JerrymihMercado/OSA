@@ -284,7 +284,7 @@ if (isset($_POST['submit'])) {
                   <label class="form-label" for="password">Password</label>
               </div>
               <div class="row mb-4">
-                      <a href="#!">Forgot password?</a>
+                      <a href="Forgot_Password/send_reset_pass.php">Forgot password?</a>
               </div>
               <!-- Submit button -->
               <button type="submit" name="submit" class="btn btn-primary btn-block">Login</button>
