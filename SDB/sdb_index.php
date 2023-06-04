@@ -79,7 +79,8 @@ if (isset($_POST['submitMail'])) {
                 user_name = '$fullname',
                 user_course = '$course',
                 user_email = '$email',
-                user_message='$user_message';";
+                user_message='$user_message',
+                is_send=0;";
             
     if (mysqli_query($conn, $sql)) {
             unset($_POST['submitMail']);

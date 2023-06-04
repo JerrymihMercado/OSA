@@ -47,6 +47,19 @@
                 echo '';
             }
             ?>
+            <?php
+            if (isset($_SESSION['role'])) {
+                if ($_SESSION['role'] == 1) {
+                    echo '<li class="nav-item me-2">
+                        <a href="../Complain/complain_index.php" class="nav-link text-white">
+                            COMPLAINS
+                        </a>
+                        </li>';
+                }
+            }else{
+                echo '';
+            }
+            ?>
         </ul>
         </div>
         <div class="d-flex align-items-center">
