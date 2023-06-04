@@ -23,7 +23,7 @@ if(isset($_POST["handle_submit_update"])){
     $date = date_create();
     $stamp = date_format($date, "Y");
     $temp = $_FILES['myfile']['tmp_name'];
-    $directory = "../upload/" . $stamp . $_FILES['myfile']['name'];   
+    $directory = "../upload/".$_FILES['myfile']['name'];   
     if (move_uploaded_file($temp, $directory)) {
         $sql = "UPDATE research_and_eval SET 
             image='$directory',
@@ -33,10 +33,10 @@ if(isset($_POST["handle_submit_update"])){
             WHERE id=".$id;
             
     if (mysqli_query($conn, $sql)) {
-            $_SESSION['status_success'] = "success";
+            $_SESSION['status_success_update'] = "success";
             header("location:../Research_&_Evaluation/research_details.php?RandD_ID=".$id);
             unlink("../upload/".$research_and_eval['image']);
-            session_unset($_SESSION['status_success']);
+            session_unset($_SESSION['status_success_update']);
         } else {
             echo mysqli_error($conn);
             $_SESSION['status_error'] = "error";
@@ -271,119 +271,6 @@ if (isset($_POST['archive'])) {
   </div>
 
 <?php include_once '../Components/footer.php' ?>
-
-<script src="../js/sweetalert2.js"></script>
-  <?php
-    if(isset($_SESSION['status_success_admin']) ){
-        ?>
-        <script>
-            const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-            })
-            Toast.fire({
-            icon: 'success',
-            title: 'Welcome Back Admin!'
-            })
-
-        </script>
-        <?php
-            unset($_SESSION['status_success_admin']);
-        
-    }
-    if(isset($_SESSION['status_success_user']) ){
-        ?>
-        <script>
-            const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-            })
-            Toast.fire({
-            icon: 'success',
-            title: 'Welcome <?php echo $_SESSION['fullname']?>!'
-            })
-        </script>
-        <?php
-        unset($_SESSION['status_success_user']);
-    }
-    if(isset($_SESSION['status_error'])){
-        ?>
-        <script>
-            const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-            })
-            Toast.fire({
-            icon: 'error',
-            title: 'Credentials error'
-            })
-
-        </script>
-        <?php
-        
-    }
-  ?>
-    <?php
-    if(isset($_SESSION['status_success']) ){
-        ?>
-        <script>
-             const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-            })
-            Toast.fire({
-            icon: 'success',
-            title: 'Record Successfully Updated!'
-            })
-
-        </script>
-        <?php
-        unset($_SESSION['status_success']);
-    }
-    
-    if(isset($_SESSION['status_error'])){
-        ?>
-        <script>
-            Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'Something went wrong!',
-           
-            })
-
-        </script>
-        <?php
-        unset($_SESSION['status_error']);
-    }
-    ?>
     <script>
       var loadFile = function(event) {
           var image = document.getElementById('output');
@@ -391,7 +278,7 @@ if (isset($_POST['archive'])) {
           image.setAttribute("class", "out");
       };
       
-  </script>
+  </>
   <script>
     tinymce.init({
     selector: '#mytextarea',

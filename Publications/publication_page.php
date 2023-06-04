@@ -36,10 +36,7 @@ if(isset($_POST["handle_submit"])){
             
     if (mysqli_query($conn, $sql)) {
             header("location:../Publications/publication_page.php?publication_ID=".$id);
-            echo '<script language="javascript">';
-            echo 'alert("message successfully sent")';
-            echo '</script>';
-            unset($_POST['handle_submit']);
+            $_SESSION['status_success_added'] = "success";
             
         } else {
             echo mysqli_error($conn);
@@ -120,15 +117,6 @@ if (isset($_POST['submit'])) {
       include '../Links/link.php';
     ?>
 </head>
-<style>
-   a,
-    a:hover,
-    a:focus,
-    a:active {
-        text-decoration: none;
-        color: inherit;
-    }
-</style>
 <body>
   
 <div class="logo-header ">
@@ -232,7 +220,8 @@ if (isset($_POST['submit'])) {
                     <label for="description">Description<span class="text-danger"> *</span></label>
                     <textarea class="form-control" id="mytextarea" name="description"></textarea>
                 </div>
-            <div class="modal-footer pt-4 ">                  
+            <div class="modal-footer pt-4 ">       
+                <button type="reset" name = "" class="btn mx-auto w-100 btn-light fw-semibold" data-mdb-dismiss="modal" >Cancel</button>
                 <button type="submit" name = "handle_submit" class="btn mx-auto w-100 btn-success fw-semibold" >Submit</button>
             </div>
         </form>
@@ -262,7 +251,7 @@ if (isset($_POST['submit'])) {
               </div>
               <div class="card-footer bg-transparent border-0">
                 <a href="<?php echo '../Publications/publication_details.php?publication_ID=' . $row['id']; ?>">
-                  <button class="btn btn-success px-4">View Details</button>
+                  <button class="btn btn-success shadow-0 px-4">View Details</button>
                 </a>
               </div>
             </div>

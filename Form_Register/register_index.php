@@ -115,13 +115,13 @@ if (isset($_POST['submit'])) {
     <div class="row " >
         <div class="right-side col-md-6 text-center d-none d-md-block">
             <div class="logo-con pt-5">
-                <img src="../img/clsu-logo.png" alt="" style="height: 250px; width: 250px;">
+                <img src="../img/white-logo.png" alt="" style="height: 250px; width: 250px;">
             </div>
-            <div class="title-con pt-2 ">
+            <div class="title-con mt-3 ">
                 <h1 class="text-white">CLSU</h1>
                 <p class="text-white">OFFICE OF STUDENT AFFAIRS</p>
                 <a href="../index.php">
-                    <button class="btn btn-light  btn-login">Login</button>
+                    <button class="btn btn-light btn-login shadow-0">Login</button>
                 </a>
             </div>
             <footer class="footer-left">
@@ -134,8 +134,8 @@ if (isset($_POST['submit'])) {
                 <p class="text-center">Please provide all information requested below</p>
             </div>
           
-          <div class="form-info container px-5">
-            <h5>Personal information</h5>
+          <div class="form-info container mt-5 px-2">
+            <h6>Personal information</h6>
             <form method="POST" class="needs-validation" novalidate>
             <div class="row ">
                 <div class="col-md-4 pt-2">
@@ -214,10 +214,10 @@ if (isset($_POST['submit'])) {
                 </div>
             </div>
             <div class="pt-2 button-con">
-                <input type="checkbox" onclick="myFunction()">Show Password
+                <input type="checkbox" onclick="myFunction()"> Show Password
             </div>
             <div class="button-con py-4">
-                <button type="submit" class="btn btn">Cancel</button>
+                <button type="reset" class="btn btn">Cancel</button>
                 <button type="submit" class="btn btn-success" name="submit">Register</button>
             </div>
           </form>
@@ -229,7 +229,7 @@ if (isset($_POST['submit'])) {
             </footer>
         </div>
     </div>
-  </div>
+</div>
 
   <script>
   function myFunction() {
@@ -297,53 +297,10 @@ $(document).ready(function () {
             }, false)
             })
         })()
-        // function checkPassword(form) {
-        //         fullname = form.fullname.value;
-        //         gender = form.gender.value;
-        //         course = form.course.value;
-        //         email = form.email.value;
-        //         password = form.password.value;
-        //         confirm_password = form.confirm_password.value;
-
-        //         let regex = /[A-Za-z]+\.[A-Za-z0-9]+@clsu2\.edu\.ph/i;
-
-        //         if (fullname == '')
-        //             document.getElementById("errorid").innerHTML = "Enter your full name";
-        //         if (gender == '')
-        //             document.getElementById("error_gender").innerHTML = "Enter your gender";
-        //         if (course == '')
-        //             document.getElementById("error_course").innerHTML = "Enter your course";
-        //         if (email == '')
-        //             document.getElementById("error_email").innerHTML = "Enter your email";
-        //         if (password == '')
-        //             document.getElementById("error_password").innerHTML = "Enter your password";
-        //         if (confirm_password == '')
-        //             document.getElementById("error_confirm_password").innerHTML = "Enter your confirm password";
-
-        //         if(regex.test(email)){
-        //             alert("true");
-        //         }
-                    
-                
-        //         else if(email != regex.test(email)){
-        //             alert ("\nEmail is not valid") 
-        //         }
-                    
-
-                
-        //         if (password != confirm_password) {
-        //             document.getElementById("error_not_match").innerHTML = "Enter your password again";
-
-        //         }
-  
-        //         else{
-        //             return true;
-        //         }
-        // }
        
     </script>
-    <script src="../js/sweetalert2.js"></script>
-    <?php
+<script src="../js/sweetalert2.js"></script>
+  <?php
     if(isset($_SESSION['status_success']) ){
         ?>
         <script>

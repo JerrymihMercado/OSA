@@ -14,20 +14,19 @@ require '../includes/Exception.php';
 $email = $_POST['email_reset_pass'];
 $token = uniqid();
 
-$sql = "INSERT INTO verification_token SET token='$token';";
- if (mysqli_query($conn, $sql)) {
-            // header("location:../Announcement/all_announcement.php");
-            echo '<script language="javascript">';
-            echo 'alert("message successfully sent")';
-            echo '</script>';
-            // unset($_POST['handle_submit']);
+$_SESSION['token'] = $token;
+// $sql = "INSERT INTO verification_token SET token='$token';";
+// if (mysqli_query($conn, $sql)) {
+//             echo '<script language="javascript">';
+//             echo 'alert("message successfully sent")';
+//             echo '</script>';
             
-        } else {
-            echo mysqli_error($conn);
-            echo '<script>';
-            echo "alert('Error Occur!');" . mysqli_error($conn);
-            echo '</script>';
-        }
+//         } else {
+//             echo mysqli_error($conn);
+//             echo '<script>';
+//             echo "alert('Error Occur!');" . mysqli_error($conn);
+//             echo '</script>';
+//         }
 $body = '  <body>
                 <div class="fluid-container" style="padding: 5% 20% 10px">
                     <div class="card-box"
@@ -98,7 +97,7 @@ $body = '  <body>
 //Set gmail password
     $mail->Password = "vxysdrlygvebegfg";
 //Email subject
-    $mail->Subject = "Reset Password";
+    $mail->Subject = "Verification Code";
 //Set sender email
     $mail->setFrom('noreply.clsu.osa@gmail.com');
 //Enable HTML
@@ -111,17 +110,31 @@ $body = '  <body>
     $mail->addAddress($email);
     // $mail->addAddress('noreply.clsu.osa@gmail.com');
 //Finally send email
-    if ( $mail->Send() ) {
-        $_SESSION['status_success_send'] = "success";
-        $ciphering = "AES-128-CTR";
-        $option = 0;
-        $encryption_iv = '1234567890123456';
-        $encryption_key = "info";
-        $encryption_email = openssl_encrypt($email,$ciphering,$encryption_key,$option,$encryption_iv);
-        header("location:../Forgot_Password/forgot_pass.php?email=$encryption_email");
-    }else{
-        echo 'Message could not be sent. Mailer Error: '[$mail->ErrorInfo];
+    $ciphering = "AES-128-CTR";
+    $option = 0;
+    $encryption_iv = '1234567890123456';
+    $encryption_key = "info";
+    $encryption_email = openssl_encrypt($email,$ciphering,$encryption_key,$option,$encryption_iv);
+
+    $sql = "SELECT * FROM account
+      WHERE email = '$encryption_email'";
+    
+    $res = mysqli_query($conn, $sql);
+    if (mysqli_num_rows($res) == 1) {
+        $row = mysqli_fetch_assoc($res);
+        $id=$row['id'];
+       if($row['email'] != $encryption_email){
+            $_SESSION['invalid'] = "invalid email"; 
+       }else{
+            $mail->Send();
+            $_SESSION['load'] = true;
+            $_SESSION['status_success_send'] = "success";
+            header("location:../Forgot_Password/forgot_pass.php?email=$encryption_email&id=$id");
+           
+       }
     }
+    
+    
 //Closing smtp connection
     $mail->smtpClose();
 }
@@ -132,32 +145,90 @@ $body = '  <body>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Office of Student Affairs</title>
+    <title>OSA | Forgat Password</title>
     <link rel="icon" href ="../img/logo.png" class="icon">
     <link rel="stylesheet" href="../Style/style.css">
     <?php
       include '../Links/link.php';
     ?>
 </head>
+<style>
+.load{
+    display: none;
+}
+.show{
+    display: block;
+}
+.error_message{
+    display: none;
+}
+</style>
 <body>
-
-<div class="container">
-    <div class="row">
-        <div class="col border">
-            <form method="POST">
-                <div class="form-outline">
-                    <input type="email" id="email_reset_pass"  name="email_reset_pass" class="form-control" />
-                    <label class="form-label" for="email_reset_pass">Email</label>
-                </div>
-                <button class="btn btn-danger mt-4" name="reset">Send Verification</button>
-            </form>
+<div class="container-fluid">
+    <div class="row " >
+        <div class="right-side col-md-6 text-center d-none d-md-block">
+            <div class="logo-con pt-5">
+                <img src="../img/white-logo.png" alt="" style="height: 250px; width: 250px;">
+            </div>
+            <div class="title-con mt-4">
+                <h1 class="text-white">CLSU</h1>
+                <p class="text-white">OFFICE OF STUDENT AFFAIRS</p>
+                <a href="../index.php">
+                    <button class="btn btn-light btn-login shadow-0">Login</button>
+                </a>
+            </div>
+            <footer class="footer-left">
+                <p class="text-white">© Copyright 2023 Central Luzon State University All Rights Reserved</p>
+            </footer>
         </div>
-        <div class="col border">
-            image here
+        <div class="col-md-6 mt-4">
+            <div class="form-title mt-5">
+                <h3 class="text-center">Forgot Password</h3>
+                <p class="text-center">Please input valid CLSU account only</p>
+            </div>
+            <div class="col px-5">
+                <div class="container mt-5">
+                <!-- <p>Check your email for token verification, Thank you!</p> -->
+                    <form method="POST">
+                        <!-- Email input -->
+                        <div class="form-outline mb-4">
+                            <input type="email" id="email_reset_pass" name="email_reset_pass" class="form-control" required/>
+                            <label class="form-label" for="email_reset_pass">Email</label>
+                        </div>
+                        <div class="error_message">
+                            <div class="alert alert-danger justify-content-center d-flex" role="alert">
+                                Please Enter Email Address
+                            </div>
+                        </div>
+                        <!-- Submit button -->
+                        <button type="submit" name="reset" class="btn btn-dark btn-block show" onclick="spinner()">Send Verification Code</button>
+                        <button class="btn btn-dark btn-block load" type="button" disabled>
+                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            Loading...
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="footer-mobile">
+            <footer>
+                <p class="m-0">© Copyright 2023 Central Luzon State University All Rights Reserved</p>
+            </footer>
         </div>
     </div>
 </div>
-
+<script type="text/javascript">               
+    function spinner() {
+        let email = document.getElementById('email_reset_pass').value;
+        if(email == ''){
+            document.getElementsByClassName("error_message")[0].style.display = "block";
+        }else{
+            document.getElementsByClassName("load")[0].style.display = "block";
+            document.getElementsByClassName("show")[0].style.display = "none";
+            document.getElementsByClassName("error_message")[0].style.display = "none";
+        }
+    }
+</script>  
 <script src="../js/sweetalert2.js"></script>
     <?php
       
@@ -184,6 +255,29 @@ $body = '  <body>
         </script>
         <?php
         unset($_SESSION['status_error']);
+    }
+    if(isset($_SESSION['status_notfound'])){
+        ?>
+        <script>
+            const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+            })
+            Toast.fire({
+            icon: 'error',
+            title: 'Email address not found'
+            })
+
+        </script>
+        <?php
+        unset($_SESSION['status_notfound']);
     }
     if(isset($_SESSION['status_success_send']) ){ ?>
         <script>

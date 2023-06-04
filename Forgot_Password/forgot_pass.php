@@ -1,10 +1,12 @@
 <?php
 session_start();
 include '../mysql_connect.php';
-
+$_SESSION['status_success_send'] = "success";
+unset($_SESSION['status_success_send']);
 if (isset($_POST['submit'])) {
     $email = $_GET['email'];
     $token = $_POST['token'];
+    $id = $_GET['id'];
 
     $password = $_POST['password'];
     $confirm_password = $_POST['confirm_password'];
@@ -21,45 +23,60 @@ if (isset($_POST['submit'])) {
     $encryption_key = "info";
     $encryption_confirm_password = openssl_encrypt($confirm_password,$ciphering,$encryption_key,$option,$encryption_iv);
 
-    $query = "SELECT * FROM verification_token WHERE token = '$token'";
-    $result = mysqli_query($conn, $query);
-    if (mysqli_num_rows($result) == 1) {
-        $row = mysqli_fetch_assoc($result);
+    // $query = "SELECT * FROM account WHERE email = '$email'";
+    // $result = mysqli_query($conn, $query);
+    // if (mysqli_num_rows($result) == 1) {
+    //     $row = mysqli_fetch_assoc($result);
 
-        if($row['token'] == $token){
-            $sql = "SELECT * FROM account
-            WHERE email = '$email'";
-            $res = mysqli_query($conn, $sql);
-            if (mysqli_num_rows($res) == 1) {
-                $row = mysqli_fetch_assoc($res);
-                
-                if($encryption_password == $encryption_confirm_password){
-                    $sql = "UPDATE account SET 
-                    password='$encryption_password',
-                    confirm_password='$encryption_confirm_password'
-                    WHERE id=".$row['id'];
-            
-                    if (mysqli_query($conn, $sql)) {
-                        $_SESSION['status_success'] = "success";
+    $regex_pass = '/^\S*(?=\S{6,})(?=\S*\d)(?=\S*[A-Z])(?=\S*[a-z])(?=\S*[!@#$%^&*? ])\S*$/';
+    if($_SESSION['token'] != $token){
+        $_SESSION['status_token'] = "error";
+    }
+    else if($encryption_password != $encryption_confirm_password){
+        $_SESSION['status_pass'] = "error";
+    }
+    else if(preg_match($regex_pass, $password)==0){
+        $_SESSION['status_length'] = "error"; 
+    }
+    else{
+        $sql = "UPDATE account SET 
+                password='$encryption_password',
+                confirm_password='$encryption_confirm_password'
+                WHERE id=".$id;
+                unset($_SESSION['token']); 
+                if (mysqli_query($conn, $sql)) {
+                    $_SESSION['status_success'] = "success";
 
-                    } else {
-                        $_SESSION['status_error'] = "error";
-
-                    }
-                }else{
-                    $_SESSION['status_pass'] = "error";
-                }
-            } else {
+                } else {
                     $_SESSION['status_error'] = "error";
-            }
-        }
-    }else{
-            echo '<script language="javascript">';
-            echo 'alert("invalid token")';
-            echo '</script>';
-        }
 
-    
+                }
+    }
+        // if($_SESSION['token'] == $token){
+            
+        //         if($encryption_password == $encryption_confirm_password){
+        //             $sql = "UPDATE account SET 
+        //             password='$encryption_password',
+        //             confirm_password='$encryption_confirm_password'
+        //             WHERE id=".$id;
+        //             unset($_SESSION['token']); 
+        //             if (mysqli_query($conn, $sql)) {
+        //                 $_SESSION['status_success'] = "success";
+
+        //             } else {
+        //                 $_SESSION['status_error'] = "error";
+
+        //             }
+        //         }else{
+        //             $_SESSION['status_pass'] = "error";
+        //         }
+        // }
+        // else{
+        //     echo '<script language="javascript">';
+        //     echo 'alert("invalid token")';
+        //     echo '</script>';
+        // }
+    // }
 }
 ?>
 <!DOCTYPE html>
@@ -71,32 +88,71 @@ if (isset($_POST['submit'])) {
     <title>OSA | Forgot Password</title>
     <link rel="icon" href ="../img/logo.png" class="icon">
      <?php include '../Links/link.php' ?> 
-    <!-- Google Fonts Roboto -->
-    
-    <link rel="stylesheet" href="../css/mdb.min.css" />
     <link rel="stylesheet" href="../Style/style.css">
 </head>
 <body>
-    <div class="container">
-        <p>Check your email for token verification, Thank you!</p>
-        <form method="POST">
-            <div class="form-outline">
-                <input type="text" id="token" name="token" class="form-control" />
-                <label class="form-label" for="token">Token</label>
+<div class="container-fluid">
+    <div class="row " >
+        <div class="right-side col-md-6 text-center d-none d-md-block">
+            <div class="logo-con pt-5">
+                <img src="../img/white-logo.png" alt="" style="height: 250px; width: 250px;">
             </div>
-            <div class="form-outline">
-                <input type="password" id="password" name="password" class="form-control" />
-                <label class="form-label" for="password">Password</label>
+            <div class="title-con mt-4">
+                <h1 class="text-white">CLSU</h1>
+                <p class="text-white">OFFICE OF STUDENT AFFAIRS </p>
+                <a href="../index.php">
+                    <button class="btn btn-light  btn-login shadow-0">Login</button>
+                </a>
             </div>
-            <div class="form-outline">
-            <input type="password" id="confirm_password" name="confirm_password" class="form-control" />
-            <label class="form-label" for="confirm_password">Confirm Password</label>
+            <footer class="footer-left">
+                <p class="text-white">© Copyright 2023 Central Luzon State University All Rights Reserved</p>
+            </footer>
+        </div>
+        <div class="col-md-6  pt-4">
+            <div class="form-title">
+                <h3 class="text-center">Forgot Password</h3>
+                <p class="text-center">Input your token and strong password</p>
             </div>
-            <button type="submit" name="submit" id="submit" class="btn btn-success">Reset</button>
-            <a href="../index.php">← Login</a>
-        </form>
-    </div>
+            <div class="col px-5 mt-5">
+                <div class="container">
+                <!-- <p>Check your email for token verification, Thank you!</p> -->
+                <form method="POST">
+                    <!-- token -->
+                    <div class="form-outline mb-4">
+                        <input type="text" id="token" name="token" class="form-control" required/>
+                        <label class="form-label" for="token">Token</label>
+                    </div>
+                    <!-- Password -->
+                    <div class="form-outline mb-4">
+                        <input type="password" id="password" name="password" class="form-control" required/>
+                        <label class="form-label" for="password">Password</label>
+                    </div>
 
+                    <!-- Confirm Password input -->
+                    <div class="form-outline mb-4">
+                        <input type="password" id="confirm_password" name="confirm_password" class="form-control" required/>
+                        <label class="form-label" for="confirm_password">Confirm Password</label>
+                    </div>
+                    </div>
+
+                    <!-- Submit button -->
+                    <button type="submit" name="submit" class="btn btn-dark btn-block">Reset Password</button>
+                </form>
+                </div>
+            </div>
+        </div>
+        <div class="footer-mobile">
+            <footer>
+                <p class="m-0">© Copyright 2023 Central Luzon State University All Rights Reserved</p>
+            </footer>
+        </div>
+    </div>
+</div>
+    
+<script type="text/javascript" src="../js/mdb.min.js"></script>
+<script type="text/javascript"></script>
+<script type="text/javascript"src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.1/mdb.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.0/mdb.min.js"></script>
 <script src="../js/sweetalert2.js"></script>
     <?php
     if(isset($_SESSION['status_success']) ){
@@ -165,6 +221,20 @@ if (isset($_POST['submit'])) {
         <?php
         unset($_SESSION['status_pass']);
     }
+    if(isset($_SESSION['status_token'])){
+        ?>
+        <script>
+            Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Invalid token or not match',
+           
+            })
+
+        </script>
+        <?php
+        unset($_SESSION['status_token']);
+    }
     if(isset($_SESSION['status_invalid_email'])){
         ?>
         <script>
@@ -192,6 +262,27 @@ if (isset($_POST['submit'])) {
         </script>
         <?php
         unset($_SESSION['status_length']);
+    }
+    if(isset($_SESSION['status_success_send']) ){ ?>
+        <script>
+            const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+            })
+            Toast.fire({
+            icon: 'success',
+            title: 'Email Send!'
+            })
+        </script>
+        <?php
+            session_unset($_SESSION['status_success_send']);
     }
     ?>
 </body>

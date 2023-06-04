@@ -65,20 +65,18 @@ if(isset($_POST["handle_submit"])){
     $date = date_create();
     $stamp = date_format($date, "Y");
     $temp = $_FILES['myfile']['tmp_name'];
-    $directory = "../upload/" . $stamp . $_FILES['myfile']['name'];   
+    $directory = "../upload/".$_FILES['myfile']['name'];   
 
     if (move_uploaded_file($temp, $directory)) {
         $sql = "INSERT INTO publication_page SET 
             image='$directory',
             title = '$titles',
             descriptions='$descriptions';";
-            
+            $_SESSION['status_success_added'] = "success";
     if (mysqli_query($conn, $sql)) {
-            header("location:../Publications/all_publications.php");
-            echo '<script language="javascript">';
-            echo 'alert("message successfully sent")';
-            echo '</script>';
-            unset($_POST['handle_submit']);
+          header("location:../Publications/all_publications.php");
+          session_unset($_SESSION['status_success_added']);
+           
             
         } else {
             echo mysqli_error($conn);
@@ -104,15 +102,6 @@ if(isset($_POST["handle_submit"])){
       include '../Links/link.php';
     ?>
 </head>
-<style>
-   a,
-    a:hover,
-    a:focus,
-    a:active {
-        text-decoration: none;
-        color: inherit;
-    }
-</style>
 <body>
   
 <div class="logo-header ">
@@ -222,7 +211,7 @@ if(isset($_POST["handle_submit"])){
                 </div>
                 <div class="card-footer bg-transparent border-0">
                   <a href="<?php echo '../Publications/publication_page.php?publication_ID=' . $row['id']; ?>">
-                    <button class="btn btn-success px-4">View More</button>
+                    <button class="btn btn-success shadow-0 px-4">View More</button>
                   </a>
                 </div>
             </div>
@@ -239,79 +228,6 @@ if(isset($_POST["handle_submit"])){
   </div>
 
 <?php include_once '../Components/footer.php' ?>
-
-<script src="../js/sweetalert2.js"></script>
-  <?php
-    if(isset($_SESSION['status_success_admin']) ){
-        ?>
-        <script>
-            const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-            })
-            Toast.fire({
-            icon: 'success',
-            title: 'Welcome Back Admin!'
-            })
-
-        </script>
-        <?php
-            unset($_SESSION['status_success_admin']);
-        
-    }
-    if(isset($_SESSION['status_success_user']) ){
-        ?>
-        <script>
-            const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-            })
-            Toast.fire({
-            icon: 'success',
-            title: 'Welcome <?php echo $_SESSION['fullname']?>!'
-            })
-        </script>
-        <?php
-        unset($_SESSION['status_success_user']);
-    }
-    if(isset($_SESSION['status_error'])){
-        ?>
-        <script>
-            const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-            })
-            Toast.fire({
-            icon: 'error',
-            title: 'Credentials error'
-            })
-
-        </script>
-        <?php
-        
-    }
-  ?>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.0/mdb.min.js"></script>
 <script>
       var loadFile = function(event) {

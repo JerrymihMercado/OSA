@@ -270,7 +270,7 @@ if(isset($_POST["handle_upload"])){
               </div>
               <div class="card-footer bg-transparent border-0">
                 <a href="<?php echo '../Publications/publication_page.php?publication_ID=' . $row['id']; ?>">
-                  <button class="btn btn-success px-4">View More</button>
+                  <button class="btn btn-success shadow-0 px-4">View Page</button>
                 </a>
               </div>
           </div>
@@ -361,7 +361,7 @@ if(isset($_POST["handle_upload"])){
               </div>
               <div class="card-footer bg-transparent border-0">
                 <a href="<?php echo '../Research_&_Evaluation/research_details.php?RandD_ID=' . $row['id']; ?>">
-                  <button class="btn btn-success px-4">View More</button>
+                  <button class="btn btn-success shadow-0 px-4">View More</button>
                 </a>
               </div>
           </div>
@@ -400,80 +400,6 @@ if(isset($_POST["handle_upload"])){
 </div>
 
 <?php include_once '../Components/footer.php' ?>
-<script src="../js/sweetalert2.js"></script>
-    <?php
-      if(isset($_SESSION['status_success_admin']) ){
-          ?>
-          <script>
-              const Toast = Swal.mixin({
-              toast: true,
-              position: 'top-end',
-              showConfirmButton: false,
-              timer: 3000,
-              timerProgressBar: true,
-              didOpen: (toast) => {
-                  toast.addEventListener('mouseenter', Swal.stopTimer)
-                  toast.addEventListener('mouseleave', Swal.resumeTimer)
-              }
-              })
-              Toast.fire({
-              icon: 'success',
-              title: 'Welcome Back Admin!'
-              })
-
-          </script>
-          <?php
-              unset($_SESSION['status_success_admin']);
-         
-      }
-
-    if(isset($_SESSION['status_success_user']) ){
-        ?>
-        <script>
-            const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-            })
-            Toast.fire({
-            icon: 'success',
-            title: 'Welcome <?php echo $_SESSION['fullname']?>!'
-            })
-        </script>
-        <?php
-        unset($_SESSION['status_success_user']);
-    }
-    
-    if(isset($_SESSION['status_error'])){
-        ?>
-        <script>
-            const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-            })
-            Toast.fire({
-            icon: 'error',
-            title: 'Credentials error'
-            })
-
-        </script>
-        <?php
-        
-    }
-    ?>
 <!-- MDB -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.0/mdb.min.js"></script>
 </body>

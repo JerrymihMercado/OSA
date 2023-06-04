@@ -180,7 +180,6 @@ if (isset($_POST['submitMail'])) {
     //Finally send email
         if ( $mail->Send() ) {
             $_SESSION['status_success_send'] = "success";
-            // session_unset($_SESSION['status_success_send']);
         }else{
             echo 'Message could not be sent. Mailer Error: '[$mail->ErrorInfo];
         }
@@ -258,7 +257,7 @@ if (isset($_POST['submit'])) {
     <title>Office of Student Affairs</title>
     <link rel="icon" href ="../img/logo.png" class="icon">
     <link rel="stylesheet" href="../Style/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/> -->
     <?php
       include '../Links/link.php';
     ?>
@@ -293,6 +292,15 @@ if (isset($_POST['submit'])) {
         overflow-y: scroll;
         height: 100px;
         resize: none; /* Remove this if you want the user to resize the textarea */
+    }
+    .load{
+    display: none;
+    }
+    .showbtn{
+        display: block;
+    }
+    .error_message{
+        display: none;
     }
 
 </style>
@@ -404,10 +412,6 @@ if (isset($_POST['submit'])) {
     </div>
 </div>
 
-<div class="container">
-    
-</div>
-
 <?php
     if (isset($_SESSION['role'])) {
         if ($_SESSION['role'] == 0) {
@@ -451,18 +455,40 @@ if (isset($_POST['submit'])) {
                         <input type="file" class="form-control" id="myfile" name="myfile" multiple/>
                     </div>
                     <!-- Message input -->
-                    <div class="form-outline mb-4">
-                        <textarea class="form-control border rounded" id="message" rows="4" name="message" required></textarea>
+                    <div class="form-outline mb-4 border">
+                        <textarea class="form-control rounded" id="message" rows="4" name="message" required></textarea>
                         <label class="form-label" for="message">State your concern here</label>
                     </div>
+                    <div class="error_message">
+                            <div class="alert alert-danger justify-content-center d-flex" role="alert">
+                                Please state your concern
+                            </div>
+                        </div>
                     <div class="modal-footer">
-                        <button type="submit" name="submitMail" id="submitMail" class="btn btn-primary btn-rounded shadows">Send &nbsp; <i class="fas fa-paper-plane"></i></button>
+                        <button type="submit" name="submitMail" id="submitMail" class="btn btn-primary btn-rounded showbtn" onclick="spinner()">Send &nbsp; <i class="fas fa-paper-plane"></i></button>
+                        <button class="btn btn-primary btn-rounded load" type="button" disabled>
+                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                Loading...
+                            </button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
+    
 </div>
+<script type="text/javascript">               
+    function spinner() {
+        let message = document.getElementById('message').value;
+        if(message == ''){
+            document.getElementsByClassName("error_message")[0].style.display = "block";
+        }else{
+            document.getElementsByClassName("load")[0].style.display = "block";
+            document.getElementsByClassName("showbtn")[0].style.display = "none";
+            document.getElementsByClassName("error_message")[0].style.display = "none";
+        }
+    }
+</script> 
 <?php include_once '../Components/footer.php' ?>
 <script>
     var loadFile = function(event) {

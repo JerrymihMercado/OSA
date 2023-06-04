@@ -5,7 +5,7 @@ if (isset($_POST['submit'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-   $ciphering = "AES-128-CTR";
+    $ciphering = "AES-128-CTR";
     $option = 0;
     $encryption_iv = '1234567890123456';
     $encryption_key = "info";
@@ -280,7 +280,7 @@ if (isset($_POST['submit'])) {
     </div>
   </div>
   <div class="container mb-5">
-    <!-- <div class="row row-cols-1 row-cols-md-5 g-4">
+    <div class="row row-cols-1 row-cols-md-5 g-4">
       <div class="col">
         <a href="Staff/all_staffs.php">
           <div class="card h-100 shadows border">
@@ -323,14 +323,13 @@ if (isset($_POST['submit'])) {
           </div>
         </div>
       </div>
-    </div> -->
-    <!-- Carousel wrapper -->
-    <div
+    </div>
+  </div>
+    <!-- <div
       id="carouselMultiItemExample"
       class="carousel slide carousel-dark text-center"
       data-mdb-ride="carousel"
     >
-      <!-- Controls -->
       <div class="container">
           <div class="d-flex justify-content-end">
               <button class="carousel-control-prev carousel__control__prev position-relative rounded shadows border" type="button" data-mdb-target="#carouselMultiItemExample"
@@ -345,9 +344,7 @@ if (isset($_POST['submit'])) {
               </button>
           </div>
         </div>
-      <!-- Inner -->
       <div class="carousel-inner py-4">
-        <!-- Single item -->
         <div class="carousel-item active">
           <div class="container">
             <div class="row">
@@ -397,7 +394,6 @@ if (isset($_POST['submit'])) {
           </div>
         </div>
 
-        <!-- Single item -->
         <div class="carousel-item">
           <div class="container">
             <div class="row">
@@ -449,7 +445,7 @@ if (isset($_POST['submit'])) {
    
       </div>
     </div>
-  </div>
+  </div> -->
   
   <!-- Modal Login-->
   <div class="modal fade" id="login_Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -473,12 +469,12 @@ if (isset($_POST['submit'])) {
               <label class="form-label" for="password">Password</label>
             </div>
             <div class="row mb-4">
-                  <a href="#!">Forgot password?</a>
+                  <a href="Forgot_Password/send_reset_pass.php">Forgot password?</a>
             </div>
             <!-- Submit button -->
             <button type="submit" name="submit" class="btn btn-primary btn-block">Login</button>
             <div class="pt-3 text-center">
-              <a href="./Form_Register/register_index.php" class="text-success">Register Account</a>
+              <a href="Form_Register/register_index.php" class="text-success">Register Account</a>
             </div>
         </form>
         </div>

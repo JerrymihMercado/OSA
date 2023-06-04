@@ -136,4 +136,48 @@
         <?php
             unset($_SESSION['status_success_send']);
     }
+    if(isset($_SESSION['status_success_added']) ){ ?>
+        <script>
+            const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+            })
+            Toast.fire({
+            icon: 'success',
+            title: 'Record Successfully Added!'
+            })
+        </script>
+        <?php
+            unset($_SESSION['status_success_added']);
+    }
+    if(isset($_SESSION['status_success_update']) ){
+        ?>
+        <script>
+             const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+            })
+            Toast.fire({
+            icon: 'success',
+            title: 'Record Successfully Updated!'
+            })
+
+        </script>
+        <?php
+        unset($_SESSION['status_success_update']);
+    }
     ?>
