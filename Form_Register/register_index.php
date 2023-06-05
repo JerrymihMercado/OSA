@@ -38,13 +38,26 @@ if (isset($_POST['submit'])) {
     $check_result = mysqli_query($conn, $check_user);
     $count = mysqli_num_rows($check_result);
     
+    $check_student_id = "SELECT * FROM account WHERE student_id = '$student_id'";
+
+    $check_result_id = mysqli_query($conn, $check_student_id);
+    $count_id = mysqli_num_rows($check_result_id);
+
+
     $str = $email;
     $pattern = "/[A-Za-z]+\.[A-Za-z0-9]+@clsu2\.edu\.ph/i";
 
-    // $pass_regex = "/^.*(?=.*[a-zA-Z])(?=.*\d)(?=.*[!#$%&?@.']).*$/";
+    $str1 = $student_id;
+    $pattern1 = "/^\d{2}\-\d{4}$/";
+
+    $st2 = $password;
+    $pass_regex = "/^.*(?=.*[a-zA-Z])(?=.*\d)(?=.*[!#$%&?@.']).*$/";
 
     if($count > 0){
         $_SESSION['status_exist'] = "error";
+    }
+    else if($count_id > 0){
+        $_SESSION['status_id_exist'] = "error";
     }
     // else if($encryption_password != $pass_regex){
     //     $_SESSION['status_length'] = "error";
@@ -53,8 +66,15 @@ if (isset($_POST['submit'])) {
         $_SESSION['status_pass'] = "error";
         
     }
+   
     else if(preg_match($pattern, $str)==0){
         $_SESSION['status_invalid_email'] = "error";
+    }
+    else if(preg_match($pattern1, $str1)==0){
+        $_SESSION['status_invalid_student_id'] = "error";
+    }
+    else if(preg_match($pass_regex, $str1)==0){
+        $_SESSION['status_invalid_password'] = "error";
     }
     else{
         $sql = "INSERT INTO account SET 
@@ -108,6 +128,10 @@ if (isset($_POST['submit'])) {
     }
     .form-outline .error{
         color: red;
+}   .example{
+    font-size: 14px;
+    /* margin-left: -20px; */
+    font-style: italic;
 }
   </style>
 <body>
@@ -136,13 +160,16 @@ if (isset($_POST['submit'])) {
           
           <div class="form-info container mt-5 px-2">
             <h6>Personal information</h6>
-            <form method="POST" class="needs-validation" novalidate>
+            <form method="POST" class="needs-validation" novalidate >
             <div class="row ">
                 <div class="col-md-4 pt-2">
                     <div class="form-outline ">
                         <input type="text" id="student_id" class="form-control" name="student_id" required/>
                         <label class="form-label" for="form12">Student ID</label>
                     </div>
+                </div>
+                <div class="col pt-3">
+                    <p class="example">(Ex.Student ID 00-0000)</p>
                 </div>
             </div>
             <div class="row ">
@@ -157,7 +184,7 @@ if (isset($_POST['submit'])) {
             <div class="row">
                 <div class="col-md-7 pt-3">
                     <select class="form-select" aria-label="Default select example" name="college" id="college" required>
-                        <option selected value="0">Choose your college</option>
+                        <option selected value="">Choose your college</option>
                         <option value="COLLEGE OF AGRICULTURE">COLLEGE OF AGRICULTURE</option>
                         <option value="COLLEGE OF ARTS AND SOCIAL SCIENCES">COLLEGE OF ARTS AND SOCIAL SCIENCES</option>
                         <option value="COLLEGE OF BUSINESS ADMINISTRATION AND ACCOUNTANCY">COLLEGE OF BUSINESS ADMINISTRATION AND ACCOUNTANCY</option>
@@ -180,7 +207,7 @@ if (isset($_POST['submit'])) {
                 <div class="row">
                     <div class="col-md-6 pt-3">
                         <select class="form-select" aria-label="Default select example" name="gender" id="gender" required>
-                            <option selected >Choose your gender</option>
+                            <option selected value="">Choose your gender</option>
                             <option value="Male">Male</option>
                             <option value="Female">Female</option>  
                         </select>
@@ -298,6 +325,28 @@ $(document).ready(function () {
             })
         })()
        
+        
+    </script>
+
+    <script>
+        (function () {
+        'use strict'
+
+        var forms = document.querySelectorAll('.needs-validation')
+        Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+            form.addEventListener('submit', function (event) {
+                if (!form.checkValidity()) {
+                event.preventDefault()
+                event.stopPropagation()
+                }
+
+                form.classList.add('was-validated')
+            }, false)
+            })
+        })()
+       
+        
     </script>
 <script src="../js/sweetalert2.js"></script>
   <?php
@@ -353,6 +402,20 @@ $(document).ready(function () {
         <?php
         unset($_SESSION['status_exist']);
     }
+    if(isset($_SESSION['status_id_exist'])){
+        ?>
+        <script>
+            Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'ID Number is already registered',
+           
+            })
+
+        </script>
+        <?php
+        unset($_SESSION['status_id_exist']);
+    }
     if(isset($_SESSION['status_pass'])){
         ?>
         <script>
@@ -381,6 +444,35 @@ $(document).ready(function () {
         <?php
         unset($_SESSION['status_invalid_email']);
     }
+    if(isset($_SESSION['status_invalid_student_id'])){
+        ?>
+        <script>
+            Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Invalid CLSU ID!',
+           
+            })
+
+        </script>
+        <?php
+        unset($_SESSION['status_invalid_student_id']);
+    }
+    if(isset($_SESSION['status_invalid_password'])){
+        ?>
+        <script>
+            Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Password must contain Capital and Small letter, Number and Symbol',
+           
+            })
+
+        </script>
+        <?php
+        unset($_SESSION['status_invalid_password']);
+    }
+    
     if(isset($_SESSION['status_length'])){
         ?>
         <script>
