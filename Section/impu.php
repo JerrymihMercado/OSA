@@ -56,11 +56,6 @@ if (isset($_POST['submit'])) {
             $_SESSION['status_error'] = "error";
     }
 }
-if(isset($_POST['view'])){
-  header("content-type: application/pdf");
-  readfile('../Handbook/CLSU-STUDENT-HANDBOOK-2022-2023.pdf');
-}
-
 if(isset($_POST["handle_upload"])){
    
 
@@ -70,16 +65,16 @@ if(isset($_POST["handle_upload"])){
     $directory = "../Handbook/".$_FILES['handbook']['name'];   
 
     if (move_uploaded_file($temp, $directory)) {
-        $sql = "INSERT INTO student_handbook SET 
+        $sql = "UPDATE student_handbook SET 
             file_name='$directory',
-            uploaded_on='$stamp';";
+            uploaded_on='$stamp'
+            WHERE id=1;";
             
     if (mysqli_query($conn, $sql)) {
             header("location:../Section/impu.php");
-            echo '<script language="javascript">';
-            echo 'alert("message successfully sent")';
-            echo '</script>';
+            $_SESSION['status_success_added'] = "success";
             unset($_POST['handle_upload']);
+            session_unset($_SESSION['status_success_added']);
             
         } else {
             echo mysqli_error($conn);
@@ -186,9 +181,16 @@ if(isset($_POST["handle_upload"])){
                   <?php
                     if (isset($_SESSION['role'])) {
                         if ($_SESSION['role'] == 1 || $_SESSION['role'] == 0) {
+
+                          $sql = "SELECT * FROM student_handbook WHERE id=1";
+                          $res = mysqli_query($conn, $sql);
+                          if(mysqli_num_rows($res) > 0){
+                              while ($row = mysqli_fetch_assoc($res)) {
                             echo '<div class="d-flex justify-content-center view-pdf-button">
-                                    <button class="btn btn-light shadows px-5" name="view">View</button>
-                                  </div>';
+                                    <a href="'.$row['file_name'].'" target="_blank" class="btn btn-light shadows px-5"><i class="fas fa-eye"></i> View</a>
+                                    </div>';
+                            }
+                          }
                         }
                     }else{
                         echo '';
@@ -216,10 +218,16 @@ if(isset($_POST["handle_upload"])){
                   <?php
                     if (isset($_SESSION['role'])) {
                         if ($_SESSION['role'] == 0) {
-                            echo '<a href="https://drive.google.com/uc?export=download&id=1FylpFFT3UyuQndDfatJ1R0jbZ5_2QwW4" class="btn btn-danger">Download</a>';
-                        }elseif($_SESSION['role'] == 1){
-                            echo '<button type="button" class="btn btn-success" data-mdb-toggle="modal" data-mdb-target="#upload">
-                                    Upload Handbook
+                           $sql = "SELECT * FROM student_handbook WHERE id=1";
+                          $res = mysqli_query($conn, $sql);
+                          if(mysqli_num_rows($res) > 0){
+                              while ($row = mysqli_fetch_assoc($res)) {
+                            echo '<a href="'.$row['file_name'].'" download class="btn btn-danger">Download</a>';
+                              }
+                          }
+                          }elseif($_SESSION['role'] == 1){
+                            echo '<button type="button" class="btn btn-primary" data-mdb-toggle="modal" data-mdb-target="#upload">
+                                    <i class="fas fa-cloud-arrow-up"></i> Upload Handbook
                                   </button>';
                         }
                     }
@@ -264,25 +272,28 @@ if(isset($_POST["handle_upload"])){
               <div class="card-body">
                   <h5 class="card-title"><?php echo $row['title']; ?></h5>
                   <p class="card-text" align="justify">
-                    <?php echo $row['descriptions']; ?>
+                    <?php 
+                      $details = substr($row['descriptions'],0,300);
+                    if($row['descriptions'] > 90){
+                      echo $details?>
+                  <?php }?>
                   </p>
-                  
               </div>
-              <div class="card-footer bg-transparent border-0">
+              <div class="card-footer bg-transparent border-0 justify-content-end d-flex">
                 <a href="<?php echo '../Publications/publication_page.php?publication_ID=' . $row['id']; ?>">
-                  <button class="btn btn-success shadow-0 px-4">View Page</button>
+                  <button class="btn btn-dark shadow-0 px-4"><i class="fas fa-eye"></i> View Page</button>
                 </a>
               </div>
           </div>
         </div>
         <?php     
-            }
-    }else{?>
-        <div class="container p-2 justify-content-center d-flex">
-            <h1 class="text-warning">No Data Found!</h1>
-        </div>
-    <?php  }
-            ?>   
+                }
+        }else{?>
+            <div class="container p-2 justify-content-center d-flex">
+                <h1 class="text-warning">No Data Found!</h1>
+            </div>
+        <?php  }
+        ?>   
     </div>
 </div>
 <!-- Research and evaluation -->
@@ -355,13 +366,17 @@ if(isset($_POST["handle_upload"])){
               <div class="card-body">
                   <h5 class="card-title"><?php echo $row['title']; ?></h5>
                   <p class="card-text" align="justify">
-                    <?php echo $row['descriptions']; ?>
+                    <?php 
+                      $details = substr($row['descriptions'],0,300);
+                    if($row['descriptions'] > 90){
+                      echo $details?>
+                  <?php }?>
                   </p>
                   
               </div>
-              <div class="card-footer bg-transparent border-0">
+              <div class="card-footer bg-transparent border-0 justify-content-end d-flex">
                 <a href="<?php echo '../Research_&_Evaluation/research_details.php?RandD_ID=' . $row['id']; ?>">
-                  <button class="btn btn-success shadow-0 px-4">View More</button>
+                  <button class="btn btn-dark shadow-0 px-4"><i class="fas fa-eye"></i> View Details</button>
                 </a>
               </div>
           </div>

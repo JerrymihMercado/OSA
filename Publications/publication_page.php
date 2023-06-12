@@ -37,6 +37,7 @@ if(isset($_POST["handle_submit"])){
     if (mysqli_query($conn, $sql)) {
             header("location:../Publications/publication_page.php?publication_ID=".$id);
             $_SESSION['status_success_added'] = "success";
+            session_unset($_SESSION['status_success_added']);
             
         } else {
             echo mysqli_error($conn);
@@ -150,8 +151,8 @@ if (isset($_POST['submit'])) {
     <?php
       if (isset($_SESSION['role'])) {
           if ($_SESSION['role'] == 1) {
-              echo '<button type="button" class="btn btn-success" data-mdb-toggle="modal" data-mdb-target="#add_post">
-                      Add Publication Post
+              echo '<button type="button" class="btn btn-primary shadows" data-mdb-toggle="modal" data-mdb-target="#add_post">
+                      <i class="fas fa-notes-medical"></i> Add Publication Post
                     </button>';
           }
       }else{
@@ -159,76 +160,6 @@ if (isset($_POST['submit'])) {
       }
     ?>
   </div>
-  <div class="container">
-    <div>
-      <?php
-        $id = $_GET['publication_ID']; 
-        $sql = "SELECT * FROM publish_post WHERE own_by=$id AND is_archive=0 ORDER BY date_created desc limit 1 ";
-        $res = mysqli_query($conn, $sql);
-        if(mysqli_num_rows($res) > 0){
-            while ($row = mysqli_fetch_assoc($res)) {?>
-        <div class="card mb-3 shadows border" style="max-width: 100%;">
-            <div class="row g-0">
-                <div class="col-md-4">
-                   <img src="../upload/<?php echo $row['image']; ?>" class="img-fluid rounded-start" alt="" style="height: 40vh; object-fit: cover;"/>
-                    </div>
-                    <div class="col-md-8">
-                    <div class="card-body">
-                        <h5 class="card-title title-left-border"><?php echo $row['title']; ?></h5>
-                        <p class="card-text">
-                          <small class="tag-sub text-muted fs-6"><?php echo $row['date_created']; ?></small>
-                        </p>
-                        <p class="card-text px-4">
-                          <?php echo $row['descriptions']; ?>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-       <?php     
-            }
-    }else{?>
-        <div class="container p-2 justify-content-center d-flex">
-            <h1 class="text-warning">No Data Found!</h1>
-        </div>
-    <?php  }
-            ?> 
-    </div>
-  </div>
-
-  
-
-  <div class="modal fade" id="add_post" tabindex="-1" aria-labelledby="add_post" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <form action="" method="POST" enctype="multipart/form-data">
-            <div class="modal-header">
-                <h5 class="modal-title">Add New Post</h1>
-                <i data-bs-dismiss="modal" aria-label="Close"></i>
-            </div>
-            <div class="modal-body">
-               
-                <div class="mb-3">
-                    <label for="myfile">Image<span class="text-danger"> *</span></label>
-                    <img class="card-img-top movie_input_img" id="output" src="../img/Default_images.svg" alt="Card image" style="width: 100%; height: auto; ">
-                    <input type="file" class="form-control mt-2" id="myfile"  name="myfile" accept="image/*" onchange="loadFile(event)" required/>
-                </div>
-                <div class="mb-3">
-                    <label for="title">Post Title<span class="text-danger"> *</span></label>
-                    <input type="text" name="title" class="form-control" id="title" placeholder="Enter Name of Location" required>
-                </div>
-                    <label for="description">Description<span class="text-danger"> *</span></label>
-                    <textarea class="form-control" id="mytextarea" name="description"></textarea>
-                </div>
-            <div class="modal-footer pt-4 ">       
-                <button type="reset" name = "" class="btn mx-auto w-100 btn-light fw-semibold" data-mdb-dismiss="modal" >Cancel</button>
-                <button type="submit" name = "handle_submit" class="btn mx-auto w-100 btn-success fw-semibold" >Submit</button>
-            </div>
-        </form>
-      </div>
-    </div>
-  </div>
-    
   <div class="container">
       <div class="row row-cols-1 row-cols-md-3 g-4">
         <?php
@@ -245,13 +176,15 @@ if (isset($_POST['submit'])) {
               </div>
               <div class="card-body">
                   <h5 class="card-title"><?php echo $row['title']; ?></h5>
-                  <!-- <p class="card-text" align="justify">
-                      <?php echo $row['descriptions']; ?>
-                    </p> -->
+                  <?php 
+                      $details = substr($row['descriptions'],0,300);
+                    if($row['descriptions'] > 90){
+                      echo $details?>...
+                  <?php }?>
               </div>
-              <div class="card-footer bg-transparent border-0">
+              <div class="card-footer bg-transparent border-0 justify-content-end d-flex">
                 <a href="<?php echo '../Publications/publication_details.php?publication_ID=' . $row['id']; ?>">
-                  <button class="btn btn-success shadow-0 px-4">View Details</button>
+                  <button class="btn btn-dark shadow-0 px-4"><i class="fas fa-eye"></i> View Details</button>
                 </a>
               </div>
             </div>
@@ -267,80 +200,39 @@ if (isset($_POST['submit'])) {
       </div>
   </div>
 
+<!-- Add Modal  -->
+<div class="modal fade" id="add_post" tabindex="-1" aria-labelledby="add_post" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <form action="" method="POST" enctype="multipart/form-data">
+            <div class="modal-header">
+                <h5 class="modal-title">Add New Post</h1>
+                <i data-bs-dismiss="modal" aria-label="Close"></i>
+            </div>
+            <div class="modal-body">
+               
+                <div class="mb-3">
+                    <label for="myfile">Image<span class="text-danger"> *</span></label>
+                    <img class="card-img-top movie_input_img" id="output" src="../img/Default_images.svg" alt="Card image" style="width: 100%; height: 20vh; object-fit: cover;">
+                    <input type="file" class="form-control mt-2" id="myfile"  name="myfile" accept="image/*" onchange="loadFile(event)" required/>
+                </div>
+                <div class="mb-3">
+                    <label for="title">Post Title<span class="text-danger"> *</span></label>
+                    <input type="text" name="title" class="form-control" id="title" placeholder="Enter Title Name" required>
+                </div>
+                    <label for="description">Description<span class="text-danger"> *</span></label>
+                    <textarea class="form-control" id="mytextarea" name="description"></textarea>
+                </div>
+            <div class="modal-footer pt-4 ">       
+                <button type="reset" name = "" class="btn mx-auto w-100 btn-light fw-semibold" data-mdb-dismiss="modal" >Cancel</button>
+                <button type="submit" name = "handle_submit" class="btn mx-auto w-100 btn-success fw-semibold" >Submit</button>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
 <?php include_once '../Components/footer.php' ?>
-
-<script src="../js/sweetalert2.js"></script>
-  <?php
-    if(isset($_SESSION['status_success_admin']) ){
-        ?>
-        <script>
-            const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-            })
-            Toast.fire({
-            icon: 'success',
-            title: 'Welcome Back Admin!'
-            })
-
-        </script>
-        <?php
-            unset($_SESSION['status_success_admin']);
-        
-    }
-    if(isset($_SESSION['status_success_user']) ){
-        ?>
-        <script>
-            const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-            })
-            Toast.fire({
-            icon: 'success',
-            title: 'Welcome <?php echo $_SESSION['fullname']?>!'
-            })
-        </script>
-        <?php
-        unset($_SESSION['status_success_user']);
-    }
-    if(isset($_SESSION['status_error'])){
-        ?>
-        <script>
-            const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-            })
-            Toast.fire({
-            icon: 'error',
-            title: 'Credentials error'
-            })
-
-        </script>
-        <?php
-        
-    }
-  ?>
 <!-- MDB -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.0/mdb.min.js"></script>
 <script>

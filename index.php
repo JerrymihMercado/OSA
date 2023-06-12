@@ -65,7 +65,7 @@ if (isset($_POST['submit'])) {
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <title>Office of Student Affairs</title>
     <link rel="icon" href ="img/logo.png" class="icon">
-    <link rel="stylesheet" href="./Style/style.css">
+    <link rel="stylesheet" href="Style/style.css">
      <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
     <!-- Google Fonts Roboto -->
@@ -236,32 +236,83 @@ if (isset($_POST['submit'])) {
     </div>
   </div>
   <div class="container">
-     <?php
+    <?php
         $sql = "SELECT * FROM announcement WHERE is_archive=0 limit 4";
         $res = mysqli_query($conn, $sql);
         if(mysqli_num_rows($res) > 0){
             while ($row = mysqli_fetch_assoc($res)) {?>
-    <div class="card mb-3 shadows border" style="max-width: 100%;">
+    <div class="row g-0">
+      <div class="card mb-3 shadows border">
+        <div class="card-header">
+          <div class="row">
+            <div class="col">
+              <h6><?php echo $row['title']; ?></h6>
+            </div>
+            <div class="col justify-content-end d-flex">
+              <small><?php echo $row['date_created']; ?></small>
+            </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <p>
+              <?php 
+                          $details = substr($row['descriptions'],0,350);
+                        if($details > 350){
+                          echo $details?>...
+                       <?php }else{
+                          echo '';
+                       }?>
+            </p>
+        </div>
+        <div class="card-footer border-0 justify-content-end d-flex">
+            <a href="<?php echo 'Announcement/announcement_details.php?announcement_id=' . $row['id']; ?>" class="card-text">
+              <button class="btn btn-dark shadow-0"><i class="fas fa-eye"></i> View Details</button>
+            </a>
+          </div>
+      </div>
+    </div>
+    <?php     
+            }
+    }else{?>
+        <div class="container p-2 justify-content-center d-flex">
+            <h1 class="text-warning">No Data Found!</h1>
+        </div>
+    <?php  }
+            ?>
+     <!-- <?php
+        $sql = "SELECT * FROM announcement WHERE is_archive=0 limit 4";
+        $res = mysqli_query($conn, $sql);
+        if(mysqli_num_rows($res) > 0){
+            while ($row = mysqli_fetch_assoc($res)) {?>
+    <div class="card mb-3 shadows border" style="max-width: 100%; height: 100%">
       <div class="row g-0">
         <div class="col-md-4">
           <img
             src="./upload/<?php echo $row['image']; ?>"
             alt=""
             class="img-fluid rounded-start"
-            style="height: 35vh; object-fit: cover; width: auto;"
+            style="height: 100%; width: 100%;"
           />
         </div>
         <div class="col-md-8">
           <div class="card-body">
-            <h5 class="card-title title-left-border"><?php echo $row['title']; ?></h5>
+            <h5 class="card-title"><?php echo $row['title']; ?></h5>
             <p class="card-text">
-              <small class="tag-sub text-muted fs-6"><?php echo $row['date_created']; ?></small>
+              <small class="fs-6"><?php echo $row['date_created']; ?></small>
             </p>
-            <p class="card-text px-4">
-              <?php echo $row['descriptions']; ?>
+            <p class="card-text">
+              <?php 
+                          $details = substr($row['descriptions'],0,350);
+                        if($details > 350){
+                          echo $details?> <b>See more..</b>
+                       <?php }else{
+                          echo '';
+                       }?>
             </p>
-            <a href="<?php echo 'Announcement/announcement_details.php?announcement_id=' . $row['id']; ?>" class="card-text tag-sub">
-              <button class="btn btn-success">View Details</button>
+          </div>
+          <div class="card-footer border-0">
+            <a href="<?php echo 'Announcement/announcement_details.php?announcement_id=' . $row['id']; ?>" class="card-text">
+              <button class="btn btn-success shadow-0">View Details</button>
             </a>
           </div>
         </div>
@@ -274,8 +325,9 @@ if (isset($_POST['submit'])) {
             <h1 class="text-warning">No Data Found!</h1>
         </div>
     <?php  }
-            ?>
+            ?> -->
   </div>
+  
   <div class="modal fade" id="login_Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">

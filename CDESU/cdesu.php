@@ -120,7 +120,7 @@ if (isset($_POST['submit'])) {
       </div>
     </div>
 
-    <div class="container mt-4">
+    <!-- <div class="container mt-4">
         <div class="row row-cols-1 row-cols-md-3 g-4">
             <div class="col">
                     <div class="card shadows h-100 border">
@@ -144,6 +144,13 @@ if (isset($_POST['submit'])) {
             </div>
             
         </div>
+    </div> -->
+    <div class="container">
+        <a href="../CDESU/cdesu_details.php">
+            <div class="mb-3">
+                <img src="../img/Under construction-bro.svg" class="card-img-top" alt="Wild Landscape" style="height: 70vh"/>
+            </div>
+        </a>
     </div>
 
 <?php include_once '../Components/footer.php' ?>

@@ -6,27 +6,43 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
+
+
 if(isset($_POST['reset'])){
-require '../includes/PHPMailer.php';
-require '../includes/SMTP.php';
-require '../includes/Exception.php';
+    require '../includes/PHPMailer.php';
+    require '../includes/SMTP.php';
+    require '../includes/Exception.php';
 
-$email = $_POST['email_reset_pass'];
-$token = uniqid();
+    $email = $_POST['email_reset_pass'];
+    $token = uniqid();
+    $_SESSION['token'] = $token;
 
-$_SESSION['token'] = $token;
-// $sql = "INSERT INTO verification_token SET token='$token';";
-// if (mysqli_query($conn, $sql)) {
-//             echo '<script language="javascript">';
-//             echo 'alert("message successfully sent")';
-//             echo '</script>';
-            
-//         } else {
-//             echo mysqli_error($conn);
-//             echo '<script>';
-//             echo "alert('Error Occur!');" . mysqli_error($conn);
-//             echo '</script>';
-//         }
+    $ciphering = "AES-128-CTR";
+    $option = 0;
+    $encryption_iv = '1234567890123456';
+    $encryption_key = "info";
+    $encryption_email = openssl_encrypt($email,$ciphering,$encryption_key,$option,$encryption_iv);
+
+    $sql = "SELECT * FROM account
+      WHERE email = '$encryption_email'";
+    
+    $res = mysqli_query($conn, $sql);
+    if (mysqli_num_rows($res) == 1) {
+        $row = mysqli_fetch_assoc($res);
+
+        $ciphering = "AES-128-CTR";
+        $option = 0;
+        $decryption_key = "info";
+        $decryption_iv = '1234567890123456';
+        $decryption = openssl_decrypt($row['email'],$ciphering,$decryption_key,$option,$decryption_iv);
+        $session_email = $decryption;
+
+        $_SESSION['fullname'] = $row['fullname'];
+        $_SESSION['id'] = $row['id'];
+        $_SESSION['email'] = $session_email;
+        
+
+    }
 $body = '  <body>
                 <div class="fluid-container" style="padding: 5% 20% 10px">
                     <div class="card-box"
@@ -60,7 +76,7 @@ $body = '  <body>
                                 Forgot Password
                             </h1>
                             <br />
-                            <h3 class="card-text-content">Good day, <b>Student</b></h3>
+                            <h3 class="card-text-content">Good day,'.@$_SESSION['fullname'].'</h3>
                             <p>
                                 <b>Token:</b>'.$token.' 
                             </p>
@@ -110,31 +126,14 @@ $body = '  <body>
     $mail->addAddress($email);
     // $mail->addAddress('noreply.clsu.osa@gmail.com');
 //Finally send email
-    $ciphering = "AES-128-CTR";
-    $option = 0;
-    $encryption_iv = '1234567890123456';
-    $encryption_key = "info";
-    $encryption_email = openssl_encrypt($email,$ciphering,$encryption_key,$option,$encryption_iv);
-
-    $sql = "SELECT * FROM account
-      WHERE email = '$encryption_email'";
-    
-    $res = mysqli_query($conn, $sql);
-    if (mysqli_num_rows($res) == 1) {
-        $row = mysqli_fetch_assoc($res);
-        $id=$row['id'];
-       if($row['email'] != $encryption_email){
-            $_SESSION['invalid'] = "invalid email"; 
-       }else{
-            $mail->Send();
-            $_SESSION['load'] = true;
-            $_SESSION['status_success_send'] = "success";
-            header("location:../Forgot_Password/forgot_pass.php?email=$encryption_email&id=$id");
-           
-       }
+    if($email != @$_SESSION['email']){
+        $_SESSION['status_notfound'] = 'error';
+        // error_reporting(E_ERROR | E_WARNING | E_PARSE); 
+    }else{
+        $mail->Send();
+        header("location:../Forgot_Password/forgot_pass.php?email=$encryption_email&id=".$_SESSION['id']);
     }
-    
-    
+           
 //Closing smtp connection
     $mail->smtpClose();
 }
@@ -222,7 +221,8 @@ $body = '  <body>
         let email = document.getElementById('email_reset_pass').value;
         if(email == ''){
             document.getElementsByClassName("error_message")[0].style.display = "block";
-        }else{
+        }
+        else{
             document.getElementsByClassName("load")[0].style.display = "block";
             document.getElementsByClassName("show")[0].style.display = "none";
             document.getElementsByClassName("error_message")[0].style.display = "none";

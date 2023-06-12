@@ -253,9 +253,14 @@ if(isset($_POST["handle_submit"])){
               </div>
               <div class="card-body">
                   <h5 class="card-title"><?php echo $row['title']; ?></h5>
-                  <!-- <p class="card-text" align="justify">
-                    <?php echo $row['descriptions']; ?>
-                  </p> -->
+                  <p class="card-text">
+                    <?php 
+                      $details = substr($row['descriptions'],0,300);
+                      if($row['descriptions'] > 90){
+                        echo $details?> ...
+                    <?php }?>
+                  </p>
+                  
                   
               </div>
               <div class="card-footer bg-transparent border-0">

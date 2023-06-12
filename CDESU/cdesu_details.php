@@ -89,7 +89,7 @@ if (isset($_POST['submit'])) {
         </div>
     </div>
   <?php include '../Components/header.php'; ?>
-  <div class="container pt-5">
+  <!-- <div class="container pt-5">
     <div class="row">
       <div class="osa-tag">
         <p class="tag-info">PEPSI COMPANY</p>
@@ -140,7 +140,12 @@ if (isset($_POST['submit'])) {
                 </div>
             </div>
         </div>
+    </div> -->
+<div class="container">
+    <div class="mb-3">
+        <img src="../img/Under construction-bro.svg" class="card-img-top" alt="Wild Landscape" style="height: 70vh"/>
     </div>
+</div>
 
 <?php include_once '../Components/footer.php' ?>
 <script src="../js/sweetalert2.js"></script>

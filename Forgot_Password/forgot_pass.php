@@ -1,8 +1,11 @@
 <?php
 session_start();
 include '../mysql_connect.php';
-$_SESSION['status_success_send'] = "success";
-unset($_SESSION['status_success_send']);
+
+// if(isset($_SESSION['token'])){
+//     header("location:../Forgot_Password/forgot_pass.php");
+// }
+
 if (isset($_POST['submit'])) {
     $email = $_GET['email'];
     $token = $_POST['token'];
@@ -23,11 +26,6 @@ if (isset($_POST['submit'])) {
     $encryption_key = "info";
     $encryption_confirm_password = openssl_encrypt($confirm_password,$ciphering,$encryption_key,$option,$encryption_iv);
 
-    // $query = "SELECT * FROM account WHERE email = '$email'";
-    // $result = mysqli_query($conn, $query);
-    // if (mysqli_num_rows($result) == 1) {
-    //     $row = mysqli_fetch_assoc($result);
-
     $regex_pass = '/^\S*(?=\S{6,})(?=\S*\d)(?=\S*[A-Z])(?=\S*[a-z])(?=\S*[!@#$%^&*? ])\S*$/';
     if($_SESSION['token'] != $token){
         $_SESSION['status_token'] = "error";
@@ -46,37 +44,14 @@ if (isset($_POST['submit'])) {
                 unset($_SESSION['token']); 
                 if (mysqli_query($conn, $sql)) {
                     $_SESSION['status_success'] = "success";
+                    header( "refresh:3;url=../index.php" );
 
                 } else {
                     $_SESSION['status_error'] = "error";
 
                 }
     }
-        // if($_SESSION['token'] == $token){
-            
-        //         if($encryption_password == $encryption_confirm_password){
-        //             $sql = "UPDATE account SET 
-        //             password='$encryption_password',
-        //             confirm_password='$encryption_confirm_password'
-        //             WHERE id=".$id;
-        //             unset($_SESSION['token']); 
-        //             if (mysqli_query($conn, $sql)) {
-        //                 $_SESSION['status_success'] = "success";
 
-        //             } else {
-        //                 $_SESSION['status_error'] = "error";
-
-        //             }
-        //         }else{
-        //             $_SESSION['status_pass'] = "error";
-        //         }
-        // }
-        // else{
-        //     echo '<script language="javascript">';
-        //     echo 'alert("invalid token")';
-        //     echo '</script>';
-        // }
-    // }
 }
 ?>
 <!DOCTYPE html>

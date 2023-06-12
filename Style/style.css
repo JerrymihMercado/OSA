@@ -203,7 +203,7 @@ input:-webkit-autofill:active {
     margin-top: 200px;
 }
 .footer-mobile {
-position: fixed;
+/* position: fixed; */
 bottom: 0;
 text-align: center;
 width: 100%;

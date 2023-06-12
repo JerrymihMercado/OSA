@@ -439,15 +439,15 @@ if (isset($_POST['submit'])) {
                 
                 <form method="POST" enctype="multipart/form-data">
                     <!-- 2 column grid layout with text inputs for the first and last names -->
-                    <div class="form-outline mb-4">
+                    <div class="mb-4">
                         <p> <b>Fullname:</b> <?php echo $_SESSION['fullname'];?> </p>
                     </div>
                     <!-- course input -->
-                    <div class="form-outline mb-4">
+                    <div class="mb-4">
                         <p> <b>Course:</b> <?php echo $_SESSION['course'];?> </p>
                     </div>
                     <!-- Email input -->
-                    <div class="form-outline mb-4">
+                    <div class="mb-4">
                        <p> <b>Email:</b> <?php echo $_SESSION['email'];?> </p>
                     </div>
                     <!-- Upload file -->

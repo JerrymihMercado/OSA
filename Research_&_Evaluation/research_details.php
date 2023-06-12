@@ -45,14 +45,13 @@ if(isset($_POST["handle_submit_update"])){
             echo '</script>';
         }
     }
-    
 }
 if (isset($_POST['submit'])) {
     $id = $research_and_eval['id'];
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-   $ciphering = "AES-128-CTR";
+    $ciphering = "AES-128-CTR";
     $option = 0;
     $encryption_iv = '1234567890123456';
     $encryption_key = "info";
@@ -142,15 +141,13 @@ if (isset($_POST['archive'])) {
       position: absolute;
     }
 </style>
-<body>
-  
+<body> 
 <div class="logo-header ">
   <div class="container-fluid">
       <div class="row d-flex justify-content-between">
           <div class="logo-header-left col-xl-7 col-md-7 col-xs-7 dp-xs-flex flex-row">
               <div class="logo mr-xs-3">
                   <img src="../img/clsu-logo.png" alt="" >
-                  
               </div>
               <div class="logo-text m-xs-0">
                   <span class="logo-title">Central Luzon State University</span>
@@ -160,15 +157,14 @@ if (isset($_POST['archive'])) {
       </div>
   </div>
 </div>
-
-  <?php include '../Components/header.php'; ?>
+<?php include '../Components/header.php'; ?>
 
 
   <div class="container pt-5">
     <div class="row">
       <div class="osa-tag">
         <p class="tag-info">RESEARCH & EVALUATION DETAILS</p>
-        <p class="tag-sub">Please read the details of R&E from the Office of Student Affairs(OSA)</p>
+        <p class="tag-sub">Please read the details of research and evaluation from the Office of Student Affairs(OSA)</p>
       </div>
     </div>
   </div>
@@ -192,13 +188,12 @@ if (isset($_POST['archive'])) {
     </div>
     <div class="row mt-5">
         <div class="col">
-          
           <?php
             if (isset($_SESSION['role'])) {
                 if ($_SESSION['role'] == 1) {
                     echo '
-                    <button class="btn btn-success fw-semibold" data-mdb-toggle="modal" data-mdb-target="#update_publication">Update</button>
-                    <button class="btn btn-danger fw-semibold" data-mdb-toggle="modal" data-mdb-target="#archive">Archive</button>';
+                    <button class="btn btn-success fw-semibold" data-mdb-toggle="modal" data-mdb-target="#update_publication"><i class="fas fa-pen-to-square"></i> Update</button>
+                    <button class="btn btn-danger fw-semibold" data-mdb-toggle="modal" data-mdb-target="#archive"><i class="fas fa-box-archive"></i> Archive</button>';
                 }
             }else{
                 echo '';
@@ -220,8 +215,8 @@ if (isset($_POST['archive'])) {
                
                 <div class="mb-3">
                     <label for="myfile">Image<span class="text-danger"> *</span></label>
-                    <img class="card-img-top movie_input_img" id="output" src="../upload/<?php echo $research_and_eval['image']; ?>" alt="Card image" style="width: 100%; height: auto; ">
-                    <input type="file" class="form-control mt-2" id="myfile"  name="myfile" accept="image/*" onchange="loadFile(event)" value="<?php echo $research_and_eval['image']; ?>"/>
+                    <img class="card-img-top movie_input_img" id="output" src="../upload/<?php echo $research_and_eval['image']; ?>" alt="Card image" style="width: 100%; height: 40vh; object-fit: cover;">
+                    <input type="file" class="form-control mt-2" id="myfile"  name="myfile" accept="image/*" onchange="loadFile(event)" required/>
                 </div>
                 <div class="mb-3">
                     <label for="title">Title<span class="text-danger"> *</span></label>
@@ -240,52 +235,50 @@ if (isset($_POST['archive'])) {
     </div>
   </div>
 
-   <!-- archive modal -->
-  <div class="modal fade" id="archive" tabindex="-1" role="dialog" aria-labelledby="archive" aria-hidden="true">
-      <div class="modal-dialog">
-          <form method="POST">  
-              <div class="modal-content">
-                  <div class="modal-header bg-danger text-white p-4">
-                      <h5 class="modal-title" id="exampleModalLabel"></h5>
-                      <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body ">
-                      <i class="fas fa-circle-exclamation text-danger justify-content-center d-flex"></i>
-                      <div class="col content-modal mt-5">
-                          <h4 class="justify-content-center d-flex fw-semibold pt-3">Archive Post</h4>
-                          <p class="justify-content-center d-flex text-black-50 mt-3">Are you sure you want to archive this post?</p>
-                      </div>
-                  </div>
-                  <div class="modal-footer">
-                      <button type="button" class="btn" data-mdb-dismiss="modal">
-                          Cancel
-                      </button>
-                     
-                      <button type="submit" name="archive" class="btn btn-danger px-4" >
-                          archive
-                      </button>
-                  </div>
-              </div>
-          </form>
-      </div>
-  </div>
+<!-- archive modal -->
+<div class="modal fade" id="archive" tabindex="-1" role="dialog" aria-labelledby="archive" aria-hidden="true">
+    <div class="modal-dialog">
+        <form method="POST">  
+            <div class="modal-content">
+                <div class="modal-header bg-danger text-white p-4">
+                    <h5 class="modal-title" id="exampleModalLabel"></h5>
+                    <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body ">
+                    <i class="fas fa-circle-exclamation text-danger justify-content-center d-flex"></i>
+                    <div class="col content-modal mt-5">
+                        <h4 class="justify-content-center d-flex fw-semibold pt-3">Archive Post</h4>
+                        <p class="justify-content-center d-flex text-black-50 mt-3">Are you sure you want to archive this post?</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn" data-mdb-dismiss="modal">
+                        Cancel
+                    </button>
+                    
+                    <button type="submit" name="archive" class="btn btn-danger px-4" >
+                        archive
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 
 <?php include_once '../Components/footer.php' ?>
-    <script>
-      var loadFile = function(event) {
-          var image = document.getElementById('output');
-          image.src = URL.createObjectURL(event.target.files[0]);
-          image.setAttribute("class", "out");
-      };
-      
-  </>
-  <script>
-    tinymce.init({
-    selector: '#mytextarea',
-        toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
-    });
+<script>
+var loadFile = function(event) {
+    var image = document.getElementById('output');
+    image.src = URL.createObjectURL(event.target.files[0]);
+    image.setAttribute("class", "out");
+};
 </script>
-<!-- MDB -->
+<script>
+  tinymce.init({
+  selector: '#mytextarea',
+      toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+  });
+</script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.0/mdb.min.js"></script>
 </body>
 </html>

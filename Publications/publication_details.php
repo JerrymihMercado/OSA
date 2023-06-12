@@ -207,8 +207,8 @@ if (isset($_POST['archive'])) {
             if (isset($_SESSION['role'])) {
                 if ($_SESSION['role'] == 1) {
                     echo '
-                    <button class="btn btn-success fw-semibold" data-mdb-toggle="modal" data-mdb-target="#update_publication">Update</button>
-                    <button class="btn btn-danger fw-semibold" data-mdb-toggle="modal" data-mdb-target="#archive">Archive</button>';
+                    <button class="btn btn-success fw-semibold" data-mdb-toggle="modal" data-mdb-target="#update_publication"><i class="fas fa-pen-to-square"></i> Update</button>
+                    <button class="btn btn-danger fw-semibold" data-mdb-toggle="modal" data-mdb-target="#archive"><i class="fas fa-box-archive"></i> Archive</button>';
                 }
             }else{
                 echo '';
@@ -230,7 +230,7 @@ if (isset($_POST['archive'])) {
                
                 <div class="mb-3">
                     <label for="myfile">Image<span class="text-danger"> *</span></label>
-                    <img class="card-img-top movie_input_img" id="output" src="../upload/<?php echo $publish['image']; ?>" alt="Card image" style="width: 100%; height: auto; ">
+                    <img class="card-img-top movie_input_img" id="output" src="../upload/<?php echo $publish['image']; ?>" alt="Card image" style="width: 100%; height: 40vh; object-fit: cover;">
                     <input type="file" class="form-control mt-2" id="myfile"  name="myfile" accept="image/*" onchange="loadFile(event)" required/>
                 </div>
                 <div class="mb-3">

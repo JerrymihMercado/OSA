@@ -70,10 +70,8 @@ if (isset($_POST['archive'])) {
      
     $sql = "UPDATE announcement SET is_archive='$archive' WHERE id=".$id;
     if (mysqli_query($conn, $sql)) {
-          echo '<script language="javascript">';
-          echo 'alert("message successfully sent")';
-          echo '</script>';
-          header("location:../index.php#login");
+          $_SESSION['status_success_archive'] = "success";
+          header("location:../Announcement/all_announcement.php");
     } else {
           echo '<script language="javascript">';
           echo 'alert("error")';
@@ -105,12 +103,11 @@ if(isset($_POST["handle_submit_update"])){
             WHERE id=".$id;
             
     if (mysqli_query($conn, $sql)) {
+            $_SESSION['status_success_update'] = "success";
             header("location:../Announcement/announcement_details.php?announcement_id=".$id);
-            echo '<script language="javascript">';
-            echo 'alert("message successfully sent")';
-            echo '</script>';
             unlink("../upload/".$announcement_details['image']);
             unset($_POST['handle_submit_update']);
+            session_unset($_SESSION['status_success_update']);
             
         } else {
             echo mysqli_error($conn);
@@ -185,18 +182,11 @@ if(isset($_POST["handle_submit_update"])){
       </div>
     </div>
 
-  <div class="container pt-5">
-    <div class="mt-3">
-        <h4><?php echo $announcement_details['title']; ?></h4>
-        <small><?php echo $announcement_details['date_created']; ?></small>
-    </div>
-  </div>
-
-  <div class="container">
+  <!-- <div class="container">
       <div class="card mb-3 shadows border mt-5">
           <div class="row g-0">
               <div class="col-md-4">
-                <img src="../upload/<?php echo $announcement_details['image']; ?>" class="img-fluid rounded-start" alt=""/>
+                <img src="../upload/<?php echo $announcement_details['image']; ?>" class="img-fluid rounded-start" alt="" style="height: 100%; object-fit: cover;"/>
 
               </div>
               <div class="col-md-8">
@@ -226,9 +216,43 @@ if(isset($_POST["handle_submit_update"])){
         </div>
       </div>
 
+  </div> -->
+  <div class="container p-2 mt-2">
+    <img src="../upload/<?php echo $announcement_details['image']; ?>" class="img-fluid rounded shadows border" alt="" style="width: 100vw; height: 50vh; object-fit: cover"/>
+    <div class="col">
+      <div class="card-body">
+        <div class="row mt-3">
+          <div class="col ">
+            <h5><?php echo $announcement_details['title'];?></h5>
+          </div>
+          <div class="col text-muted d-flex justify-content-end">
+            <p><?php echo $announcement_details['date_created'];?></p>
+          </div>
+        </div>
+        <p class="card-text description-left-border mt-5">
+          <?php echo $announcement_details['descriptions'];?>
+        </p>         
+      </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col">
+          
+          <?php
+            if (isset($_SESSION['role'])) {
+                if ($_SESSION['role'] == 1) {
+                    echo '
+                    <button class="btn btn-success fw-semibold" data-mdb-toggle="modal" data-mdb-target="#update_announcement"><i class="fas fa-pen-to-square"></i> Update</button>
+                    <button class="btn btn-danger fw-semibold" data-mdb-toggle="modal" data-mdb-target="#archive"><i class="fas fa-box-archive"></i> Archive</button>';
+                }
+            }else{
+                echo '';
+            }
+          ?>
+        </div>
+      </div>
   </div>
   <div class="container d-flex justify-content-center">
-      <a href="../Announcement/all_announcement.php" class="btn btn-success shadows">View More Announcement</a>
+      <a href="../Announcement/all_announcement.php" class="btn btn-dark shadows">View More Announcement</a>
   </div>
 
   <!-- archive modal -->
@@ -261,116 +285,41 @@ if(isset($_POST["handle_submit_update"])){
       </div>
   </div>
 
-  <!-- Update Announcement -->
-  <div class="modal fade" id="update_announcement" tabindex="-1" aria-labelledby="update_announcement" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <form action="" method="POST" enctype="multipart/form-data">
-            <div class="modal-header">
-                <h5 class="modal-title">Add New Announcement</h1>
-                <i data-bs-dismiss="modal" aria-label="Close"></i>
-            </div>
-            <div class="modal-body">
-               
-                <div class="mb-3">
-                    <label for="myfile">Image<span class="text-danger"> *</span></label>
-                    <img class="card-img-top movie_input_img" id="output" src="../upload/<?php echo $announcement_details['image']; ?>" alt="Card image" style="width: 100%; height: auto; ">
-                    <input type="file" class="form-control mt-2" id="myfile"  name="myfile" accept="image/*" onchange="loadFile(event)" required/>
-                </div>
-                <div class="mb-3">
-                    <label for="title">Announcement Title<span class="text-danger"> *</span></label>
-                    <input value="<?php echo $announcement_details['title']; ?>" type="text" name="title" class="form-control" id="title" placeholder="Enter Name of Location" required>
-                </div>
-                <div class="mb-3">
-                    <label for="description">Description<span class="text-danger"> *</span></label>
-                    <textarea class="form-control " id="mytextarea" name="description"><?php echo $announcement_details['descriptions']; ?></textarea>
-                </div>
-            </div>
-            <div class="modal-footer pt-4 ">                  
-                <button type="submit" name="handle_submit_update" class="btn mx-auto w-100 btn-success fw-semibold" >Submit</button>
-            </div>
-        </form>
-      </div>
+<!-- Update Announcement -->
+<div class="modal fade" id="update_announcement" tabindex="-1" aria-labelledby="update_announcement" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <form action="" method="POST" enctype="multipart/form-data">
+          <div class="modal-header">
+              <h5 class="modal-title">Add New Announcement</h1>
+              <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              
+              <div class="mb-3">
+                  <label for="myfile">Image<span class="text-danger"> *</span></label>
+                  <img class="card-img-top" id="output" src="../upload/<?php echo $announcement_details['image']; ?>" alt="Card image" style="width: 100%; height: 40vh; object-fit: cover;">
+                  <input type="file" class="form-control mt-2" id="myfile" name="myfile" accept="image/*" onchange="loadFile(event)" required/>
+              </div>
+              <div class="mb-3">
+                  <label for="title">Announcement Title<span class="text-danger"> *</span></label>
+                  <input value="<?php echo $announcement_details['title']; ?>" type="text" name="title" class="form-control" id="title" placeholder="Enter Name of Location" required>
+              </div>
+              <div class="mb-3">
+                  <label for="description">Description<span class="text-danger"> *</span></label>
+                  <textarea class="form-control " id="mytextarea" name="description"><?php echo $announcement_details['descriptions']; ?></textarea>
+              </div>
+          </div>
+          <div class="modal-footer pt-4 ">                  
+              <button type="submit" name="handle_submit_update" class="btn mx-auto w-100 btn-success fw-semibold" >Submit</button>
+          </div>
+      </form>
     </div>
   </div>
+</div>
 
-  <?php include_once '../Components/footer.php' ?>
 <?php include_once '../Components/footer.php' ?>
 
-<script src="../js/sweetalert2.js"></script>
-    <?php
-      if(isset($_SESSION['status_success_admin']) ){
-          ?>
-          <script>
-              const Toast = Swal.mixin({
-              toast: true,
-              position: 'top-end',
-              showConfirmButton: false,
-              timer: 3000,
-              timerProgressBar: true,
-              didOpen: (toast) => {
-                  toast.addEventListener('mouseenter', Swal.stopTimer)
-                  toast.addEventListener('mouseleave', Swal.resumeTimer)
-              }
-              })
-              Toast.fire({
-              icon: 'success',
-              title: 'Welcome Back Admin!'
-              })
-
-          </script>
-          <?php
-              unset($_SESSION['status_success_admin']);
-         
-      }
-
-    if(isset($_SESSION['status_success_user']) ){
-        ?>
-        <script>
-            const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-            })
-            Toast.fire({
-            icon: 'success',
-            title: 'Welcome <?php echo $_SESSION['fullname']?>!'
-            })
-        </script>
-        <?php
-        unset($_SESSION['status_success_user']);
-    }
-    
-    if(isset($_SESSION['status_error'])){
-        ?>
-        <script>
-            const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-            })
-            Toast.fire({
-            icon: 'error',
-            title: 'Credentials error'
-            })
-
-        </script>
-        <?php
-        
-    }
-    ?>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.0/mdb.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.0/mdb.min.js"></script>
 <script>

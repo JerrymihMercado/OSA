@@ -146,8 +146,8 @@ if(isset($_POST["handle_submit"])){
     <?php
       if (isset($_SESSION['role'])) {
           if ($_SESSION['role'] == 1) {
-              echo '<button type="button" class="btn btn-success" data-mdb-toggle="modal" data-mdb-target="#add_page">
-                      Add Publication Page
+              echo '<button type="button" class="btn btn-primary shadows" data-mdb-toggle="modal" data-mdb-target="#add_page">
+                      <i class="fas fa-notes-medical"></i> Add Publication Page
                     </button>';
           }
       }else{
@@ -155,40 +155,6 @@ if(isset($_POST["handle_submit"])){
       }
     ?>
   </div>
-
-  <div class="modal fade" id="add_page" tabindex="-1" aria-labelledby="add_page" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <form action="" method="POST" enctype="multipart/form-data">
-            <div class="modal-header">
-                <h5 class="modal-title">Add New Page</h1>
-                <i data-bs-dismiss="modal" aria-label="Close"></i>
-            </div>
-            <div class="modal-body">
-               
-                <div class="mb-3">
-                    <label for="myfile">Image<span class="text-danger"> *</span></label>
-                    <img class="card-img-top movie_input_img" id="output" src="../img/Default_images.svg" alt="Card image" style="width: 100%; height: auto; ">
-                    <input type="file" class="form-control mt-2" id="myfile"  name="myfile" accept="image/*" onchange="loadFile(event)" required/>
-                </div>
-                <div class="mb-3">
-                    <label for="title">Page Title<span class="text-danger"> *</span></label>
-                    <input type="text" name="title" class="form-control" id="title" placeholder="Input Title" required>
-                </div>
-                <div class="mb-3">
-                    <label for="description">Description<span class="text-danger"> *</span></label>
-                    <textarea class="form-control" id="mytextarea" name="description"></textarea>
-                </div>
-            </div>
-            <div class="modal-footer pt-4 "> 
-                <button type="reset" name = "" class="btn mx-auto w-100 btn-light fw-semibold" data-mdb-dismiss="modal" >Cancel</button>
-                <button type="submit" name = "handle_submit" class="btn mx-auto w-100 btn-success fw-semibold" >Submit</button>
-            </div>
-        </form>
-      </div>
-    </div>
-  </div>
-
  <div class="container mt-4">
       <div class="row row-cols-1 row-cols-md-3 g-4">
         <?php
@@ -209,9 +175,9 @@ if(isset($_POST["handle_submit"])){
                     </p>
                     
                 </div>
-                <div class="card-footer bg-transparent border-0">
+                <div class="card-footer bg-transparent border-0 justify-content-end d-flex">
                   <a href="<?php echo '../Publications/publication_page.php?publication_ID=' . $row['id']; ?>">
-                    <button class="btn btn-success shadow-0 px-4">View More</button>
+                    <button class="btn btn-dark shadow-0 px-4"><i class="fas fa-eye"></i> View More</button>
                   </a>
                 </div>
             </div>
@@ -227,6 +193,39 @@ if(isset($_POST["handle_submit"])){
       </div>
   </div>
 
+  <!-- Add Modal -->
+  <div class="modal fade" id="add_page" tabindex="-1" aria-labelledby="add_page" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <form action="" method="POST" enctype="multipart/form-data">
+            <div class="modal-header">
+                <h5 class="modal-title">Add New Page</h1>
+                <i data-bs-dismiss="modal" aria-label="Close"></i>
+            </div>
+            <div class="modal-body">
+               
+                <div class="mb-3">
+                    <label for="myfile">Image<span class="text-danger"> *</span></label>
+                    <img class="card-img-top movie_input_img" id="output" src="../img/Default_images.svg" alt="Card image" style="width: 100%; height: 20vh; object-fit: cover;">
+                    <input type="file" class="form-control mt-2" id="myfile"  name="myfile" accept="image/*" onchange="loadFile(event)" required/>
+                </div>
+                <div class="mb-3">
+                    <label for="title">Page Title<span class="text-danger"> *</span></label>
+                    <input type="text" name="title" class="form-control" id="title" placeholder="Input Title" required>
+                </div>
+                <div class="mb-3">
+                    <label for="description">Description<span class="text-danger"> *</span></label>
+                    <textarea class="form-control" id="mytextarea" name="description"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer pt-4 "> 
+                <button type="reset" name = "" class="btn mx-auto w-100 btn-light fw-semibold" data-mdb-dismiss="modal" >Cancel</button>
+                <button type="submit" name = "handle_submit" class="btn mx-auto w-100 btn-success fw-semibold" >Submit</button>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
 <?php include_once '../Components/footer.php' ?>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.0/mdb.min.js"></script>
 <script>
