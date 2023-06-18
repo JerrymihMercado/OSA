@@ -93,7 +93,7 @@ if (isset($_POST['submitMail'])) {
         }
     }
     
-     $body = '  <body>
+     $body = '  <body style="background-color: #fdfdfd">
                     <div class="fluid-container" style="padding: 5% 20% 10px">
                         <div class="card-box"
                             style="
@@ -258,7 +258,6 @@ if (isset($_POST['submit'])) {
     <title>Office of Student Affairs</title>
     <link rel="icon" href ="../img/logo.png" class="icon">
     <link rel="stylesheet" href="../Style/style.css">
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/> -->
     <?php
       include '../Links/link.php';
     ?>
@@ -305,23 +304,7 @@ if (isset($_POST['submit'])) {
     }
 
 </style>
-<body>
-<div class="logo-header ">
-    <div class="container-fluid">
-        <div class="row d-flex justify-content-between">
-            <div class="logo-header-left col-xl-7 col-md-7 col-xs-7 dp-xs-flex flex-row">
-                <div class="logo mr-xs-3">
-                    <img src="../img/clsu-logo.png" alt="" >
-                    
-                </div>
-                <div class="logo-text m-xs-0">
-                    <span class="logo-title">Central Luzon State University</span>
-                    <span class="logo-sub">Science City of Muñoz, Nueva Ecija, Philippines 3120</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<body style="background-color: #fdfdfd">
 
 <?php include '../Components/header.php'; ?>
 
@@ -351,8 +334,8 @@ if (isset($_POST['submit'])) {
     if (isset($_SESSION['role'])) {
         if ($_SESSION['role'] == 1) {
             echo '<div class="container d-flex justify-content-end">
-                        <button type="button" class="btn btn-primary fw-semibold" data-mdb-toggle="modal" data-mdb-target="#upload">
-                            Upload Files
+                        <button type="button" class="btn btn-primary shadows" data-mdb-toggle="modal" data-mdb-target="#upload">
+                            <i class="fas fa-cloud-arrow-up"></i> Upload Files
                         </button>
                     </div>';
         }
@@ -370,7 +353,9 @@ if (isset($_POST['submit'])) {
           while ($row = mysqli_fetch_assoc($res)) {?>
         <div class="col">
             <div class="card h-100 shadows">
-                <img src="../upload/<?php echo $row['file_name']?>" class="card-img-top" alt="<?php echo $row['file_name']?>"/>
+                <a href="../upload/<?php echo $row['file_name']; ?>" target="_blank" >
+                    <img src="../upload/<?php echo $row['file_name']?>" class="card-img-top" alt="<?php echo $row['file_name']?>"/>
+                </a>
             </div>
         </div> 
         <?php     

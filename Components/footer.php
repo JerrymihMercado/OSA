@@ -203,4 +203,27 @@
         <?php
         unset($_SESSION['status_success_archive']);
     }
+    if(isset($_SESSION['status_success_unarchive']) ){
+        ?>
+        <script>
+             const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+            })
+            Toast.fire({
+            icon: 'success',
+            title: 'Record Successfully Unarchive!'
+            })
+
+        </script>
+        <?php
+        unset($_SESSION['status_success_unarchive']);
+    }
 ?>

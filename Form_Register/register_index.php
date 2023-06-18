@@ -134,7 +134,7 @@ if (isset($_POST['submit'])) {
     font-style: italic;
 }
   </style>
-<body>
+<body style="background-color: #fdfdfd">
 <div class="container-fluid">
     <div class="row " >
         <div class="right-side col-md-6 text-center d-none d-md-block">
@@ -144,9 +144,9 @@ if (isset($_POST['submit'])) {
             <div class="title-con mt-3 ">
                 <h1 class="text-white">CLSU</h1>
                 <p class="text-white">OFFICE OF STUDENT AFFAIRS</p>
-                <a href="../index.php">
+                <!-- <a href="../index.php">
                     <button class="btn btn-light btn-login shadow-0">Login</button>
-                </a>
+                </a> -->
             </div>
             <footer class="footer-left">
                 <p class="text-white">© Copyright 2023 Central Luzon State University All Rights Reserved</p>
@@ -244,7 +244,7 @@ if (isset($_POST['submit'])) {
                 <input type="checkbox" onclick="myFunction()"> Show Password
             </div>
             <div class="button-con py-4">
-                <button type="reset" class="btn btn">Cancel</button>
+                <a href="../index.php" class="btn btn">Cancel</a>
                 <button type="submit" class="btn btn-success" name="submit">Register</button>
             </div>
           </form>

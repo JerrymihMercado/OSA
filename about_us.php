@@ -1,6 +1,7 @@
 <?php
 session_start();
 include 'mysql_connect.php';
+
 if (isset($_POST['submit'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
@@ -35,7 +36,6 @@ if (isset($_POST['submit'])) {
         $_SESSION['fullname'] = $row['fullname'];
         $_SESSION['email'] = $session_email;
         $_SESSION['course'] = $row['course'];
-        
         $_SESSION['role'] = $row['role'];
         
         if ($row['role'] == 1) {    
@@ -54,6 +54,7 @@ if (isset($_POST['submit'])) {
             $_SESSION['status_error'] = "error";
     }
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -63,43 +64,21 @@ if (isset($_POST['submit'])) {
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <title>Office of Student Affairs</title>
     <link rel="icon" href ="img/logo.png" class="icon">
-    <link rel="stylesheet" href="./Style/style.css">
-    <link rel="stylesheet" href="./Style/style_about.css">
-     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
-    <!-- Google Fonts Roboto -->
-    
+    <link rel="stylesheet" href="Style/style.css">
+    <link rel="stylesheet" href="Style/style_about.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>    
     <link rel="stylesheet" href="css/mdb.min.css" />
   </head>
   <style>
-   a,
+    a,
     a:hover,
     a:focus,
     a:active {
         text-decoration: none;
         color: inherit;
     }
-    ul,li
-      {
-          list-style-type: none;
-      }
-    .carousel__control__prev{
-        padding: 10px 10px 20px 10px;
-        width: fit-content;
-        /* background: #C8E6C9; */
-        transition: .4s ease;
-    }
-  
-    .carousel__control__next{
-        padding: 10px 10px 20px 10px;
-        width: fit-content;
-        /* background: #C8E6C9; */
-        transition: .4s ease;
-        margin-left: 20px;
-    }
- 
-</style>
-  <body>
+  </style>
+<body style="background-color: #fdfdfd">
 
   <div class="logo-header ">
       <div class="container-fluid">
@@ -116,6 +95,7 @@ if (isset($_POST['submit'])) {
           </div>
       </div>
   </div>
+
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid navi-section">
       <button
@@ -212,6 +192,7 @@ if (isset($_POST['submit'])) {
       </div>
     </div>
   </nav>
+
   <div class="bg-image ripple" data-mdb-ripple-color="light">
     <img src="img/banner1.png" class="banner__img" />
     <a href="#!">
@@ -227,6 +208,7 @@ if (isset($_POST['submit'])) {
       </div>
     </a>
   </div>
+
   <div class="container pt-5">
     <div class="row">
       <div class="osa-tag">
@@ -284,6 +266,7 @@ if (isset($_POST['submit'])) {
       </div>
     </div>
   </div>
+
   <div class="container pt-5">
     <div class="row">
       <div class="osa-tag">
@@ -292,12 +275,13 @@ if (isset($_POST['submit'])) {
       </div>
     </div>
   </div>
+  
   <div class="container mb-5">
     <div class="row row-cols-1 row-cols-md-5 g-4">
       <div class="col">
         <a href="Staff/all_staffs.php">
           <div class="card h-100 shadows border">
-          <img src="img/Hired-pana.png" class="card-img-top" alt="administration_image"/>
+          <img src="img/Under construction-bro.svg" class="card-img-top" alt="administration_image"/>
           <div class="card-body">
             <h5 class="card-title mt-5 text-center">Information Management and Publication Unit</h5>
           </div>
@@ -306,7 +290,7 @@ if (isset($_POST['submit'])) {
       </div>
       <div class="col">
         <div class="card h-100 shadows border">
-          <img src="img/Hired-pana.png" class="card-img-top" alt="administration_image"/>
+          <img src="img/Under construction-bro.svg" class="card-img-top" alt="administration_image"/>
           <div class="card-body">
             <h5 class="card-title mt-5 text-center">Career Development and Employment Services Unit</h5>
           </div>
@@ -314,7 +298,7 @@ if (isset($_POST['submit'])) {
       </div>
       <div class="col">
         <div class="card h-100 shadows border">
-          <img src="img/Hired-pana.png" class="card-img-top" alt="administration_image"/>
+          <img src="img/Under construction-bro.svg" class="card-img-top" alt="administration_image"/>
           <div class="card-body">
             <h5 class="card-title mt-5 text-center">Guidance Service Unit</h5>
           </div>
@@ -322,7 +306,7 @@ if (isset($_POST['submit'])) {
       </div>
       <div class="col">
         <div class="card h-100 shadows border">
-          <img src="img/Hired-pana.png" class="card-img-top" alt="administration_image"/>
+          <img src="img/Under construction-bro.svg" class="card-img-top" alt="administration_image"/>
           <div class="card-body">
             <h5 class="card-title mt-5 text-center">Student Organization Unit</h5>
           </div>
@@ -330,7 +314,7 @@ if (isset($_POST['submit'])) {
       </div>
       <div class="col">
         <div class="card h-100 shadows border">
-          <img src="img/Hired-pana.png" class="card-img-top" alt="administration_image"/>
+          <img src="img/Under construction-bro.svg" class="card-img-top" alt="administration_image"/>
           <div class="card-body">
             <h5 class="card-title mt-5 text-center">Student Organization Unit</h5>
           </div>
@@ -338,162 +322,49 @@ if (isset($_POST['submit'])) {
       </div>
     </div>
   </div>
-    <!-- <div
-      id="carouselMultiItemExample"
-      class="carousel slide carousel-dark text-center"
-      data-mdb-ride="carousel"
-    >
-      <div class="container">
-          <div class="d-flex justify-content-end">
-              <button class="carousel-control-prev carousel__control__prev position-relative rounded shadows border" type="button" data-mdb-target="#carouselMultiItemExample"
-                  data-mdb-slide="prev">
-                  <span class="carousel-control-prev-icon" aria-hidden="true" style="width: 20px;"></span>
-                  <span class="visually-hidden">Previous</span>
-              </button>
-              <button class="carousel-control-next carousel__control__next position-relative rounded shadows border" type="button" data-mdb-target="#carouselMultiItemExample"
-                  data-mdb-slide="next">
-                  <span class="carousel-control-next-icon" aria-hidden="true" style="width: 20px;"></span>
-                  <span class="visually-hidden">Next</span>
-              </button>
-          </div>
-        </div>
-      <div class="carousel-inner py-4">
-        <div class="carousel-item active">
-          <div class="container">
-            <div class="row">
-              <div class="col-lg-4">
-                <div class="card h-100">
-                  <img
-                    src="img/Hired-pana.png"
-                    class="card-img-top"
-                    alt="Waterfall"
-                  />
-                  <div class="card-body">
-                    <h5 class="card-title">Information Management and Publication Unit</h5>
-                    
-                    <a href="Staff/all_staffs.php" class="btn btn-success">View All</a>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-lg-4 d-none d-lg-block ">
-                <div class="card h-100">
-                  <img
-                    src="img/Hired-pana.png"
-                    class="card-img-top"
-                    alt="Sunset Over the Sea"
-                  />
-                  <div class="card-body">
-                    <h5 class="card-title">Career Development and Employment Services Unit</h5>
-                    <a href="Staff/all_staffs.php" class="btn btn-success">View All</a>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-lg-4 d-none d-lg-block">
-                <div class="card h-100">
-                  <img
-                    src="img/Hired-pana.png"
-                    class="card-img-top"
-                    alt="Sunset over the Sea"
-                  />
-                  <div class="card-body">
-                    <h5 class="card-title">Guidance Service Unit</h5>
-                    <a href="Staff/all_staffs.php" class="btn btn-success">View All</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="carousel-item">
-          <div class="container">
-            <div class="row">
-              <div class="col-lg-4 col-md-12">
-                <div class="card h-100">
-                  <img
-                    src="img/Hired-pana.png"
-                    class="card-img-top"
-                    alt="Fissure in Sandstone"
-                  />
-                  <div class="card-body">
-                    <h5 class="card-title">Student Organization Unit</h5>
-                    <a href="Staff/all_staffs.php" class="btn btn-success">View All</a>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-lg-4 d-none d-lg-block">
-                <div class="card h-100">
-                  <img
-                    src="img/Hired-pana.png"
-                    class="card-img-top"
-                    alt="Storm Clouds"
-                  />
-                  <div class="card-body">
-                    <h5 class="card-title">Student Code of Conduct and Discipline</h5>
-                    <a href="Staff/all_staffs.php" class="btn btn-success">View All</a>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-lg-4 d-none d-lg-block">
-                <div class="card h-100">
-                  <img
-                    src="img/Hired-pana.png"
-                    class="card-img-top"
-                    alt="Hot Air Balloons"
-                  />
-                  <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <a href="Staff/all_staffs.php" class="btn btn-success">View All</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-   
-      </div>
-    </div>
-  </div> -->
   
   <!-- Modal Login-->
   <div class="modal fade" id="login_Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">LOGIN</h5>
-          <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+        <div class="modal-content">
+        <div class="modal-header border-0">
+            <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
+          <div class="justify-content-center d-flex" style="height: 50px; margin-top: -5vh;">
+            <img src="img/logo.png" alt="login-logo" class="shadow rounded-circle">
+          </div>
+          <div class="py-2 justify-content-center d-flex">
+            <h5>CLSU Account for OSA</h5>
+          </div>
+          <div class="text-center">
+            <p>Log in with the credentials of your account to get more accurate view of office of student affairs.</p>
+          </div>
           <form method="POST">
-            <!-- Email input -->
-            <div class="form-outline mb-4">
-              <input type="email" id="email" name="email" class="form-control" required/>
-              <label class="form-label" for="email">Email address</label>
-            </div>
-
-            <!-- Password input -->
-            <div class="form-outline mb-2">
-              <input type="password" id="password" name="password" class="form-control" required/>
-              <label class="form-label" for="password">Password</label>
-            </div>
-            <div class="row mb-4">
-                  <a href="Forgot_Password/send_reset_pass.php">Forgot password?</a>
-            </div>
-            <!-- Submit button -->
-            <button type="submit" name="submit" class="btn btn-primary btn-block">Login</button>
-            <div class="pt-3 text-center">
-              <a href="Form_Register/register_index.php" class="text-success">Register Account</a>
-            </div>
-        </form>
+              <!-- Email input -->
+              <div class="form-outline mb-3 mt-4">
+                  <input type="email" id="email" name="email" class="form-control" required/>
+                  <label class="form-label" for="email">Email address</label>
+              </div>
+              <!-- Password input -->
+              <div class="form-outline mb-2">
+                  <input type="password" id="password" name="password" class="form-control" required/>
+                  <label class="form-label" for="password">Password</label>
+              </div>
+              <div class="mb-4 justify-content-end d-flex">
+                <a href="Forgot_Password/send_reset_pass.php" class="text-muted">Forgot password?</a>
+              </div>
+              <!-- Submit button -->
+              <button type="submit" name="submit" class="btn btn-dark btn-block shadow-0">Continue</button>
+              <div class="pt-3 text-center">
+                  Don't have an account? <a href="Form_Register/register_index.php" class="text-success">Register Here</a>
+              </div>
+          </form>
         </div>
-      </div>
+        </div>
     </div>
   </div>
+  <!-- Footer -->
   <div class="mt-5 footer-section " >
     <footer class="text-center text-lg-start bg-light text-muted " style="background-image: url(img/banner1.png);  background-repeat: no-repeat; background-size: cover; ">
       <section class="">

@@ -1,3 +1,18 @@
+<div class="logo-header ">
+    <div class="container-fluid">
+        <div class="row d-flex justify-content-between">
+            <div class="logo-header-left col-xl-7 col-md-7 col-xs-7 dp-xs-flex flex-row">
+                <div class="logo mr-xs-3">
+                    <img src="../img/clsu-logo.png" alt="" >
+                </div>
+                <div class="logo-text m-xs-0">
+                    <span class="logo-title">Central Luzon State University</span>
+                    <span class="logo-sub">Science City of Muñoz, Nueva Ecija, Philippines 3120</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid navi-section">
         <button
@@ -98,33 +113,41 @@
 <div class="modal fade" id="login_Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">LOGIN</h5>
+        <div class="modal-header border-0">
             <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <form method="POST">
-            <!-- Email input -->
-            <div class="form-outline mb-4">
-                <input type="email" id="email" name="email" class="form-control" required/>
-                <label class="form-label" for="email">Email address</label>
-            </div>
+            <div class="justify-content-center d-flex" style="height: 50px; margin-top: -5vh;">
+            <img src="../img/logo.png" alt="login-logo" class="shadow rounded-circle">
+          </div>
+          <div class="py-2 justify-content-center d-flex">
+            <h5>CLSU Account for OSA</h5>
+          </div>
+          <div class="text-center">
+            <p>Log in with the credentials of your account to get more accurate view of office of student affairs.</p>
+          </div>
+          <form method="POST">
+              <!-- Email input -->
+              <div class="form-outline mb-3 mt-4">
+                  <input type="email" id="email" name="email" class="form-control" required/>
+                  <label class="form-label" for="email">Email address</label>
+              </div>
 
-            <!-- Password input -->
-            <div class="form-outline mb-2">
-                <input type="password" id="password" name="password" class="form-control" required/>
-                <label class="form-label" for="password">Password</label>
-            </div>
-            <div class="row mb-4">
-                    <a href="../Forgot_Password/send_reset_pass.php">Forgot password?</a>
-            </div>
-            <!-- Submit button -->
-            <button type="submit" name="submit" class="btn btn-primary btn-block">Login</button>
-            <div class="pt-3 text-center">
-                <a href="../Form_Register/register_index.php" class="text-success">Register Account</a>
-            </div>
-        </form>
+              <!-- Password input -->
+              <div class="form-outline mb-2">
+                  <input type="password" id="password" name="password" class="form-control" required/>
+                  <label class="form-label" for="password">Password</label>
+              </div>
+              <div class="mb-4 justify-content-end d-flex">
+                <a href="../Forgot_Password/send_reset_pass.php" class="text-muted">Forgot password?</a>
+              </div>
+              <!-- Submit button -->
+              <button type="submit" name="submit" class="btn btn-dark btn-block shadow-0">Continue</button>
+              <div class="pt-3 text-center">
+                  Don't have an account? <a href="../Form_Register/register_index.php" class="text-success">Register Here</a>
+              </div>
+          </form>
         </div>
         </div>
     </div>
-</div>
+  </div>

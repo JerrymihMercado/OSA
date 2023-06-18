@@ -66,12 +66,10 @@ if (isset($_POST['submit'])) {
     <title>Office of Student Affairs</title>
     <link rel="icon" href ="img/logo.png" class="icon">
     <link rel="stylesheet" href="Style/style.css">
-     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
-    <!-- Google Fonts Roboto -->
     <link rel="stylesheet" href="css/mdb.min.css" />
   </head>
-  <body>
+  <body style="background-color: #fdfdfd">
    
   <div class="logo-header ">
       <div class="container-fluid">
@@ -236,109 +234,74 @@ if (isset($_POST['submit'])) {
     </div>
   </div>
   <div class="container">
-    <?php
-        $sql = "SELECT * FROM announcement WHERE is_archive=0 limit 4";
-        $res = mysqli_query($conn, $sql);
-        if(mysqli_num_rows($res) > 0){
-            while ($row = mysqli_fetch_assoc($res)) {?>
-    <div class="row g-0">
-      <div class="card mb-3 shadows border">
-        <div class="card-header">
-          <div class="row">
-            <div class="col">
-              <h6><?php echo $row['title']; ?></h6>
+        <?php
+            $sql = "SELECT * FROM announcement WHERE is_archive=0 limit 4";
+            $res = mysqli_query($conn, $sql);
+            if(mysqli_num_rows($res) > 0){
+                while ($row = mysqli_fetch_assoc($res)) {?>
+        <div class="row g-0">
+          <div class="card mb-3 shadows">
+            <div class="card-header">
+              <div class="row">
+                <div class="col">
+                  <h6><?php echo $row['title']; ?></h6>
+                </div>
+                <div class="col justify-content-end d-flex">
+                  <small><?php echo $row['date_created']; ?></small>
+                </div>
+                </div>
             </div>
-            <div class="col justify-content-end d-flex">
-              <small><?php echo $row['date_created']; ?></small>
+            <div class="card-body">
+                <p>
+                  <?php 
+                    $details = substr($row['descriptions'],0,350);
+                    if($details > 350){
+                        echo $details?>...
+                    <?php }else{
+                        echo '';
+                    }?>
+                </p>
             </div>
-            </div>
-        </div>
-        <div class="card-body">
-            <p>
-              <?php 
-                          $details = substr($row['descriptions'],0,350);
-                        if($details > 350){
-                          echo $details?>...
-                       <?php }else{
-                          echo '';
-                       }?>
-            </p>
-        </div>
-        <div class="card-footer border-0 justify-content-end d-flex">
-            <a href="<?php echo 'Announcement/announcement_details.php?announcement_id=' . $row['id']; ?>" class="card-text">
-              <button class="btn btn-dark shadow-0"><i class="fas fa-eye"></i> View Details</button>
-            </a>
+            <div class="card-footer border-0 justify-content-end d-flex">
+                <a href="<?php echo 'Announcement/announcement_details.php?announcement_id=' . $row['id']; ?>" class="card-text">
+                  <button class="btn btn-dark shadow-0"><i class="fas fa-eye"></i> View Details</button>
+                </a>
+              </div>
           </div>
+        </div>
+        <?php     
+                }
+        }else{?>
+            <div class="container p-2 justify-content-center d-flex">
+                <h1 class="text-warning">No Data Found!</h1>
+            </div>
+        <?php  }
+                ?>
       </div>
     </div>
-    <?php     
-            }
-    }else{?>
-        <div class="container p-2 justify-content-center d-flex">
-            <h1 class="text-warning">No Data Found!</h1>
-        </div>
-    <?php  }
-            ?>
-     <!-- <?php
-        $sql = "SELECT * FROM announcement WHERE is_archive=0 limit 4";
-        $res = mysqli_query($conn, $sql);
-        if(mysqli_num_rows($res) > 0){
-            while ($row = mysqli_fetch_assoc($res)) {?>
-    <div class="card mb-3 shadows border" style="max-width: 100%; height: 100%">
-      <div class="row g-0">
-        <div class="col-md-4">
-          <img
-            src="./upload/<?php echo $row['image']; ?>"
-            alt=""
-            class="img-fluid rounded-start"
-            style="height: 100%; width: 100%;"
-          />
-        </div>
-        <div class="col-md-8">
-          <div class="card-body">
-            <h5 class="card-title"><?php echo $row['title']; ?></h5>
-            <p class="card-text">
-              <small class="fs-6"><?php echo $row['date_created']; ?></small>
-            </p>
-            <p class="card-text">
-              <?php 
-                          $details = substr($row['descriptions'],0,350);
-                        if($details > 350){
-                          echo $details?> <b>See more..</b>
-                       <?php }else{
-                          echo '';
-                       }?>
-            </p>
-          </div>
-          <div class="card-footer border-0">
-            <a href="<?php echo 'Announcement/announcement_details.php?announcement_id=' . $row['id']; ?>" class="card-text">
-              <button class="btn btn-success shadow-0">View Details</button>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <?php     
-            }
-    }else{?>
-        <div class="container p-2 justify-content-center d-flex">
-            <h1 class="text-warning">No Data Found!</h1>
-        </div>
-    <?php  }
-            ?> -->
   </div>
+
   
+  <!-- Login Modal -->
   <div class="modal fade" id="login_Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">LOGIN</h5>
+        <div class="modal-header border-0">
             <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
+          <div class="justify-content-center d-flex" style="height: 50px; margin-top: -5vh;">
+            <img src="img/logo.png" alt="login-logo" class="shadow rounded-circle">
+          </div>
+          <div class="py-2 justify-content-center d-flex">
+            <h5>CLSU Account for OSA</h5>
+          </div>
+          <div class="text-center">
+            <p>Log in with the credentials of your account to get more accurate view of office of student affairs.</p>
+          </div>
           <form method="POST">
               <!-- Email input -->
-              <div class="form-outline mb-4">
+              <div class="form-outline mb-3 mt-4">
                   <input type="email" id="email" name="email" class="form-control" required/>
                   <label class="form-label" for="email">Email address</label>
               </div>
@@ -348,19 +311,20 @@ if (isset($_POST['submit'])) {
                   <input type="password" id="password" name="password" class="form-control" required/>
                   <label class="form-label" for="password">Password</label>
               </div>
-              <div class="row mb-4">
-                      <a href="Forgot_Password/send_reset_pass.php">Forgot password?</a>
+              <div class="mb-4 justify-content-end d-flex">
+                <a href="Forgot_Password/send_reset_pass.php" class="text-muted">Forgot password?</a>
               </div>
               <!-- Submit button -->
-              <button type="submit" name="submit" class="btn btn-primary btn-block">Login</button>
+              <button type="submit" name="submit" class="btn btn-dark btn-block shadow-0">Continue</button>
               <div class="pt-3 text-center">
-                  <a href="Form_Register/register_index.php" class="text-success">Register Account</a>
+                  Don't have an account? <a href="Form_Register/register_index.php" class="text-success">Register Here</a>
               </div>
           </form>
         </div>
         </div>
     </div>
   </div>
+  <!-- Footer -->
   <div class="mt-5 footer-section " >
     <footer class="text-center text-lg-start bg-light text-muted " style="background-image: url(img/banner1.png);  background-repeat: no-repeat; background-size: cover; ">
       <section class="">

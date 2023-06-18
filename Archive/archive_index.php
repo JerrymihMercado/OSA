@@ -38,16 +38,17 @@ if (isset($_POST['submit'])) {
         echo '</script>';
     }
 }
-if (isset($_POST['announcement_unarchive'])) {
+if (isset($_POST['announcement_unarchive_submit']) && isset($_POST['announce_id_input'])) {
  
-    $aid = $_POST['announcement_id'];
+    $aid = $_POST['announce_id_input'];
     
     $unarchive = 0;
      
     $sql = "UPDATE announcement SET is_archive='$unarchive' WHERE id=".$aid;
     if (mysqli_query($conn, $sql)) {
-          $_SESSION['status_success_archive'] = "success";
+          $_SESSION['status_success_unarchive'] = "success";
           header("location:../Archive/archive_index.php");
+          session_unset($_SESSION['status_success_unarchive']);
     } else {
           echo '<script language="javascript">';
           echo 'alert("error")';
@@ -55,16 +56,34 @@ if (isset($_POST['announcement_unarchive'])) {
     }
 
 }
-if (isset($_POST['publication_unarchive'])) {
+if (isset($_POST['publication_unarchive_submit'])) {
  
-    $pid = $_POST['publication_id'];
+    $pid = $_POST['post_id_input'];
     $unarchive = 0;
   
 
     $sql = "UPDATE publish_post SET is_archive='$unarchive' WHERE id=".$pid;
     if (mysqli_query($conn, $sql)) {
-          $_SESSION['status_success_archive'] = "success";
-          header("location:../Archive/archive_index.php");
+        $_SESSION['status_success_unarchive'] = "success";
+        header("location:../Archive/archive_index.php");
+        session_unset($_SESSION['status_success_unarchive']);
+    } else {
+          echo '<script language="javascript">';
+          echo 'alert("error")';
+          echo '</script>';
+    }
+}
+if (isset($_POST['research_unarchive_submit'])) {
+ 
+    $pid = $_POST['research_post_id_input'];
+    $unarchive = 0;
+  
+
+    $sql = "UPDATE research_and_eval SET is_archive='$unarchive' WHERE id=".$pid;
+    if (mysqli_query($conn, $sql)) {
+        $_SESSION['status_success_unarchive'] = "success";
+        header("location:../Archive/archive_index.php");
+        session_unset($_SESSION['status_success_unarchive']);
     } else {
           echo '<script language="javascript">';
           echo 'alert("error")';
@@ -88,6 +107,17 @@ if (isset($_POST['publication_unarchive'])) {
     <link rel="stylesheet" href="../css/mdb.min.css" />
   </head>
 <style>
+  .fa-circle-exclamation{
+      font-size: 110px;
+      width: fit-content;
+      margin-left: 35%;
+      padding: 10px;
+      margin-top: -15%;
+      margin-bottom: 5%;
+      background-color: #fff;
+      border-radius: 50%;
+      position: absolute;
+    }
       a,
       a:hover,
       a:focus,
@@ -402,23 +432,8 @@ if (isset($_POST['publication_unarchive'])) {
         text-transform: uppercase;
       }
 </style>
-  <body>
-   
-<div class="logo-header ">
-    <div class="container-fluid">
-        <div class="row d-flex justify-content-between">
-            <div class="logo-header-left col-xl-7 col-md-7 col-xs-7 dp-xs-flex flex-row">
-                <div class="logo mr-xs-3">
-                    <img src="../img/clsu-logo.png" alt="" >
-                </div>
-                <div class="logo-text m-xs-0">
-                    <span class="logo-title">Central Luzon State University</span>
-                    <span class="logo-sub">Science City of Muñoz, Nueva Ecija, Philippines 3120</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<body style="background-color: #fdfdfd">
+
 <?php include '../Components/header.php'; ?>
 
   <div class="container pt-5">
@@ -463,12 +478,9 @@ if (isset($_POST['publication_unarchive'])) {
                           <li class="widget-49-meeting-item"><span><?php echo $row['descriptions']; ?></span></li>
                       </ol>
                       <div class="widget-49-meeting-action">
-                          <form method="POST">
-                            <input type="hidden" name="announcement_id" value="<?php echo $row['id']; ?>">
-                            <button name="announcement_unarchive" class="btn btn-sm btn-flash-border-primary bg-danger text-white">
-                              Unarchive
-                            </button>
-                          </form>
+                        <button class="btn btn-sm btn-flash-border-primary bg-danger text-white" onclick="setID(<?php echo $row['id']; ?>)" data-mdb-toggle="modal" data-mdb-target="#announcement_unarchive">
+                          Unarchive
+                        </button>
                       </div>
                   </div>
               </div>
@@ -509,7 +521,6 @@ if (isset($_POST['publication_unarchive'])) {
       <div class="col-lg-4">
           <div class="card card-margin shadows">
               <div class="card-header no-border">
-                  <!-- <h5 class="card-title">MOM</h5> -->
               </div>
               <div class="card-body pt-0">
                   <div class="widget-49">
@@ -527,12 +538,9 @@ if (isset($_POST['publication_unarchive'])) {
                           <li class="widget-49-meeting-item"><span><?php echo $row['descriptions']; ?></span></li>
                       </ol>
                       <div class="widget-49-meeting-action">
-                        <form method="POST">
-                            <input type="hidden" name="publication_id" value="<?php echo $row['id']; ?>">
-                            <button name="publication_unarchive" class="btn btn-sm btn-flash-border-primary bg-danger text-white">
-                              Unarchive
-                            </button>
-                          </form>
+                        <button name="publication_unarchive" class="btn btn-sm btn-flash-border-primary bg-danger text-white" onclick="getID(<?php echo $row['id']; ?>)" data-mdb-toggle="modal" data-mdb-target="#publication_unarchive">
+                          Unarchive
+                        </button>
                       </div>
                   </div>
               </div>
@@ -590,11 +598,9 @@ if (isset($_POST['publication_unarchive'])) {
                           <li class="widget-49-meeting-item"><span><?php echo $row['descriptions']; ?></span></li>
                       </ol>
                       <div class="widget-49-meeting-action">
-                        <form method="POST">
-                          <button class="btn btn-sm btn-flash-border-primary bg-danger text-white">
-                            Unarchive
-                          </button>
-                        </form>
+                        <button name="research_unarchive" class="btn btn-sm btn-flash-border-primary bg-danger text-white" onclick="getID2(<?php echo $row['id']; ?>)" data-mdb-toggle="modal" data-mdb-target="#research_unarchive">
+                          Unarchive
+                        </button>
                       </div>
                   </div>
               </div>
@@ -610,86 +616,130 @@ if (isset($_POST['publication_unarchive'])) {
             ?>
     </div>
   </div>
+  <!-- Announcement Unarchive Modal -->
+  <div class="modal fade" id="announcement_unarchive" tabindex="-1" role="dialog" aria-labelledby="announcement_unarchive" aria-hidden="true">
+      <div class="modal-dialog">
+          <form method="POST">  
+              <div class="modal-content">
+                  <div class="modal-header bg-danger text-white p-4">
+                      <h5 class="modal-title" id="exampleModalLabel"></h5>
+                      <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body ">
+                      <i class="fas fa-circle-exclamation text-danger justify-content-center d-flex"></i>
+                      <div class="col content-modal mt-5">
+                          <h4 class="justify-content-center d-flex fw-semibold pt-3">Unarchive Announcement</h4>
+                          <div class="form-group">
+                              <input type="hidden" class="form-control" placeholder="Enter id" id="announce_id_input" name="announce_id_input" required>
+                          </div>
+                          
+                          <p class="justify-content-center d-flex text-black-50 mt-3">Are you sure you want to unarchive this announcement? <span id="anno"> </p>
+                      </div>
+                  </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn" data-mdb-dismiss="modal">
+                          Cancel
+                      </button>
+                     
+                      <button type="submit" name="announcement_unarchive_submit" class="btn btn-danger px-4" >
+                          archive
+                      </button>
+                  </div>
+              </div>
+          </form>
+      </div>
+  </div>
+  <!-- Research Unarchive Modal -->
+  <div class="modal fade" id="research_unarchive" tabindex="-1" role="dialog" aria-labelledby="research_unarchive" aria-hidden="true">
+      <div class="modal-dialog">
+          <form method="POST">  
+              <div class="modal-content">
+                  <div class="modal-header bg-danger text-white p-4">
+                      <h5 class="modal-title" id="exampleModalLabel"></h5>
+                      <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body ">
+                      <i class="fas fa-circle-exclamation text-danger justify-content-center d-flex"></i>
+                      <div class="col content-modal mt-5">
+                          <h4 class="justify-content-center d-flex fw-semibold pt-3">Unarchive Research Post</h4>
+                          <div class="form-group">
+                              <input type="hidden" class="form-control" placeholder="Enter id" id="research_post_id_input" name="research_post_id_input" required>
+                          </div>
+                          
+                          <p class="justify-content-center d-flex text-black-50 mt-3">Are you sure you want to unarchive this Post? <span id="research_post"> </p>
+                      </div>
+                  </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn" data-mdb-dismiss="modal">
+                          Cancel
+                      </button>
+                     
+                      <button type="submit" name="research_unarchive_submit" class="btn btn-danger px-4" >
+                          archive
+                      </button>
+                  </div>
+              </div>
+          </form>
+      </div>
+  </div>
+  <!-- Publication Unarchive Modal -->
+  <div class="modal fade" id="publication_unarchive" tabindex="-1" role="dialog" aria-labelledby="publication_unarchive" aria-hidden="true">
+      <div class="modal-dialog">
+          <form method="POST">  
+              <div class="modal-content">
+                  <div class="modal-header bg-danger text-white p-4">
+                      <h5 class="modal-title" id="exampleModalLabel"></h5>
+                      <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body ">
+                      <i class="fas fa-circle-exclamation text-danger justify-content-center d-flex"></i>
+                      <div class="col content-modal mt-5">
+                          <h4 class="justify-content-center d-flex fw-semibold pt-3">Unarchive Publication</h4>
+                          <div class="form-group">
+                              <input type="hidden" class="form-control" placeholder="Enter id" id="post_id_input" name="post_id_input" required>
+                          </div>
+                          
+                          <p class="justify-content-center d-flex text-black-50 mt-3">Are you sure you want to unarchive this Post? <span id="post"> </p>
+                      </div>
+                  </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn" data-mdb-dismiss="modal">
+                          Cancel
+                      </button>
+                     
+                      <button type="submit" name="publication_unarchive_submit" class="btn btn-danger px-4" >
+                          archive
+                      </button>
+                  </div>
+              </div>
+          </form>
+      </div>
+  </div>
 
+<script>
+  function setID(id) {
+      let announce_id = document.getElementById("anno");
+      announce_id.innerText = id;
+      document.getElementById("announce_id_input").value = id
+      
+  }
+  function getID(id) {
+      let announce_id = document.getElementById("post");
+      announce_id.innerText = id;
+      document.getElementById("post_id_input").value = id
+      
+  }
+  function getID2(id) {
+      let announce_id = document.getElementById("research_post");
+      announce_id.innerText = id;
+      document.getElementById("research_post_id_input").value = id
+      
+  }
+</script>
 
 <?php include_once '../Components/footer.php' ?>
-<script src="../js/sweetalert2.js"></script>
-    <?php
-      if(isset($_SESSION['status_success_admin']) ){
-          ?>
-          <script>
-              const Toast = Swal.mixin({
-              toast: true,
-              position: 'top-end',
-              showConfirmButton: false,
-              timer: 3000,
-              timerProgressBar: true,
-              didOpen: (toast) => {
-                  toast.addEventListener('mouseenter', Swal.stopTimer)
-                  toast.addEventListener('mouseleave', Swal.resumeTimer)
-              }
-              })
-              Toast.fire({
-              icon: 'success',
-              title: 'Welcome Back Admin!'
-              })
-
-          </script>
-          <?php
-              unset($_SESSION['status_success_admin']);
-         
-      }
-
-    if(isset($_SESSION['status_success_user']) ){
-        ?>
-        <script>
-            const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-            })
-            Toast.fire({
-            icon: 'success',
-            title: 'Welcome <?php echo $_SESSION['fullname']?>!'
-            })
-        </script>
-        <?php
-        unset($_SESSION['status_success_user']);
-    }
-    
-    if(isset($_SESSION['status_error'])){
-        ?>
-        <script>
-            const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-            })
-            Toast.fire({
-            icon: 'error',
-            title: 'Credentials error'
-            })
-
-        </script>
-        <?php
-        
-    }
-    ?>
-    <!-- MDB -->
-    <script type="text/javascript" src="../js/mdb.min.js"></script>
-    <!-- Custom scripts -->
-    <script type="text/javascript"></script>
-  </body>
+<!-- MDB -->
+<script type="text/javascript" src="../js/mdb.min.js"></script>
+<!-- Custom scripts -->
+</body>
 </html>

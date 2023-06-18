@@ -107,8 +107,8 @@ if (isset($_POST['archive'])) {
      
     $sql = "UPDATE research_and_eval SET is_archive='$archive' WHERE id=".$id;
     if (mysqli_query($conn, $sql)) {
-          $_SESSION['status_success'] = "success";
-          header("location:../Research_&_Evaluation/research_page.php");
+        header("location:../Research_&_Evaluation/research_page.php");
+        $_SESSION['status_success_archive'] = "success";
     } else {
           $_SESSION['status_error'] = "error";
     }
@@ -141,22 +141,7 @@ if (isset($_POST['archive'])) {
       position: absolute;
     }
 </style>
-<body> 
-<div class="logo-header ">
-  <div class="container-fluid">
-      <div class="row d-flex justify-content-between">
-          <div class="logo-header-left col-xl-7 col-md-7 col-xs-7 dp-xs-flex flex-row">
-              <div class="logo mr-xs-3">
-                  <img src="../img/clsu-logo.png" alt="" >
-              </div>
-              <div class="logo-text m-xs-0">
-                  <span class="logo-title">Central Luzon State University</span>
-                  <span class="logo-sub">Science City of Muñoz, Nueva Ecija, Philippines 3120</span>
-              </div>
-          </div>
-      </div>
-  </div>
-</div>
+<body style="background-color: #fdfdfd"> 
 <?php include '../Components/header.php'; ?>
 
 
@@ -192,8 +177,8 @@ if (isset($_POST['archive'])) {
             if (isset($_SESSION['role'])) {
                 if ($_SESSION['role'] == 1) {
                     echo '
-                    <button class="btn btn-success fw-semibold" data-mdb-toggle="modal" data-mdb-target="#update_publication"><i class="fas fa-pen-to-square"></i> Update</button>
-                    <button class="btn btn-danger fw-semibold" data-mdb-toggle="modal" data-mdb-target="#archive"><i class="fas fa-box-archive"></i> Archive</button>';
+                    <button class="btn btn-success shadows" data-mdb-toggle="modal" data-mdb-target="#update_publication"><i class="fas fa-pen-to-square"></i> Update</button>
+                    <button class="btn btn-danger shadows" data-mdb-toggle="modal" data-mdb-target="#archive"><i class="fas fa-box-archive"></i> Archive</button>';
                 }
             }else{
                 echo '';
@@ -227,7 +212,8 @@ if (isset($_POST['archive'])) {
                     <textarea class="form-control" id="mytextarea" name="description"><?php echo $research_and_eval['descriptions']; ?></textarea>
                 </div>
             </div>
-            <div class="modal-footer pt-4 ">                  
+            <div class="modal-footer pt-4 ">        
+                <button type="reset" name="" class="btn mx-auto w-100 btn-light fw-semibold" data-mdb-dismiss="modal">Cancel</button>
                 <button type="submit" name="handle_submit_update" class="btn mx-auto w-100 btn-success fw-semibold" >Submit</button>
             </div>
         </form>

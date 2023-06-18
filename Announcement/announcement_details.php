@@ -1,6 +1,8 @@
 <?php
 session_start();
 include '../mysql_connect.php';
+
+
 if (isset($_POST['submit'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
@@ -35,34 +37,32 @@ if (isset($_POST['submit'])) {
         $_SESSION['fullname'] = $row['fullname'];
         $_SESSION['email'] = $session_email;
         $_SESSION['course'] = $row['course'];
-        
         $_SESSION['role'] = $row['role'];
         
         if ($row['role'] == 1) {    
-          header("location:../Announcement/all_announcement.php");
-          $_SESSION['status_success_admin'] = "success";
-          session_unset($_SESSION['status_success_admin']);
-          
+            header("location:../Announcement/all_announcement.php");
+            $_SESSION['status_success_admin'] = "success";
+            session_unset($_SESSION['status_success_admin']);
         }
         else {
-          $_SESSION['status_success_user'] = "success";
-          header("location:../Announcement/all_announcement.php");
-          session_unset($_SESSION['status_success_user']);
-
+            $_SESSION['status_success_user'] = "success";
+            header("location:../Announcement/all_announcement.php");
+            session_unset($_SESSION['status_success_user']);
           }
     } else {
-            $_SESSION['status_error'] = "error";
+      $_SESSION['status_error'] = "error";
     }
 }
+
 if (isset($_GET['announcement_id'])) {
     $id = $_GET['announcement_id'];
     $sql = "SELECT * FROM  announcement WHERE id=".$id;
     $result = mysqli_query($conn, $sql);
     if (mysqli_num_rows($result) > 0) {
-
         $announcement_details = mysqli_fetch_assoc($result);
     }
 }
+
 if (isset($_POST['archive'])) {
  
     $id = $announcement_details['id'];
@@ -71,13 +71,15 @@ if (isset($_POST['archive'])) {
     $sql = "UPDATE announcement SET is_archive='$archive' WHERE id=".$id;
     if (mysqli_query($conn, $sql)) {
           $_SESSION['status_success_archive'] = "success";
-          header("location:../Announcement/all_announcement.php");
+          header("refresh:2;url=../Announcement/all_announcement.php");
+          // session_unset($_SESSION['status_success_archive']);
     } else {
           echo '<script language="javascript">';
           echo 'alert("error")';
           echo '</script>';
     }
 }
+
 if(isset($_POST["handle_submit_update"])){
    
     $id = $announcement_details['id'];
@@ -91,7 +93,7 @@ if(isset($_POST["handle_submit_update"])){
     $date = date_create();
     $stamp = date_format($date, "Y");
     $temp = $_FILES['myfile']['tmp_name'];
-    $directory = "../upload/" . $stamp . $_FILES['myfile']['name'];   
+    $directory = "../upload/".$_FILES['myfile']['name'];   
 
     if (move_uploaded_file($temp, $directory)) {
         $sql = "UPDATE announcement SET 
@@ -116,8 +118,8 @@ if(isset($_POST["handle_submit_update"])){
             echo '</script>';
         }
     }
-    
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -128,20 +130,9 @@ if(isset($_POST["handle_submit_update"])){
     <title>Office of Student Affairs</title>
     <link rel="icon" href ="../img/logo.png" class="icon">
     <link rel="stylesheet" href="../Style/style.css">
-    <script src="https://cdn.tiny.cloud/1/n46xtsacbhbxjsimv4eyp5etxtgm41hzte71yebrsou8dm4r/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
-
-    <?php
-      include '../Links/link.php';
-    ?>
+    <?php include '../Links/link.php'; ?>
 </head>
 <style>
-   a,
-    a:hover,
-    a:focus,
-    a:active {
-        text-decoration: none;
-        color: inherit;
-    }
     .fa-circle-exclamation{
       font-size: 110px;
       width: fit-content;
@@ -154,23 +145,8 @@ if(isset($_POST["handle_submit_update"])){
       position: absolute;
     }
 </style>
-<body>
-  
-  <div class="logo-header ">
-    <div class="container-fluid">
-        <div class="row d-flex justify-content-between">
-            <div class="logo-header-left col-xl-7 col-md-7 col-xs-7 dp-xs-flex flex-row">
-                <div class="logo mr-xs-3">
-                    <img src="../img/clsu-logo.png" alt="" >
-                </div>
-                <div class="logo-text m-xs-0">
-                    <span class="logo-title">Central Luzon State University</span>
-                    <span class="logo-sub">Science City of Muñoz, Nueva Ecija, Philippines 3120</span>
-                </div>
-            </div>
-        </div>
-    </div>
-  </div>
+<body style="background-color: #fdfdfd">
+
   <?php include '../Components/header.php'; ?>
   <div class="container pt-5">
       <div class="row">
@@ -182,41 +158,6 @@ if(isset($_POST["handle_submit_update"])){
       </div>
     </div>
 
-  <!-- <div class="container">
-      <div class="card mb-3 shadows border mt-5">
-          <div class="row g-0">
-              <div class="col-md-4">
-                <img src="../upload/<?php echo $announcement_details['image']; ?>" class="img-fluid rounded-start" alt="" style="height: 100%; object-fit: cover;"/>
-
-              </div>
-              <div class="col-md-8">
-                <div class="card-body">
-                    <p class="card-text description-left-border">
-                      <?php echo $announcement_details['descriptions']; ?>
-                    </p>
-                </div>
-              </div>
-          </div>
-      </div>
-
-      <div class="row">
-        <div class="col">
-          
-          <?php
-            if (isset($_SESSION['role'])) {
-                if ($_SESSION['role'] == 1) {
-                    echo '
-                    <button class="btn btn-success fw-semibold" data-mdb-toggle="modal" data-mdb-target="#update_announcement">Update</button>
-                    <button class="btn btn-danger fw-semibold" data-mdb-toggle="modal" data-mdb-target="#archive">Archive</button>';
-                }
-            }else{
-                echo '';
-            }
-          ?>
-        </div>
-      </div>
-
-  </div> -->
   <div class="container p-2 mt-2">
     <img src="../upload/<?php echo $announcement_details['image']; ?>" class="img-fluid rounded shadows border" alt="" style="width: 100vw; height: 50vh; object-fit: cover"/>
     <div class="col">
@@ -236,13 +177,12 @@ if(isset($_POST["handle_submit_update"])){
     </div>
     <div class="row mt-5">
         <div class="col">
-          
           <?php
             if (isset($_SESSION['role'])) {
                 if ($_SESSION['role'] == 1) {
                     echo '
-                    <button class="btn btn-success fw-semibold" data-mdb-toggle="modal" data-mdb-target="#update_announcement"><i class="fas fa-pen-to-square"></i> Update</button>
-                    <button class="btn btn-danger fw-semibold" data-mdb-toggle="modal" data-mdb-target="#archive"><i class="fas fa-box-archive"></i> Archive</button>';
+                    <button class="btn btn-success shadows" data-mdb-toggle="modal" data-mdb-target="#update_announcement"><i class="fas fa-pen-to-square"></i> Update</button>
+                    <button class="btn btn-danger shadows" data-mdb-toggle="modal" data-mdb-target="#archive"><i class="fas fa-box-archive"></i> Archive</button>';
                 }
             }else{
                 echo '';
@@ -321,20 +261,22 @@ if(isset($_POST["handle_submit_update"])){
 <?php include_once '../Components/footer.php' ?>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.0/mdb.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.0/mdb.min.js"></script>
+<!-- Display preview image function -->
 <script>
     var loadFile = function(event) {
         var image = document.getElementById('output');
         image.src = URL.createObjectURL(event.target.files[0]);
         image.setAttribute("class", "out");
     };
-    
 </script>
+
+<!-- tiny mce function -->
 <script>
-         tinymce.init({
-        selector: '#mytextarea',
-         toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
-      });
-    </script>
+      tinymce.init({
+    selector: '#mytextarea',
+      toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+  });
+</script>
+
 </body>
 </html>

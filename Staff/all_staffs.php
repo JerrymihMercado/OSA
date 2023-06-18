@@ -73,7 +73,7 @@ if(isset($_POST["handle_submit"])){
         color: inherit;
     }
 </style>
-<body>
+<body style="background-color: #fdfdfd">
 <div class="logo-header ">
         <div class="container-fluid">
             <div class="row d-flex justify-content-between">

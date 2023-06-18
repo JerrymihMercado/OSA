@@ -65,7 +65,7 @@ if (isset($_POST['submit'])) {
      <?php include '../Links/link.php' ?> 
     <link rel="stylesheet" href="../Style/style.css">
 </head>
-<body>
+<body style="background-color: #fdfdfd">
 <div class="container-fluid">
     <div class="row " >
         <div class="right-side col-md-6 text-center d-none d-md-block">
@@ -75,18 +75,18 @@ if (isset($_POST['submit'])) {
             <div class="title-con mt-4">
                 <h1 class="text-white">CLSU</h1>
                 <p class="text-white">OFFICE OF STUDENT AFFAIRS </p>
-                <a href="../index.php">
-                    <button class="btn btn-light  btn-login shadow-0">Login</button>
-                </a>
             </div>
             <footer class="footer-left">
                 <p class="text-white">© Copyright 2023 Central Luzon State University All Rights Reserved</p>
             </footer>
         </div>
         <div class="col-md-6  pt-4">
-            <div class="form-title">
-                <h3 class="text-center">Forgot Password</h3>
-                <p class="text-center">Input your token and strong password</p>
+            <div class="form-title px-5">
+                <a href="../index.php" class="text-dark">
+                    <i class="fas fa-arrow-left-long"></i> Back
+                </a>
+                <h3 class="text-center fw-semibold">Create new password</h3>
+                <p class="text-center">Your new password must be different from previous used passwords.</p>
             </div>
             <div class="col px-5 mt-5">
                 <div class="container">
@@ -108,10 +108,8 @@ if (isset($_POST['submit'])) {
                         <input type="password" id="confirm_password" name="confirm_password" class="form-control" required/>
                         <label class="form-label" for="confirm_password">Confirm Password</label>
                     </div>
-                    </div>
-
                     <!-- Submit button -->
-                    <button type="submit" name="submit" class="btn btn-dark btn-block">Reset Password</button>
+                    <button type="submit" name="submit" class="btn btn-dark btn-block shadow-0">Reset Password</button>
                 </form>
                 </div>
             </div>

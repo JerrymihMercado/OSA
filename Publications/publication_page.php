@@ -23,7 +23,7 @@ if(isset($_POST["handle_submit"])){
     $date = date_create();
     $stamp = date_format($date, "Y");
     $temp = $_FILES['myfile']['tmp_name'];
-    $directory = "../upload/" . $stamp . $_FILES['myfile']['name'];   
+    $directory = "../upload/".$_FILES['myfile']['name'];   
 
     if (move_uploaded_file($temp, $directory)) {
         $sql = "INSERT INTO publish_post SET 
@@ -112,31 +112,12 @@ if (isset($_POST['submit'])) {
     <title>Office of Student Affairs</title>
     <link rel="icon" href ="../img/logo.png" class="icon">
     <link rel="stylesheet" href="../Style/style.css">
-    <script src="https://cdn.tiny.cloud/1/n46xtsacbhbxjsimv4eyp5etxtgm41hzte71yebrsou8dm4r/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
-
     <?php
       include '../Links/link.php';
     ?>
 </head>
-<body>
+<body style="background-color: #fdfdfd">
   
-<div class="logo-header ">
-  <div class="container-fluid">
-      <div class="row d-flex justify-content-between">
-          <div class="logo-header-left col-xl-7 col-md-7 col-xs-7 dp-xs-flex flex-row">
-              <div class="logo mr-xs-3">
-                  <img src="../img/clsu-logo.png" alt="" >
-                  
-              </div>
-              <div class="logo-text m-xs-0">
-                  <span class="logo-title">Central Luzon State University</span>
-                  <span class="logo-sub">Science City of Muñoz, Nueva Ecija, Philippines 3120</span>
-              </div>
-          </div>
-      </div>
-  </div>
-</div>
-
 <?php include '../Components/header.php'; ?>
 
 <div class="container pt-5">
@@ -245,7 +226,7 @@ if (isset($_POST['submit'])) {
   </script>
   <script>
       tinymce.init({
-    selector: '#mytextarea',
+      selector: '#mytextarea',
       toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
   });
 </script>

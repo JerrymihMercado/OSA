@@ -79,22 +79,7 @@ if (isset($_POST['submit'])) {
         color: inherit;
     }
 </style>
-<body>
-<div class="logo-header ">
-  <div class="container-fluid">
-      <div class="row d-flex justify-content-between">
-          <div class="logo-header-left col-xl-7 col-md-7 col-xs-7 dp-xs-flex flex-row">
-              <div class="logo mr-xs-3">
-                  <img src="../img/clsu-logo.png" alt="" >
-              </div>
-              <div class="logo-text m-xs-0">
-                  <span class="logo-title">Central Luzon State University</span>
-                  <span class="logo-sub">Science City of Muñoz, Nueva Ecija, Philippines 3120</span>
-              </div>
-          </div>
-      </div>
-  </div>
-</div>
+<body style="background-color: #fdfdfd">
  
 <?php include '../Components/header.php'; ?>
      
@@ -126,7 +111,7 @@ if (isset($_POST['submit'])) {
   <div class="row">
     <div class="osa-tag">
       <p class="tag-info">OFFICIAL WEBSITE PAGE</p>
-      <p class="tag-sub">Visit our official website for Student Organizations Unit (SOU)</p>
+      <p class="tag-sub">Visit our official website for Guidance Service Unit (GSU)</p>
     </div>
   </div>
 </div>

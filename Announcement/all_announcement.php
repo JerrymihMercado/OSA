@@ -1,7 +1,7 @@
 <?php
-
 session_start();
 include '../mysql_connect.php';
+
 if (isset($_POST['submit'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
@@ -36,25 +36,23 @@ if (isset($_POST['submit'])) {
         $_SESSION['fullname'] = $row['fullname'];
         $_SESSION['email'] = $session_email;
         $_SESSION['course'] = $row['course'];
-        
         $_SESSION['role'] = $row['role'];
         
         if ($row['role'] == 1) {    
-          header("location:../Announcement/all_announcement.php");
-          $_SESSION['status_success_admin'] = "success";
-          session_unset($_SESSION['status_success_admin']);
-          
+            header("location:../Announcement/all_announcement.php");
+            $_SESSION['status_success_admin'] = "success";
+            session_unset($_SESSION['status_success_admin']);
         }
         else {
-          $_SESSION['status_success_user'] = "success";
-          header("location:../Announcement/all_announcement.php");
-          session_unset($_SESSION['status_success_user']);
-
-          }
+            $_SESSION['status_success_user'] = "success";
+            header("location:../Announcement/all_announcement.php");
+            session_unset($_SESSION['status_success_user']);
+        }
     } else {
-            $_SESSION['status_error'] = "error";
+      $_SESSION['status_error'] = "error";
     }
 }
+
 if(isset($_POST["handle_submit"])){
    
     $title = $_POST['title'];
@@ -68,7 +66,7 @@ if(isset($_POST["handle_submit"])){
     $date = date_create();
     $stamp = date_format($date, "Y");
     $temp = $_FILES['myfile']['tmp_name'];
-    $directory = "../upload/" . $stamp . $_FILES['myfile']['name'];   
+    $directory = "../upload/".$_FILES['myfile']['name'];   
 
     if (move_uploaded_file($temp, $directory)) {
         $sql = "INSERT INTO announcement SET 
@@ -78,11 +76,10 @@ if(isset($_POST["handle_submit"])){
             descriptions='$descriptions',
             is_archive=0;";
             $_SESSION['status_success_added'] = "success";
-    if (mysqli_query($conn, $sql)) {
-          $_SESSION['status_success_added'] = "success";
-          header("location:../Announcement/all_announcement.php");
-          session_unset($_SESSION['status_success_added']);
-            
+      if (mysqli_query($conn, $sql)) {
+            $_SESSION['status_success_added'] = "success";
+            header("location:../Announcement/all_announcement.php");
+            session_unset($_SESSION['status_success_added']);
         } else {
             echo mysqli_error($conn);
             echo '<script>';
@@ -90,8 +87,8 @@ if(isset($_POST["handle_submit"])){
             echo '</script>';
         }
     }
-    
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -102,43 +99,22 @@ if(isset($_POST["handle_submit"])){
     <title>Office of Student Affairs</title>
     <link rel="icon" href ="../img/logo.png" class="icon">
     <link rel="stylesheet" href="../Style/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
-    <!-- Google Fonts Roboto -->
-    
-    <script src="https://cdn.tiny.cloud/1/n46xtsacbhbxjsimv4eyp5etxtgm41hzte71yebrsou8dm4r/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
-    <?php
-      include '../Links/link.php';
-    ?>
+    <?php include '../Links/link.php'; ?>
 </head>
-<body>
-  
-  <div class="logo-header ">
-    <div class="container-fluid">
-        <div class="row d-flex justify-content-between">
-            <div class="logo-header-left col-xl-7 col-md-7 col-xs-7 dp-xs-flex flex-row">
-                <div class="logo mr-xs-3">
-                    <img src="../img/clsu-logo.png" alt="" >
-                    
-                </div>
-                <div class="logo-text m-xs-0">
-                    <span class="logo-title">Central Luzon State University</span>
-                    <span class="logo-sub">Science City of Muñoz, Nueva Ecija, Philippines 3120</span>
-                </div>
-            </div>
-        </div>
-    </div>
-  </div>
+
+<body style="background-color: #fdfdfd">
+
   <?php include '../Components/header.php'; ?>
+
   <div class="container pt-5">
     <div class="row">
       <div class="osa-tag">
         <p class="tag-info">ANNOUNCEMENT LIST</p>
         <p class="tag-sub">Access all announcements from the Office of Student Affairs (OSA)</p>
       </div>
-
     </div>
   </div>
-  <!-- Button trigger modal -->
+
   <div class="container d-flex justify-content-end mb-3">
     <?php
       if (isset($_SESSION['role'])) {
@@ -152,45 +128,88 @@ if(isset($_POST["handle_submit"])){
       }
     ?>
   </div>
-  <div class="container">
-      <div class="row row-cols-1 row-cols-md-3 g-4">
-        <?php
-          $sql = "SELECT * FROM announcement WHERE is_archive=0";
-          $res = mysqli_query($conn, $sql);
-          if(mysqli_num_rows($res) > 0){
-              while ($row = mysqli_fetch_assoc($res)) {?>
-          <div class="col">
-            <div class="card h-100 shadows">
-            <div class="card-header">
-              <h6><?php echo $row['title']; ?></h6>
-              <small><?php echo $row['date_created']; ?></small>
+
+  <!-- <div class="container">
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+      <div class="col">
+          <?php
+            $sql = "SELECT * FROM announcement WHERE is_archive=0";
+            $res = mysqli_query($conn, $sql);
+            if(mysqli_num_rows($res) > 0){
+                while ($row = mysqli_fetch_assoc($res)) {?>
+            
+              <div class="card h-100 shadows">
+              <div class="card-header">
+                <h6><?php echo $row['title']; ?></h6>
+                <small><?php echo $row['date_created']; ?></small>
+              </div>
+              <div class="card-body">
+                <p class="card-text">
+                  <?php 
+                    $details = substr($row['descriptions'],0,300);
+                    if($row['descriptions'] > 300){
+                      echo $details?>...
+                  <?php }?>
+                </p>
+              </div>
+              <div class="card-footer justify-content-end d-flex border-0">
+                <a href="<?php echo '../Announcement/announcement_details.php?announcement_id=' . $row['id']; ?>" class="card-text">
+                  <button class="btn btn-dark shadow-0"><i class="fas fa-eye"></i> View Details</button>
+                </a>
+              </div>
             </div>
-            <div class="card-body">
-              <p class="card-text">
-                <?php 
-                  $details = substr($row['descriptions'],0,100);
-                  if($row['descriptions'] > 90){
-                    echo $details?>...
-                <?php }?>
-              </p>
+            
+          <?php     
+              }
+        }else{?>
+            <div class="container p-2 justify-content-center d-flex mt-5">
+                <h1 class="text-warning mt-5">No Data Found!</h1>
             </div>
-            <div class="card-footer justify-content-end d-flex">
-              <a href="<?php echo '../Announcement/announcement_details.php?announcement_id=' . $row['id']; ?>" class="card-text">
-                <button class="btn btn-dark shadow-0"><i class="fas fa-eye"></i> View Details</button>
-              </a>
-            </div>
-          </div>
-          </div>
-        <?php     
-            }
-      }else{?>
-          <div class="container p-2 justify-content-center d-flex mt-5">
-              <h1 class="text-warning mt-5">No Data Found!</h1>
-          </div>
-      <?php  }
-              ?>
+        <?php  }
+                ?>
+        </div>
       </div>
+  </div> -->
+  <div class="container">
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+      <?php
+      $sql = "SELECT * FROM announcement WHERE is_archive=0";
+      $res = mysqli_query($conn, $sql);
+      if(mysqli_num_rows($res) > 0){
+          while ($row = mysqli_fetch_assoc($res)) {?>
+      <div class="col">
+        <div class="card mb-3 shadows h-100">
+          <div class="card-header">
+            <h6><?php echo $row['title']; ?></h6>
+            <small><?php echo $row['date_created']; ?></small>
+          </div>
+          <div class="card-body">
+            <p>
+              <?php 
+                $details = $row['descriptions'];
+                echo substr_replace($details, '...', 100);
+               ?>
+            </p>
+          </div>
+          <div class="card-footer justify-content-end d-flex border-0">
+            <a href="<?php echo '../Announcement/announcement_details.php?announcement_id=' . $row['id']; ?>" class="card-text">
+              <button class="btn btn-dark shadow-0"><i class="fas fa-eye"></i> View Details</button>
+            </a>
+          </div>
+
+        </div>
+      </div>
+      <?php     
+              }
+        }else{?>
+            <div class="container p-2 justify-content-center d-flex mt-5">
+                <h1 class="text-warning mt-5">No Data Found!</h1>
+            </div>
+        <?php  }
+                ?>
+    </div>
   </div>
+
    <!-- Add Announcement Modal -->
   <div class="modal fade" id="add_announcement" tabindex="-1" aria-labelledby="add_announcement" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -227,18 +246,22 @@ if(isset($_POST["handle_submit"])){
 <?php include_once '../Components/footer.php' ?>
 
 <script type="text/javascript"src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.1/mdb.min.js"></script>
-  <script>
-      var loadFile = function(event) {
-          var image = document.getElementById('output');
-          image.src = URL.createObjectURL(event.target.files[0]);
-          image.setAttribute("class", "out");
-      };
-  </script>
-  <script>
-        tinymce.init({
-      selector: '#mytextarea',
-        toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
-    });
-  </script>
+<!-- Display preview image function -->
+<script>
+    var loadFile = function(event) {
+        var image = document.getElementById('output');
+        image.src = URL.createObjectURL(event.target.files[0]);
+        image.setAttribute("class", "out");
+    };
+</script>
+
+<!-- tiny mce function -->
+<script>
+    tinymce.init({
+    selector: '#mytextarea',
+    toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+  });
+</script>
+
 </body>
 </html>

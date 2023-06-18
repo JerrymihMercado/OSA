@@ -23,7 +23,7 @@ if(isset($_POST["handle_submit_update"])){
     $date = date_create();
     $stamp = date_format($date, "Y");
     $temp = $_FILES['myfile']['tmp_name'];
-    $directory = "../upload/" . $stamp . $_FILES['myfile']['name'];   
+    $directory = "../upload/".$_FILES['myfile']['name'];   
 
     if (move_uploaded_file($temp, $directory)) {
         $sql = "UPDATE publish_post SET 
@@ -34,10 +34,10 @@ if(isset($_POST["handle_submit_update"])){
             WHERE id=".$id;
             
     if (mysqli_query($conn, $sql)) {
-            $_SESSION['status_success'] = "success";
+            $_SESSION['status_success_update'] = "success";
             header("location:../Publications/publication_details.php?publication_ID=".$id);
             unlink("../upload/".$publish['image']);
-            session_unset($_SESSION['status_success']);
+            session_unset($_SESSION['status_success_update']);
             
         } else {
             echo mysqli_error($conn);
@@ -47,7 +47,6 @@ if(isset($_POST["handle_submit_update"])){
             echo '</script>';
         }
     }
-    
 }
 if (isset($_POST['submit'])) {
     $email = $_POST['email'];
@@ -105,14 +104,13 @@ if (isset($_POST['submit'])) {
 if (isset($_POST['archive'])) {
  
     $id = $publish['id'];
+    $own_by_id = $publish['own_by'];
     $archive = 1;
      
     $sql = "UPDATE publish_post SET is_archive='$archive' WHERE id=".$id;
     if (mysqli_query($conn, $sql)) {
-          echo '<script language="javascript">';
-          echo 'alert("message successfully sent")';
-          echo '</script>';
-          header("location:../Publications/all_publications.php");
+          $_SESSION['status_success_archive'] = "success";
+          header("location:../Publications/publication_page.php?publication_ID=".$own_by_id);
     } else {
           echo '<script language="javascript">';
           echo 'alert("error")';
@@ -128,13 +126,8 @@ if (isset($_POST['archive'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Office of Student Affairs</title>
     <link rel="icon" href ="../img/logo.png" class="icon">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
-    <!-- Google Fonts Roboto -->
-    <script src="https://cdn.tiny.cloud/1/n46xtsacbhbxjsimv4eyp5etxtgm41hzte71yebrsou8dm4r/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
-    
     <link rel="stylesheet" href="../css/mdb.min.css" />
     <link rel="stylesheet" href="../Style/style.css">
-
     <?php
       include '../Links/link.php';
     ?>
@@ -152,25 +145,8 @@ if (isset($_POST['archive'])) {
       position: absolute;
     }
 </style>
-<body>
+<body style="background-color: #fdfdfd">
   
-<div class="logo-header ">
-  <div class="container-fluid">
-      <div class="row d-flex justify-content-between">
-          <div class="logo-header-left col-xl-7 col-md-7 col-xs-7 dp-xs-flex flex-row">
-              <div class="logo mr-xs-3">
-                  <img src="../img/clsu-logo.png" alt="" >
-                  
-              </div>
-              <div class="logo-text m-xs-0">
-                  <span class="logo-title">Central Luzon State University</span>
-                  <span class="logo-sub">Science City of Muñoz, Nueva Ecija, Philippines 3120</span>
-              </div>
-          </div>
-      </div>
-  </div>
-</div>
-
 <?php include '../Components/header.php'; ?>
 
 <div class="container pt-5">
@@ -207,8 +183,8 @@ if (isset($_POST['archive'])) {
             if (isset($_SESSION['role'])) {
                 if ($_SESSION['role'] == 1) {
                     echo '
-                    <button class="btn btn-success fw-semibold" data-mdb-toggle="modal" data-mdb-target="#update_publication"><i class="fas fa-pen-to-square"></i> Update</button>
-                    <button class="btn btn-danger fw-semibold" data-mdb-toggle="modal" data-mdb-target="#archive"><i class="fas fa-box-archive"></i> Archive</button>';
+                    <button class="btn btn-success shadows" data-mdb-toggle="modal" data-mdb-target="#update_publication"><i class="fas fa-pen-to-square"></i> Update</button>
+                    <button class="btn btn-danger shadows" data-mdb-toggle="modal" data-mdb-target="#archive"><i class="fas fa-box-archive"></i> Archive</button>';
                 }
             }else{
                 echo '';
@@ -282,137 +258,22 @@ if (isset($_POST['archive'])) {
   </div>
 
 <?php include_once '../Components/footer.php' ?>
-
-<script src="../js/sweetalert2.js"></script>
-  <?php
-    if(isset($_SESSION['status_success_admin']) ){
-        ?>
-        <script>
-            const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-            })
-            Toast.fire({
-            icon: 'success',
-            title: 'Welcome Back Admin!'
-            })
-
-        </script>
-        <?php
-            unset($_SESSION['status_success_admin']);
-        
-    }
-    if(isset($_SESSION['status_success_user']) ){
-        ?>
-        <script>
-            const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-            })
-            Toast.fire({
-            icon: 'success',
-            title: 'Welcome <?php echo $_SESSION['fullname']?>!'
-            })
-        </script>
-        <?php
-        unset($_SESSION['status_success_user']);
-    }
-    if(isset($_SESSION['status_error'])){
-        ?>
-        <script>
-            const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-            })
-            Toast.fire({
-            icon: 'error',
-            title: 'Credentials error'
-            })
-
-        </script>
-        <?php
-        
-    }
-  ?>
-    <?php
-    if(isset($_SESSION['status_success']) ){
-        ?>
-        <script>
-             const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-            })
-            Toast.fire({
-            icon: 'success',
-            title: 'Record Successfully Updated!'
-            })
-
-        </script>
-        <?php
-        unset($_SESSION['status_success']);
-    }
-    
-    if(isset($_SESSION['status_error'])){
-        ?>
-        <script>
-            Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'Something went wrong!',
-           
-            })
-
-        </script>
-        <?php
-        unset($_SESSION['status_error']);
-    }
-    ?>
-    <script>
-      var loadFile = function(event) {
-          var image = document.getElementById('output');
-          image.src = URL.createObjectURL(event.target.files[0]);
-          image.setAttribute("class", "out");
-      };
-      
-  </script>
+<!-- Display preview image function -->
+<script>
+    var loadFile = function(event) {
+        var image = document.getElementById('output');
+        image.src = URL.createObjectURL(event.target.files[0]);
+        image.setAttribute("class", "out");
+    };
+</script>
 <script>
     tinymce.init({
     selector: '#mytextarea',
         toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
     });
 </script>
-    <!-- MDB -->
-    <script type="text/javascript" src="js/mdb.min.js"></script>
-    <!-- Custom scripts -->
-    <script type="text/javascript"></script>
-    <script type="text/javascript"src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.1/mdb.min.js"></script>
+<script type="text/javascript" src="js/mdb.min.js"></script>
+<script type="text/javascript"></script>
+<script type="text/javascript"src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.1/mdb.min.js"></script>
 </body>
 </html>

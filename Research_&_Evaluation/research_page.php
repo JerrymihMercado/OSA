@@ -1,7 +1,10 @@
 <?php
 session_start();
 include '../mysql_connect.php';
-
+if(isset($_SESSION['status_success_archive'])){
+  $_SESSION['status_success_archive'] = "success";
+  unset($_SESSION['status_success_archive']);
+}
 if (isset($_POST['submit'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
@@ -58,7 +61,6 @@ if (isset($_POST['submit'])) {
 }
 if(isset($_POST["handle_submit"])){
 
-    // $id = $_GET['publication_ID']; 
     $title = $_POST['title'];
     $titles = str_replace("'","\'",$title);
     $date_created = date_create();
@@ -82,6 +84,7 @@ if(isset($_POST["handle_submit"])){
         if (mysqli_query($conn, $sql)) {
                 $_SESSION['status_success_added'] = "success";
                 header("location:../Research_&_Evaluation/research_page.php");
+                session_unset($_SESSION['status_success_added']);
             
         } else {
               $_SESSION['status_error'] = "error";
@@ -98,8 +101,6 @@ if(isset($_POST["handle_submit"])){
     <title>Office of Student Affairs</title>
     <link rel="icon" href ="../img/logo.png" class="icon">
     <link rel="stylesheet" href="../Style/style.css">
-    <script src="https://cdn.tiny.cloud/1/n46xtsacbhbxjsimv4eyp5etxtgm41hzte71yebrsou8dm4r/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
-
     <?php
       include '../Links/link.php';
     ?>
@@ -113,23 +114,7 @@ if(isset($_POST["handle_submit"])){
         color: inherit;
     }
 </style>
-<body>
-  
-<div class="logo-header ">
-  <div class="container-fluid">
-      <div class="row d-flex justify-content-between">
-          <div class="logo-header-left col-xl-7 col-md-7 col-xs-7 dp-xs-flex flex-row">
-              <div class="logo mr-xs-3">
-                  <img src="../img/clsu-logo.png" alt="" >
-              </div>
-              <div class="logo-text m-xs-0">
-                  <span class="logo-title">Central Luzon State University</span>
-                  <span class="logo-sub">Science City of Muñoz, Nueva Ecija, Philippines 3120</span>
-              </div>
-          </div>
-      </div>
-  </div>
-</div>
+<body style="background-color: #fdfdfd">
 
   <?php include '../Components/header.php'; ?>
   <!-- banner -->
@@ -158,8 +143,8 @@ if(isset($_POST["handle_submit"])){
     <?php
       if (isset($_SESSION['role'])) {
           if ($_SESSION['role'] == 1) {
-              echo '<button type="button" class="btn btn-success" data-mdb-toggle="modal" data-mdb-target="#add_page">
-                      Add New Record
+              echo '<button type="button" class="btn btn-primary shadows" data-mdb-toggle="modal" data-mdb-target="#add_page">
+                      <i class="fas fa-notes-medical"></i> Add New Post
                     </button>';
           }
       }else{
@@ -180,7 +165,7 @@ if(isset($_POST["handle_submit"])){
                
                 <div class="mb-3">
                     <label for="myfile">Image<span class="text-danger"> *</span></label>
-                    <img class="card-img-top movie_input_img" id="output" src="../img/Default_images.svg" alt="Card image" style="width: 100%; height: auto; ">
+                    <img class="card-img-top movie_input_img" id="output" src="../img/Default_images.svg" alt="Card image" style="width: 100%; height: 20vh; object-fit: cover;">
                     <input type="file" class="form-control mt-2" id="myfile"  name="myfile" accept="image/*" onchange="loadFile(event)" required/>
                 </div>
                 <div class="mb-3">
@@ -201,43 +186,6 @@ if(isset($_POST["handle_submit"])){
     </div>
   </div>
 
-  <!-- <div class="container pt-5">
-      <div class="row row-cols-1 row-cols-md-3 g-4">
-          <div class="col">
-              <a href="../Research_&_Evaluation/research_details.php">
-                  <div class="card h-100 shadows">
-                  <img src="../img/Rectangle 266.png" class="card-img-top" alt="clsu-image"/>
-                  <div class="card-body">
-                      <h5 class="card-title">Card title</h5>
-                      <p class="card-text">
-                      This is a longer card with supporting text below as a natural lead-in to
-                      additional content. This content is a little bit longer.
-                      </p>
-                  </div>
-              </div>
-              </a>
-          </div>
-          <div class="col">
-              <div class="card h-100 shadows">
-              <img src="../img/Rectangle 266.png" class="card-img-top" alt="Palm Springs Road"/>
-              <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">This is a short card.</p>
-              </div>
-              </div>
-          </div>
-          <div class="col">
-              <div class="card h-100 shadows">
-              <img src="../img/Rectangle 266.png" class="card-img-top" alt="Los Angeles Skyscrapers"/>
-              <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
-              </div>
-              </div>
-          </div>
-      
-      </div>
-  </div> -->
   <div class="container mt-4">
     <div class="row row-cols-1 row-cols-md-3 g-4">
       <?php
@@ -263,9 +211,9 @@ if(isset($_POST["handle_submit"])){
                   
                   
               </div>
-              <div class="card-footer bg-transparent border-0">
+              <div class="card-footer bg-transparent border-0 justify-content-end d-flex">
                 <a href="<?php echo '../Research_&_Evaluation/research_details.php?RandD_ID=' . $row['id']; ?>">
-                  <button class="btn btn-success shadow-0 px-4">View Details</button>
+                  <button class="btn btn-dark shadow-0 px-4"><i class="fas fa-eye"></i> View Details</button>
                 </a>
               </div>
           </div>

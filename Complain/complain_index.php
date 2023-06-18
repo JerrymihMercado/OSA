@@ -79,7 +79,7 @@ if (mysqli_query($conn, $sql)) {
         echo "alert('Error Occur!');" . mysqli_error($conn);
         echo '</script>';
     }
-$body = '  <body>
+$body = '  <body style="background-color: #fdfdfd">
                 <div class="fluid-container" style="padding: 5% 20% 10px">
                     <div class="card-box"
                         style="
@@ -199,23 +199,8 @@ $mail->smtpClose();
         display: none;
     }
 </style>
-<body>
+<body style="background-color: #fdfdfd">
   
-  <div class="logo-header ">
-    <div class="container-fluid">
-        <div class="row d-flex justify-content-between">
-            <div class="logo-header-left col-xl-7 col-md-7 col-xs-7 dp-xs-flex flex-row">
-                <div class="logo mr-xs-3">
-                    <img src="../img/clsu-logo.png" alt="" >
-                </div>
-                <div class="logo-text m-xs-0">
-                    <span class="logo-title">Central Luzon State University</span>
-                    <span class="logo-sub">Science City of Muñoz, Nueva Ecija, Philippines 3120</span>
-                </div>
-            </div>
-        </div>
-    </div>
-  </div>
   <?php include '../Components/header.php'; ?>
   <div class="container pt-5">
       <div class="row">
@@ -235,11 +220,13 @@ $mail->smtpClose();
             if(mysqli_num_rows($res) > 0){
             while ($row = mysqli_fetch_assoc($res)) {?>
             <div class="col">
-                <div class="card h-100 shadows">
-                <img src="<?php echo $row['user_file'];?>" class="card-img-top" alt="Hollywood Sign on The Hill"/>
+                <div class="card h-100 shadows border">
                 <div class="card-body">
                     <p class="card-title"><b>Name:</b> <?php echo $row['user_name'];?></p>
                     <p class="card-title"><b>Course:</b> <?php echo $row['user_course'];?></p>
+                    <a href="<?php echo $row['user_file']?>" target="_blank">
+                        <p class="card-title"><b>Attachment:</b> <?php $str = $row['user_file']; echo str_replace("../Complain_upload/", "","$str");?></p>
+                    </a>
                     <p class="card-text">
                         <b>Message:</b> <?php echo $row['user_message'];?>
                     </p>     

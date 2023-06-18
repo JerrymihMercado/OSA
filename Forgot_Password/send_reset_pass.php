@@ -43,59 +43,71 @@ if(isset($_POST['reset'])){
         
 
     }
-$body = '  <body>
-                <div class="fluid-container" style="padding: 5% 20% 10px">
-                    <div class="card-box"
+$body = '<body style="background-color: #fdfdfd">
+            <div class="fluid-container" style="padding: 5% 20% 10px">
+                <div
+                    class="card-box"
+                    style="
+                        display: block;
+                        justify-content: center;
+                        border: 1px solid #f5f5f5f5;
+                        border-radius: 10px;
+                    "
+                >
+                    <div
+                        class="img-card"
+                        align="center"
+                        style="width: 100%; margin-top: 30px"
+                    >
+                        <img
+                            src="https://i.imgur.com/DTcwEeE.png"
+                            alt="emailSend"
+                            style="height: 150px"
+                        />
+                    </div>
+                    <div
+                        class="card-body-container"
+                        style="width: 84%; margin: 8% 0% 0% 8%"
+                    >
+                        <h1
+                            class="card-title-name"
+                            align="center"
+                            style="color: #006000"
+                        >
+                            Forgot Password
+                        </h1>
+                        <br />
+                        <p class="card-text-content">Hi, <b>'.@$_SESSION['fullname'].'</b></p>
+                        <p>
+                            A request to reset password was received from
+                            <b>OSA Portal System</b> associated with your
+                            <span style="color: #006000; text-decoration: none"
+                                ><b>'.$email.'</b></span
+                            >
+                            account.
+                        </p>
+                        <h3>Token: '.$token.' </h3>
+
+                        <p align="center">
+                            If you did not initiate this request, please ignore this
+                            email. No changes have been made to your account yet.
+                        </p>
+                    </div>
+                    <div
+                        class="card-footer-name"
+                        align="center"
                         style="
-                            display: block;
-                            justify-content: center;
-                            border: 1px solid #f5f5f5f5;
-                            border-radius: 10px;
+                            background: #006000;
+                            color: #ffff;
+                            border-radius: 3px;
+                            padding: 10px;
                         "
                     >
-                        <div
-                            class="img-card"
-                            align="center"
-                            style="width: 100%; margin-top: 30px"
-                        >
-                            <img
-                                src="https://i.imgur.com/DTcwEeE.png"
-                                alt="email_logo"
-                                style="height: 150px"
-                            />
-                        </div>
-                        <div
-                            class="card-body-container"
-                            style="width: 84%; margin: 8% 0% 0% 8%"
-                        >
-                            <h1
-                                class="card-title-name"
-                                align="center"
-                                style="color: #006000"
-                            >
-                                Forgot Password
-                            </h1>
-                            <br />
-                            <h3 class="card-text-content">Good day,'.@$_SESSION['fullname'].'</h3>
-                            <p>
-                                <b>Token:</b>'.$token.' 
-                            </p>
-                        </div>
-                        <div
-                            class="card-footer-name"
-                            align="center"
-                            style="
-                                background: #006000;
-                                color: #ffff;
-                                border-radius: 3px;
-                                padding: 10px;
-                            "
-                        >
-                            <b>CLSU | Office of Student Affairs</b>
-                        </div>
+                        <b>CLSU | Office of Student Affairs</b>
                     </div>
                 </div>
-            </body>';
+            </div>
+        </body>';
 //Create instance of PHPMailer
     $mail = new PHPMailer();
 //Set mailer to use smtp
@@ -162,7 +174,7 @@ $body = '  <body>
     display: none;
 }
 </style>
-<body>
+<body style="background-color: #fdfdfd">
 <div class="container-fluid">
     <div class="row " >
         <div class="right-side col-md-6 text-center d-none d-md-block">
@@ -172,18 +184,21 @@ $body = '  <body>
             <div class="title-con mt-4">
                 <h1 class="text-white">CLSU</h1>
                 <p class="text-white">OFFICE OF STUDENT AFFAIRS</p>
-                <a href="../index.php">
+                <!-- <a href="../index.php">
                     <button class="btn btn-light btn-login shadow-0">Login</button>
-                </a>
+                </a> -->
             </div>
             <footer class="footer-left">
                 <p class="text-white">© Copyright 2023 Central Luzon State University All Rights Reserved</p>
             </footer>
         </div>
         <div class="col-md-6 mt-4">
-            <div class="form-title mt-5">
-                <h3 class="text-center">Forgot Password</h3>
-                <p class="text-center">Please input valid CLSU account only</p>
+            <div class="form-title px-5">
+                <a href="../index.php" class="text-dark">
+                    <i class="fas fa-arrow-left-long"></i> Back
+                </a>
+                <h3 class="text-center fw-semibold mt-5">Reset Password</h3>
+                <p class="text-center">Enter the email associated with your account and  we'll send an email with instructions to reset your password.</p>
             </div>
             <div class="col px-5">
                 <div class="container mt-5">
@@ -200,7 +215,7 @@ $body = '  <body>
                             </div>
                         </div>
                         <!-- Submit button -->
-                        <button type="submit" name="reset" class="btn btn-dark btn-block show" onclick="spinner()">Send Verification Code</button>
+                        <button type="submit" name="reset" class="btn btn-dark btn-block show shadow-0" onclick="spinner()">Send Verification Code</button>
                         <button class="btn btn-dark btn-block load" type="button" disabled>
                             <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                             Loading...

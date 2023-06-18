@@ -79,23 +79,7 @@ if (isset($_POST['submit'])) {
         color: inherit;
     }
 </style>
-<body>
-<div class="logo-header ">
-        <div class="container-fluid">
-            <div class="row d-flex justify-content-between">
-                <div class="logo-header-left col-xl-7 col-md-7 col-xs-7 dp-xs-flex flex-row">
-                    <div class="logo mr-xs-3">
-                        <img src="../img/clsu-logo.png" alt="" >
-                        
-                    </div>
-                    <div class="logo-text m-xs-0">
-                        <span class="logo-title">Central Luzon State University</span>
-                        <span class="logo-sub">Science City of Muñoz, Nueva Ecija, Philippines 3120</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<body style="background-color: #fdfdfd">
   <?php include '../Components/header.php'; ?>
      
  
@@ -119,32 +103,6 @@ if (isset($_POST['submit'])) {
         </div>
       </div>
     </div>
-
-    <!-- <div class="container mt-4">
-        <div class="row row-cols-1 row-cols-md-3 g-4">
-            <div class="col">
-                    <div class="card shadows h-100 border">
-                    <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                        <img src="../img/clsu-1.jpg" class="card-img-top" alt="clsu-image"/>
-                        <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Job Title</h5>
-                        <p class="card-text">
-                        This is a longer card with supporting text below as a natural lead-in to
-                        additional content. This content is a little bit longer.
-                        </p>
-                    </div>
-                    <div class="card-footer bg-transparent border-0">
-                        <a href="../CDESU/cdesu_details.php">
-                        <button class="btn btn-success shadow-0 px-4">View Details</button>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-        </div>
-    </div> -->
     <div class="container">
         <a href="../CDESU/cdesu_details.php">
             <div class="mb-3">

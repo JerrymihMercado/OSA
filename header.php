@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../Style/style.css">
     
 </head>
-<body>
+<body style="background-color: #fdfdfd">
     <div class="container-fluid header-title">
     <div class="row">
       <div class="col-md-1 ">
