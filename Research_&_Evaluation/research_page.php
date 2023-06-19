@@ -240,9 +240,10 @@ if(isset($_POST["handle_submit"])){
   </script>
 <script>
     tinymce.init({
-    selector: '#mytextarea',
-        toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
-    });
+    selector: "#mytextarea",
+    plugins: "fullpage",
+    fullpage_default_doctype: "<!DOCTYPE html>"
+  });
 </script>
 <!-- MDB -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.0/mdb.min.js"></script>

@@ -213,7 +213,7 @@ if(isset($_POST["handle_upload"])){
                                 }
                             }
                             }elseif($_SESSION['role'] == 1){
-                              echo '<button type="button" class="btn btn-primary" data-mdb-toggle="modal" data-mdb-target="#upload">
+                              echo '<button type="button" class="btn btn-primary shadows" data-mdb-toggle="modal" data-mdb-target="#upload">
                                       <i class="fas fa-cloud-arrow-up"></i> Upload Handbook
                                     </button>';
                           }
@@ -251,7 +251,7 @@ if(isset($_POST["handle_upload"])){
       if(mysqli_num_rows($res) > 0){
         while ($row = mysqli_fetch_assoc($res)) {?>
         <div class="col">
-          <div class="card h-100 shadows">
+          <div class="card h-100 shadows border">
               <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
                 <img src="../upload/<?php echo $row['image']; ?>" class="card-img-top" alt="" style="height: 30vh; object-fit: cover;"/>
                 <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
@@ -309,7 +309,7 @@ if(isset($_POST["handle_upload"])){
         if(mysqli_num_rows($res) > 0){
           while ($row = mysqli_fetch_assoc($res)) {?>
           <div class="col">
-            <div class="card h-100 shadows">
+            <div class="card h-100 shadows border">
                 <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
                   <img src="../upload/<?php echo $row['image']; ?>" class="card-img-top" alt="" style="height: 30vh; object-fit: cover;"/>
                   <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>

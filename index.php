@@ -240,7 +240,7 @@ if (isset($_POST['submit'])) {
             if(mysqli_num_rows($res) > 0){
                 while ($row = mysqli_fetch_assoc($res)) {?>
         <div class="row g-0">
-          <div class="card mb-3 shadows">
+          <div class="card mb-3 shadows border">
             <div class="card-header">
               <div class="row">
                 <div class="col">

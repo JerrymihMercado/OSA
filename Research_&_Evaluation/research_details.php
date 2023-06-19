@@ -260,10 +260,11 @@ var loadFile = function(event) {
 };
 </script>
 <script>
-  tinymce.init({
-  selector: '#mytextarea',
-      toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
-  });
+    tinymce.init({
+    selector: "#mytextarea",
+    plugins: "fullpage",
+    fullpage_default_doctype: "<!DOCTYPE html>"
+    });
 </script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.0/mdb.min.js"></script>
 </body>

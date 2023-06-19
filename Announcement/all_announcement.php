@@ -129,47 +129,6 @@ if(isset($_POST["handle_submit"])){
     ?>
   </div>
 
-  <!-- <div class="container">
-    <div class="row row-cols-1 row-cols-md-3 g-4">
-      <div class="col">
-          <?php
-            $sql = "SELECT * FROM announcement WHERE is_archive=0";
-            $res = mysqli_query($conn, $sql);
-            if(mysqli_num_rows($res) > 0){
-                while ($row = mysqli_fetch_assoc($res)) {?>
-            
-              <div class="card h-100 shadows">
-              <div class="card-header">
-                <h6><?php echo $row['title']; ?></h6>
-                <small><?php echo $row['date_created']; ?></small>
-              </div>
-              <div class="card-body">
-                <p class="card-text">
-                  <?php 
-                    $details = substr($row['descriptions'],0,300);
-                    if($row['descriptions'] > 300){
-                      echo $details?>...
-                  <?php }?>
-                </p>
-              </div>
-              <div class="card-footer justify-content-end d-flex border-0">
-                <a href="<?php echo '../Announcement/announcement_details.php?announcement_id=' . $row['id']; ?>" class="card-text">
-                  <button class="btn btn-dark shadow-0"><i class="fas fa-eye"></i> View Details</button>
-                </a>
-              </div>
-            </div>
-            
-          <?php     
-              }
-        }else{?>
-            <div class="container p-2 justify-content-center d-flex mt-5">
-                <h1 class="text-warning mt-5">No Data Found!</h1>
-            </div>
-        <?php  }
-                ?>
-        </div>
-      </div>
-  </div> -->
   <div class="container">
     <div class="row row-cols-1 row-cols-md-2 g-4">
       <?php
@@ -178,7 +137,7 @@ if(isset($_POST["handle_submit"])){
       if(mysqli_num_rows($res) > 0){
           while ($row = mysqli_fetch_assoc($res)) {?>
       <div class="col">
-        <div class="card mb-3 shadows h-100">
+        <div class="card mb-3 shadows h-100 border">
           <div class="card-header">
             <h6><?php echo $row['title']; ?></h6>
             <small><?php echo $row['date_created']; ?></small>
@@ -258,8 +217,9 @@ if(isset($_POST["handle_submit"])){
 <!-- tiny mce function -->
 <script>
     tinymce.init({
-    selector: '#mytextarea',
-    toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+    selector: "#mytextarea",
+    plugins: "fullpage",
+    fullpage_default_doctype: "<!DOCTYPE html>"
   });
 </script>
 
