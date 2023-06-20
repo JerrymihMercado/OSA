@@ -50,7 +50,7 @@ if (isset($_POST['submit'])) {
     $str1 = $student_id;
     $pattern1 = "/^\d{2}\-\d{4}$/";
 
-    $st2 = $password;
+    $str2 = $password;
     $pass_regex = "/^.*(?=.*[a-zA-Z])(?=.*\d)(?=.*[!#$%&?@.']).*$/";
 
     if($count > 0){
@@ -73,7 +73,7 @@ if (isset($_POST['submit'])) {
     else if(preg_match($pattern1, $str1)==0){
         $_SESSION['status_invalid_student_id'] = "error";
     }
-    else if(preg_match($pass_regex, $str1)==0){
+    else if(preg_match($pass_regex, $str2)==0){
         $_SESSION['status_invalid_password'] = "error";
     }
     else{
