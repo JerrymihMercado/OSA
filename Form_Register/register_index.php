@@ -161,92 +161,92 @@ if (isset($_POST['submit'])) {
           <div class="form-info container mt-5 px-2">
             <h6>Personal information</h6>
             <form method="POST" class="needs-validation" novalidate >
-            <div class="row ">
-                <div class="col-md-4 pt-2">
-                    <div class="form-outline ">
-                        <input type="text" id="student_id" class="form-control" name="student_id" required/>
-                        <label class="form-label" for="form12">Student ID</label>
+                <div class="row ">
+                    <div class="col-md-4 pt-2">
+                        <div class="form-outline ">
+                            <input type="text" id="student_id" class="form-control" name="student_id" required/>
+                            <label class="form-label" for="form12">Student ID</label>
+                        </div>
+                    </div>
+                    <div class="col pt-3">
+                        <p class="example">(Ex.Student ID 00-0000)</p>
                     </div>
                 </div>
-                <div class="col pt-3">
-                    <p class="example">(Ex.Student ID 00-0000)</p>
-                </div>
-            </div>
-            <div class="row ">
-                <div class="col-md-12 pt-3">
-                    <div class="form-outline ">
-                        <input type="text" id="fullname" class="form-control" name="fullname" required/>
-                        <label class="form-label" for="form12">Full Name</label>
-                    </div>
-                    <p id="errorid" class="text-danger"></p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-7 pt-3">
-                    <select class="form-select" aria-label="Default select example" name="college" id="college" required>
-                        <option selected value="">Choose your college</option>
-                        <option value="COLLEGE OF AGRICULTURE">COLLEGE OF AGRICULTURE</option>
-                        <option value="COLLEGE OF ARTS AND SOCIAL SCIENCES">COLLEGE OF ARTS AND SOCIAL SCIENCES</option>
-                        <option value="COLLEGE OF BUSINESS ADMINISTRATION AND ACCOUNTANCY">COLLEGE OF BUSINESS ADMINISTRATION AND ACCOUNTANCY</option>
-                        <option value="COLLEGE OF EDUCATION">COLLEGE OF EDUCATION</option>
-                        <option value="COLLEGE OF ENGINEERING">COLLEGE OF ENGINEERING</option>
-                        <option value="COLLEGE OF FISHERIES">COLLEGE OF FISHERIES</option>
-                        <option value="COLLEGE OF HOME SCIENCE AND INDUSTRY">COLLEGE OF HOME SCIENCE AND INDUSTRY</option>
-                        <option value="COLLEGE OF VETERINARY SCIENCE AND MEDICINE">COLLEGE OF VETERINARY SCIENCE AND MEDICINE</option>
-                        <option value="COLLEGE OF SCIENCE">COLLEGE OF SCIENCE</option>
-                    </select>
-                </div>
-                <div class="col-md-5 pt-3">
-                    <select class="form-select" aria-label="Default select example" name="course" id="course"required>
-                        <option selected value="">Choose your course</option>
-                       
-                    </select>
-                </div>
-            </div>
-            
-                <div class="row">
-                    <div class="col-md-6 pt-3">
-                        <select class="form-select" aria-label="Default select example" name="gender" id="gender" required>
-                            <option selected value="">Choose your gender</option>
-                            <option value="Male">Male</option>
-                            <option value="Female">Female</option>  
-                        </select>
-                        <p id="error_gender" class="text-danger"></p>
-                    </div>
-                </div>
-                <div class="row">
+                <div class="row ">
                     <div class="col-md-12 pt-3">
                         <div class="form-outline ">
-                            <input type="email" id="email" class="form-control" name="email" required/>
-                            <label class="form-label" for="form12">Email</label>
+                            <input type="text" id="fullname" class="form-control" name="fullname" required/>
+                            <label class="form-label" for="form12">Full Name</label>
                         </div>
-                        <p id="error_email" class="text-danger"></p>
+                        <p id="errorid" class="text-danger"></p>
                     </div>
                 </div>
-            <div class="row">
-                <div class="col-md-6 pt-3">
-                    <div class="form-outline ">
-                        <input type="password"  class="form-control" id="password" name="password" required/>
-                        <label class="form-label" for="form12">Password</label>
+                <div class="row">
+                    <div class="col-md-7 pt-3">
+                        <select class="form-select" aria-label="Default select example" name="college" id="college" required>
+                            <option selected value="">Choose your college</option>
+                            <option value="COLLEGE OF AGRICULTURE">COLLEGE OF AGRICULTURE</option>
+                            <option value="COLLEGE OF ARTS AND SOCIAL SCIENCES">COLLEGE OF ARTS AND SOCIAL SCIENCES</option>
+                            <option value="COLLEGE OF BUSINESS ADMINISTRATION AND ACCOUNTANCY">COLLEGE OF BUSINESS ADMINISTRATION AND ACCOUNTANCY</option>
+                            <option value="COLLEGE OF EDUCATION">COLLEGE OF EDUCATION</option>
+                            <option value="COLLEGE OF ENGINEERING">COLLEGE OF ENGINEERING</option>
+                            <option value="COLLEGE OF FISHERIES">COLLEGE OF FISHERIES</option>
+                            <option value="COLLEGE OF HOME SCIENCE AND INDUSTRY">COLLEGE OF HOME SCIENCE AND INDUSTRY</option>
+                            <option value="COLLEGE OF VETERINARY SCIENCE AND MEDICINE">COLLEGE OF VETERINARY SCIENCE AND MEDICINE</option>
+                            <option value="COLLEGE OF SCIENCE">COLLEGE OF SCIENCE</option>
+                        </select>
                     </div>
-                    <p id="error_password" class="text-danger"></p>
-                </div>
-                <div class="col-md-6 pt-3">
-                    <div class="form-outline ">
-                        <input type="password"  class="form-control" id="confirm_password" name="confirm_password" required/>
-                        <label class="form-label" for="form12">Confirm Password</label>
+                    <div class="col-md-5 pt-3">
+                        <select class="form-select" aria-label="Default select example" name="course" id="course"required>
+                            <option selected value="">Choose your course</option>
+                        
+                        </select>
                     </div>
-                    <p id="error_confirm_password" class="text-danger"></p>
-                    <p id="error_not_match" class="text-warning"></p>
                 </div>
-            </div>
-            <div class="pt-2 button-con">
-                <input type="checkbox" onclick="myFunction()"> Show Password
-            </div>
-            <div class="button-con py-4">
-                <a href="../index.php" class="btn btn">Cancel</a>
-                <button type="submit" class="btn btn-success" name="submit">Register</button>
-            </div>
+                
+                    <div class="row">
+                        <div class="col-md-6 pt-3">
+                            <select class="form-select" aria-label="Default select example" name="gender" id="gender" required>
+                                <option selected value="">Choose your gender</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>  
+                            </select>
+                            <p id="error_gender" class="text-danger"></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 pt-3">
+                            <div class="form-outline ">
+                                <input type="email" id="email" class="form-control" name="email" required/>
+                                <label class="form-label" for="form12">Email</label>
+                            </div>
+                            <p id="error_email" class="text-danger"></p>
+                        </div>
+                    </div>
+                <div class="row">
+                    <div class="col-md-6 pt-3">
+                        <div class="form-outline ">
+                            <input type="password"  class="form-control" id="password" name="password" required/>
+                            <label class="form-label" for="form12">Password</label>
+                        </div>
+                        <p id="error_password" class="text-danger"></p>
+                    </div>
+                    <div class="col-md-6 pt-3">
+                        <div class="form-outline ">
+                            <input type="password"  class="form-control" id="confirm_password" name="confirm_password" required/>
+                            <label class="form-label" for="form12">Confirm Password</label>
+                        </div>
+                        <p id="error_confirm_password" class="text-danger"></p>
+                        <p id="error_not_match" class="text-warning"></p>
+                    </div>
+                </div>
+                <div class="pt-2 button-con">
+                    <input type="checkbox" onclick="myFunction()"> Show Password
+                </div>
+                <div class="button-con py-4"> 
+                    <a href="../index.php" class="btn shadow-0">Back</a>
+                    <button type="submit" class="btn btn-success shadow-0" name="submit">Register</button>
+                </div>
           </form>
           </div>
         </div>
@@ -257,7 +257,24 @@ if (isset($_POST['submit'])) {
         </div>
     </div>
 </div>
+  <script>
+    document.addEventListener('contextmenu', (e) => e.preventDefault());
 
+    function ctrlShiftKey(e, keyCode) {
+    return e.ctrlKey && e.shiftKey && e.keyCode === keyCode.charCodeAt(0);
+    }
+
+    document.onkeydown = (e) => {
+    if (
+        event.keyCode === 123 ||
+        ctrlShiftKey(e, 'I') ||
+        ctrlShiftKey(e, 'J') ||
+        ctrlShiftKey(e, 'C') ||
+        (e.ctrlKey && e.keyCode === 'U'.charCodeAt(0))
+    )
+        return false;
+    };
+  </script>
   <script>
   function myFunction() {
   var x = document.getElementById("password");
