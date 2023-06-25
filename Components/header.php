@@ -117,7 +117,7 @@
             <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <div class="justify-content-center d-flex" style="height: 50px; margin-top: -5vh;">
+            <div class="justify-content-center d-flex" style="height: 50px;">
             <img src="../img/logo.png" alt="login-logo" class="shadow rounded-circle">
           </div>
           <div class="py-2 justify-content-center d-flex">
